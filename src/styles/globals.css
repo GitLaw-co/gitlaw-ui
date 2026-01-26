@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* GitLaw Design Tokens */
+
+  /* Colors */
+  --primary: #5e49d6;
+  --secondary: #ebe7ff;
+  --destructive: #e11d48;
+  --alert: #f97316;
+  --positive: #15803d;
+
+  /* Text Colors */
+  --text-primary-text: #1b1b1f;
+  --text-secondary-text: #989898;
+  --text-negative-text: #f7f6ff;
+  --text-button-text: #5e49d6;
+  --text-button-text-disabled: #cfc8f3;
+  --text-button-negative-text: #f7f6ff;
+  --text-tag-text: #5e49d6;
+
+  /* Background Colors */
+  --backgrounds-button-primary-background: #5e49d6;
+  --backgrounds-button-secondary-background: #ebe7ff;
+  --backgrounds-tag-background: #ebfaee;
+  --backgrounds-switch-inactive-background: white;
+
+  /* Input Colors */
+  --input-bright: white;
+  --input-border: #dce3e8;
+
+  /* Switch Colors */
+  --switch-active: #5e49d6;
+  --switch-inactive: #cfc8f3;
+  --switch-active-thumb: white;
+
+  /* Active States */
+  --active-border: #5e49d6;
+
+  /* Spacing */
+  --xs: 4px;
+  --s: 4px;
+  --m: 8px;
+  --l: 12px;
+  --xl: 16px;
+  --2xl: 24px;
+  --p-2: 8px;
+  --pt-px: 1px;
+  --space-x-1: 4px;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* CSS Variables mapping for Figma tokens */
+.gitlaw-theme {
+  --text\/primary-text: var(--text-primary-text);
+  --text\/secondary-text: var(--text-secondary-text);
+  --text\/negative-text: var(--text-negative-text);
+  --text\/button-text: var(--text-button-text);
+  --text\/button-text-disabled: var(--text-button-text-disabled);
+  --text\/button-negative-text: var(--text-button-negative-text);
+  --text\/tag-text: var(--text-tag-text);
+  --backgrounds\/button-primary-background: var(--backgrounds-button-primary-background);
+  --backgrounds\/button-secondary-background: var(--backgrounds-button-secondary-background);
+  --backgrounds\/tag-background: var(--backgrounds-tag-background);
+  --backgrounds\/switch-inactive-background: var(--backgrounds-switch-inactive-background);
+}
