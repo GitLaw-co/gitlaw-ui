@@ -1,4 +1,4 @@
-import{j as e}from"./jsx-runtime-DiklIkkE.js";import{useMDXComponents as t}from"./index-ChEI-nsM.js";import{M as r}from"./index-CdUWVBXB.js";import"./index-DRjF_FHU.js";import"./iframe-BiroL4zb.js";import"./index-DIvcuAjW.js";import"./index-D-Mha1DF.js";import"./index-DrFu-skq.js";function i(s){const n={a:"a",code:"code",h1:"h1",h2:"h2",h3:"h3",li:"li",p:"p",pre:"pre",strong:"strong",ul:"ul",...t(),...s.components};return e.jsxs(e.Fragment,{children:[e.jsx(r,{title:"Introduction"}),`
+import{j as e}from"./jsx-runtime-DiklIkkE.js";import{useMDXComponents as t}from"./index-ChEI-nsM.js";import{M as o}from"./index-C-BkYkAx.js";import"./index-DRjF_FHU.js";import"./iframe-DJjuYeeB.js";import"./index-DIvcuAjW.js";import"./index-D-Mha1DF.js";import"./index-DrFu-skq.js";function s(i){const n={a:"a",code:"code",h1:"h1",h2:"h2",h3:"h3",li:"li",p:"p",pre:"pre",strong:"strong",ul:"ul",...t(),...i.components};return e.jsxs(e.Fragment,{children:[e.jsx(o,{title:"Introduction"}),`
 `,e.jsx(n.h1,{id:"gitlaw-ui-component-library",children:"GitLaw UI Component Library"}),`
 `,e.jsxs(n.p,{children:["Welcome to the ",e.jsx(n.strong,{children:"GitLaw UI"})," component library, built with React and Tailwind CSS. This Storybook showcases the design system extracted from the GitLaw Figma library."]}),`
 `,e.jsx(n.h2,{id:"design-tokens",children:"Design Tokens"}),`
@@ -52,6 +52,12 @@ import{j as e}from"./jsx-runtime-DiklIkkE.js";import{useMDXComponents as t}from"
 `,e.jsx(n.p,{children:"Navigation tab component with badge support and selection states."}),`
 `,e.jsx(n.h3,{id:"switch",children:"Switch"}),`
 `,e.jsx(n.p,{children:"Toggle switch component for boolean settings."}),`
+`,e.jsx(n.h3,{id:"listitem",children:"ListItem"}),`
+`,e.jsx(n.p,{children:"List item component with multiple left element types (icon, avatar, clause, select, mini-users), secondary text, and selection states."}),`
+`,e.jsx(n.h3,{id:"select",children:"Select"}),`
+`,e.jsx(n.p,{children:"Dropdown select component with search functionality, multiple sizes, validation states, and label positioning options."}),`
+`,e.jsx(n.h3,{id:"textfield",children:"TextField"}),`
+`,e.jsx(n.p,{children:"Multi-line text area component with label support, multiple sizes, and validation states."}),`
 `,e.jsx(n.h2,{id:"getting-started",children:"Getting Started"}),`
 `,e.jsx(n.pre,{children:e.jsx(n.code,{className:"language-bash",children:`# Install dependencies
 npm install
@@ -64,4 +70,4 @@ npm run storybook
 `,e.jsxs(n.ul,{children:[`
 `,e.jsx(n.li,{children:e.jsx(n.a,{href:"https://www.figma.com/design/czek1GvIeHMJnnvc3aqWHK/UI-v2",rel:"nofollow",children:"UI-v2 Library"})}),`
 `,e.jsx(n.li,{children:e.jsx(n.a,{href:"https://www.figma.com/design/EhLq6bat0Gx4dRJpYGFGw9/Typography---Icons",rel:"nofollow",children:"Typography & Icons"})}),`
-`]})]})}function j(s={}){const{wrapper:n}={...t(),...s.components};return n?e.jsx(n,{...s,children:e.jsx(i,{...s})}):i(s)}export{j as default};
+`]})]})}function j(i={}){const{wrapper:n}={...t(),...i.components};return n?e.jsx(n,{...i,children:e.jsx(s,{...i})}):s(i)}export{j as default};
