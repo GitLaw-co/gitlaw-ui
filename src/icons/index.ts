@@ -5,3 +5,6 @@ export { X } from './X';
 export { Building } from './Building';
 export { ImageUp } from './ImageUp';
 export { User } from './User';
+export { TextCursor } from './TextCursor';
+export { Info } from './Info';
+export { Sparkles } from './Sparkles';
