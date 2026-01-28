@@ -1,6 +1,6 @@
 import React from 'react';
 import { Check } from '../icons/Check';
-import { TextCursor } from '../icons/TextCursor';
+import { CircleDashed } from '../icons/CircleDashed';
 import { Info } from '../icons/Info';
 
 export type ListItemLeftElement = 'icon' | 'avatar' | 'clause' | 'select' | 'mini-users';
@@ -60,7 +60,7 @@ export const ListItem: React.FC<ListItemProps> = ({
 
     switch (leftElement) {
       case 'icon':
-        return leftIcon || <TextCursor className="size-6" color="#1b1b1f" />;
+        return leftIcon || <CircleDashed className="size-6" color="#1b1b1f" />;
 
       case 'avatar':
         return (
