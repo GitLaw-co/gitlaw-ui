@@ -11,7 +11,7 @@ export const Info: React.FC<InfoProps> = ({ className = 'size-6', color = 'curre
     viewBox="0 0 24 24"
     fill="none"
     stroke={color}
-    strokeWidth="2"
+    strokeWidth="1"
     strokeLinecap="round"
     strokeLinejoin="round"
   >

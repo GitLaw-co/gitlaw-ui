@@ -11,7 +11,7 @@ export const ImageUp: React.FC<ImageUpProps> = ({ className = 'size-4', color = 
     viewBox="0 0 24 24"
     fill="none"
     stroke={color}
-    strokeWidth="2"
+    strokeWidth="1"
     strokeLinecap="round"
     strokeLinejoin="round"
   >

@@ -11,7 +11,7 @@ export const Check: React.FC<CheckProps> = ({ className = 'size-6', color = 'cur
     viewBox="0 0 24 24"
     fill="none"
     stroke={color}
-    strokeWidth="2"
+    strokeWidth="1"
     strokeLinecap="round"
     strokeLinejoin="round"
   >
