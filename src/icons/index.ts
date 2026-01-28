@@ -1,7 +1,5 @@
 export { Check } from './Check';
 export { ChevronDown } from './ChevronDown';
-export { ChevronRight } from './ChevronRight';
-export { ChevronsLeft } from './ChevronsLeft';
 export { Search } from './Search';
 export { X } from './X';
 export { Building } from './Building';
@@ -10,9 +8,3 @@ export { User } from './User';
 export { CircleDashed } from './CircleDashed';
 export { Info } from './Info';
 export { Sparkles } from './Sparkles';
-export { FileText } from './FileText';
-export { FolderClosed } from './FolderClosed';
-export { Settings } from './Settings';
-export { HelpCircle } from './HelpCircle';
-export { LogOut } from './LogOut';
-export { Plus } from './Plus';
