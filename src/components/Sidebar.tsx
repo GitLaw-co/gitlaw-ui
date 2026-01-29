@@ -12,6 +12,7 @@ import { TagIcon } from '../icons/Tag';
 import { CircleHelp } from '../icons/CircleHelp';
 import { Rss } from '../icons/Rss';
 import { ChevronUp } from '../icons/ChevronUp';
+import { Tooltip } from './Tooltip';
 
 // Import logo SVGs as URLs
 // Note: File names are swapped - "inner" files have white logos, "landing" files have purple logos
@@ -173,10 +174,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {isSignedIn && (
         <div className={`flex items-center shrink-0 ${isCollapsed ? 'justify-center' : 'justify-between'} h-12`}>
           {isCollapsed ? (
-            // Collapsed: Show only logo icon
-            <div className="flex items-center justify-center h-12">
-              <img src={getLogo()} alt="GitLaw" className="h-8" />
-            </div>
+            // Collapsed: Logo is a button that expands the sidebar
+            <Tooltip content="Open sidebar" size="m" type="neutral">
+              <button
+                type="button"
+                onClick={onToggle}
+                className={`flex items-center justify-center h-12 p-3 rounded ${colors.hoverBg} transition-colors`}
+                aria-label="Open sidebar"
+              >
+                <img src={getLogo()} alt="GitLaw" className="h-8" />
+              </button>
+            </Tooltip>
           ) : (
             // Expanded: Show logo and controls
             <>
@@ -209,33 +217,46 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {/* For signed-out: vertically centered with flex-1 spacers */}
       {!isSignedIn && <div className="flex-1" />}
       <nav className="flex flex-col shrink-0">
-        {items.map((item) => (
-          <button
-            key={item.id}
-            type="button"
-            onClick={() => onMenuItemClick?.(item.id)}
-            className={`
-              flex items-center gap-2 min-h-12 p-3 rounded
-              ${colors.hoverBg} transition-colors
-              ${item.active ? colors.selectedBg : ''}
-              ${isCollapsed ? 'justify-center' : ''}
-            `}
-          >
-            {item.icon && (
-              <span className="shrink-0">
-                {React.cloneElement(item.icon as React.ReactElement, {
-                  color: colors.menuIcon,
-                  className: ICON_SIZE,
-                })}
-              </span>
-            )}
-            {!isCollapsed && (
-              <span className={`text-base font-normal ${colors.menuText} truncate`}>
-                {item.label}
-              </span>
-            )}
-          </button>
-        ))}
+        {items.map((item) => {
+          const buttonContent = (
+            <button
+              key={item.id}
+              type="button"
+              onClick={() => onMenuItemClick?.(item.id)}
+              className={`
+                flex items-center gap-2 min-h-12 p-3 rounded w-full
+                ${colors.hoverBg} transition-colors
+                ${item.active ? colors.selectedBg : ''}
+                ${isCollapsed ? 'justify-center' : ''}
+              `}
+            >
+              {item.icon && (
+                <span className="shrink-0">
+                  {React.cloneElement(item.icon as React.ReactElement, {
+                    color: colors.menuIcon,
+                    className: ICON_SIZE,
+                  })}
+                </span>
+              )}
+              {!isCollapsed && (
+                <span className={`text-base font-normal ${colors.menuText} truncate`}>
+                  {item.label}
+                </span>
+              )}
+            </button>
+          );
+
+          // Show tooltips only for collapsed signed-in state
+          if (isCollapsed && isSignedIn) {
+            return (
+              <Tooltip key={item.id} content={item.label} size="m" type="neutral">
+                {buttonContent}
+              </Tooltip>
+            );
+          }
+
+          return <React.Fragment key={item.id}>{buttonContent}</React.Fragment>;
+        })}
       </nav>
       {!isSignedIn && <div className="flex-1" />}
 
@@ -279,31 +300,41 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {/* Always sticks to bottom - shrink-0 ensures it never shrinks */}
       {isSignedIn && (
         <div className={`shrink-0 pt-2 ${isCollapsed ? 'flex justify-center' : ''}`}>
-          <button
-            type="button"
-            className={`
-              flex items-center gap-2 min-h-12 p-3 rounded
-              transition-colors
-              ${isCollapsed ? 'justify-center' : 'w-full bg-card'}
-            `}
-          >
-            {/* Avatar */}
-            <div className="size-8 rounded bg-primary flex items-center justify-center shrink-0">
-              {userAvatar ? (
-                <img src={userAvatar} alt={userName} className="w-full h-full object-cover rounded" />
-              ) : (
-                <span className="text-sm font-black text-text-negative">{userInitials}</span>
-              )}
-            </div>
-            {!isCollapsed && (
-              <>
-                <span className="text-base font-normal text-text-primary truncate flex-1 text-left">
-                  {userName}
-                </span>
-                <ChevronUp className={ICON_SIZE} color="#1B1B1F" />
-              </>
-            )}
-          </button>
+          {isCollapsed ? (
+            <Tooltip content={userName} size="m" type="neutral">
+              <button
+                type="button"
+                className="flex items-center justify-center min-h-12 p-3 rounded transition-colors"
+              >
+                {/* Avatar */}
+                <div className="size-8 rounded bg-primary flex items-center justify-center shrink-0">
+                  {userAvatar ? (
+                    <img src={userAvatar} alt={userName} className="w-full h-full object-cover rounded" />
+                  ) : (
+                    <span className="text-sm font-black text-text-negative">{userInitials}</span>
+                  )}
+                </div>
+              </button>
+            </Tooltip>
+          ) : (
+            <button
+              type="button"
+              className="flex items-center gap-2 min-h-12 p-3 rounded transition-colors w-full bg-card"
+            >
+              {/* Avatar */}
+              <div className="size-8 rounded bg-primary flex items-center justify-center shrink-0">
+                {userAvatar ? (
+                  <img src={userAvatar} alt={userName} className="w-full h-full object-cover rounded" />
+                ) : (
+                  <span className="text-sm font-black text-text-negative">{userInitials}</span>
+                )}
+              </div>
+              <span className="text-base font-normal text-text-primary truncate flex-1 text-left">
+                {userName}
+              </span>
+              <ChevronUp className={ICON_SIZE} color="#1B1B1F" />
+            </button>
+          )}
         </div>
       )}
     </div>

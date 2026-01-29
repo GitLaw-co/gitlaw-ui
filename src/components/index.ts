@@ -30,3 +30,6 @@ export type { TextFieldProps, TextFieldSize, TextFieldStatus } from './TextField
 
 export { Sidebar } from './Sidebar';
 export type { SidebarProps, SidebarVariant, SidebarStatus, SidebarUser, SidebarMenuItem, SidebarChatHistoryItem } from './Sidebar';
+
+export { Tooltip } from './Tooltip';
+export type { TooltipProps, TooltipSize, TooltipType, TooltipPosition } from './Tooltip';
