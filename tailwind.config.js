@@ -4,55 +4,103 @@ export default {
   theme: {
     extend: {
       colors: {
-        // GitLaw Brand Colors
+        // GitLaw Brand Colors (from Figma Semantic Colors)
         primary: {
-          DEFAULT: '#5e49d6',
-          light: '#ebe7ff',
-          dark: '#4a3aab',
+          DEFAULT: '#5E49D6',  // purple/700
+          light: '#EBE7FF',    // purple/100
+          hover: '#6F5EEC',    // purple/600 (primary-hover)
         },
         secondary: {
-          DEFAULT: '#ebe7ff',
-          dark: '#cfc8f3',
+          DEFAULT: '#EBE7FF',  // purple/100
+          hover: '#E2DDFF',    // purple/200 (secondary-hover)
         },
         destructive: {
-          DEFAULT: '#e11d48',
+          DEFAULT: '#E11D48',  // red/500
         },
         alert: {
-          DEFAULT: '#f97316',
+          DEFAULT: '#F97316',  // orange/500
         },
         positive: {
-          DEFAULT: '#15803d',
+          DEFAULT: '#15803D',  // green/700
         },
-        // Text Colors
+        // Text Colors (from Figma Semantic Colors)
         text: {
-          primary: '#1b1b1f',
-          secondary: '#989898',
-          negative: '#f7f6ff',
-          button: '#5e49d6',
-          'button-disabled': '#cfc8f3',
-          tag: '#5e49d6',
+          primary: '#1B1B1F',         // obsidian/950 (foreground)
+          secondary: '#989898',       // grey/50
+          negative: '#F7F6FF',        // purple/50
+          button: '#5E49D6',          // purple/700 (secondary-foreground)
+          'button-disabled': '#CFC8F3', // purple/300
+          tag: '#5E49D6',             // purple/700
+        },
+        // Icon Colors (from Figma Semantic Colors)
+        icon: {
+          primary: '#5E49D6',    // purple/700
+          secondary: '#989898',  // grey/50
+          disabled: '#CFC8F3',   // purple/300
+          negative: '#F7F6FF',   // purple/50
+          black: '#1B1B1F',      // obsidian/950
         },
         // Background Colors
         backgrounds: {
-          'button-primary': '#5e49d6',
-          'button-secondary': '#ebe7ff',
-          'tag-background': '#ebfaee',
-          'switch-inactive': 'white',
+          'button-primary': '#5E49D6',   // purple/700
+          'button-secondary': '#EBE7FF', // purple/100
+          'tag-background': '#EBFAEE',   // grass/50
+          'switch-inactive': '#FFFFFF',  // white
+        },
+        // Border Colors (from Figma Semantic Colors)
+        border: {
+          DEFAULT: '#E2DDFF',  // purple/200
         },
         // Input Colors
         input: {
-          bright: 'white',
-          border: '#dce3e8',
+          bright: '#FFFFFF',   // white
+          border: '#E2DDFF',   // purple/200 (border)
         },
         // Switch Colors
         switch: {
-          active: '#5e49d6',
-          inactive: '#cfc8f3',
-          'active-thumb': 'white',
+          active: '#5E49D6',       // purple/700
+          inactive: '#CFC8F3',     // purple/300
+          'active-thumb': '#FFFFFF', // white
         },
         // Active States
         active: {
-          border: '#5e49d6',
+          border: '#5E49D6',  // purple/700
+        },
+        // Additional Figma Primitives (commonly used)
+        purple: {
+          50: '#F7F6FF',
+          65: '#F3F1FF',
+          100: '#EBE7FF',
+          200: '#E2DDFF',
+          300: '#CFC8F3',
+          400: '#B6AEE9',
+          450: '#978AE6',
+          500: '#7F72FF',
+          600: '#6F5EEC',
+          700: '#5E49D6',
+          800: '#4D33BC',
+          900: '#382C80',
+          950: '#261D56',
+        },
+        obsidian: {
+          50: '#F0F0F5',
+          100: '#C0C0D1',
+          200: '#A3A3B3',
+          300: '#81818F',
+          400: '#6E6E7B',
+          500: '#5C5C67',
+          600: '#4A4A53',
+          700: '#38383F',
+          800: '#2D2D33',
+          900: '#242428',
+          950: '#1B1B1F',
+        },
+        grey: {
+          20: '#C4C4C4',
+          40: '#ABABAB',
+          50: '#989898',
+          60: '#6B6B6B',
+          80: '#3D3D3D',
         },
       },
       fontFamily: {
