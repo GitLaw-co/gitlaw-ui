@@ -27,3 +27,6 @@ export type { SelectProps, SelectSize, SelectStatus, SelectAlign, SelectLabelPos
 
 export { TextField } from './TextField';
 export type { TextFieldProps, TextFieldSize, TextFieldStatus } from './TextField';
+
+export { Sidebar } from './Sidebar';
+export type { SidebarProps, SidebarVariant, SidebarStatus, SidebarUser, SidebarMenuItem, SidebarChatHistoryItem } from './Sidebar';

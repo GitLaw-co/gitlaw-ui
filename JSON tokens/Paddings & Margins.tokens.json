@@ -1,0 +1,73 @@
+{
+  "dialog": {
+    "$type": "number",
+    "$value": 24,
+    "$extensions": {
+      "com.figma.variableId": "VariableID:8902:365372",
+      "com.figma.scopes": [
+        "ALL_SCOPES"
+      ],
+      "com.figma.aliasData": {
+        "targetVariableId": "VariableID:c79bc293e8cb45a30420cfd7658a96ca3534dd35/-1:-1",
+        "targetVariableName": "2xl",
+        "targetVariableSetId": "VariableCollectionId:edad076eeff5cef5ff6c9b95a72f919107022252/-1:-1",
+        "targetVariableSetName": "Lengths"
+      },
+      "com.figma.isOverride": true
+    }
+  },
+  "document": {
+    "$type": "number",
+    "$value": 24,
+    "$extensions": {
+      "com.figma.variableId": "VariableID:8922:467413",
+      "com.figma.scopes": [
+        "ALL_SCOPES"
+      ],
+      "com.figma.aliasData": {
+        "targetVariableId": "VariableID:c79bc293e8cb45a30420cfd7658a96ca3534dd35/-1:-1",
+        "targetVariableName": "2xl",
+        "targetVariableSetId": "VariableCollectionId:edad076eeff5cef5ff6c9b95a72f919107022252/-1:-1",
+        "targetVariableSetName": "Lengths"
+      },
+      "com.figma.isOverride": true
+    }
+  },
+  "card": {
+    "$type": "number",
+    "$value": 16,
+    "$extensions": {
+      "com.figma.variableId": "VariableID:8909:224667",
+      "com.figma.scopes": [
+        "ALL_SCOPES"
+      ],
+      "com.figma.aliasData": {
+        "targetVariableId": "VariableID:16ac82f7b1bb66fd1d0af31de22bf3fe3d11cfeb/-1:-1",
+        "targetVariableName": "xl",
+        "targetVariableSetId": "VariableCollectionId:edad076eeff5cef5ff6c9b95a72f919107022252/-1:-1",
+        "targetVariableSetName": "Lengths"
+      },
+      "com.figma.isOverride": true
+    }
+  },
+  "menu": {
+    "$type": "number",
+    "$value": 8,
+    "$extensions": {
+      "com.figma.variableId": "VariableID:8902:365373",
+      "com.figma.scopes": [
+        "ALL_SCOPES"
+      ],
+      "com.figma.aliasData": {
+        "targetVariableId": "VariableID:00b9bf341548b6e538586bc717d765f6f0350f3c/-1:-1",
+        "targetVariableName": "m",
+        "targetVariableSetId": "VariableCollectionId:edad076eeff5cef5ff6c9b95a72f919107022252/-1:-1",
+        "targetVariableSetName": "Lengths"
+      },
+      "com.figma.isOverride": true
+    }
+  },
+  "$extensions": {
+    "com.figma.modeName": "Mode 1"
+  }
+}

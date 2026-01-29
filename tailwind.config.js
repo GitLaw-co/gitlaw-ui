@@ -23,14 +23,20 @@ export default {
         positive: {
           DEFAULT: '#15803D',  // green/700
         },
+        // Card Colors
+        card: {
+          DEFAULT: '#FFFFFF',  // white (card background)
+        },
         // Text Colors (from Figma Semantic Colors)
         text: {
           primary: '#1B1B1F',         // obsidian/950 (foreground)
           secondary: '#989898',       // grey/50
           negative: '#F7F6FF',        // purple/50
           button: '#5E49D6',          // purple/700 (secondary-foreground)
+          'button-negative': '#F7F6FF', // purple/50 (button-negative-text)
           'button-disabled': '#CFC8F3', // purple/300
           tag: '#5E49D6',             // purple/700
+          'ai-chat-placeholder': '#CFC8F3', // purple/300
         },
         // Icon Colors (from Figma Semantic Colors)
         icon: {
@@ -53,8 +59,10 @@ export default {
         },
         // Input Colors
         input: {
-          bright: '#FFFFFF',   // white
-          border: '#E2DDFF',   // purple/200 (border)
+          DEFAULT: '#DFFBE3',    // grass/65 (input background)
+          bright: '#FFFFFF',     // white
+          border: '#DCE3E8',     // bluish/100 (input-border) - NOT purple/200!
+          disabled: '#F1F5F8',   // bluish/50 (input-disabled)
         },
         // Switch Colors
         switch: {
@@ -65,6 +73,33 @@ export default {
         // Active States
         active: {
           border: '#5E49D6',  // purple/700
+        },
+        // Sidebar Colors
+        sidebar: {
+          background: '#F3F1FF',  // purple/65
+          hover: '#EBE7FF',       // purple/100
+          border: '#DCE3E8',      // bluish/100
+        },
+        // Page/Layout Colors
+        page: {
+          background: '#F7F6FF',  // purple/50
+        },
+        // Muted Color
+        muted: {
+          DEFAULT: '#F0F0F5',     // obsidian/50
+        },
+        // Bluish Colors (for inputs/sidebars)
+        bluish: {
+          50: '#F1F5F8',
+          100: '#DCE3E8',
+        },
+        // Grass Colors (for tags, inputs)
+        grass: {
+          50: '#EBFAEE',
+          65: '#DFFBE3',
+          80: '#D9F8DD',
+          100: '#CFF5D4',
+          150: '#C3F1CA',
         },
         // Additional Figma Primitives (commonly used)
         purple: {
