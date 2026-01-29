@@ -1,23 +1,34 @@
-import{j as e}from"./jsx-runtime-DiklIkkE.js";import{useMDXComponents as t}from"./index-ChEI-nsM.js";import{M as o}from"./index-C-BkYkAx.js";import"./index-DRjF_FHU.js";import"./iframe-DJjuYeeB.js";import"./index-DIvcuAjW.js";import"./index-D-Mha1DF.js";import"./index-DrFu-skq.js";function s(i){const n={a:"a",code:"code",h1:"h1",h2:"h2",h3:"h3",li:"li",p:"p",pre:"pre",strong:"strong",ul:"ul",...t(),...i.components};return e.jsxs(e.Fragment,{children:[e.jsx(o,{title:"Introduction"}),`
+import{j as e}from"./jsx-runtime-DiklIkkE.js";import{useMDXComponents as o}from"./index-ChEI-nsM.js";import{M as t}from"./index-CQz4QJUA.js";import"./index-DRjF_FHU.js";import"./iframe-_zK4KdLa.js";import"./index-DIvcuAjW.js";import"./index-D-Mha1DF.js";import"./index-DrFu-skq.js";function s(i){const n={a:"a",code:"code",h1:"h1",h2:"h2",h3:"h3",li:"li",p:"p",pre:"pre",strong:"strong",ul:"ul",...o(),...i.components};return e.jsxs(e.Fragment,{children:[e.jsx(t,{title:"Introduction"}),`
 `,e.jsx(n.h1,{id:"gitlaw-ui-component-library",children:"GitLaw UI Component Library"}),`
 `,e.jsxs(n.p,{children:["Welcome to the ",e.jsx(n.strong,{children:"GitLaw UI"})," component library, built with React and Tailwind CSS. This Storybook showcases the design system extracted from the GitLaw Figma library."]}),`
 `,e.jsx(n.h2,{id:"design-tokens",children:"Design Tokens"}),`
 `,e.jsx(n.p,{children:"The design system uses the following core tokens:"}),`
-`,e.jsx(n.h3,{id:"colors",children:"Colors"}),`
+`,e.jsx(n.h3,{id:"semantic-colors",children:"Semantic Colors"}),`
 `,e.jsxs(n.p,{children:[`| Token | Value | Usage |
 |-------|-------|-------|
-| `,e.jsx(n.code,{children:"primary"})," | ",e.jsx(n.code,{children:"#5e49d6"}),` | Primary brand color, buttons, links |
-| `,e.jsx(n.code,{children:"secondary"})," | ",e.jsx(n.code,{children:"#ebe7ff"}),` | Secondary backgrounds, muted elements |
-| `,e.jsx(n.code,{children:"destructive"})," | ",e.jsx(n.code,{children:"#e11d48"}),` | Error states, delete actions |
-| `,e.jsx(n.code,{children:"alert"})," | ",e.jsx(n.code,{children:"#f97316"}),` | Warning states |
-| `,e.jsx(n.code,{children:"positive"})," | ",e.jsx(n.code,{children:"#15803d"})," | Success states |"]}),`
+| `,e.jsx(n.code,{children:"primary"})," | ",e.jsx(n.code,{children:"#5E49D6"}),` | Primary brand color, buttons, links |
+| `,e.jsx(n.code,{children:"primary-hover"})," | ",e.jsx(n.code,{children:"#6F5EEC"}),` | Primary hover state |
+| `,e.jsx(n.code,{children:"secondary"})," | ",e.jsx(n.code,{children:"#EBE7FF"}),` | Secondary backgrounds, muted elements |
+| `,e.jsx(n.code,{children:"secondary-hover"})," | ",e.jsx(n.code,{children:"#E2DDFF"}),` | Secondary hover state |
+| `,e.jsx(n.code,{children:"destructive"})," | ",e.jsx(n.code,{children:"#E11D48"}),` | Error states, delete actions |
+| `,e.jsx(n.code,{children:"alert"})," | ",e.jsx(n.code,{children:"#F97316"}),` | Warning states |
+| `,e.jsx(n.code,{children:"positive"})," | ",e.jsx(n.code,{children:"#15803D"}),` | Success states |
+| `,e.jsx(n.code,{children:"border"})," | ",e.jsx(n.code,{children:"#E2DDFF"})," | Default border color |"]}),`
 `,e.jsx(n.h3,{id:"text-colors",children:"Text Colors"}),`
 `,e.jsxs(n.p,{children:[`| Token | Value | Usage |
 |-------|-------|-------|
-| `,e.jsx(n.code,{children:"text-primary"})," | ",e.jsx(n.code,{children:"#1b1b1f"}),` | Primary text |
-| `,e.jsx(n.code,{children:"text-secondary"})," | ",e.jsx(n.code,{children:"#989898"}),` | Secondary/muted text |
-| `,e.jsx(n.code,{children:"text-negative"})," | ",e.jsx(n.code,{children:"#f7f6ff"}),` | Text on dark backgrounds |
-| `,e.jsx(n.code,{children:"text-button"})," | ",e.jsx(n.code,{children:"#5e49d6"})," | Button text (secondary variant) |"]}),`
+| `,e.jsx(n.code,{children:"text-primary"})," | ",e.jsx(n.code,{children:"#1B1B1F"}),` | Primary text (obsidian/950) |
+| `,e.jsx(n.code,{children:"text-secondary"})," | ",e.jsx(n.code,{children:"#989898"}),` | Secondary/muted text (grey/50) |
+| `,e.jsx(n.code,{children:"text-negative"})," | ",e.jsx(n.code,{children:"#F7F6FF"}),` | Text on dark backgrounds (purple/50) |
+| `,e.jsx(n.code,{children:"text-button"})," | ",e.jsx(n.code,{children:"#5E49D6"})," | Button text (secondary variant) |"]}),`
+`,e.jsx(n.h3,{id:"icon-colors",children:"Icon Colors"}),`
+`,e.jsxs(n.p,{children:[`| Token | Value | Usage |
+|-------|-------|-------|
+| `,e.jsx(n.code,{children:"icon-primary"})," | ",e.jsx(n.code,{children:"#5E49D6"}),` | Primary icon color |
+| `,e.jsx(n.code,{children:"icon-secondary"})," | ",e.jsx(n.code,{children:"#989898"}),` | Secondary icon color |
+| `,e.jsx(n.code,{children:"icon-disabled"})," | ",e.jsx(n.code,{children:"#CFC8F3"}),` | Disabled icon color |
+| `,e.jsx(n.code,{children:"icon-negative"})," | ",e.jsx(n.code,{children:"#F7F6FF"}),` | Icon on dark backgrounds |
+| `,e.jsx(n.code,{children:"icon-black"})," | ",e.jsx(n.code,{children:"#1B1B1F"})," | Black icon color |"]}),`
 `,e.jsx(n.h3,{id:"typography",children:"Typography"}),`
 `,e.jsxs(n.p,{children:["The design system uses ",e.jsx(n.strong,{children:"DM Sans"})," as the primary font family with the following sizes:"]}),`
 `,e.jsxs(n.ul,{children:[`
@@ -68,6 +79,6 @@ npm run storybook
 `,e.jsx(n.h2,{id:"figma-source",children:"Figma Source"}),`
 `,e.jsx(n.p,{children:"This component library is generated from the GitLaw Figma design system:"}),`
 `,e.jsxs(n.ul,{children:[`
-`,e.jsx(n.li,{children:e.jsx(n.a,{href:"https://www.figma.com/design/czek1GvIeHMJnnvc3aqWHK/UI-v2",rel:"nofollow",children:"UI-v2 Library"})}),`
+`,e.jsx(n.li,{children:e.jsx(n.a,{href:"https://www.figma.com/design/czek1GvIeHMJnnvc3aqWHK/UI-v3",rel:"nofollow",children:"UI-v3 Library"})}),`
 `,e.jsx(n.li,{children:e.jsx(n.a,{href:"https://www.figma.com/design/EhLq6bat0Gx4dRJpYGFGw9/Typography---Icons",rel:"nofollow",children:"Typography & Icons"})}),`
-`]})]})}function j(i={}){const{wrapper:n}={...t(),...i.components};return n?e.jsx(n,{...i,children:e.jsx(s,{...i})}):s(i)}export{j as default};
+`]})]})}function j(i={}){const{wrapper:n}={...o(),...i.components};return n?e.jsx(n,{...i,children:e.jsx(s,{...i})}):s(i)}export{j as default};
