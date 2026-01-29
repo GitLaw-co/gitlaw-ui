@@ -14,10 +14,12 @@ import { Rss } from '../icons/Rss';
 import { ChevronUp } from '../icons/ChevronUp';
 
 // Import logo SVGs as URLs
-import innerLogoCollapsed from '../../Assets/inner-logo-collapsed.svg';
-import innerLogoExpanded from '../../Assets/inner-logo-expanded.svg';
-import landingLogoCollapsed from '../../Assets/landing-logo-collapsed.svg';
-import landingLogoExpanded from '../../Assets/landing-logo-expanded.svg';
+// Note: File names are swapped - "inner" files have white logos, "landing" files have purple logos
+// So we swap them here to use the correct colors for each variant
+import innerLogoCollapsed from '../../Assets/landing-logo-collapsed.svg';  // purple logo for light bg
+import innerLogoExpanded from '../../Assets/landing-logo-expanded.svg';    // purple logo for light bg
+import landingLogoCollapsed from '../../Assets/inner-logo-collapsed.svg';  // white logo for dark bg
+import landingLogoExpanded from '../../Assets/inner-logo-expanded.svg';    // white logo for dark bg
 
 export type SidebarVariant = 'landing' | 'inner';
 export type SidebarStatus = 'collapsed' | 'expanded';
@@ -94,6 +96,16 @@ const defaultChatHistory: SidebarChatHistoryItem[] = [
   { id: '5', label: 'Alpha Tech: Software Developme...' },
   { id: '6', label: 'CloudSmith Solutions: Service-L...' },
   { id: '7', label: 'MNDA with John Carter' },
+  { id: '8', label: 'Partnership Agreement: TechFlow' },
+  { id: '9', label: 'NDA Review: Quantum Labs' },
+  { id: '10', label: 'Employment Contract: Mike Chen' },
+  { id: '11', label: 'Vendor Agreement: DataSync Inc' },
+  { id: '12', label: 'IP Assignment: Creative Works' },
+  { id: '13', label: 'Lease Agreement: Office Space' },
+  { id: '14', label: 'Consulting Agreement: J. Smith' },
+  { id: '15', label: 'Terms of Service Review' },
+  { id: '16', label: 'Privacy Policy Draft' },
+  { id: '17', label: 'SaaS Agreement: CloudNine' },
 ];
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -157,21 +169,21 @@ export const Sidebar: React.FC<SidebarProps> = ({
         ${className}
       `}
     >
-      {/* Header / Logo Area */}
-      <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'justify-between'} h-12 mb-2`}>
-        {isCollapsed ? (
-          // Collapsed: Show only logo icon
-          <div className="flex items-center justify-center h-12">
-            <img src={getLogo()} alt="GitLaw" className="h-8" />
-          </div>
-        ) : (
-          // Expanded: Show logo and controls
-          <>
-            <div className="flex items-center px-3 h-12">
+      {/* Header / Logo Area (only for signed-in users) */}
+      {isSignedIn && (
+        <div className={`flex items-center shrink-0 ${isCollapsed ? 'justify-center' : 'justify-between'} h-12`}>
+          {isCollapsed ? (
+            // Collapsed: Show only logo icon
+            <div className="flex items-center justify-center h-12">
               <img src={getLogo()} alt="GitLaw" className="h-8" />
             </div>
-            <div className="flex items-center gap-1">
-              {isSignedIn && (
+          ) : (
+            // Expanded: Show logo and controls
+            <>
+              <div className="flex items-center px-3 h-12">
+                <img src={getLogo()} alt="GitLaw" className="h-8" />
+              </div>
+              <div className="flex items-center gap-1">
                 <button
                   type="button"
                   className={`size-10 flex items-center justify-center rounded ${colors.hoverBg} transition-colors`}
@@ -179,22 +191,24 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 >
                   <Search className={ICON_SIZE} color={colors.menuIcon} />
                 </button>
-              )}
-              <button
-                type="button"
-                onClick={onToggle}
-                className={`size-10 flex items-center justify-center rounded ${colors.hoverBg} transition-colors`}
-                aria-label="Collapse sidebar"
-              >
-                <ChevronsLeft className={ICON_SIZE} color={colors.menuIcon} />
-              </button>
-            </div>
-          </>
-        )}
-      </div>
+                <button
+                  type="button"
+                  onClick={onToggle}
+                  className={`size-10 flex items-center justify-center rounded ${colors.hoverBg} transition-colors`}
+                  aria-label="Collapse sidebar"
+                >
+                  <ChevronsLeft className={ICON_SIZE} color={colors.menuIcon} />
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+      )}
 
       {/* Main Menu Items */}
-      <nav className="flex flex-col gap-0.5">
+      {/* For signed-out: vertically centered with flex-1 spacers */}
+      {!isSignedIn && <div className="flex-1" />}
+      <nav className="flex flex-col shrink-0">
         {items.map((item) => (
           <button
             key={item.id}
@@ -223,10 +237,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </button>
         ))}
       </nav>
+      {!isSignedIn && <div className="flex-1" />}
 
       {/* Chat History (only in expanded signed-in state) */}
+      {/* 16px (mt-4) vertical margin between main nav and chat history */}
       {!isCollapsed && isSignedIn && chatHistory.length > 0 && (
-        <div className="flex flex-col gap-0.5 mt-4 flex-1 overflow-y-auto">
+        <div className="flex flex-col mt-4 flex-1 min-h-0 overflow-y-auto">
           {chatHistory.map((chat) => (
             <React.Fragment key={chat.id}>
               {chat.isDateHeader ? (
@@ -255,24 +271,20 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
       )}
 
-      {/* Spacer for collapsed or signed-out state */}
-      {(isCollapsed || !isSignedIn) && <div className="flex-1" />}
+      {/* Spacer for collapsed state (signed-in only) */}
+      {isCollapsed && isSignedIn && <div className="flex-1" />}
 
       {/* Profile Section (only for signed-in users) */}
-      {/* Same for both landing and inner variants:
-          - background: card (#FFFFFF)
-          - text: primary-text (#1B1B1F)
-          - chevron icon: icon-black (#1B1B1F)
-      */}
+      {/* Expanded: white background (card), collapsed: no background (just avatar) */}
+      {/* Always sticks to bottom - shrink-0 ensures it never shrinks */}
       {isSignedIn && (
-        <div className={`mt-auto pt-2 ${isCollapsed ? 'flex justify-center' : ''}`}>
+        <div className={`shrink-0 pt-2 ${isCollapsed ? 'flex justify-center' : ''}`}>
           <button
             type="button"
             className={`
-              flex items-center gap-2 min-h-12 p-3 rounded w-full
-              bg-card
+              flex items-center gap-2 min-h-12 p-3 rounded
               transition-colors
-              ${isCollapsed ? 'justify-center w-auto' : ''}
+              ${isCollapsed ? 'justify-center' : 'w-full bg-card'}
             `}
           >
             {/* Avatar */}
