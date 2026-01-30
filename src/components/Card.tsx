@@ -240,7 +240,7 @@ export const Card: React.FC<CardProps> = ({
       className={`
         @container bg-card rounded-lg overflow-hidden relative cursor-pointer
         w-full min-w-[160px] max-w-[248px]
-        ${isFolder ? 'px-4 py-6' : 'p-4 @[200px]:p-6'}
+        p-4 @[200px]:p-6
         ${className}
       `}
       style={{
