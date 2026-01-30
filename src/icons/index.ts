@@ -36,3 +36,6 @@ export { Settings2 } from './Settings2';
 export { FilePlus } from './FilePlus';
 export { FileSearch } from './FileSearch';
 export { AlignLeft } from './AlignLeft';
+export { Trash2 } from './Trash2';
+export { ArrowDownToLine } from './ArrowDownToLine';
+export { FolderInput } from './FolderInput';

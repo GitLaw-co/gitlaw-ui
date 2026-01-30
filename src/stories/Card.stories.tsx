@@ -1,6 +1,8 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Card } from '../components/Card';
+import { Button } from '../components/Button';
+import { Trash2, ArrowDownToLine, FolderInput, Check } from '../icons';
 
 const meta: Meta<typeof Card> = {
   title: 'Components/Card',
@@ -432,22 +434,40 @@ const InteractiveDemo = () => {
             {selectedIds.size > 0 ? `${selectedIds.size} file${selectedIds.size > 1 ? 's' : ''} selected` : 'Click or drag to select'}
           </p>
           {selectedIds.size > 0 && (
-            <div className="flex items-center gap-2">
-              <button className="px-3 py-1.5 text-sm border border-primary text-text-button rounded hover:bg-secondary transition-colors">
+            <div className="flex items-center gap-1">
+              <Button
+                variant="secondary"
+                size="s"
+                showLeftIcon
+                leftIcon={<Trash2 className="size-6" color="#5E49D6" />}
+              >
                 Delete
-              </button>
-              <button className="px-3 py-1.5 text-sm border border-primary text-text-button rounded hover:bg-secondary transition-colors">
+              </Button>
+              <Button
+                variant="secondary"
+                size="s"
+                showLeftIcon
+                leftIcon={<ArrowDownToLine className="size-6" color="#5E49D6" />}
+              >
                 Download
-              </button>
-              <button className="px-3 py-1.5 text-sm border border-primary text-text-button rounded hover:bg-secondary transition-colors">
+              </Button>
+              <Button
+                variant="secondary"
+                size="s"
+                showLeftIcon
+                leftIcon={<FolderInput className="size-6" color="#5E49D6" />}
+              >
                 Move
-              </button>
-              <button
+              </Button>
+              <Button
+                variant="primary"
+                size="s"
+                showLeftIcon
+                leftIcon={<Check className="size-6" color="#FFFFFF" />}
                 onClick={() => setSelectedIds(new Set())}
-                className="px-3 py-1.5 text-sm bg-primary text-text-negative rounded hover:bg-primary-hover transition-colors"
               >
                 Done
-              </button>
+              </Button>
             </div>
           )}
         </div>
