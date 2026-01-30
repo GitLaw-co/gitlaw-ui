@@ -140,6 +140,7 @@ export default {
       },
       fontFamily: {
         sans: ['DM Sans', 'sans-serif'],
+        serif: ['DM Serif Text', 'serif'],
       },
       fontSize: {
         xxs: ['10px', { lineHeight: '1.4' }],
@@ -165,5 +166,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/container-queries')],
 };

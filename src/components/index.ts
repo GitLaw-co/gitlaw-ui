@@ -33,3 +33,6 @@ export type { SidebarProps, SidebarVariant, SidebarStatus, SidebarUser, SidebarM
 
 export { Tooltip } from './Tooltip';
 export type { TooltipProps, TooltipSize, TooltipType, TooltipPosition } from './Tooltip';
+
+export { Card } from './Card';
+export type { CardProps, CardType, CardVisibility, CardOwner, CardFileItem } from './Card';
