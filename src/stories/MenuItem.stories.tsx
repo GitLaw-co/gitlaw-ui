@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { ListItem } from '../components/ListItem';
+import { MenuItem } from '../components/MenuItem';
 
-const meta: Meta<typeof ListItem> = {
-  title: 'Components/ListItem',
-  component: ListItem,
+const meta: Meta<typeof MenuItem> = {
+  title: 'Components/MenuItem',
+  component: MenuItem,
   parameters: {
     layout: 'centered',
   },
@@ -56,7 +56,7 @@ const meta: Meta<typeof ListItem> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Default ListItem with icon
+// Default MenuItem with icon
 export const Default: Story = {
   args: {
     primaryText: 'Primary',
@@ -173,11 +173,11 @@ export const WithTick: Story = {
 export const AllLeftElements: Story = {
   render: () => (
     <div className="flex flex-col gap-2">
-      <ListItem primaryText="With icon" leftElement="icon" showLeftElement />
-      <ListItem primaryText="With avatar" leftElement="avatar" showLeftElement avatarInitials="AC" />
-      <ListItem primaryText="With clause" leftElement="clause" showLeftElement />
-      <ListItem primaryText="With select" leftElement="select" showLeftElement />
-      <ListItem primaryText="With mini-users" leftElement="mini-users" showLeftElement />
+      <MenuItem primaryText="With icon" leftElement="icon" showLeftElement />
+      <MenuItem primaryText="With avatar" leftElement="avatar" showLeftElement avatarInitials="AC" />
+      <MenuItem primaryText="With clause" leftElement="clause" showLeftElement />
+      <MenuItem primaryText="With select" leftElement="select" showLeftElement />
+      <MenuItem primaryText="With mini-users" leftElement="mini-users" showLeftElement />
     </div>
   ),
 };
@@ -185,7 +185,7 @@ export const AllLeftElements: Story = {
 // Full example
 export const FullExample: Story = {
   args: {
-    primaryText: 'Complete list item',
+    primaryText: 'Complete menu item',
     secondaryText: 'With all features enabled',
     leftElement: 'avatar',
     showLeftElement: true,

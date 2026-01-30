@@ -3,15 +3,15 @@ import { Check } from '../icons/Check';
 import { CircleDashed } from '../icons/CircleDashed';
 import { Info } from '../icons/Info';
 
-export type ListItemLeftElement = 'icon' | 'avatar' | 'clause' | 'select' | 'mini-users';
+export type MenuItemLeftElement = 'icon' | 'avatar' | 'clause' | 'select' | 'mini-users';
 
-export interface ListItemProps {
+export interface MenuItemProps {
   /** Primary text content */
   primaryText?: string;
   /** Secondary text content */
   secondaryText?: string;
   /** Type of left element to display */
-  leftElement?: ListItemLeftElement;
+  leftElement?: MenuItemLeftElement;
   /** Show left element */
   showLeftElement?: boolean;
   /** Show secondary text */
@@ -38,7 +38,7 @@ export interface ListItemProps {
   className?: string;
 }
 
-export const ListItem: React.FC<ListItemProps> = ({
+export const MenuItem: React.FC<MenuItemProps> = ({
   primaryText = 'Primary',
   secondaryText = '2 minutes ago',
   leftElement = 'icon',
@@ -152,4 +152,4 @@ export const ListItem: React.FC<ListItemProps> = ({
   );
 };
 
-export default ListItem;
+export default MenuItem;
