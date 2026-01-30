@@ -45,3 +45,6 @@ export type { DialogProps } from './Dialog';
 
 export { ChatInput } from './ChatInput';
 export type { ChatInputProps, ChatInputStatus, ChatInputSize, QuickAction } from './ChatInput';
+
+export { Icon } from './Icon';
+export type { IconProps } from './Icon';

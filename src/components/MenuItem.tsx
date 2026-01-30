@@ -1,7 +1,5 @@
 import React from 'react';
-import { Check } from '../icons/Check';
-import { CircleDashed } from '../icons/CircleDashed';
-import { Info } from '../icons/Info';
+import { Icon } from './Icon';
 
 export type MenuItemLeftElement = 'icon' | 'avatar' | 'clause' | 'select' | 'mini-users';
 
@@ -60,7 +58,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
 
     switch (leftElement) {
       case 'icon':
-        return leftIcon || <CircleDashed className="size-6" color="#1b1b1f" />;
+        return leftIcon || <Icon name="circle-dashed" className="size-6" color="#1b1b1f" />;
 
       case 'avatar':
         return (
@@ -76,7 +74,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
       case 'clause':
         return (
           <div className="size-8 rounded-full bg-backgrounds-tag-background flex items-center justify-center shrink-0">
-            <Info className="size-6" color="#15803d" />
+            <Icon name="info" className="size-6" color="#15803d" />
           </div>
         );
 
@@ -88,7 +86,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
               ${selected ? 'bg-primary border-primary' : 'bg-white border-secondary'}
             `}
           >
-            {selected && <Check className="size-3" color="#f7f6ff" />}
+            {selected && <Icon name="check" className="size-3" color="#f7f6ff" />}
           </div>
         );
 
@@ -139,13 +137,13 @@ export const MenuItem: React.FC<MenuItemProps> = ({
 
       {showRightElement && (
         <div className="relative flex items-center justify-end min-h-6 shrink-0">
-          <Check className="size-6" color="#5e49d6" />
+          <Icon name="check" className="size-6" color="#5e49d6" />
         </div>
       )}
 
       {showTick && (
         <div className="absolute -top-1 -right-1 bg-primary rounded p-1 flex items-center justify-center">
-          <Check className="size-6" color="#f7f6ff" />
+          <Icon name="check" className="size-6" color="#f7f6ff" />
         </div>
       )}
     </div>

@@ -1,12 +1,5 @@
 import React, { useRef, useCallback } from 'react';
-import { Star } from '../icons/Star';
-import { Ellipsis } from '../icons/Ellipsis';
-import { FileText } from '../icons/FileText';
-import { Lock } from '../icons/Lock';
-import { FolderClosed } from '../icons/FolderClosed';
-import { Earth } from '../icons/Earth';
-import { UsersRound } from '../icons/UsersRound';
-import { Building2 } from '../icons/Building2';
+import { Icon } from './Icon';
 
 export type CardType = 'file' | 'template' | 'folder';
 export type CardVisibility = 'private' | 'public' | 'shared' | 'organization';
@@ -129,15 +122,15 @@ export const Card: React.FC<CardProps> = ({
   const getVisibilityIcon = () => {
     switch (visibility) {
       case 'private':
-        return <Lock className="size-6 shrink-0" color="#989898" />;
+        return <Icon name="lock" className="size-6 shrink-0" color="#989898" />;
       case 'public':
-        return <Earth className="size-6 shrink-0" color="#989898" />;
+        return <Icon name="earth" className="size-6 shrink-0" color="#989898" />;
       case 'shared':
-        return <UsersRound className="size-6 shrink-0" color="#989898" />;
+        return <Icon name="users-round" className="size-6 shrink-0" color="#989898" />;
       case 'organization':
-        return <Building2 className="size-6 shrink-0" color="#989898" />;
+        return <Icon name="building-2" className="size-6 shrink-0" color="#989898" />;
       default:
-        return <Lock className="size-6 shrink-0" color="#989898" />;
+        return <Icon name="lock" className="size-6 shrink-0" color="#989898" />;
     }
   };
 
@@ -169,7 +162,7 @@ export const Card: React.FC<CardProps> = ({
             }}
             className="p-1 hover:bg-secondary rounded transition-colors hidden @[200px]:block"
           >
-            <Star className={ICON_SIZE} color={starred ? '#5E49D6' : '#CFC8F3'} filled={starred} />
+            <Icon name="star" className={ICON_SIZE} color={starred ? '#5E49D6' : '#CFC8F3'} />
           </button>
           <button
             type="button"
@@ -179,7 +172,7 @@ export const Card: React.FC<CardProps> = ({
             }}
             className="p-1 hover:bg-secondary rounded transition-colors"
           >
-            <Ellipsis className={ICON_SIZE} color="#989898" />
+            <Icon name="ellipsis" className={ICON_SIZE} color="#989898" />
           </button>
         </div>
       </div>
@@ -201,7 +194,7 @@ export const Card: React.FC<CardProps> = ({
       {/* Folder header */}
       <div className="flex items-center gap-2 p-3 w-full">
         <div className="flex items-center gap-2 flex-1 min-w-0">
-          <FolderClosed className="size-6 shrink-0" color="#5E49D6" />
+          <Icon name="folder-closed" className="size-6 shrink-0" color="#5E49D6" />
           <div className="flex flex-col flex-1 min-w-0">
             <h3 className="text-base font-normal text-text-primary leading-[1.4] truncate">{title}</h3>
             {/* File count hidden under 200px */}
@@ -221,7 +214,7 @@ export const Card: React.FC<CardProps> = ({
             }}
             className="p-1 hover:bg-secondary rounded transition-colors hidden @[200px]:block"
           >
-            <Star className={ICON_SIZE} color={starred ? '#5E49D6' : '#CFC8F3'} filled={starred} />
+            <Icon name="star" className={ICON_SIZE} color={starred ? '#5E49D6' : '#CFC8F3'} />
           </button>
           <button
             type="button"
@@ -231,7 +224,7 @@ export const Card: React.FC<CardProps> = ({
             }}
             className="p-1 hover:bg-secondary rounded transition-colors"
           >
-            <Ellipsis className={ICON_SIZE} color="#989898" />
+            <Icon name="ellipsis" className={ICON_SIZE} color="#989898" />
           </button>
         </div>
       </div>
@@ -250,7 +243,7 @@ export const Card: React.FC<CardProps> = ({
               onFileClick?.(file);
             }}
           >
-            <FileText className="size-6 shrink-0" color="#CFC8F3" />
+            <Icon name="file-text" className="size-6 shrink-0" color="#CFC8F3" />
             <span className="text-base font-normal text-text-primary truncate">{file.name}</span>
           </div>
         ))}

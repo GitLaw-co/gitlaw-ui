@@ -1,6 +1,5 @@
 import React from 'react';
-import { X } from '../icons/X';
-import { Check } from '../icons/Check';
+import { Icon } from './Icon';
 import { Button } from './Button';
 
 export interface DialogProps {
@@ -59,7 +58,7 @@ export const Dialog: React.FC<DialogProps> = ({
             onClick={onClose}
             className="p-1 hover:bg-secondary rounded transition-colors"
           >
-            <X className="size-6" color="#1b1b1f" />
+            <Icon name="x" className="size-6" color="#1b1b1f" />
           </button>
         )}
       </div>
@@ -76,7 +75,7 @@ export const Dialog: React.FC<DialogProps> = ({
           variant="outline"
           size="m"
           showLeftIcon
-          leftIcon={<X className="size-5" color="#5E49D6" />}
+          leftIcon={<Icon name="x" className="size-5" color="#5E49D6" />}
           onClick={onSecondaryClick}
           className="flex-1"
         >
@@ -88,7 +87,7 @@ export const Dialog: React.FC<DialogProps> = ({
           variant="primary"
           size="m"
           showLeftIcon
-          leftIcon={<Check className="size-5" color="#F7F6FF" />}
+          leftIcon={<Icon name="check" className="size-5" color="#F7F6FF" />}
           onClick={onPrimaryClick}
           className="flex-1"
         >

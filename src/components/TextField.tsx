@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles } from '../icons/Sparkles';
+import { Icon } from './Icon';
 
 export type TextFieldSize = 'xs' | 's' | 'm' | 'l' | 'xl';
 export type TextFieldStatus = 'empty' | 'populated' | 'active';
@@ -148,7 +148,7 @@ export const TextField: React.FC<TextFieldProps> = ({
 
       {showIcon && (
         <div className={`absolute ${iconPosition}`}>
-          {icon || <Sparkles className="size-6" color="#5e49d6" />}
+          {icon || <Icon name="sparkles" className="size-6" color="#5e49d6" />}
         </div>
       )}
     </div>

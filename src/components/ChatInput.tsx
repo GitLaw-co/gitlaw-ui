@@ -1,11 +1,5 @@
 import React from 'react';
-import { Square } from '../icons/Square';
-import { ArrowUp } from '../icons/ArrowUp';
-import { Paperclip } from '../icons/Paperclip';
-import { Settings2 } from '../icons/Settings2';
-import { FilePlus } from '../icons/FilePlus';
-import { FileSearch } from '../icons/FileSearch';
-import { AlignLeft } from '../icons/AlignLeft';
+import { Icon } from './Icon';
 
 export type ChatInputStatus = 'active' | 'populated' | 'working';
 export type ChatInputSize = 'l' | 'm';
@@ -54,11 +48,11 @@ const defaultQuickActions: QuickAction[] = [
 const QuickActionIcon: React.FC<{ icon: string }> = ({ icon }) => {
   switch (icon) {
     case 'draft':
-      return <FilePlus className="size-4" color="#5E49D6" />;
+      return <Icon name="file-plus" className="size-4" color="#5E49D6" />;
     case 'review':
-      return <FileSearch className="size-4" color="#5E49D6" />;
+      return <Icon name="file-search" className="size-4" color="#5E49D6" />;
     case 'summarize':
-      return <AlignLeft className="size-4" color="#5E49D6" />;
+      return <Icon name="align-left" className="size-4" color="#5E49D6" />;
     default:
       return null;
   }
@@ -108,7 +102,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
             onClick={onStopClick}
             className="ml-auto p-1 hover:bg-secondary rounded transition-colors"
           >
-            <Square className="size-6" color="#5E49D6" />
+            <Icon name="square" className="size-6" color="#5E49D6" />
           </button>
         </div>
       </div>
@@ -151,7 +145,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
               p-1 rounded transition-colors shrink-0
             "
           >
-            <ArrowUp className="size-6" color="#F7F6FF" />
+            <Icon name="arrow-up" className="size-6" color="#F7F6FF" />
           </button>
         )}
       </div>
@@ -165,14 +159,14 @@ export const ChatInput: React.FC<ChatInputProps> = ({
             onClick={onAttachmentClick}
             className="p-1 hover:bg-secondary rounded transition-colors"
           >
-            <Paperclip className="size-6" color="#5E49D6" />
+            <Icon name="paperclip" className="size-6" color="#5E49D6" />
           </button>
           <button
             type="button"
             onClick={onSettingsClick}
             className="p-1 hover:bg-secondary rounded transition-colors"
           >
-            <Settings2 className="size-6" color="#5E49D6" />
+            <Icon name="settings-2" className="size-6" color="#5E49D6" />
           </button>
         </div>
 

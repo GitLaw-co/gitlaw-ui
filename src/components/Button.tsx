@@ -1,6 +1,5 @@
 import React from 'react';
-import { Check } from '../icons/Check';
-import { ChevronDown } from '../icons/ChevronDown';
+import { Icon } from './Icon';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'disabled' | 'icon';
 export type ButtonSize = 'xs' | 's' | 'm' | 'l' | 'xl';
@@ -81,13 +80,13 @@ export const Button: React.FC<ButtonProps> = ({
       disabled={isDisabled}
       type="button"
     >
-      {showLeftIcon && !isIcon && (leftIcon || <Check className="size-5" color={iconColor} />)}
+      {showLeftIcon && !isIcon && (leftIcon || <Icon name="check" className="size-5" color={iconColor} />)}
       {isIcon ? (
-        leftIcon || <Check className="size-6" color={iconColor} />
+        leftIcon || <Icon name="check" className="size-6" color={iconColor} />
       ) : (
         <span>{children}</span>
       )}
-      {showRightIcon && !isIcon && (rightIcon || <ChevronDown className="size-5" color={iconColor} />)}
+      {showRightIcon && !isIcon && (rightIcon || <Icon name="chevron-down" className="size-5" color={iconColor} />)}
     </button>
   );
 };

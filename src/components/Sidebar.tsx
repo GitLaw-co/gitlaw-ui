@@ -1,17 +1,5 @@
 import React from 'react';
-import { PenSquare } from '../icons/PenSquare';
-import { FolderClosed } from '../icons/FolderClosed';
-import { LayoutGrid } from '../icons/LayoutGrid';
-import { Bell } from '../icons/Bell';
-import { MessageCircle } from '../icons/MessageCircle';
-import { ChevronsLeft } from '../icons/ChevronsLeft';
-import { Search } from '../icons/Search';
-import { Home } from '../icons/Home';
-import { Sparkles } from '../icons/Sparkles';
-import { TagIcon } from '../icons/Tag';
-import { CircleHelp } from '../icons/CircleHelp';
-import { Rss } from '../icons/Rss';
-import { ChevronUp } from '../icons/ChevronUp';
+import { Icon } from './Icon';
 import { Tooltip } from './Tooltip';
 
 // Import logo SVGs as URLs
@@ -71,20 +59,20 @@ const ICON_SIZE = 'size-5'; // 20px
 
 // Default menu items for signed-in users
 const defaultSignedInMenuItems: SidebarMenuItem[] = [
-  { id: 'new-chat', label: 'New chat', icon: <PenSquare className={ICON_SIZE} /> },
-  { id: 'files', label: 'Files', icon: <FolderClosed className={ICON_SIZE} /> },
-  { id: 'templates', label: 'Templates', icon: <LayoutGrid className={ICON_SIZE} /> },
-  { id: 'reminders', label: 'Reminders', icon: <Bell className={ICON_SIZE} /> },
+  { id: 'new-chat', label: 'New chat', icon: <Icon name="pen-line" className={ICON_SIZE} /> },
+  { id: 'files', label: 'Files', icon: <Icon name="folder-closed" className={ICON_SIZE} /> },
+  { id: 'templates', label: 'Templates', icon: <Icon name="layout-grid" className={ICON_SIZE} /> },
+  { id: 'reminders', label: 'Reminders', icon: <Icon name="bell" className={ICON_SIZE} /> },
 ];
 
 // Default menu items for signed-out users
 const defaultSignedOutMenuItems: SidebarMenuItem[] = [
-  { id: 'home', label: 'Home', icon: <Home className={ICON_SIZE} /> },
-  { id: 'features', label: 'Features', icon: <Sparkles className={ICON_SIZE} /> },
-  { id: 'pricing', label: 'Pricing', icon: <TagIcon className={ICON_SIZE} /> },
-  { id: 'templates', label: 'Templates', icon: <LayoutGrid className={ICON_SIZE} /> },
-  { id: 'knowledge-base', label: 'Knowledge base', icon: <CircleHelp className={ICON_SIZE} /> },
-  { id: 'news', label: 'News', icon: <Rss className={ICON_SIZE} /> },
+  { id: 'home', label: 'Home', icon: <Icon name="home" className={ICON_SIZE} /> },
+  { id: 'features', label: 'Features', icon: <Icon name="sparkles" className={ICON_SIZE} /> },
+  { id: 'pricing', label: 'Pricing', icon: <Icon name="tag" className={ICON_SIZE} /> },
+  { id: 'templates', label: 'Templates', icon: <Icon name="layout-grid" className={ICON_SIZE} /> },
+  { id: 'knowledge-base', label: 'Knowledge base', icon: <Icon name="circle-help" className={ICON_SIZE} /> },
+  { id: 'news', label: 'News', icon: <Icon name="rss" className={ICON_SIZE} /> },
 ];
 
 // Default chat history
@@ -197,7 +185,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   className={`size-10 flex items-center justify-center rounded ${colors.hoverBg} transition-colors`}
                   aria-label="Search"
                 >
-                  <Search className={ICON_SIZE} color={colors.menuIcon} />
+                  <Icon name="search" className={ICON_SIZE} color={colors.menuIcon} />
                 </button>
                 <button
                   type="button"
@@ -205,7 +193,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   className={`size-10 flex items-center justify-center rounded ${colors.hoverBg} transition-colors`}
                   aria-label="Collapse sidebar"
                 >
-                  <ChevronsLeft className={ICON_SIZE} color={colors.menuIcon} />
+                  <Icon name="chevrons-left" className={ICON_SIZE} color={colors.menuIcon} />
                 </button>
               </div>
             </>
@@ -281,7 +269,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     ${colors.hoverBg} transition-colors text-left
                   `}
                 >
-                  <MessageCircle className={ICON_SIZE} color={colors.chatIcon} />
+                  <Icon name="message-circle" className={ICON_SIZE} color={colors.chatIcon} />
                   <span className={`text-sm font-normal ${colors.chatItemText} truncate`}>
                     {chat.label}
                   </span>
@@ -332,7 +320,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <span className="text-base font-normal text-text-primary truncate flex-1 text-left">
                 {userName}
               </span>
-              <ChevronUp className={ICON_SIZE} color="#1B1B1F" />
+              <Icon name="chevron-up" className={ICON_SIZE} color="#1B1B1F" />
             </button>
           )}
         </div>

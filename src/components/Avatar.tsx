@@ -1,6 +1,5 @@
 import React from 'react';
-import { Building } from '../icons/Building';
-import { ImageUp } from '../icons/ImageUp';
+import { Icon } from './Icon';
 
 export type AvatarType = 'image' | 'initials' | 'icon' | 'empty';
 export type AvatarSize = 'S' | 'M' | 'L' | 'XL';
@@ -85,12 +84,12 @@ export const Avatar: React.FC<AvatarProps> = ({
         )}
 
         {type === 'icon' && (
-          <Building className={sizeConfig.icon} color="#f7f6ff" />
+          <Icon name="building" className={sizeConfig.icon} color="#f7f6ff" />
         )}
 
         {type === 'empty' && (
           <div className="flex flex-col items-center justify-center gap-1">
-            <ImageUp className="size-4" color="#f7f6ff" />
+            <Icon name="image-up" className="size-4" color="#f7f6ff" />
             <span className="text-xxs text-text-negative">Add</span>
           </div>
         )}
@@ -108,18 +107,7 @@ export const Avatar: React.FC<AvatarProps> = ({
             hover:bg-[#2a2d33] transition-colors
           "
         >
-          <svg
-            className="size-4"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#f7f6ff"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
-            <path d="m15 5 4 4" />
-          </svg>
+          <Icon name="pencil" className="size-4" color="#f7f6ff" />
         </button>
       )}
     </div>

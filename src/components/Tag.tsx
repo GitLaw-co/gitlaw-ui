@@ -1,6 +1,5 @@
 import React from 'react';
-import { User } from '../icons/User';
-import { X } from '../icons/X';
+import { Icon } from './Icon';
 
 export type TagSize = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl';
 export type TagWeight = 'regular' | 'bold';
@@ -81,7 +80,7 @@ export const Tag: React.FC<TagProps> = ({
     >
       {showIcon && (
         <span className="shrink-0 text-text-tag">
-          {icon || <User className={sizeConfig.icon} color="#5e49d6" />}
+          {icon || <Icon name="user" className={sizeConfig.icon} color="#5e49d6" />}
         </span>
       )}
       <span className={`text-text-tag ${sizeConfig.text} ${fontWeight} overflow-hidden text-ellipsis`}>
@@ -93,7 +92,7 @@ export const Tag: React.FC<TagProps> = ({
           onClick={onClose}
           className="shrink-0 text-text-tag hover:opacity-70 transition-opacity"
         >
-          <X className={sizeConfig.icon} color="#5e49d6" />
+          <Icon name="x" className={sizeConfig.icon} color="#5e49d6" />
         </button>
       )}
     </div>
