@@ -1,121 +1,157 @@
 # GitLaw UI
 
-A React + Tailwind CSS component library built from the GitLaw Figma design system.
+An **experimental** React component library built with Tailwind CSS, generated using Claude from the GitLaw Figma design system.
 
-**Live**: [gitlaw-ui.vercel.app](https://gitlaw-ui.vercel.app)
+[![Storybook](https://img.shields.io/badge/Storybook-FF4785?logo=storybook&logoColor=white)](https://gitlaw-ui.vercel.app)
+[![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 
-## Components
+> **Note:** This is a proof-of-concept implementation created with AI assistance. It demonstrates how Claude can translate Figma designs into functional React components. Not intended for production use.
 
-| Component | Description |
-|-----------|-------------|
-| **Button** | Versatile button with variants: primary, secondary, outline, ghost, destructive, disabled, icon |
-| **Input** | Text input with label, icons, and multiple sizes |
-| **Avatar** | User avatar supporting images, initials, icons, and empty states |
-| **Badge** | Notification badge with color variants (red, orange, green, primary, secondary) |
-| **Tag** | Label/tag component with icon and close button support |
-| **Tab** | Navigation tab with badge support and selection states |
-| **Switch** | Toggle switch for boolean settings |
-| **MenuItem** | List item with multiple left element types |
-| **Select** | Dropdown select with search and validation |
-| **TextField** | Multi-line text area with label support |
-| **Sidebar** | Navigation sidebar with collapsed/expanded states |
-| **Tooltip** | Hover tooltip with multiple sizes and positions |
-| **Card** | Content card for files, templates, and folders |
-| **Dialog** | Modal dialog with action buttons |
-| **ChatInput** | AI chat input with quick actions |
-| **Toast** | Notification toast component |
-| **Icon** | Dynamic icon component (1474 icons) |
+[Live Storybook](https://gitlaw-ui.vercel.app) | [Figma Source](https://www.figma.com/design/czek1GvIeHMJnnvc3aqWHK/UI-v3)
 
-## Foundations
+---
 
-| Category | Description |
-|----------|-------------|
-| **Colors** | Semantic and primitive color palette |
-| **Typography** | Font families, sizes, and weights |
-| **Spacing** | Spacing scale and border radius tokens |
-| **Icons** | 1474 searchable icons with categories |
-| **Illustrations** | 100 Zest illustrations with search |
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js 18+
-- npm or yarn
-
-### Installation
+## Quick Start
 
 ```bash
+# Clone and install
+git clone https://github.com/GitLaw-co/gitlaw-ui.git
+cd gitlaw-ui
 npm install
-```
 
-### Development
-
-```bash
+# Run Storybook
 npm run storybook
 ```
 
 Opens at [http://localhost:6006](http://localhost:6006)
-
-### Build
-
-```bash
-npm run build-storybook
-```
-
-## Design Tokens
-
-### Colors
-
-```css
---primary: #5e49d6;
---secondary: #ebe7ff;
---destructive: #e11d48;
---alert: #f97316;
---positive: #15803d;
-```
-
-### Typography
-
-Font: **DM Sans**
-
-| Size | Value |
-|------|-------|
-| xxs | 10px |
-| xs | 12px |
-| sm | 14px |
-| base | 16px |
-| lg | 18px |
-| xl | 20px |
-| 2xl | 24px |
 
 ## Usage
 
 ```tsx
 import { Button, Input, Avatar, Icon } from './components';
 
-// Button
-<Button variant="primary" size="m">Click me</Button>
+<Button variant="primary" size="m">Get Started</Button>
 
-// Input
-<Input placeholder="Enter text..." showLabel label="Email" />
+<Input label="Email" placeholder="you@example.com" showLabel />
 
-// Avatar
 <Avatar type="initials" initials="JD" size="M" />
 
-// Icon
 <Icon name="check" className="size-6" color="#5E49D6" />
 ```
 
-## Figma Source
+## Components
 
-- [UI-v3 Library](https://www.figma.com/design/czek1GvIeHMJnnvc3aqWHK/UI-v3)
-- [Typography & Icons](https://www.figma.com/design/EhLq6bat0Gx4dRJpYGFGw9/Typography---Icons)
+### Core
+
+| Component | Description |
+|-----------|-------------|
+| **Button** | Primary, secondary, outline, ghost, destructive variants with 5 sizes |
+| **Input** | Text input with labels, icons, validation states |
+| **TextField** | Multi-line textarea with character count |
+| **Select** | Searchable dropdown with multi-select support |
+| **Switch** | Toggle for boolean settings |
+
+### Data Display
+
+| Component | Description |
+|-----------|-------------|
+| **Avatar** | Images, initials, icons, or empty states |
+| **Badge** | Notification indicators with color variants |
+| **Tag** | Labels with optional icon and close button |
+| **Card** | File, template, and folder cards with actions |
+| **Tooltip** | Contextual hints in multiple sizes/positions |
+| **Toast** | Notification messages |
+
+### Navigation
+
+| Component | Description |
+|-----------|-------------|
+| **Tab** | Tab navigation with badge support |
+| **MenuItem** | List items with icons, avatars, or checkboxes |
+| **Sidebar** | Collapsible navigation with user states |
+
+### Feedback
+
+| Component | Description |
+|-----------|-------------|
+| **Dialog** | Modal dialogs with action buttons |
+| **ChatInput** | AI chat interface with quick actions |
+
+### Foundation
+
+| Resource | Count |
+|----------|-------|
+| **Icons** | 1,474 searchable icons |
+| **Illustrations** | 100 Zest illustrations |
+| **Colors** | Semantic + primitive palette |
+| **Typography** | DM Sans, 7 size scales |
+
+## Design Tokens
+
+```css
+/* Primary palette */
+--primary: #5e49d6;
+--primary-hover: #6f5eec;
+--secondary: #ebe7ff;
+
+/* Semantic colors */
+--destructive: #e11d48;
+--alert: #f97316;
+--positive: #15803d;
+
+/* Text */
+--text-primary: #1b1b1f;
+--text-secondary: #989898;
+```
+
+## Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run storybook` | Start dev server on :6006 |
+| `npm run build-storybook` | Build static Storybook |
+| `npm run build` | Build component library |
+| `npm run lint` | Run ESLint |
 
 ## Tech Stack
 
-- React 18
-- TypeScript
-- Tailwind CSS
-- Storybook 8
-- Vite
+| Technology | Version |
+|------------|---------|
+| React | 18 |
+| TypeScript | 5 |
+| Tailwind CSS | 3 |
+| Storybook | 8 |
+| Vite | 5 |
+
+## Project Structure
+
+```
+src/
+├── components/       # React components
+│   ├── Button/
+│   ├── Input/
+│   └── ...
+├── stories/          # Storybook stories
+├── assets/           # Icons, illustrations
+└── styles/           # Global styles, tokens
+```
+
+## Resources
+
+- [Live Storybook](https://gitlaw-ui.vercel.app)
+- [Figma UI-v3 Library](https://www.figma.com/design/czek1GvIeHMJnnvc3aqWHK/UI-v3)
+- [Figma Typography & Icons](https://www.figma.com/design/EhLq6bat0Gx4dRJpYGFGw9/Typography---Icons)
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/new-component`)
+3. Commit changes (`git commit -m 'Add new component'`)
+4. Push to branch (`git push origin feature/new-component`)
+5. Open a Pull Request
+
+## License
+
+MIT

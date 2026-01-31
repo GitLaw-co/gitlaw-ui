@@ -4,140 +4,125 @@ import { Meta } from '@storybook/blocks';
 
 # GitLaw UI
 
-Welcome to **GitLaw UI**, the component library built with React and Tailwind CSS. This is the design system extracted from the GitLaw Figma library.
+An **experimental** React component library built with Tailwind CSS, generated using Claude from the GitLaw Figma design system.
+
+> **Note:** This is a proof-of-concept implementation created with AI assistance. It demonstrates how Claude can translate Figma designs into functional React components. Not intended for production use.
+
+## About This Project
+
+This Storybook showcases 17+ components, 1,474 icons, and 100 illustrations — all generated through an experimental workflow using Claude to interpret Figma designs. Use the sidebar to explore components interactively.
+
+### How to Navigate
+
+| Section | What You'll Find |
+|---------|------------------|
+| **Components** | Interactive component demos with controls |
+| **Foundations** | Colors, typography, spacing, icons |
+| **Docs** | Component API documentation |
+
+> **Tip:** Use the **Controls** panel at the bottom of each story to experiment with props in real-time.
+
+---
+
+## Quick Start
+
+```tsx
+import { Button, Input, Avatar, Icon } from './components';
+
+// Primary button
+<Button variant="primary" size="m">Get Started</Button>
+
+// Input with label
+<Input label="Email" placeholder="you@example.com" showLabel />
+
+// User avatar
+<Avatar type="initials" initials="JD" size="M" />
+
+// Icon
+<Icon name="check" className="size-6" color="#5E49D6" />
+```
+
+---
+
+## Component Overview
+
+### Form Controls
+- [**Button**](?path=/docs/components-button--docs) — Primary, secondary, outline, ghost, destructive variants
+- [**Input**](?path=/docs/components-input--docs) — Text input with labels, icons, validation
+- [**TextField**](?path=/docs/components-textfield--docs) — Multi-line textarea
+- [**Select**](?path=/docs/components-select--docs) — Searchable dropdown with multi-select
+- [**Switch**](?path=/docs/components-switch--docs) — Boolean toggle
+
+### Data Display
+- [**Avatar**](?path=/docs/components-avatar--docs) — User avatars with multiple display modes
+- [**Badge**](?path=/docs/components-badge--docs) — Notification indicators
+- [**Tag**](?path=/docs/components-tag--docs) — Labels with icons and close buttons
+- [**Card**](?path=/docs/components-card--docs) — File, template, and folder cards
+- [**Tooltip**](?path=/docs/components-tooltip--docs) — Contextual information hints
+
+### Navigation
+- [**Tab**](?path=/docs/components-tab--docs) — Tab navigation with badges
+- [**MenuItem**](?path=/docs/components-menuitem--docs) — List items for menus
+- [**Sidebar**](?path=/docs/components-sidebar--docs) — Collapsible navigation sidebar
+
+### Feedback
+- [**Dialog**](?path=/docs/components-dialog--docs) — Modal dialogs
+- [**Toast**](?path=/docs/components-toast--docs) — Notification messages
+- [**ChatInput**](?path=/docs/components-chatinput--docs) — AI chat interface
+
+---
 
 ## Design Tokens
 
-The design system uses the following core tokens:
+### Colors
 
-### Semantic Colors
+| Token | Value | Preview |
+|-------|-------|---------|
+| `primary` | `#5E49D6` | <span style={{display:'inline-block',width:'16px',height:'16px',background:'#5E49D6',borderRadius:'4px',verticalAlign:'middle'}}></span> |
+| `secondary` | `#EBE7FF` | <span style={{display:'inline-block',width:'16px',height:'16px',background:'#EBE7FF',borderRadius:'4px',verticalAlign:'middle',border:'1px solid #ddd'}}></span> |
+| `destructive` | `#E11D48` | <span style={{display:'inline-block',width:'16px',height:'16px',background:'#E11D48',borderRadius:'4px',verticalAlign:'middle'}}></span> |
+| `alert` | `#F97316` | <span style={{display:'inline-block',width:'16px',height:'16px',background:'#F97316',borderRadius:'4px',verticalAlign:'middle'}}></span> |
+| `positive` | `#15803D` | <span style={{display:'inline-block',width:'16px',height:'16px',background:'#15803D',borderRadius:'4px',verticalAlign:'middle'}}></span> |
 
-| Token | Value | Usage |
-|-------|-------|-------|
-| `primary` | `#5E49D6` | Primary brand color, buttons, links |
-| `primary-hover` | `#6F5EEC` | Primary hover state |
-| `secondary` | `#EBE7FF` | Secondary backgrounds, muted elements |
-| `secondary-hover` | `#E2DDFF` | Secondary hover state |
-| `destructive` | `#E11D48` | Error states, delete actions |
-| `alert` | `#F97316` | Warning states |
-| `positive` | `#15803D` | Success states |
-| `border` | `#E2DDFF` | Default border color (purple/200) |
-| `input-border` | `#DCE3E8` | Input border color (bluish/100) |
-| `muted` | `#F0F0F5` | Muted backgrounds (obsidian/50) |
-| `page-background` | `#F7F6FF` | Page background (purple/50) |
-
-### Sidebar Colors
-
-| Token | Value | Usage |
-|-------|-------|-------|
-| `sidebar-background` | `#F3F1FF` | Sidebar background (purple/65) |
-| `sidebar-hover` | `#EBE7FF` | Sidebar hover state (purple/100) |
-| `sidebar-border` | `#DCE3E8` | Sidebar border (bluish/100) |
-
-### Input Colors
-
-| Token | Value | Usage |
-|-------|-------|-------|
-| `input` | `#DFFBE3` | Input background (grass/65) |
-| `input-bright` | `#FFFFFF` | Bright input background |
-| `input-border` | `#DCE3E8` | Input border (bluish/100) |
-| `input-disabled` | `#F1F5F8` | Disabled input (bluish/50) |
-
-### Text Colors
-
-| Token | Value | Usage |
-|-------|-------|-------|
-| `text-primary` | `#1B1B1F` | Primary text (obsidian/950) |
-| `text-secondary` | `#989898` | Secondary/muted text (grey/50) |
-| `text-negative` | `#F7F6FF` | Text on dark backgrounds (purple/50) |
-| `text-button` | `#5E49D6` | Button text (secondary variant) |
-
-### Icon Colors
-
-| Token | Value | Usage |
-|-------|-------|-------|
-| `icon-primary` | `#5E49D6` | Primary icon color |
-| `icon-secondary` | `#989898` | Secondary icon color |
-| `icon-disabled` | `#CFC8F3` | Disabled icon color |
-| `icon-negative` | `#F7F6FF` | Icon on dark backgrounds |
-| `icon-black` | `#1B1B1F` | Black icon color |
+> See [**Foundations/Colors**](?path=/docs/foundations-colors--docs) for the complete palette.
 
 ### Typography
 
-The design system uses **DM Sans** as the primary font family with the following sizes:
+**Font Family:** DM Sans
 
-- `text-xxs`: 10px
-- `text-xs`: 12px
-- `text-sm`: 14px
-- `text-base`: 16px
-- `text-lg`: 18px
-- `text-xl`: 20px
-- `text-2xl`: 24px
+| Scale | Size |
+|-------|------|
+| `xxs` | 10px |
+| `xs` | 12px |
+| `sm` | 14px |
+| `base` | 16px |
+| `lg` | 18px |
+| `xl` | 20px |
+| `2xl` | 24px |
 
 ### Spacing
 
 | Token | Value |
 |-------|-------|
-| `xs` / `s` | 4px |
+| `xs` | 4px |
 | `m` | 8px |
 | `l` | 12px |
 | `xl` | 16px |
 | `2xl` | 24px |
 
-## Components
+---
 
-### Button
-A versatile button component with multiple variants (primary, secondary, outline, ghost, destructive, disabled) and sizes (xs, s, m, l, xl).
+## Resources
 
-### Input
-Text input component with support for labels, icons, and multiple sizes.
+| Resource | Link |
+|----------|------|
+| **Figma UI-v3** | [Open in Figma](https://www.figma.com/design/czek1GvIeHMJnnvc3aqWHK/UI-v3) |
+| **Typography & Icons** | [Open in Figma](https://www.figma.com/design/EhLq6bat0Gx4dRJpYGFGw9/Typography---Icons) |
+| **GitHub** | [View Repository](https://github.com/GitLaw-co/gitlaw-ui) |
 
-### Avatar
-User avatar component supporting images, initials, icons, and empty states in multiple sizes.
+---
 
-### Badge
-Notification badge component with color variants and optional count display.
-
-### Tag
-Label/tag component for categorization with icon and close button support.
-
-### Tab
-Navigation tab component with badge support and selection states.
-
-### Switch
-Toggle switch component for boolean settings.
-
-### ListItem
-List item component with multiple left element types (icon, avatar, clause, select, mini-users), secondary text, and selection states.
-
-### Select
-Dropdown select component with search functionality, multiple sizes, validation states, and label positioning options.
-
-### TextField
-Multi-line text area component with label support, multiple sizes, and validation states.
-
-### Sidebar
-Navigation sidebar component with multiple variants and states:
-- **Variants**: `landing` (dark purple background) and `inner` (light purple background)
-- **States**: `collapsed` (icons only, 64px) and `expanded` (full content, 288px)
-- **User states**: `signed-in` (with profile and chat history) and `signed-out` (marketing menu)
-- Includes logo, menu items, chat history (signed-in), and user profile section
-
-### Tooltip
-Hover tooltip component with multiple sizes and color types:
-- **Sizes**: `s` (12px text), `m` (14px text), `l` (16px text)
-- **Types**: `neutral` (white background, dark text) and `purple` (purple background, white text)
-- **Positions**: `top`, `right`, `bottom`, `left`
-
-### Card
-Content card component for displaying files, templates, and folders:
-- **Types**: `file`, `template` (same visual format), `folder`
-- **File/Template cards**: Display owner avatar, title, visibility status, description
-- **Folder cards**: Display folder header with file count and list of files inside
-- **Features**: Star/favorite toggle, menu button, hover overlay with action button
-- **Responsive**: Works at various breakpoints (xxs: 288px, xs: 204px, sm: 192px, md: 239px, lg: 242px, xl: 215px, 2xl: 202px)
-
-## Getting Started
+## Local Development
 
 ```bash
 # Install dependencies
@@ -145,10 +130,7 @@ npm install
 
 # Start Storybook
 npm run storybook
+
+# Build static Storybook
+npm run build-storybook
 ```
-
-## Figma Source
-
-This component library is generated from the GitLaw Figma design system:
-- [UI-v3 Library](https://www.figma.com/design/czek1GvIeHMJnnvc3aqWHK/UI-v3)
-- [Typography & Icons](https://www.figma.com/design/EhLq6bat0Gx4dRJpYGFGw9/Typography---Icons)
