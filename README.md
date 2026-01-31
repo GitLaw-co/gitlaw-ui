@@ -1,10 +1,10 @@
-# GitLaw UI Component Library
+# GitLaw UI
 
-A React + Tailwind CSS component library generated from the GitLaw Figma design system.
+A React + Tailwind CSS component library built from the GitLaw Figma design system.
+
+**Live**: [gitlaw-ui.vercel.app](https://gitlaw-ui.vercel.app)
 
 ## Components
-
-This library includes the following components:
 
 | Component | Description |
 |-----------|-------------|
@@ -15,6 +15,26 @@ This library includes the following components:
 | **Tag** | Label/tag component with icon and close button support |
 | **Tab** | Navigation tab with badge support and selection states |
 | **Switch** | Toggle switch for boolean settings |
+| **MenuItem** | List item with multiple left element types |
+| **Select** | Dropdown select with search and validation |
+| **TextField** | Multi-line text area with label support |
+| **Sidebar** | Navigation sidebar with collapsed/expanded states |
+| **Tooltip** | Hover tooltip with multiple sizes and positions |
+| **Card** | Content card for files, templates, and folders |
+| **Dialog** | Modal dialog with action buttons |
+| **ChatInput** | AI chat input with quick actions |
+| **Toast** | Notification toast component |
+| **Icon** | Dynamic icon component (1474 icons) |
+
+## Foundations
+
+| Category | Description |
+|----------|-------------|
+| **Colors** | Semantic and primitive color palette |
+| **Typography** | Font families, sizes, and weights |
+| **Spacing** | Spacing scale and border radius tokens |
+| **Icons** | 1474 searchable icons with categories |
+| **Illustrations** | 100 Zest illustrations with search |
 
 ## Getting Started
 
@@ -26,23 +46,18 @@ This library includes the following components:
 ### Installation
 
 ```bash
-cd gitlaw-storybook
 npm install
 ```
 
 ### Development
 
-Start Storybook in development mode:
-
 ```bash
 npm run storybook
 ```
 
-This will open Storybook at [http://localhost:6006](http://localhost:6006)
+Opens at [http://localhost:6006](http://localhost:6006)
 
 ### Build
-
-Build Storybook for production:
 
 ```bash
 npm run build-storybook
@@ -74,20 +89,10 @@ Font: **DM Sans**
 | xl | 20px |
 | 2xl | 24px |
 
-### Spacing
-
-| Token | Value |
-|-------|-------|
-| xs/s | 4px |
-| m | 8px |
-| l | 12px |
-| xl | 16px |
-| 2xl | 24px |
-
 ## Usage
 
 ```tsx
-import { Button, Input, Avatar, Badge, Tag, Tab, Switch } from './components';
+import { Button, Input, Avatar, Icon } from './components';
 
 // Button
 <Button variant="primary" size="m">Click me</Button>
@@ -98,22 +103,13 @@ import { Button, Input, Avatar, Badge, Tag, Tab, Switch } from './components';
 // Avatar
 <Avatar type="initials" initials="JD" size="M" />
 
-// Badge
-<Badge type="red" count={5} />
-
-// Tag
-<Tag label="TypeScript" showClose />
-
-// Tab
-<Tab label="Activity" status="selected-underlined" />
-
-// Switch
-<Switch checked onChange={(checked) => console.log(checked)} />
+// Icon
+<Icon name="check" className="size-6" color="#5E49D6" />
 ```
 
 ## Figma Source
 
-- [UI-v2 Library](https://www.figma.com/design/czek1GvIeHMJnnvc3aqWHK/UI-v2)
+- [UI-v3 Library](https://www.figma.com/design/czek1GvIeHMJnnvc3aqWHK/UI-v3)
 - [Typography & Icons](https://www.figma.com/design/EhLq6bat0Gx4dRJpYGFGw9/Typography---Icons)
 
 ## Tech Stack

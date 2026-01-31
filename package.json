@@ -1,7 +1,7 @@
 {
-  "name": "gitlaw-ui-storybook",
+  "name": "gitlaw-ui",
   "version": "1.0.0",
-  "description": "GitLaw UI Component Library - Storybook",
+  "description": "GitLaw UI Component Library",
   "main": "index.js",
   "scripts": {
     "storybook": "storybook dev -p 6006",
@@ -25,6 +25,7 @@
     "@types/react-dom": "^18.2.0",
     "@vitejs/plugin-react": "^4.2.0",
     "autoprefixer": "^10.4.17",
+    "chromatic": "^13.3.5",
     "gh-pages": "^6.3.0",
     "postcss": "^8.4.35",
     "storybook": "^8.0.0",
