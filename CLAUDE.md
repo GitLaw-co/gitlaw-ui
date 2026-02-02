@@ -300,3 +300,31 @@ npm run deploy
 - Commit messages should be clear and descriptive
 - Always include `Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>` in commits
 - Push to `main` branch for immediate deployment
+
+## Tidy Up Routine
+
+When asked to "tidy up" the repo, perform these checks:
+
+### 1. Update Documentation
+- Update `src/stories/Introduction.mdx` with correct component count
+- Ensure all new components are listed in the component navigation sections
+- Update the existing components table in this file if needed
+
+### 2. Verify Exports
+- Check `src/components/index.ts` exports all components
+- Ensure both named exports and types are exported
+
+### 3. Design Token Consistency
+- Verify all components use `colors.` constants from `src/specs/colors.ts`
+- Check for hardcoded hex colors and replace with tokens
+- Verify Tailwind classes use semantic names (e.g., `text-foreground`, `bg-card`)
+
+### 4. Consolidate Repeated Patterns
+- Look for repeated inline styles (e.g., shadows, transitions)
+- Add utilities to `tailwind.config.js` if pattern appears 3+ times
+- Example: `shadow-card` for the standard card shadow
+
+### 5. Build & Deploy
+- Run `npm run build-storybook` to verify no errors
+- Commit changes with descriptive message
+- Run `npm run deploy` to publish
