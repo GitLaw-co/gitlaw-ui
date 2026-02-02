@@ -1,5 +1,5 @@
 // Auto-generated changelog from git commits
-// Generated: 2026-02-02T10:58:51.494Z
+// Generated: 2026-02-02T11:00:55.147Z
 // Run: node scripts/generate-changelog.js
 
 export interface ChangelogEntry {
@@ -14,6 +14,10 @@ export const changelog: ChangelogEntry[] = [
   {
     "date": "2026-02-02",
     "commits": [
+      {
+        "hash": "ac3edbf",
+        "message": "Add auto-generated changelog from Git commits"
+      },
       {
         "hash": "bc07a3f",
         "message": "Fix spacing tokens and color consistency"
