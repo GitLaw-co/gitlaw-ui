@@ -150,89 +150,47 @@ This project is designed for AI-assisted development with Claude Code. Follow th
 
 ### 1. Install Claude Code
 
-```bash
-# Install Claude Code CLI globally
-npm install -g @anthropic-ai/claude-code
+Download and install from [claude.ai/download](https://claude.ai/download)
 
-# Verify installation
-claude --version
-```
-
-Or download from [claude.ai/code](https://claude.ai/code)
-
-### 2. Clone and Open Project
+### 2. Clone the Repository
 
 ```bash
-# Clone the repository
 git clone https://github.com/GitLaw-co/gitlaw-ui.git
 cd gitlaw-ui
-
-# Install dependencies
 npm install
-
-# Open with Claude Code
-claude
 ```
 
-### 3. Set Up Figma MCP (Model Context Protocol)
+### 3. Open Project in Claude Code
 
-Figma MCP allows Claude to read designs directly from Figma. This enables design-to-code workflow.
+1. Open Claude Code app
+2. Click **"Open Folder"** or use `Cmd+O`
+3. Select the `gitlaw-ui` folder
+4. Claude now has access to the codebase
 
-#### Step 1: Get Figma Access Token
+### 4. Connect Figma MCP
 
-1. Go to [Figma Account Settings](https://www.figma.com/settings)
-2. Scroll to **Personal access tokens**
-3. Click **Generate new token**
-4. Give it a name (e.g., "Claude Code")
-5. Copy the token (you won't see it again!)
+Figma MCP lets Claude read designs directly from Figma.
 
-#### Step 2: Configure Figma MCP in Claude Code
+1. In Claude Code, go to **Settings** → **MCP Servers**
+2. Find **Figma** and click **Connect**
+3. Authorize access when prompted
+4. Done! Claude can now read Figma files
 
-Add to your Claude Code MCP config file (`~/.claude/mcp.json`):
-
-```json
-{
-  "mcpServers": {
-    "figma": {
-      "command": "npx",
-      "args": ["-y", "figma-mcp", "--figma-api-key=YOUR_FIGMA_TOKEN"]
-    }
-  }
-}
-```
-
-Replace `YOUR_FIGMA_TOKEN` with your actual token.
-
-#### Step 3: Restart Claude Code
-
-```bash
-# Exit and restart Claude Code
-claude
-```
-
-#### Step 4: Test Figma Connection
-
-In Claude Code, try:
-```
-Can you read this Figma file? https://www.figma.com/design/czek1GvIeHMJnnvc3aqWHK/UI-v3
-```
-
-### 4. Workflow: Adding Components
+### 5. Workflow Examples
 
 Once set up, you can ask Claude to:
 
-1. **Read Figma designs**: "Look at this Figma frame and implement it"
-2. **Add components**: "Add this button variant from Figma"
-3. **Update styles**: "Update the colors to match Figma"
-4. **Add icons/illustrations**: Copy SVG to `Assets/` folder, then ask Claude to add it
-
-Example workflow:
 ```
-# In Claude Code:
+"Look at this Figma frame and implement it: [paste Figma link]"
+
+"Add this button variant from Figma"
+
 "I've added an illustration to Assets/Zest Illustration Set/new-illustration.svg - please add it to the Storybook"
+
+"Update the colors to match Figma"
 ```
 
-### 5. Key Commands
+### 6. Key Commands
 
 | Task | Command |
 |------|---------|
@@ -240,7 +198,7 @@ Example workflow:
 | Deploy to GitHub Pages | `npm run deploy` |
 | Update illustration colors | `node scripts/update-illustration-colors.js` |
 
-### 6. Git Workflow
+### 7. Git Workflow
 
 ```bash
 # Create feature branch
