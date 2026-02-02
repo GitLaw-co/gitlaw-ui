@@ -1,6 +1,6 @@
 import React from 'react';
 import { Icon } from './Icon';
-import { buttonTailwindClasses, type ButtonSize } from '../specs';
+import { buttonTailwindClasses, colors, type ButtonSize } from '../specs';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'disabled' | 'icon';
 export type { ButtonSize };
@@ -55,7 +55,7 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   const isIcon = variant === 'icon';
   const isDisabled = variant === 'disabled' || disabled;
-  const iconColor = ['primary', 'destructive'].includes(variant) ? '#f7f6ff' : '#5e49d6';
+  const iconColor = ['primary', 'destructive'].includes(variant) ? colors.textButtonNegative : colors.textButton;
 
   const baseClasses = 'inline-flex items-center justify-center rounded font-normal transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50';
   const sizeClass = isIcon ? iconSizeClasses[size] : sizeClasses[size];

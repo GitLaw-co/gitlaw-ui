@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon } from './Icon';
 import { Tooltip } from './Tooltip';
-import { colors } from '../specs';
+import { colors as dsColors } from '../specs';
 
 // Import logo SVGs as URLs
 // Note: File names are swapped - "inner" files have white logos, "landing" files have purple logos
@@ -128,23 +128,25 @@ export const Sidebar: React.FC<SidebarProps> = ({
   };
 
   // Color configuration based on variant
-  // Landing: dark purple background (#5E49D6) with light text/icons
-  // Inner: light purple background (#F3F1FF) with dark text/icons
-  const colors = {
-    bg: isLanding ? 'bg-[#5E49D6]' : 'bg-sidebar-background',
-    // Main menu item text: button-negative-text (#F7F6FF) for landing, button-text (#5E49D6) for inner
+  // Landing: dark purple background (primary) with light text/icons
+  // Inner: light purple background (sidebar-background) with dark text/icons
+  const themeColors = {
+    bg: isLanding ? 'bg-primary' : 'bg-sidebar-background',
+    // Main menu item text: button-negative-text for landing, button-text for inner
     menuText: isLanding ? 'text-text-button-negative' : 'text-text-button',
-    // Main menu icon colors
-    menuIcon: isLanding ? '#F7F6FF' : '#5E49D6',
-    // Chat history heading: ai-chat-placeholder (#CFC8F3) for landing, secondary-text (#989898) for inner
+    // Main menu icon colors (using design system constants)
+    menuIcon: isLanding ? dsColors.iconNegative : dsColors.iconPrimary,
+    // Chat history heading: ai-chat-placeholder for landing, secondary-text for inner
     chatHeadingText: isLanding ? 'text-text-ai-chat-placeholder' : 'text-text-secondary',
-    // Chat history item text: negative-text (#F7F6FF) for landing, primary-text (#1B1B1F) for inner
+    // Chat history item text: negative-text for landing, primary-text for inner
     chatItemText: isLanding ? 'text-text-negative' : 'text-text-primary',
-    // Chat history icon colors
-    chatIcon: isLanding ? '#F7F6FF' : '#989898',
+    // Chat history icon colors (using design system constants)
+    chatIcon: isLanding ? dsColors.iconNegative : dsColors.iconSecondary,
     // Hover states
     hoverBg: isLanding ? 'hover:bg-purple-600' : 'hover:bg-sidebar-hover',
     selectedBg: isLanding ? 'bg-secondary' : 'bg-secondary',
+    // Text primary for chevron icon
+    textPrimary: dsColors.textPrimary,
   };
 
   const width = isCollapsed ? 'w-16' : 'w-72';
@@ -152,7 +154,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   return (
     <div
       className={`
-        ${colors.bg} ${width}
+        ${themeColors.bg} ${width}
         flex flex-col h-full min-h-[600px]
         px-2 py-3 relative
         transition-all duration-200
@@ -168,7 +170,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <button
                 type="button"
                 onClick={onToggle}
-                className={`flex items-center justify-center h-12 p-3 rounded ${colors.hoverBg} transition-colors`}
+                className={`flex items-center justify-center h-12 p-3 rounded ${themeColors.hoverBg} transition-colors`}
                 aria-label="Open sidebar"
               >
                 <img src={getLogo()} alt="GitLaw" className="h-8" />
@@ -183,18 +185,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <div className="flex items-center gap-1">
                 <button
                   type="button"
-                  className={`size-10 flex items-center justify-center rounded ${colors.hoverBg} transition-colors`}
+                  className={`size-10 flex items-center justify-center rounded ${themeColors.hoverBg} transition-colors`}
                   aria-label="Search"
                 >
-                  <Icon name="search" className={ICON_SIZE} color={colors.menuIcon} />
+                  <Icon name="search" className={ICON_SIZE} color={themeColors.menuIcon} />
                 </button>
                 <button
                   type="button"
                   onClick={onToggle}
-                  className={`size-10 flex items-center justify-center rounded ${colors.hoverBg} transition-colors`}
+                  className={`size-10 flex items-center justify-center rounded ${themeColors.hoverBg} transition-colors`}
                   aria-label="Collapse sidebar"
                 >
-                  <Icon name="chevrons-left" className={ICON_SIZE} color={colors.menuIcon} />
+                  <Icon name="chevrons-left" className={ICON_SIZE} color={themeColors.menuIcon} />
                 </button>
               </div>
             </>
@@ -214,21 +216,21 @@ export const Sidebar: React.FC<SidebarProps> = ({
               onClick={() => onMenuItemClick?.(item.id)}
               className={`
                 flex items-center gap-2 min-h-12 p-3 rounded w-full
-                ${colors.hoverBg} transition-colors
-                ${item.active ? colors.selectedBg : ''}
+                ${themeColors.hoverBg} transition-colors
+                ${item.active ? themeColors.selectedBg : ''}
                 ${isCollapsed ? 'justify-center' : ''}
               `}
             >
               {item.icon && (
                 <span className="shrink-0">
                   {React.cloneElement(item.icon as React.ReactElement, {
-                    color: colors.menuIcon,
+                    color: themeColors.menuIcon,
                     className: ICON_SIZE,
                   })}
                 </span>
               )}
               {!isCollapsed && (
-                <span className={`text-base font-normal ${colors.menuText} truncate`}>
+                <span className={`text-base font-normal ${themeColors.menuText} truncate`}>
                   {item.label}
                 </span>
               )}
@@ -257,7 +259,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <React.Fragment key={chat.id}>
               {chat.isDateHeader ? (
                 // Chat history heading: sm size, ai-chat-placeholder in landing, secondary-text in inner
-                <div className={`px-3 py-3 text-sm font-normal ${colors.chatHeadingText}`}>
+                <div className={`px-3 py-3 text-sm font-normal ${themeColors.chatHeadingText}`}>
                   {chat.label}
                 </div>
               ) : (
@@ -267,11 +269,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   onClick={() => onChatHistoryClick?.(chat.id)}
                   className={`
                     flex items-center gap-2 min-h-12 p-3 rounded
-                    ${colors.hoverBg} transition-colors text-left
+                    ${themeColors.hoverBg} transition-colors text-left
                   `}
                 >
-                  <Icon name="message-circle" className={ICON_SIZE} color={colors.chatIcon} />
-                  <span className={`text-sm font-normal ${colors.chatItemText} truncate`}>
+                  <Icon name="message-circle" className={ICON_SIZE} color={themeColors.chatIcon} />
+                  <span className={`text-sm font-normal ${themeColors.chatItemText} truncate`}>
                     {chat.label}
                   </span>
                 </button>
@@ -321,7 +323,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <span className="text-base font-normal text-text-primary truncate flex-1 text-left">
                 {userName}
               </span>
-              <Icon name="chevron-up" className={ICON_SIZE} color={colors.textPrimary} />
+              <Icon name="chevron-up" className={ICON_SIZE} color={themeColors.textPrimary} />
             </button>
           )}
         </div>
