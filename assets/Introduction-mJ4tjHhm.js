@@ -1,4 +1,4 @@
-import{j as n}from"./jsx-runtime-DiklIkkE.js";import{useMDXComponents as o}from"./index-ChEI-nsM.js";import{M as t}from"./index-B9666pmy.js";import"./index-DRjF_FHU.js";import"./iframe-DTb7bdGA.js";import"./index-DIvcuAjW.js";import"./index-D-Mha1DF.js";import"./index-DrFu-skq.js";function i(s){const e={a:"a",blockquote:"blockquote",code:"code",h1:"h1",h2:"h2",h3:"h3",hr:"hr",li:"li",p:"p",pre:"pre",strong:"strong",ul:"ul",...o(),...s.components};return n.jsxs(n.Fragment,{children:[n.jsx(t,{title:"Introduction"}),`
+import{j as n}from"./jsx-runtime-DiklIkkE.js";import{useMDXComponents as o}from"./index-ChEI-nsM.js";import{M as r}from"./index-BvP0hTVm.js";import"./index-DRjF_FHU.js";import"./iframe-CDK841qO.js";import"./index-DIvcuAjW.js";import"./index-D-Mha1DF.js";import"./index-DrFu-skq.js";function i(s){const e={a:"a",blockquote:"blockquote",code:"code",h1:"h1",h2:"h2",h3:"h3",hr:"hr",li:"li",p:"p",pre:"pre",strong:"strong",ul:"ul",...o(),...s.components};return n.jsxs(n.Fragment,{children:[n.jsx(r,{title:"Introduction"}),`
 `,n.jsx(e.h1,{id:"gitlaw-ui",children:"GitLaw UI"}),`
 `,n.jsxs(e.p,{children:["An ",n.jsx(e.strong,{children:"experimental"})," React component library built with Tailwind CSS, generated using Claude from the GitLaw Figma design system."]}),`
 `,n.jsxs(e.blockquote,{children:[`
@@ -81,7 +81,12 @@ import{j as n}from"./jsx-runtime-DiklIkkE.js";import{useMDXComponents as o}from"
 `,n.jsxs(e.p,{children:["See ",n.jsx(e.a,{href:"?path=/docs/foundations-colors--docs",children:n.jsx(e.strong,{children:"Foundations/Colors"})})," for the complete palette."]}),`
 `]}),`
 `,n.jsx(e.h3,{id:"typography",children:"Typography"}),`
-`,n.jsxs(e.p,{children:[n.jsx(e.strong,{children:"Font Family:"})," DM Sans"]}),`
+`,n.jsx(e.p,{children:n.jsx(e.strong,{children:"Font Families:"})}),`
+`,n.jsxs(e.ul,{children:[`
+`,n.jsxs(e.li,{children:[n.jsx(e.code,{children:"font-sans"})," — DM Sans (default)"]}),`
+`,n.jsxs(e.li,{children:[n.jsx(e.code,{children:"font-serif"})," — DM Serif Text"]}),`
+`]}),`
+`,n.jsxs(e.p,{children:[n.jsx(e.strong,{children:"Line Height:"})," 1.4 (all sizes)"]}),`
 `,n.jsxs(e.p,{children:[`| Scale | Size |
 |-------|------|
 | `,n.jsx(e.code,{children:"xxs"}),` | 10px |
@@ -94,11 +99,25 @@ import{j as n}from"./jsx-runtime-DiklIkkE.js";import{useMDXComponents as o}from"
 `,n.jsx(e.h3,{id:"spacing",children:"Spacing"}),`
 `,n.jsxs(e.p,{children:[`| Token | Value |
 |-------|-------|
-| `,n.jsx(e.code,{children:"xs"}),` | 4px |
-| `,n.jsx(e.code,{children:"m"}),` | 8px |
-| `,n.jsx(e.code,{children:"l"}),` | 12px |
-| `,n.jsx(e.code,{children:"xl"}),` | 16px |
-| `,n.jsx(e.code,{children:"2xl"})," | 24px |"]}),`
+| `,n.jsx(e.code,{children:"gitlaw-xxs"}),` | 1px |
+| `,n.jsx(e.code,{children:"gitlaw-xs"}),` | 2px |
+| `,n.jsx(e.code,{children:"gitlaw-s"}),` | 4px |
+| `,n.jsx(e.code,{children:"gitlaw-m"}),` | 8px |
+| `,n.jsx(e.code,{children:"gitlaw-l"}),` | 12px |
+| `,n.jsx(e.code,{children:"gitlaw-xl"}),` | 16px |
+| `,n.jsx(e.code,{children:"gitlaw-2xl"}),` | 24px |
+| `,n.jsx(e.code,{children:"gitlaw-3xl"}),` | 32px |
+| `,n.jsx(e.code,{children:"gitlaw-4xl"})," | 48px |"]}),`
+`,n.jsx(e.h3,{id:"border-radius",children:"Border Radius"}),`
+`,n.jsxs(e.p,{children:[`| Token | Value |
+|-------|-------|
+| `,n.jsx(e.code,{children:"gitlaw-s"}),` | 4px |
+| `,n.jsx(e.code,{children:"gitlaw-m"}),` | 8px |
+| `,n.jsx(e.code,{children:"gitlaw-full"})," | 1000px |"]}),`
+`,n.jsx(e.h3,{id:"shadows",children:"Shadows"}),`
+`,n.jsxs(e.p,{children:[`| Token | Value |
+|-------|-------|
+| `,n.jsx(e.code,{children:"shadow-card"})," | 0px 10px 40px 0px rgba(0, 0, 0, 0.05) |"]}),`
 `,n.jsx(e.hr,{}),`
 `,n.jsx(e.h2,{id:"resources",children:"Resources"}),`
 `,n.jsxs(e.p,{children:[`| Resource | Link |
