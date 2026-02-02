@@ -1,5 +1,7 @@
 import React from 'react';
 import { Icon } from './Icon';
+import { Switch } from './Switch';
+import { Badge } from './Badge';
 import { colors } from '../specs';
 
 export type MenuItemLeftElement = 'icon' | 'avatar' | 'clause' | 'select' | 'mini-users';
@@ -15,8 +17,6 @@ export interface MenuItemProps {
   showLeftElement?: boolean;
   /** Show secondary text */
   showSecondaryText?: boolean;
-  /** Show right element (check icon) */
-  showRightElement?: boolean;
   /** Show background highlight */
   showBackground?: boolean;
   /** Show border stroke */
@@ -35,6 +35,52 @@ export interface MenuItemProps {
   onClick?: () => void;
   /** Additional CSS classes */
   className?: string;
+
+  // R Element props - all can be shown independently or combined
+  /** Show label text in R element */
+  showRLabel?: boolean;
+  /** Label text for R element */
+  rLabel?: string;
+  /** Show first icon in R element */
+  showRIcon1?: boolean;
+  /** First icon name for R element */
+  rIcon1?: string;
+  /** Show second icon in R element */
+  showRIcon2?: boolean;
+  /** Second icon name for R element */
+  rIcon2?: string;
+  /** Show button in R element */
+  showRButton?: boolean;
+  /** Button label for R element */
+  rButtonLabel?: string;
+  /** Show button set (x and check) in R element */
+  showRButtonSet?: boolean;
+  /** Button set cancel handler */
+  onRButtonSetCancel?: () => void;
+  /** Button set confirm handler */
+  onRButtonSetConfirm?: () => void;
+  /** Show badge in R element */
+  showRBadge?: boolean;
+  /** Badge count for R element */
+  rBadgeCount?: number;
+  /** Show switch in R element */
+  showRSwitch?: boolean;
+  /** Switch checked state for R element */
+  rSwitchChecked?: boolean;
+  /** Switch change handler for R element */
+  onRSwitchChange?: (checked: boolean) => void;
+  /** Show large avatar in R element */
+  showRLargeAvatar?: boolean;
+  /** Large avatar src for R element */
+  rLargeAvatarSrc?: string;
+  /** Show medium avatar in R element */
+  showRMediumAvatar?: boolean;
+  /** Medium avatar src for R element */
+  rMediumAvatarSrc?: string;
+  /** Show tags in R element */
+  showRTags?: boolean;
+  /** Tag label for R element */
+  rTagLabel?: string;
 }
 
 export const MenuItem: React.FC<MenuItemProps> = ({
@@ -43,7 +89,6 @@ export const MenuItem: React.FC<MenuItemProps> = ({
   leftElement = 'icon',
   showLeftElement = true,
   showSecondaryText = false,
-  showRightElement = false,
   showBackground = false,
   showStroke = false,
   showTick = false,
@@ -53,7 +98,34 @@ export const MenuItem: React.FC<MenuItemProps> = ({
   selected = false,
   onClick,
   className = '',
+  // R Element props
+  showRLabel = false,
+  rLabel = 'Label',
+  showRIcon1 = false,
+  rIcon1 = 'check',
+  showRIcon2 = false,
+  rIcon2 = 'check',
+  showRButton = false,
+  rButtonLabel = 'Action',
+  showRButtonSet = false,
+  onRButtonSetCancel,
+  onRButtonSetConfirm,
+  showRBadge = false,
+  rBadgeCount = 7,
+  showRSwitch = false,
+  rSwitchChecked = false,
+  onRSwitchChange,
+  showRLargeAvatar = false,
+  rLargeAvatarSrc,
+  showRMediumAvatar = false,
+  rMediumAvatarSrc,
+  showRTags = false,
+  rTagLabel = 'Label',
 }) => {
+  // Check if any R element is shown
+  const hasRElement = showRLabel || showRIcon1 || showRIcon2 || showRButton ||
+    showRButtonSet || showRBadge || showRSwitch || showRLargeAvatar ||
+    showRMediumAvatar || showRTags;
   const renderLeftElement = () => {
     if (!showLeftElement) return null;
 
@@ -67,7 +139,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
             {avatarSrc ? (
               <img src={avatarSrc} alt="" className="w-full h-full object-cover rounded" />
             ) : (
-              <span className="text-sm font-black text-text-negative">{avatarInitials}</span>
+              <span className="text-sm font-black text-negative">{avatarInitials}</span>
             )}
           </div>
         );
@@ -96,7 +168,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
           <div className="flex items-center -space-x-1 shrink-0">
             <div className="size-4 rounded bg-gray-300 border-2 border-white z-10" />
             <div className="size-4 rounded bg-primary flex items-center justify-center">
-              <span className="text-[8px] font-black text-text-negative">AC</span>
+              <span className="text-[8px] font-black text-negative">AC</span>
             </div>
           </div>
         );
@@ -125,20 +197,83 @@ export const MenuItem: React.FC<MenuItemProps> = ({
         {renderLeftElement()}
 
         <div className="flex flex-col flex-1 min-w-0">
-          <p className="text-base font-normal text-text-primary truncate leading-[1.4]">
+          <p className="text-base font-normal text-foreground truncate leading-[1.4]">
             {primaryText}
           </p>
           {showSecondaryText && (
-            <p className="text-sm font-normal text-text-secondary truncate leading-[1.4]">
+            <p className="text-sm font-normal text-muted truncate leading-[1.4]">
               {secondaryText}
             </p>
           )}
         </div>
       </div>
 
-      {showRightElement && (
-        <div className="relative flex items-center justify-end min-h-6 shrink-0">
-          <Icon name="check" className="size-6" color={colors.iconPrimary} />
+      {hasRElement && (
+        <div className="relative flex items-center gap-2 justify-end min-h-6 shrink-0">
+          {showRBadge && (
+            <Badge type="red" count={rBadgeCount} />
+          )}
+          {showRLabel && (
+            <span className="text-sm text-muted min-w-6">{rLabel}</span>
+          )}
+          {showRButton && (
+            <button className="flex items-center gap-1 px-3 py-2 h-8 rounded bg-secondary text-xs text-foreground-button">
+              <Icon name="check" className="size-6" color={colors.iconPrimary} />
+              <span>{rButtonLabel}</span>
+            </button>
+          )}
+          {showRButtonSet && (
+            <div className="flex items-center gap-2">
+              <button
+                className="flex items-center justify-center size-8 rounded"
+                onClick={(e) => { e.stopPropagation(); onRButtonSetCancel?.(); }}
+              >
+                <Icon name="x" className="size-6" color={colors.iconPrimary} />
+              </button>
+              <button
+                className="flex items-center justify-center size-8 rounded"
+                onClick={(e) => { e.stopPropagation(); onRButtonSetConfirm?.(); }}
+              >
+                <Icon name="check" className="size-6" color={colors.iconPrimary} />
+              </button>
+            </div>
+          )}
+          {showRTags && (
+            <div className="flex items-center gap-2 px-4 py-2 rounded bg-backgrounds-tag-background">
+              <Icon name="user-round" className="size-6" color={colors.positive} />
+              <span className="text-sm text-foreground-tag">{rTagLabel}</span>
+            </div>
+          )}
+          {showRLargeAvatar && (
+            <div className="size-16 rounded overflow-hidden shrink-0">
+              {rLargeAvatarSrc ? (
+                <img src={rLargeAvatarSrc} alt="" className="w-full h-full object-cover" />
+              ) : (
+                <div className="w-full h-full bg-primary" />
+              )}
+            </div>
+          )}
+          {showRMediumAvatar && (
+            <div className="size-8 rounded overflow-hidden shrink-0">
+              {rMediumAvatarSrc ? (
+                <img src={rMediumAvatarSrc} alt="" className="w-full h-full object-cover" />
+              ) : (
+                <div className="w-full h-full bg-primary" />
+              )}
+            </div>
+          )}
+          {showRIcon1 && (
+            <Icon name={rIcon1} className="size-6" color={colors.iconPrimary} />
+          )}
+          {showRIcon2 && (
+            <Icon name={rIcon2} className="size-6" color={colors.iconPrimary} />
+          )}
+          {showRSwitch && (
+            <Switch
+              checked={rSwitchChecked}
+              onChange={onRSwitchChange}
+            />
+          )}
         </div>
       )}
 

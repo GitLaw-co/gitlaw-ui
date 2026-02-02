@@ -79,7 +79,7 @@ export const Avatar: React.FC<AvatarProps> = ({
         )}
 
         {type === 'initials' && (
-          <span className={`font-black text-text-negative ${sizeConfig.text}`}>
+          <span className={`font-black text-negative ${sizeConfig.text}`}>
             {initials}
           </span>
         )}
@@ -91,7 +91,7 @@ export const Avatar: React.FC<AvatarProps> = ({
         {type === 'empty' && (
           <div className="flex flex-col items-center justify-center gap-1">
             <Icon name="image-up" className="size-4" color={colors.iconNegative} />
-            <span className="text-xxs text-text-negative">Add</span>
+            <span className="text-xxs text-negative">Add</span>
           </div>
         )}
       </div>

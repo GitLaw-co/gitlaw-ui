@@ -133,13 +133,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const themeColors = {
     bg: isLanding ? 'bg-primary' : 'bg-sidebar-background',
     // Main menu item text: button-negative-text for landing, button-text for inner
-    menuText: isLanding ? 'text-text-button-negative' : 'text-text-button',
+    menuText: isLanding ? 'text-foreground-button-negative' : 'text-foreground-button',
     // Main menu icon colors (using design system constants)
     menuIcon: isLanding ? dsColors.iconNegative : dsColors.iconPrimary,
     // Chat history heading: ai-chat-placeholder for landing, secondary-text for inner
-    chatHeadingText: isLanding ? 'text-text-ai-chat-placeholder' : 'text-text-secondary',
+    chatHeadingText: isLanding ? 'text-foreground-ai-placeholder' : 'text-muted',
     // Chat history item text: negative-text for landing, primary-text for inner
-    chatItemText: isLanding ? 'text-text-negative' : 'text-text-primary',
+    chatItemText: isLanding ? 'text-negative' : 'text-foreground',
     // Chat history icon colors (using design system constants)
     chatIcon: isLanding ? dsColors.iconNegative : dsColors.iconSecondary,
     // Hover states
@@ -302,7 +302,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   {userAvatar ? (
                     <img src={userAvatar} alt={userName} className="w-full h-full object-cover rounded" />
                   ) : (
-                    <span className="text-sm font-black text-text-negative">{userInitials}</span>
+                    <span className="text-sm font-black text-negative">{userInitials}</span>
                   )}
                 </div>
               </button>
@@ -317,10 +317,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 {userAvatar ? (
                   <img src={userAvatar} alt={userName} className="w-full h-full object-cover rounded" />
                 ) : (
-                  <span className="text-sm font-black text-text-negative">{userInitials}</span>
+                  <span className="text-sm font-black text-negative">{userInitials}</span>
                 )}
               </div>
-              <span className="text-base font-normal text-text-primary truncate flex-1 text-left">
+              <span className="text-base font-normal text-foreground truncate flex-1 text-left">
                 {userName}
               </span>
               <Icon name="chevron-up" className={ICON_SIZE} color={themeColors.textPrimary} />

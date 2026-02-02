@@ -2,6 +2,30 @@
 
 This is a React component library built with Tailwind CSS, based on the GitLaw Figma design system.
 
+## Roadmap
+
+This library is a **work in progress**. Current focus: building out components.
+
+**Target Structure:**
+
+```
+Foundations/       ← 🔄 Evolving (changes frequently as design system matures)
+  Colors
+  Typography
+  Spacing
+  Icons
+  Illustrations
+
+Components/        ← 🔄 In progress (current focus)
+  Button, Card, Input, etc.
+
+Templates/         ← 📋 Planned
+  Page layouts, shells
+
+Prototypes/        ← 📋 Planned
+  Full interactive flows
+```
+
 ## Existing Components
 
 | Component | Status | Description |
@@ -165,10 +189,94 @@ import { colors } from '../specs';
 
 ### Creating a New Component
 
-1. Create component file: `src/components/ComponentName.tsx`
-2. Create story file: `src/stories/ComponentName.stories.tsx`
-3. Export from `src/components/index.ts`
-4. Use design tokens from `src/specs/`
+1. **Get specs from Figma first** - Use Figma MCP to fetch design context and screenshots
+2. Create component file: `src/components/ComponentName.tsx`
+3. Create story file: `src/stories/ComponentName.stories.tsx`
+4. Export from `src/components/index.ts`
+5. Use design tokens from `src/specs/`
+6. **Review against Figma before finalising** - Always verify component matches Figma specs
+
+**Figma Workflow (Required):**
+- Always use `get_design_context` and `get_screenshot` from Figma MCP to extract exact specs
+- Verify sizes, spacing, colors, borders, and all visual properties match Figma
+- Check both variants and states (hover, active, disabled, etc.)
+- Never guess specs - if unclear, fetch from Figma again
+
+**Icon Size Note:**
+Figma MCP often reports icons as 24px regardless of actual size. Deduce correct icon size from:
+1. **Container/button size** - icon should fit with appropriate padding
+2. **Visual ratio** - check screenshot to see icon-to-container proportion
+3. **Button specs** - refer to `src/specs/button.specs.ts` for icon sizes per button size:
+   - xs (24px button) → 12px icon
+   - s (32px button) → 16px icon
+   - m (40px button) → 16-24px icon
+   - l (54px button) → 20-48px icon
+
+**Component Template:**
+
+```tsx
+// src/components/ComponentName.tsx
+import React from 'react';
+
+export type ComponentNameVariant = 'primary' | 'secondary';
+
+export interface ComponentNameProps {
+  /** Description of prop */
+  variant?: ComponentNameVariant;
+  /** Additional CSS classes */
+  className?: string;
+}
+
+const variantClasses: Record<ComponentNameVariant, string> = {
+  primary: 'bg-primary text-text-negative',
+  secondary: 'bg-secondary text-text-button',
+};
+
+export const ComponentName: React.FC<ComponentNameProps> = ({
+  variant = 'primary',
+  className = '',
+}) => {
+  return (
+    <div className={`${variantClasses[variant]} ${className}`}>
+      {/* Component content */}
+    </div>
+  );
+};
+
+export default ComponentName;
+```
+
+**Story Template:**
+
+```tsx
+// src/stories/ComponentName.stories.tsx
+import type { Meta, StoryObj } from '@storybook/react';
+import { ComponentName } from '../components/ComponentName';
+
+const meta: Meta<typeof ComponentName> = {
+  title: 'Components/ComponentName',
+  component: ComponentName,
+  parameters: { layout: 'centered' },
+  tags: ['autodocs'],
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: ['primary', 'secondary'],
+    },
+  },
+};
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Primary: Story = {
+  args: { variant: 'primary' },
+};
+
+export const Secondary: Story = {
+  args: { variant: 'secondary' },
+};
+```
 
 ## Figma Resources
 

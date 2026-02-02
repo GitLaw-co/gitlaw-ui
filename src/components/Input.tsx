@@ -110,7 +110,7 @@ export const Input: React.FC<InputProps> = ({
   return (
     <div className={`flex flex-col gap-2 ${widthClass} ${className}`}>
       {showLabel && (
-        <label className={`font-semibold text-text-primary ${sizeConfig.label}`}>
+        <label className={`font-semibold text-foreground ${sizeConfig.label}`}>
           {label}
         </label>
       )}
@@ -124,7 +124,7 @@ export const Input: React.FC<InputProps> = ({
         `}
       >
         {showLeftIcon && (
-          <span className="shrink-0 text-text-primary">
+          <span className="shrink-0 text-foreground">
             {leftIcon || <Icon name="search" className="size-6" color={colors.textPrimary} />}
           </span>
         )}
@@ -138,7 +138,7 @@ export const Input: React.FC<InputProps> = ({
           disabled={disabled}
           className={`
             flex-1 bg-transparent outline-none font-normal
-            text-text-primary placeholder:text-text-secondary
+            text-foreground placeholder:text-muted
             ${sizeConfig.input}
             ${disabled ? 'cursor-not-allowed' : ''}
           `}
@@ -147,7 +147,7 @@ export const Input: React.FC<InputProps> = ({
           <button
             type="button"
             onClick={handleClear}
-            className="shrink-0 text-text-primary hover:text-text-secondary transition-colors"
+            className="shrink-0 text-foreground hover:text-muted transition-colors"
           >
             {rightIcon || <Icon name="x" className="size-6" color={colors.textPrimary} />}
           </button>

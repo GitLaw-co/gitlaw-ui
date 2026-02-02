@@ -28,8 +28,8 @@ const sizeConfig: Record<TooltipSize, { text: string; padding: string }> = {
 
 // Type configuration
 const typeConfig: Record<TooltipType, { bg: string; text: string }> = {
-  neutral: { bg: 'bg-card', text: 'text-text-primary' },
-  purple: { bg: 'bg-primary', text: 'text-text-negative' },
+  neutral: { bg: 'bg-card', text: 'text-foreground' },
+  purple: { bg: 'bg-primary', text: 'text-negative' },
 };
 
 // Position configuration - using CSS classes for absolute positioning

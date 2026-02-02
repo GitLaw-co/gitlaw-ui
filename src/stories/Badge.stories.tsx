@@ -112,13 +112,13 @@ export const UsageExample: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="relative inline-flex">
-        <button className="px-4 py-2 bg-secondary rounded text-text-button">
+        <button className="px-4 py-2 bg-secondary rounded text-foreground-button">
           Notifications
         </button>
         <Badge type="red" count={3} className="absolute -top-1 -right-1" />
       </div>
       <div className="relative inline-flex">
-        <button className="px-4 py-2 bg-secondary rounded text-text-button">
+        <button className="px-4 py-2 bg-secondary rounded text-foreground-button">
           Messages
         </button>
         <Badge type="primary" count={12} className="absolute -top-1 -right-1" />

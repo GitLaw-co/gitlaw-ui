@@ -39,7 +39,7 @@ export const Toast: React.FC<ToastProps> = ({
       `}
     >
       {/* Message */}
-      <p className="text-sm font-normal text-text-negative leading-[1.4] max-w-[480px]">
+      <p className="text-sm font-normal text-negative leading-[1.4] max-w-[480px]">
         {message}
       </p>
 
@@ -51,7 +51,7 @@ export const Toast: React.FC<ToastProps> = ({
           className="
             bg-primary hover:bg-primary-hover
             flex items-center gap-2 h-10 px-4 py-3 rounded
-            text-sm font-normal text-text-negative leading-[1.4]
+            text-sm font-normal text-negative leading-[1.4]
             transition-colors shrink-0
           "
         >

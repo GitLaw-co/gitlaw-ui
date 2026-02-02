@@ -129,15 +129,15 @@ export const AllStates: Story = {
   render: () => (
     <div className="flex flex-col gap-6">
       <div>
-        <h3 className="text-sm font-semibold mb-4 text-text-secondary">Working State</h3>
+        <h3 className="text-sm font-semibold mb-4 text-muted">Working State</h3>
         <ChatInput status="working" size="l" />
       </div>
       <div>
-        <h3 className="text-sm font-semibold mb-4 text-text-secondary">Active State (Empty)</h3>
+        <h3 className="text-sm font-semibold mb-4 text-muted">Active State (Empty)</h3>
         <ChatInput status="active" size="l" placeholder="Draft a mutual NDA" />
       </div>
       <div>
-        <h3 className="text-sm font-semibold mb-4 text-text-secondary">Populated State (With Text)</h3>
+        <h3 className="text-sm font-semibold mb-4 text-muted">Populated State (With Text)</h3>
         <ChatInput status="populated" size="l" value="User is typing here" />
       </div>
     </div>
@@ -149,11 +149,11 @@ export const SizeComparison: Story = {
   render: () => (
     <div className="flex flex-col gap-6">
       <div>
-        <h3 className="text-sm font-semibold mb-4 text-text-secondary">Large Size</h3>
+        <h3 className="text-sm font-semibold mb-4 text-muted">Large Size</h3>
         <ChatInput status="active" size="l" placeholder="Draft a mutual NDA" />
       </div>
       <div>
-        <h3 className="text-sm font-semibold mb-4 text-text-secondary">Medium Size</h3>
+        <h3 className="text-sm font-semibold mb-4 text-muted">Medium Size</h3>
         <ChatInput status="active" size="m" placeholder="Draft a mutual NDA" />
       </div>
     </div>

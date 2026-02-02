@@ -118,7 +118,7 @@ export const TextField: React.FC<TextFieldProps> = ({
 
       <div className="flex flex-col flex-1 min-h-px min-w-px relative">
         {isEmpty ? (
-          <p className={`font-normal text-text-secondary leading-[1.4] ${sizeConfig.text}`}>
+          <p className={`font-normal text-muted leading-[1.4] ${sizeConfig.text}`}>
             {placeholder}
           </p>
         ) : (
@@ -133,13 +133,13 @@ export const TextField: React.FC<TextFieldProps> = ({
               rows={rows}
               className={`
                 flex-1 bg-transparent outline-none font-normal resize-none
-                text-text-primary placeholder:text-text-secondary leading-[1.4]
+                text-foreground placeholder:text-muted leading-[1.4]
                 ${sizeConfig.text}
                 ${disabled ? 'cursor-not-allowed' : ''}
               `}
             />
             {status === 'populated' && (
-              <p className={`font-normal text-text-secondary leading-[1.4] ${sizeConfig.secondaryText}`}>
+              <p className={`font-normal text-muted leading-[1.4] ${sizeConfig.secondaryText}`}>
                 {placeholder}
               </p>
             )}

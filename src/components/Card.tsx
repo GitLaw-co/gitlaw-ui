@@ -146,10 +146,10 @@ export const Card: React.FC<CardProps> = ({
               {ownerAvatar ? (
                 <img src={ownerAvatar} alt={ownerName} className="w-full h-full object-cover rounded" />
               ) : (
-                <span className="text-[10px] font-black text-text-negative">{ownerInitials}</span>
+                <span className="text-[10px] font-black text-negative">{ownerInitials}</span>
               )}
             </div>
-            <span className="text-xs font-normal text-text-primary leading-[1.4]">{ownerName}</span>
+            <span className="text-xs font-normal text-foreground leading-[1.4]">{ownerName}</span>
           </div>
         )}
 
@@ -179,11 +179,11 @@ export const Card: React.FC<CardProps> = ({
       </div>
 
       {/* Title - DM Serif Text, 24px, primary-text */}
-      <h3 className="font-serif text-2xl font-normal text-text-primary leading-[1.4]">{title}</h3>
+      <h3 className="font-serif text-2xl font-normal text-foreground leading-[1.4]">{title}</h3>
 
       {/* Description - sm (14px), secondary-text */}
       {description && (
-        <p className="text-sm font-normal text-text-secondary leading-[1.4]">
+        <p className="text-sm font-normal text-muted leading-[1.4]">
           {description}
         </p>
       )}
@@ -197,9 +197,9 @@ export const Card: React.FC<CardProps> = ({
         <div className="flex items-center gap-2 flex-1 min-w-0">
           <Icon name="folder-closed" className="size-6 shrink-0" color={colors.iconPrimary} />
           <div className="flex flex-col flex-1 min-w-0">
-            <h3 className="text-base font-normal text-text-primary leading-[1.4] truncate">{title}</h3>
+            <h3 className="text-base font-normal text-foreground leading-[1.4] truncate">{title}</h3>
             {/* File count hidden under 200px */}
-            <span className="text-xs font-normal text-text-secondary leading-[1.4] hidden @[200px]:block">
+            <span className="text-xs font-normal text-muted leading-[1.4] hidden @[200px]:block">
               {filesCount} files
             </span>
           </div>
@@ -245,7 +245,7 @@ export const Card: React.FC<CardProps> = ({
             }}
           >
             <Icon name="file-text" className="size-6 shrink-0" color={colors.iconDisabled} />
-            <span className="text-base font-normal text-text-primary truncate">{file.name}</span>
+            <span className="text-base font-normal text-foreground truncate">{file.name}</span>
           </div>
         ))}
       </div>
@@ -282,7 +282,7 @@ export const Card: React.FC<CardProps> = ({
           {/* Visibility row */}
           <div className="absolute bottom-4 @[200px]:bottom-6 left-0 right-0 px-4 @[200px]:px-6 flex items-center gap-2">
             {getVisibilityIcon()}
-            <span className="text-sm font-normal text-text-secondary leading-[1.4]">
+            <span className="text-sm font-normal text-muted leading-[1.4]">
               {getVisibilityLabel()}
             </span>
           </div>

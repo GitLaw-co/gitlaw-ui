@@ -126,12 +126,12 @@ export const Select: React.FC<SelectProps> = ({
   const widthClass = align === 'fill' ? 'w-full' : 'w-auto';
   const isHorizontal = labelPosition === 'left';
 
-  const textColorClass = status === 'empty' ? 'text-text-secondary' : 'text-text-primary';
+  const textColorClass = status === 'empty' ? 'text-muted' : 'text-foreground';
 
   const renderLabel = () => {
     if (!showLabel) return null;
     return (
-      <label className={`font-semibold text-text-primary ${sizeConfig.label} ${isHorizontal ? 'shrink-0' : ''}`}>
+      <label className={`font-semibold text-foreground ${sizeConfig.label} ${isHorizontal ? 'shrink-0' : ''}`}>
         {label}
       </label>
     );
@@ -150,7 +150,7 @@ export const Select: React.FC<SelectProps> = ({
     >
       <div className={`flex items-center flex-1 min-w-0 ${sizeConfig.gap}`}>
         {showLeftIcon && (
-          <span className="shrink-0 text-text-primary">
+          <span className="shrink-0 text-foreground">
             {leftIcon || <Icon name="user" className="size-6" color={colors.textPrimary} />}
           </span>
         )}
@@ -158,7 +158,7 @@ export const Select: React.FC<SelectProps> = ({
           {selectedOption?.label || placeholder}
         </span>
       </div>
-      <span className="shrink-0 text-text-primary">
+      <span className="shrink-0 text-foreground">
         {rightIcon || <Icon name="chevron-down" className="size-6" color={colors.textPrimary} />}
       </span>
     </div>
@@ -186,7 +186,7 @@ export const Select: React.FC<SelectProps> = ({
               className={`
                 px-3 py-2 cursor-pointer transition-colors
                 ${sizeConfig.text}
-                ${option.value === value ? 'bg-secondary text-text-primary' : 'text-text-primary hover:bg-secondary/50'}
+                ${option.value === value ? 'bg-secondary text-foreground' : 'text-foreground hover:bg-secondary/50'}
               `}
               onClick={() => handleSelect(option.value)}
             >

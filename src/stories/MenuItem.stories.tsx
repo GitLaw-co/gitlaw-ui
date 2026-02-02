@@ -22,10 +22,6 @@ const meta: Meta<typeof MenuItem> = {
       control: 'boolean',
       description: 'Show secondary text',
     },
-    showRightElement: {
-      control: 'boolean',
-      description: 'Show right element (check icon)',
-    },
     showBackground: {
       control: 'boolean',
       description: 'Show background highlight',
@@ -50,6 +46,24 @@ const meta: Meta<typeof MenuItem> = {
       control: 'boolean',
       description: 'Selected state (for select type)',
     },
+    // R Element controls
+    showRLabel: { control: 'boolean', description: 'Show label in R element' },
+    rLabel: { control: 'text', description: 'Label text for R element' },
+    showRIcon1: { control: 'boolean', description: 'Show first icon in R element' },
+    rIcon1: { control: 'text', description: 'First icon name' },
+    showRIcon2: { control: 'boolean', description: 'Show second icon in R element' },
+    rIcon2: { control: 'text', description: 'Second icon name' },
+    showRButton: { control: 'boolean', description: 'Show button in R element' },
+    rButtonLabel: { control: 'text', description: 'Button label' },
+    showRButtonSet: { control: 'boolean', description: 'Show button set (x and check)' },
+    showRBadge: { control: 'boolean', description: 'Show badge in R element' },
+    rBadgeCount: { control: 'number', description: 'Badge count' },
+    showRSwitch: { control: 'boolean', description: 'Show switch in R element' },
+    rSwitchChecked: { control: 'boolean', description: 'Switch checked state' },
+    showRLargeAvatar: { control: 'boolean', description: 'Show large avatar in R element' },
+    showRMediumAvatar: { control: 'boolean', description: 'Show medium avatar in R element' },
+    showRTags: { control: 'boolean', description: 'Show tags in R element' },
+    rTagLabel: { control: 'text', description: 'Tag label' },
   },
 };
 
@@ -129,13 +143,99 @@ export const WithMiniUsers: Story = {
   },
 };
 
-// With right element (check)
-export const WithRightElement: Story = {
+// With R element - icon
+export const WithRIcon: Story = {
   args: {
     primaryText: 'Selected item',
-    leftElement: 'icon',
+    leftElement: 'avatar',
     showLeftElement: true,
-    showRightElement: true,
+    showRIcon1: true,
+    rIcon1: 'check',
+    showStroke: true,
+  },
+};
+
+// With R element - label
+export const WithRLabel: Story = {
+  args: {
+    primaryText: 'Item with label',
+    leftElement: 'avatar',
+    showLeftElement: true,
+    showRLabel: true,
+    rLabel: 'Label',
+    showStroke: true,
+  },
+};
+
+// With R element - button
+export const WithRButton: Story = {
+  args: {
+    primaryText: 'Item with action',
+    leftElement: 'avatar',
+    showLeftElement: true,
+    showRButton: true,
+    rButtonLabel: 'Action',
+    showStroke: true,
+  },
+};
+
+// With R element - button set
+export const WithRButtonSet: Story = {
+  args: {
+    primaryText: 'Item with button set',
+    leftElement: 'avatar',
+    showLeftElement: true,
+    showRButtonSet: true,
+    showStroke: true,
+  },
+};
+
+// With R element - badge
+export const WithRBadge: Story = {
+  args: {
+    primaryText: 'Notifications',
+    leftElement: 'avatar',
+    showLeftElement: true,
+    showRBadge: true,
+    rBadgeCount: 7,
+    showStroke: true,
+  },
+};
+
+// With R element - switch
+export const WithRSwitch: Story = {
+  args: {
+    primaryText: 'Toggle setting',
+    leftElement: 'avatar',
+    showLeftElement: true,
+    showRSwitch: true,
+    rSwitchChecked: true,
+    showStroke: true,
+  },
+};
+
+// With R element - large avatar
+export const WithRLargeAvatar: Story = {
+  args: {
+    primaryText: 'Item with avatar',
+    secondaryText: 'Secondary text',
+    leftElement: 'avatar',
+    showLeftElement: true,
+    showSecondaryText: true,
+    showRLargeAvatar: true,
+    showStroke: true,
+  },
+};
+
+// With R element - tags
+export const WithRTags: Story = {
+  args: {
+    primaryText: 'Item with tags',
+    leftElement: 'avatar',
+    showLeftElement: true,
+    showRTags: true,
+    rTagLabel: 'Label',
+    showStroke: true,
   },
 };
 
@@ -178,6 +278,23 @@ export const AllLeftElements: Story = {
       <MenuItem primaryText="With clause" leftElement="clause" showLeftElement />
       <MenuItem primaryText="With select" leftElement="select" showLeftElement />
       <MenuItem primaryText="With mini-users" leftElement="mini-users" showLeftElement />
+    </div>
+  ),
+};
+
+// All R element types showcase
+export const AllRElements: Story = {
+  render: () => (
+    <div className="flex flex-col gap-2">
+      <MenuItem primaryText="With label" leftElement="avatar" showLeftElement showRLabel rLabel="Label" showStroke />
+      <MenuItem primaryText="With icon" leftElement="avatar" showLeftElement showRIcon1 rIcon1="check" showStroke />
+      <MenuItem primaryText="With two icons" leftElement="avatar" showLeftElement showRIcon1 showRIcon2 rIcon1="edit" rIcon2="trash" showStroke />
+      <MenuItem primaryText="With button" leftElement="avatar" showLeftElement showRButton rButtonLabel="Action" showStroke />
+      <MenuItem primaryText="With button set" leftElement="avatar" showLeftElement showRButtonSet showStroke />
+      <MenuItem primaryText="With badge" leftElement="avatar" showLeftElement showRBadge rBadgeCount={7} showStroke />
+      <MenuItem primaryText="With switch" leftElement="avatar" showLeftElement showRSwitch rSwitchChecked showStroke />
+      <MenuItem primaryText="With large avatar" leftElement="avatar" showLeftElement showRLargeAvatar showStroke />
+      <MenuItem primaryText="With tags" leftElement="avatar" showLeftElement showRTags rTagLabel="Label" showStroke />
     </div>
   ),
 };

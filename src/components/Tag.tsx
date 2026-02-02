@@ -80,18 +80,18 @@ export const Tag: React.FC<TagProps> = ({
       `}
     >
       {showIcon && (
-        <span className="shrink-0 text-text-tag">
+        <span className="shrink-0 text-foreground-tag">
           {icon || <Icon name="user" className={sizeConfig.icon} color={colors.iconPrimary} />}
         </span>
       )}
-      <span className={`text-text-tag ${sizeConfig.text} ${fontWeight} overflow-hidden text-ellipsis`}>
+      <span className={`text-foreground-tag ${sizeConfig.text} ${fontWeight} overflow-hidden text-ellipsis`}>
         {label}
       </span>
       {showClose && (
         <button
           type="button"
           onClick={onClose}
-          className="shrink-0 text-text-tag hover:opacity-70 transition-opacity"
+          className="shrink-0 text-foreground-tag hover:opacity-70 transition-opacity"
         >
           <Icon name="x" className={sizeConfig.icon} color={colors.iconPrimary} />
         </button>

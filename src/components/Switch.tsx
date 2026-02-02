@@ -53,7 +53,7 @@ export const Switch: React.FC<SwitchProps> = ({
         rounded-sm py-0.5
         transition-colors
         ${sizeConfig.track}
-        ${checked ? 'bg-primary justify-end pr-0.5' : 'bg-white border border-secondary-dark justify-start pl-0.5'}
+        ${checked ? 'bg-primary justify-end pr-0.5' : 'bg-secondary justify-start pl-0.5'}
         ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
         ${className}
       `}
@@ -62,7 +62,7 @@ export const Switch: React.FC<SwitchProps> = ({
         className={`
           rounded-sm transition-colors
           ${sizeConfig.thumb}
-          ${checked ? 'bg-white' : 'bg-secondary-dark'}
+          bg-white
         `}
       />
     </button>

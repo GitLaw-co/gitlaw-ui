@@ -28,16 +28,15 @@ export default {
           DEFAULT: '#FFFFFF',  // white (card background)
         },
         // Text Colors (from Figma Semantic Colors)
-        text: {
-          primary: '#1B1B1F',         // obsidian/950 (foreground)
-          secondary: '#989898',       // grey/50
-          negative: '#F7F6FF',        // purple/50
-          button: '#5E49D6',          // purple/700 (secondary-foreground)
-          'button-negative': '#F7F6FF', // purple/50 (button-negative-text)
-          'button-disabled': '#CFC8F3', // purple/300
-          tag: '#5E49D6',             // purple/700
-          'ai-chat-placeholder': '#CFC8F3', // purple/300
-        },
+        // Using semantic names to avoid text-text-* redundancy
+        foreground: '#1B1B1F',        // obsidian/950 (primary text) - use text-foreground
+        muted: '#989898',             // grey/50 (secondary text) - use text-muted
+        negative: '#F7F6FF',          // purple/50 - use text-negative
+        'foreground-button': '#5E49D6',   // purple/700 - use text-foreground-button
+        'foreground-button-negative': '#F7F6FF', // purple/50
+        'foreground-button-disabled': '#CFC8F3', // purple/300
+        'foreground-tag': '#5E49D6',      // purple/700 - use text-foreground-tag
+        'foreground-ai-placeholder': '#CFC8F3', // purple/300
         // Icon Colors (from Figma Semantic Colors)
         icon: {
           primary: '#5E49D6',    // purple/700

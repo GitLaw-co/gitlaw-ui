@@ -23,10 +23,10 @@ const ColorSwatch: React.FC<ColorSwatchProps> = ({ name, value, className, textD
     <div
       className={`w-full h-16 rounded-gitlaw-m border border-border ${className}`}
     />
-    <p className={`text-sm font-medium mt-2 ${textDark ? 'text-text-primary' : 'text-text-primary'}`}>
+    <p className={`text-sm font-medium mt-2 ${textDark ? 'text-foreground' : 'text-foreground'}`}>
       {name}
     </p>
-    <p className="text-xs text-text-secondary font-mono">{value}</p>
+    <p className="text-xs text-muted font-mono">{value}</p>
   </div>
 );
 
@@ -37,7 +37,7 @@ interface ColorGroupProps {
 
 const ColorGroup: React.FC<ColorGroupProps> = ({ title, colors }) => (
   <div className="mb-10">
-    <h3 className="text-lg font-semibold text-text-primary mb-4">{title}</h3>
+    <h3 className="text-lg font-semibold text-foreground mb-4">{title}</h3>
     <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4">
       {colors.map((color) => (
         <ColorSwatch key={color.name} {...color} />
@@ -191,13 +191,13 @@ const ColorsPage = () => {
   return (
     <div className="p-8 bg-page-background min-h-screen">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-2xl font-bold text-text-primary mb-2">Colors</h1>
-        <p className="text-text-secondary mb-8">
+        <h1 className="text-2xl font-bold text-foreground mb-2">Colors</h1>
+        <p className="text-muted mb-8">
           GitLaw design system color palette. Use semantic colors for most UI elements.
         </p>
 
         <div className="mb-12">
-          <h2 className="text-xl font-semibold text-text-primary mb-6 pb-2 border-b border-border">
+          <h2 className="text-xl font-semibold text-foreground mb-6 pb-2 border-b border-border">
             Semantic Colors
           </h2>
           {semanticColors.map((group) => (
@@ -206,10 +206,10 @@ const ColorsPage = () => {
         </div>
 
         <div>
-          <h2 className="text-xl font-semibold text-text-primary mb-6 pb-2 border-b border-border">
+          <h2 className="text-xl font-semibold text-foreground mb-6 pb-2 border-b border-border">
             Primitive Colors
           </h2>
-          <p className="text-sm text-text-secondary mb-6">
+          <p className="text-sm text-muted mb-6">
             Raw color values. Prefer semantic colors in code - use primitives only for reference.
           </p>
           {primitiveColors.map((group) => (

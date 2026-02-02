@@ -41,7 +41,7 @@ const IllustrationCard: React.FC<IllustrationCardProps> = ({ id, filename, name,
     >
       <div className="w-full aspect-square flex items-center justify-center mb-3 bg-purple-50 rounded-gitlaw-s overflow-hidden">
         {imageError ? (
-          <div className="text-xs text-text-secondary text-center p-2">
+          <div className="text-xs text-muted text-center p-2">
             SVG not found
           </div>
         ) : (
@@ -53,10 +53,10 @@ const IllustrationCard: React.FC<IllustrationCardProps> = ({ id, filename, name,
           />
         )}
       </div>
-      <p className="text-sm font-medium text-text-primary group-hover:text-primary text-center">
+      <p className="text-sm font-medium text-foreground group-hover:text-primary text-center">
         {copied ? 'Copied!' : name}
       </p>
-      <p className="text-xs text-text-secondary text-center mt-1 line-clamp-2">
+      <p className="text-xs text-muted text-center mt-1 line-clamp-2">
         {keywords.slice(0, 3).join(', ')}
       </p>
     </button>
@@ -82,8 +82,8 @@ const IllustrationsPage = () => {
   return (
     <div className="p-8 bg-page-background min-h-screen">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-2xl font-bold text-text-primary mb-2">Illustrations</h1>
-        <p className="text-text-secondary mb-6">
+        <h1 className="text-2xl font-bold text-foreground mb-2">Illustrations</h1>
+        <p className="text-muted mb-6">
           {illustrations.length} illustrations from the Zest illustration library. Click to copy the ID.
         </p>
 
@@ -103,7 +103,7 @@ const IllustrationsPage = () => {
 
           {/* Category Filter */}
           <div className="flex items-center gap-2">
-            <span className="text-sm text-text-secondary">Category:</span>
+            <span className="text-sm text-muted">Category:</span>
             <select
               value={selectedCategory || ''}
               onChange={(e) => setSelectedCategory(e.target.value || null)}
@@ -127,7 +127,7 @@ const IllustrationsPage = () => {
         )}
 
         {/* Results count */}
-        <p className="text-sm text-text-secondary mb-4">
+        <p className="text-sm text-muted mb-4">
           Showing {filteredIllustrations.length} of {illustrations.length} illustrations
         </p>
 
@@ -147,26 +147,26 @@ const IllustrationsPage = () => {
 
         {filteredIllustrations.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-text-secondary">No illustrations found matching "{searchQuery}"</p>
+            <p className="text-muted">No illustrations found matching "{searchQuery}"</p>
           </div>
         )}
 
         {/* Usage Section */}
         <section className="mt-12">
-          <h2 className="text-xl font-semibold text-text-primary mb-6 pb-2 border-b border-border">
+          <h2 className="text-xl font-semibold text-foreground mb-6 pb-2 border-b border-border">
             Usage
           </h2>
           <div className="bg-card p-6 rounded-gitlaw-m border border-border">
             <div className="space-y-4">
               <div>
-                <p className="text-sm font-medium text-text-primary mb-2">As an image</p>
-                <code className="block bg-muted p-3 rounded-gitlaw-s text-sm font-mono text-text-primary">
+                <p className="text-sm font-medium text-foreground mb-2">As an image</p>
+                <code className="block bg-muted p-3 rounded-gitlaw-s text-sm font-mono text-foreground">
                   {`<img src="/illustrations/empty-box.svg" alt="Empty state" className="w-64 h-64" />`}
                 </code>
               </div>
               <div>
-                <p className="text-sm font-medium text-text-primary mb-2">Common use cases</p>
-                <ul className="text-sm text-text-secondary space-y-1 ml-4 list-disc">
+                <p className="text-sm font-medium text-foreground mb-2">Common use cases</p>
+                <ul className="text-sm text-muted space-y-1 ml-4 list-disc">
                   <li><strong>Empty states:</strong> empty-box, location-lost, wifi-disconnect</li>
                   <li><strong>Success:</strong> thumbs-up, antivirus-complete, email-confirm</li>
                   <li><strong>Errors:</strong> wifi-disconnect, clock-warning, empty-box</li>

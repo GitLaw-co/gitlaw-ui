@@ -215,7 +215,7 @@ export const ResponsiveSizes: Story = {
   render: () => (
     <div className="flex flex-col gap-8">
       <div>
-        <h3 className="text-sm font-semibold mb-4 text-text-secondary">Under 200px (compact: no star, no file count, 16px padding)</h3>
+        <h3 className="text-sm font-semibold mb-4 text-muted">Under 200px (compact: no star, no file count, 16px padding)</h3>
         <div className="flex gap-2">
           <div style={{ width: '180px' }}>
             <Card
@@ -240,7 +240,7 @@ export const ResponsiveSizes: Story = {
         </div>
       </div>
       <div>
-        <h3 className="text-sm font-semibold mb-4 text-text-secondary">200px+ (full: star visible, file count visible, 24px padding)</h3>
+        <h3 className="text-sm font-semibold mb-4 text-muted">200px+ (full: star visible, file count visible, 24px padding)</h3>
         <div className="flex gap-2">
           <div style={{ width: '240px' }}>
             <Card
@@ -501,7 +501,7 @@ const InteractiveDemo = () => {
         </div>
 
         {/* Footer hint */}
-        <p className="text-xs text-text-secondary mt-6">
+        <p className="text-xs text-muted mt-6">
           Click to select/deselect. Drag anywhere for rubber band selection. Double click to open.
         </p>
       </div>

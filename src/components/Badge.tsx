@@ -16,23 +16,23 @@ export interface BadgeProps {
 const typeClasses: Record<BadgeType, { bg: string; text: string }> = {
   primary: {
     bg: 'bg-primary',
-    text: 'text-text-negative',
+    text: 'text-negative',
   },
   secondary: {
     bg: 'bg-secondary',
-    text: 'text-text-button',
+    text: 'text-foreground-button',
   },
   red: {
     bg: 'bg-destructive',
-    text: 'text-text-negative',
+    text: 'text-negative',
   },
   orange: {
     bg: 'bg-alert',
-    text: 'text-text-negative',
+    text: 'text-negative',
   },
   green: {
     bg: 'bg-positive',
-    text: 'text-text-negative',
+    text: 'text-negative',
   },
 };
 

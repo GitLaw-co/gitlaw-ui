@@ -1,5 +1,5 @@
 // Auto-generated changelog from git commits
-// Generated: 2026-02-02T12:29:58.734Z
+// Generated: 2026-02-02T12:39:59.371Z
 // Run: node scripts/generate-changelog.js
 
 export interface ChangelogEntry {
@@ -14,6 +14,42 @@ export const changelog: ChangelogEntry[] = [
   {
     "date": "2026-02-02",
     "commits": [
+      {
+        "hash": "new",
+        "message": "Add Dropdown component with adaptive width (220-360px)"
+      },
+      {
+        "hash": "new",
+        "message": "Add EditorHeader component with title, close, and share actions"
+      },
+      {
+        "hash": "new",
+        "message": "Add EditorToolbar component with formatting tools"
+      },
+      {
+        "hash": "new",
+        "message": "Add MenuItem R element options (label, icons, button, badge, switch, avatar, tags)"
+      },
+      {
+        "hash": "new",
+        "message": "Add Button leftIconName/rightIconName props for automatic icon sizing"
+      },
+      {
+        "hash": "new",
+        "message": "Refactor text colors to semantic names (text-foreground, text-muted)"
+      },
+      {
+        "hash": "new",
+        "message": "Fix Switch visibility when unchecked (bg-secondary instead of white)"
+      },
+      {
+        "hash": "new",
+        "message": "Update Dialog width to 400px and fix header padding"
+      },
+      {
+        "hash": "efe75ed",
+        "message": "Fix disabled button icon color"
+      },
       {
         "hash": "63074fd",
         "message": "Replace hardcoded hex colors with design system constants"

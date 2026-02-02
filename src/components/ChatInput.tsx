@@ -131,7 +131,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
           placeholder={placeholder}
           className="
             flex-1 text-lg font-normal leading-[1.4]
-            text-text-primary placeholder:text-purple-300
+            text-foreground placeholder:text-purple-300
             bg-transparent outline-none
           "
         />
@@ -182,7 +182,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
                 className="
                   bg-secondary hover:bg-secondary-hover
                   flex items-center gap-1 h-8 px-3 py-2 rounded
-                  text-xs font-normal text-text-button leading-[1.4]
+                  text-xs font-normal text-foreground-button leading-[1.4]
                   transition-colors
                 "
               >

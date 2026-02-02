@@ -16,9 +16,13 @@ export interface ButtonProps {
   showLeftIcon?: boolean;
   /** Show right icon */
   showRightIcon?: boolean;
-  /** Custom left icon */
+  /** Left icon name (uses correct size automatically) */
+  leftIconName?: string;
+  /** Right icon name (uses correct size automatically) */
+  rightIconName?: string;
+  /** Custom left icon (overrides leftIconName, caller handles sizing) */
   leftIcon?: React.ReactNode;
-  /** Custom right icon */
+  /** Custom right icon (overrides rightIconName, caller handles sizing) */
   rightIcon?: React.ReactNode;
   /** Click handler */
   onClick?: () => void;
@@ -32,13 +36,13 @@ export interface ButtonProps {
 const { size: sizeClasses, iconSize: buttonIconSizes, iconOnlySize: iconOnlyIconSizes, iconOnlyContainer: iconSizeClasses } = buttonTailwindClasses;
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary: 'bg-primary text-text-negative hover:bg-primary-dark',
-  secondary: 'bg-secondary text-text-button hover:bg-secondary-dark',
-  outline: 'border border-primary text-text-button bg-transparent hover:bg-secondary/30',
-  ghost: 'text-text-button bg-transparent hover:bg-secondary/30',
-  destructive: 'bg-destructive text-text-negative hover:bg-destructive/90',
-  disabled: 'bg-secondary text-text-button-disabled cursor-not-allowed',
-  icon: 'bg-transparent text-text-button hover:bg-secondary/30',
+  primary: 'bg-primary text-negative hover:bg-primary-dark',
+  secondary: 'bg-secondary text-foreground-button hover:bg-secondary-dark',
+  outline: 'border border-primary text-foreground-button bg-transparent hover:bg-secondary/30',
+  ghost: 'text-foreground-button bg-transparent hover:bg-secondary/30',
+  destructive: 'bg-destructive text-negative hover:bg-destructive/90',
+  disabled: 'bg-secondary text-foreground-button-disabled cursor-not-allowed',
+  icon: 'bg-transparent text-foreground-button hover:bg-secondary/30',
 };
 
 export const Button: React.FC<ButtonProps> = ({
@@ -47,6 +51,8 @@ export const Button: React.FC<ButtonProps> = ({
   size = 'm',
   showLeftIcon = false,
   showRightIcon = false,
+  leftIconName,
+  rightIconName,
   leftIcon,
   rightIcon,
   onClick,
@@ -68,6 +74,20 @@ export const Button: React.FC<ButtonProps> = ({
   const sizeClass = isIcon ? iconSizeClasses[size] : sizeClasses[size];
   const variantClass = variantClasses[variant];
 
+  // Render left icon with correct size
+  const renderLeftIcon = () => {
+    if (leftIcon) return leftIcon; // Custom icon, caller handles sizing
+    if (leftIconName) return <Icon name={leftIconName} className={isIcon ? iconOnlyIconSizes[size] : buttonIconSizes[size]} color={iconColor} />;
+    return <Icon name="check" className={isIcon ? iconOnlyIconSizes[size] : buttonIconSizes[size]} color={iconColor} />;
+  };
+
+  // Render right icon with correct size
+  const renderRightIcon = () => {
+    if (rightIcon) return rightIcon; // Custom icon, caller handles sizing
+    if (rightIconName) return <Icon name={rightIconName} className={buttonIconSizes[size]} color={iconColor} />;
+    return <Icon name="chevron-down" className={buttonIconSizes[size]} color={iconColor} />;
+  };
+
   return (
     <button
       className={`${baseClasses} ${sizeClass} ${variantClass} ${className}`}
@@ -75,13 +95,13 @@ export const Button: React.FC<ButtonProps> = ({
       disabled={isDisabled}
       type="button"
     >
-      {showLeftIcon && !isIcon && (leftIcon || <Icon name="check" className={buttonIconSizes[size]} color={iconColor} />)}
+      {showLeftIcon && !isIcon && renderLeftIcon()}
       {isIcon ? (
-        leftIcon || <Icon name="check" className={iconOnlyIconSizes[size]} color={iconColor} />
+        renderLeftIcon()
       ) : (
         <span>{children}</span>
       )}
-      {showRightIcon && !isIcon && (rightIcon || <Icon name="chevron-down" className={buttonIconSizes[size]} color={iconColor} />)}
+      {showRightIcon && !isIcon && renderRightIcon()}
     </button>
   );
 };

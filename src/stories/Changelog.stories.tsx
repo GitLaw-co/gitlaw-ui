@@ -55,11 +55,11 @@ const ChangelogPage = () => {
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-text-primary mb-2">Changelog</h1>
-          <p className="text-text-secondary">
+          <h1 className="text-2xl font-bold text-foreground mb-2">Changelog</h1>
+          <p className="text-muted">
             Recent updates to the GitLaw UI design system.
           </p>
-          <p className="text-xs text-text-secondary mt-2">
+          <p className="text-xs text-muted mt-2">
             Last updated: {formatDate(lastUpdated)} • Auto-generated from Git commits
           </p>
         </div>
@@ -82,7 +82,7 @@ const ChangelogPage = () => {
             <div key={entry.date} className="relative">
               {/* Date header */}
               <div className="sticky top-0 bg-page-background py-2 z-10">
-                <h2 className="text-lg font-semibold text-text-primary">
+                <h2 className="text-lg font-semibold text-foreground">
                   {formatDate(entry.date)}
                 </h2>
               </div>
@@ -108,7 +108,7 @@ const ChangelogPage = () => {
 
                       {/* Content */}
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm text-text-primary leading-relaxed">
+                        <p className="text-sm text-foreground leading-relaxed">
                           {commit.message}
                         </p>
                         <div className="flex items-center gap-2 mt-1">
@@ -118,7 +118,7 @@ const ChangelogPage = () => {
                           >
                             {type}
                           </span>
-                          <code className="text-xs text-text-secondary font-mono">
+                          <code className="text-xs text-muted font-mono">
                             {commit.hash}
                           </code>
                         </div>
@@ -133,7 +133,7 @@ const ChangelogPage = () => {
 
         {/* Footer */}
         <div className="mt-12 pt-8 border-t border-border text-center">
-          <p className="text-sm text-text-secondary">
+          <p className="text-sm text-muted">
             To regenerate this changelog, run:{' '}
             <code className="bg-muted px-2 py-1 rounded text-xs font-mono">
               node scripts/generate-changelog.js

@@ -2,6 +2,7 @@ import React from 'react';
 import { Icon } from './Icon';
 import { Button } from './Button';
 import { dialogTailwindClasses, colors } from '../specs';
+// Note: Dialog uses Icon directly for close button, and leftIconName for Button icons
 
 export interface DialogProps {
   /** Dialog title */
@@ -70,7 +71,7 @@ export const Dialog: React.FC<DialogProps> = ({
           variant="outline"
           size="m"
           showLeftIcon
-          leftIcon={<Icon name="x" className={dialogTailwindClasses.buttonIcon} color={colors.iconPrimary} />}
+          leftIconName="x"
           onClick={onSecondaryClick}
           className="flex-1"
         >
@@ -82,7 +83,7 @@ export const Dialog: React.FC<DialogProps> = ({
           variant="primary"
           size="m"
           showLeftIcon
-          leftIcon={<Icon name="check" className={dialogTailwindClasses.buttonIcon} color={colors.iconNegative} />}
+          leftIconName="check"
           onClick={onPrimaryClick}
           className="flex-1"
         >

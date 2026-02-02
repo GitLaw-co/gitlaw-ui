@@ -202,7 +202,7 @@ export const AllVariants: Story = {
   render: () => (
     <div className="flex flex-col gap-8 p-8">
       <div>
-        <h3 className="text-lg font-semibold mb-4 text-text-primary">Neutral Tooltips</h3>
+        <h3 className="text-lg font-semibold mb-4 text-foreground">Neutral Tooltips</h3>
         <div className="flex gap-4">
           <Tooltip content="Small tooltip (12px)" size="s" type="neutral" position="bottom">
             <Button variant="secondary" size="s">Small</Button>
@@ -216,7 +216,7 @@ export const AllVariants: Story = {
         </div>
       </div>
       <div>
-        <h3 className="text-lg font-semibold mb-4 text-text-primary">Purple Tooltips</h3>
+        <h3 className="text-lg font-semibold mb-4 text-foreground">Purple Tooltips</h3>
         <div className="flex gap-4">
           <Tooltip content="Small tooltip (12px)" size="s" type="purple" position="bottom">
             <Button variant="primary" size="s">Small</Button>
@@ -230,7 +230,7 @@ export const AllVariants: Story = {
         </div>
       </div>
       <div>
-        <h3 className="text-lg font-semibold mb-4 text-text-primary">Position Variants</h3>
+        <h3 className="text-lg font-semibold mb-4 text-foreground">Position Variants</h3>
         <div className="flex gap-4 items-center justify-center">
           <Tooltip content="Top position" size="m" type="neutral" position="top">
             <Button variant="secondary" size="m">Top</Button>

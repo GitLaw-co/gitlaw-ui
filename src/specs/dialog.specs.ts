@@ -49,7 +49,7 @@ export interface DialogSpec {
  * Dialog specifications from Figma
  */
 export const dialogSpecs: DialogSpec = {
-  width: 360,
+  width: 400,
   padding: 24,
   borderRadius: 8,
   gap: 16,
@@ -80,12 +80,12 @@ export const dialogSpecs: DialogSpec = {
  * Tailwind class mappings derived from specs
  */
 export const dialogTailwindClasses = {
-  container: 'bg-white rounded-lg shadow-[0px_10px_40px_0px_rgba(0,0,0,0.05)] flex flex-col gap-4 p-6 w-[360px]',
-  header: 'flex items-center justify-between min-h-12 p-3',
-  title: 'text-xl font-semibold text-text-primary leading-[1.4]',
+  container: 'bg-white rounded-lg shadow-[0px_10px_40px_0px_rgba(0,0,0,0.05)] flex flex-col gap-4 p-6 w-[400px]',
+  header: 'flex items-center justify-between min-h-12 py-3',
+  title: 'text-xl font-semibold text-foreground leading-[1.4]',
   closeButton: 'p-1 hover:bg-secondary rounded transition-colors',
   closeIcon: 'size-6', // 24px
-  message: 'text-base font-normal text-text-primary leading-[1.4]',
+  message: 'text-base font-normal text-foreground leading-[1.4]',
   buttonContainer: 'flex items-center justify-end gap-2 py-2',
   buttonIcon: 'size-4', // 16px - matches button size 'm' icon spec
 };

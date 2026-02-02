@@ -48,3 +48,9 @@ export type { ChatInputProps, ChatInputStatus, ChatInputSize, QuickAction } from
 
 export { Icon } from './Icon';
 export type { IconProps } from './Icon';
+
+export { EditorHeader } from './EditorHeader';
+export type { EditorHeaderProps } from './EditorHeader';
+
+export { EditorToolbar } from './EditorToolbar';
+export type { EditorToolbarProps, EditorToolbarSize, EditorToolbarStatus } from './EditorToolbar';
