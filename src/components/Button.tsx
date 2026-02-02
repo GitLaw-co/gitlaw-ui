@@ -27,20 +27,22 @@ export interface ButtonProps {
   disabled?: boolean;
 }
 
+// Figma specs: Normal buttons with text
 const sizeClasses: Record<ButtonSize, string> = {
-  xl: 'gap-3 p-6 text-lg',
-  l: 'gap-2 p-4 text-base',
-  m: 'gap-2 px-4 py-3 h-10 text-sm',
-  s: 'gap-1 px-3 py-2 h-8 text-xs',
-  xs: 'gap-1 px-2 py-1 h-6 text-xxs',
+  xs: 'gap-1 px-2 py-1 h-6 text-xxs',      // 73×24, px-8, py-4, 10px font
+  s: 'gap-1 px-3 py-2 h-8 text-xs',        // 93×32, px-12, py-8, 12px font
+  m: 'gap-2 px-4 py-3 h-10 text-sm',       // 114×40, px-16, py-12, 14px font
+  l: 'gap-2 p-4 text-base',                // 127×54, p-16, 16px font
+  xl: 'gap-3 p-6 text-lg',                 // 164×73, p-24, 18px font
 };
 
+// Figma specs: Icon-only buttons (square)
 const iconSizeClasses: Record<ButtonSize, string> = {
-  xl: 'size-16 p-4',
-  l: 'size-14 p-4',
-  m: 'size-10 p-3',
-  s: 'size-8 p-2',
-  xs: 'size-6 p-2',
+  xs: 'size-6',           // 24×24
+  s: 'size-8 p-1',        // 32×32, 4px padding
+  m: 'size-10 p-2',       // 40×40, 8px padding
+  l: 'size-14 p-4',       // 56×56, 16px padding
+  xl: 'size-16 p-5',      // 64×64, 20px padding
 };
 
 const variantClasses: Record<ButtonVariant, string> = {
@@ -80,13 +82,13 @@ export const Button: React.FC<ButtonProps> = ({
       disabled={isDisabled}
       type="button"
     >
-      {showLeftIcon && !isIcon && (leftIcon || <Icon name="check" className="size-5" color={iconColor} />)}
+      {showLeftIcon && !isIcon && (leftIcon || <Icon name="check" className="size-6" color={iconColor} />)}
       {isIcon ? (
         leftIcon || <Icon name="check" className="size-6" color={iconColor} />
       ) : (
         <span>{children}</span>
       )}
-      {showRightIcon && !isIcon && (rightIcon || <Icon name="chevron-down" className="size-5" color={iconColor} />)}
+      {showRightIcon && !isIcon && (rightIcon || <Icon name="chevron-down" className="size-6" color={iconColor} />)}
     </button>
   );
 };
