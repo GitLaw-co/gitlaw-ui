@@ -6,7 +6,15 @@ const meta: Meta<typeof Dropdown> = {
   component: Dropdown,
   parameters: {
     layout: 'centered',
+    backgrounds: { default: 'light' },
   },
+  decorators: [
+    (Story) => (
+      <div style={{ padding: '40px' }}>
+        <Story />
+      </div>
+    ),
+  ],
   tags: ['autodocs'],
   argTypes: {
     showIcons: {

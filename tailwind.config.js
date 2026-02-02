@@ -167,7 +167,7 @@ export default {
         'gitlaw-full': '1000px',
       },
       boxShadow: {
-        'card': '0px 10px 40px 0px rgba(0, 0, 0, 0.05)',
+        card: '0px 10px 40px 0px rgba(0, 0, 0, 0.05)',
       },
     },
   },

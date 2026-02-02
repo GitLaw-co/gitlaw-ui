@@ -40,8 +40,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
     <div
       className={`
         w-[220px] max-w-[360px] p-2 rounded-lg
-        bg-card
-        shadow-card
+        bg-card shadow-card
         flex flex-col gap-px
         ${className}
       `}

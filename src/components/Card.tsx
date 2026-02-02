@@ -255,7 +255,7 @@ export const Card: React.FC<CardProps> = ({
   return (
     <div
       className={`
-        @container bg-card rounded-lg overflow-hidden relative cursor-pointer
+        @container bg-card rounded-lg shadow-card overflow-hidden relative cursor-pointer
         w-full min-w-[160px]
         p-4 @[200px]:p-6
         transition-all

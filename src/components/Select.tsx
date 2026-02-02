@@ -179,7 +179,7 @@ export const Select: React.FC<SelectProps> = ({
       {renderDropdown()}
 
       {isOpen && options.length > 0 && (
-        <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-input-border rounded shadow-lg z-50 max-h-60 overflow-auto">
+        <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-input-border rounded shadow-card z-50 max-h-60 overflow-auto">
           {options.map((option) => (
             <div
               key={option.value}

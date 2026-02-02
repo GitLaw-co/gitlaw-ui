@@ -41,6 +41,9 @@
   /* Active States */
   --active-border: #5e49d6;
 
+  /* Shadows */
+  --shadow-card: 0px 10px 40px 0px rgba(0, 0, 0, 0.05);
+
   /* Illustration Colors (themeable for dark mode) */
   --color-illustration-primary: #382C80;    /* purple/900 - main/dark strokes */
   --color-illustration-secondary: #7F72FF;  /* purple/500 - lighter accents */
@@ -77,4 +80,9 @@ body {
   --backgrounds\/button-secondary-background: var(--backgrounds-button-secondary-background);
   --backgrounds\/tag-background: var(--backgrounds-tag-background);
   --backgrounds\/switch-inactive-background: var(--backgrounds-switch-inactive-background);
+}
+
+/* Shadow utilities */
+.shadow-card {
+  box-shadow: var(--shadow-card);
 }
