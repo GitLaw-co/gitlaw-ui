@@ -2,6 +2,28 @@
 
 This is a React component library built with Tailwind CSS, based on the GitLaw Figma design system.
 
+## Existing Components
+
+| Component | Status | Description |
+|-----------|--------|-------------|
+| Button | ✅ Stable | Primary, secondary, outline, ghost, destructive, disabled, icon variants |
+| Input | ✅ Stable | Text input with label, icons, validation states |
+| TextField | ✅ Stable | Multi-line textarea with character count |
+| Select | ✅ Stable | Searchable dropdown with multi-select |
+| Switch | ✅ Stable | Toggle for boolean settings |
+| Avatar | ✅ Stable | Images, initials, icons, or empty states |
+| Badge | ✅ Stable | Notification indicators |
+| Tag | ✅ Stable | Labels with optional icon and close button |
+| Card | ✅ Stable | File, template, and folder cards |
+| Tooltip | ✅ Stable | Contextual hints |
+| Toast | ✅ Stable | Notification messages |
+| Tab | ✅ Stable | Tab navigation with badge support |
+| MenuItem | ✅ Stable | List items with icons, avatars, checkboxes |
+| Sidebar | ✅ Stable | Collapsible navigation |
+| Dialog | ✅ Stable | Modal dialogs |
+| ChatInput | ✅ Stable | AI chat interface |
+| Icon | ✅ Stable | 1,475 icons with color support |
+
 ## Quick Commands
 
 | Task | Command |
@@ -86,6 +108,40 @@ Use GitLaw spacing scale:
 - `gitlaw-2xl` = 24px
 - `gitlaw-3xl` = 32px
 - `gitlaw-4xl` = 48px
+
+## Component API Patterns
+
+### Props Structure
+
+Components use consistent prop patterns:
+
+```tsx
+// Variants via string union (not boolean flags)
+<Button variant="primary" />    // ✅ Good
+<Button isPrimary />            // ❌ Bad
+
+// Size props: 'xs' | 's' | 'm' | 'l' | 'xl'
+<Button size="m" />
+
+// Common prop patterns:
+variant    // Visual style variant
+size       // Component size
+disabled   // Disabled state (boolean)
+className  // Additional Tailwind classes
+onClick    // Click handler
+children   // Content
+```
+
+### Naming Conventions
+
+| Type | Convention | Example |
+|------|------------|---------|
+| Component files | PascalCase | `Button.tsx` |
+| Story files | PascalCase + .stories | `Button.stories.tsx` |
+| Spec files | camelCase | `colors.ts` |
+| CSS classes | Tailwind (kebab-case) | `bg-primary` |
+| Props | camelCase | `showLeftIcon` |
+| Color tokens | camelCase | `colors.iconPrimary` |
 
 ## Adding Components
 
