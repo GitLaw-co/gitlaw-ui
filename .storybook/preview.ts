@@ -28,33 +28,8 @@ const preview: Preview = {
       ],
     },
     options: {
-      storySort: (a, b) => {
-        const order = [
-          'Introduction',
-          'Foundations',
-          'Components',
-          'Changelog',
-        ];
-
-        const aTitle = a.title || a.id;
-        const bTitle = b.title || b.id;
-
-        // Get the top-level category
-        const aCategory = aTitle.split('/')[0];
-        const bCategory = bTitle.split('/')[0];
-
-        const aIndex = order.indexOf(aCategory);
-        const bIndex = order.indexOf(bCategory);
-
-        // If both are in order array, sort by order
-        if (aIndex !== -1 && bIndex !== -1) {
-          return aIndex - bIndex;
-        }
-        // If only one is in order, prioritize it
-        if (aIndex !== -1) return -1;
-        if (bIndex !== -1) return 1;
-        // Otherwise alphabetical
-        return aTitle.localeCompare(bTitle);
+      storySort: {
+        order: ['Introduction', 'Foundations', 'Components', 'Changelog'],
       },
     },
   },
