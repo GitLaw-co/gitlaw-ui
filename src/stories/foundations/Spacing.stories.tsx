@@ -45,12 +45,15 @@ const RadiusSample: React.FC<RadiusSampleProps> = ({ name, value, className }) =
 
 const SpacingPage = () => {
   const gitlawSpacing: SpacingSampleProps[] = [
-    { name: 'gitlaw-xs', value: '4px', className: 'w-[4px]' },
+    { name: 'gitlaw-xxs', value: '1px', className: 'w-[1px]' },
+    { name: 'gitlaw-xs', value: '2px', className: 'w-[2px]' },
     { name: 'gitlaw-s', value: '4px', className: 'w-[4px]' },
     { name: 'gitlaw-m', value: '8px', className: 'w-[8px]' },
     { name: 'gitlaw-l', value: '12px', className: 'w-[12px]' },
     { name: 'gitlaw-xl', value: '16px', className: 'w-[16px]' },
     { name: 'gitlaw-2xl', value: '24px', className: 'w-[24px]' },
+    { name: 'gitlaw-3xl', value: '32px', className: 'w-[32px]' },
+    { name: 'gitlaw-4xl', value: '48px', className: 'w-[48px]' },
   ];
 
   const tailwindSpacing: SpacingSampleProps[] = [

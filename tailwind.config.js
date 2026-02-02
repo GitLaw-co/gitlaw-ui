@@ -152,12 +152,15 @@ export default {
         '2xl': ['24px', { lineHeight: '1.4' }],
       },
       spacing: {
-        'gitlaw-xs': '4px',
+        'gitlaw-xxs': '1px',
+        'gitlaw-xs': '2px',
         'gitlaw-s': '4px',
         'gitlaw-m': '8px',
         'gitlaw-l': '12px',
         'gitlaw-xl': '16px',
         'gitlaw-2xl': '24px',
+        'gitlaw-3xl': '32px',
+        'gitlaw-4xl': '48px',
       },
       borderRadius: {
         'gitlaw-s': '4px',

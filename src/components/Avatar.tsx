@@ -103,9 +103,9 @@ export const Avatar: React.FC<AvatarProps> = ({
           className="
             absolute -bottom-1 -right-1
             size-6 rounded-full
-            bg-[#1b1d22]
+            bg-text-primary
             flex items-center justify-center
-            hover:bg-[#2a2d33] transition-colors
+            hover:bg-obsidian-800 transition-colors
           "
         >
           <Icon name="pencil" className="size-4" color={colors.iconNegative} />
