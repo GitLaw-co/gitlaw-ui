@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ChatInput } from '../components/ChatInput';
 
 const meta: Meta<typeof ChatInput> = {
-  title: 'Feedback/ChatInput',
+  title: 'Components/Feedback/ChatInput',
   component: ChatInput,
   parameters: {
     layout: 'centered',

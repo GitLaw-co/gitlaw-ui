@@ -5,7 +5,7 @@ import { Button } from '../components/Button';
 import { Trash2, ArrowDownToLine, FolderInput, Check } from '../icons';
 
 const meta: Meta<typeof Card> = {
-  title: 'Data Display/Card',
+  title: 'Components/Data Display/Card',
   component: Card,
   parameters: {
     layout: 'centered',
