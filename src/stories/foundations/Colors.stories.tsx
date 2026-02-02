@@ -26,7 +26,7 @@ const ColorSwatch: React.FC<ColorSwatchProps> = ({ name, value, className, textD
     <p className={`text-sm font-medium mt-2 ${textDark ? 'text-foreground' : 'text-foreground'}`}>
       {name}
     </p>
-    <p className="text-xs text-muted font-mono">{value}</p>
+    <p className="text-xs text-subtle font-mono">{value}</p>
   </div>
 );
 
@@ -192,7 +192,7 @@ const ColorsPage = () => {
     <div className="p-8 bg-page-background min-h-screen">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-2xl font-bold text-foreground mb-2">Colors</h1>
-        <p className="text-muted mb-8">
+        <p className="text-subtle mb-8">
           GitLaw design system color palette. Use semantic colors for most UI elements.
         </p>
 
@@ -209,7 +209,7 @@ const ColorsPage = () => {
           <h2 className="text-xl font-semibold text-foreground mb-6 pb-2 border-b border-border">
             Primitive Colors
           </h2>
-          <p className="text-sm text-muted mb-6">
+          <p className="text-sm text-subtle mb-6">
             Raw color values. Prefer semantic colors in code - use primitives only for reference.
           </p>
           {primitiveColors.map((group) => (

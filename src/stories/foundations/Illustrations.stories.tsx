@@ -41,7 +41,7 @@ const IllustrationCard: React.FC<IllustrationCardProps> = ({ id, filename, name,
     >
       <div className="w-full aspect-square flex items-center justify-center mb-3 bg-purple-50 rounded-gitlaw-s overflow-hidden">
         {imageError ? (
-          <div className="text-xs text-muted text-center p-2">
+          <div className="text-xs text-subtle text-center p-2">
             SVG not found
           </div>
         ) : (
@@ -56,7 +56,7 @@ const IllustrationCard: React.FC<IllustrationCardProps> = ({ id, filename, name,
       <p className="text-sm font-medium text-foreground group-hover:text-primary text-center">
         {copied ? 'Copied!' : name}
       </p>
-      <p className="text-xs text-muted text-center mt-1 line-clamp-2">
+      <p className="text-xs text-subtle text-center mt-1 line-clamp-2">
         {keywords.slice(0, 3).join(', ')}
       </p>
     </button>
@@ -83,7 +83,7 @@ const IllustrationsPage = () => {
     <div className="p-8 bg-page-background min-h-screen">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-2xl font-bold text-foreground mb-2">Illustrations</h1>
-        <p className="text-muted mb-6">
+        <p className="text-subtle mb-6">
           {illustrations.length} illustrations from the Zest illustration library. Click to copy the ID.
         </p>
 
@@ -103,7 +103,7 @@ const IllustrationsPage = () => {
 
           {/* Category Filter */}
           <div className="flex items-center gap-2">
-            <span className="text-sm text-muted">Category:</span>
+            <span className="text-sm text-subtle">Category:</span>
             <select
               value={selectedCategory || ''}
               onChange={(e) => setSelectedCategory(e.target.value || null)}
@@ -127,7 +127,7 @@ const IllustrationsPage = () => {
         )}
 
         {/* Results count */}
-        <p className="text-sm text-muted mb-4">
+        <p className="text-sm text-subtle mb-4">
           Showing {filteredIllustrations.length} of {illustrations.length} illustrations
         </p>
 
@@ -147,7 +147,7 @@ const IllustrationsPage = () => {
 
         {filteredIllustrations.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-muted">No illustrations found matching "{searchQuery}"</p>
+            <p className="text-subtle">No illustrations found matching "{searchQuery}"</p>
           </div>
         )}
 
@@ -166,7 +166,7 @@ const IllustrationsPage = () => {
               </div>
               <div>
                 <p className="text-sm font-medium text-foreground mb-2">Common use cases</p>
-                <ul className="text-sm text-muted space-y-1 ml-4 list-disc">
+                <ul className="text-sm text-subtle space-y-1 ml-4 list-disc">
                   <li><strong>Empty states:</strong> empty-box, location-lost, wifi-disconnect</li>
                   <li><strong>Success:</strong> thumbs-up, antivirus-complete, email-confirm</li>
                   <li><strong>Errors:</strong> wifi-disconnect, clock-warning, empty-box</li>

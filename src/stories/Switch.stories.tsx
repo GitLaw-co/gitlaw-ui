@@ -110,7 +110,7 @@ const InteractiveSwitch = () => {
   return (
     <div className="flex items-center gap-4">
       <Switch checked={checked} onChange={setChecked} size="m" />
-      <span className="text-sm text-muted">
+      <span className="text-sm text-subtle">
         {checked ? 'On' : 'Off'}
       </span>
     </div>

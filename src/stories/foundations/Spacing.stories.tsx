@@ -21,7 +21,7 @@ const SpacingSample: React.FC<SpacingSampleProps> = ({ name, value, className })
   <div className="flex items-center gap-4 py-3 border-b border-border last:border-b-0">
     <div className="w-32">
       <span className="text-sm font-medium text-foreground">{name}</span>
-      <span className="text-xs text-muted ml-2 font-mono">{value}</span>
+      <span className="text-xs text-subtle ml-2 font-mono">{value}</span>
     </div>
     <div className="flex-1">
       <div className={`bg-primary h-4 rounded ${className}`} />
@@ -39,7 +39,7 @@ const RadiusSample: React.FC<RadiusSampleProps> = ({ name, value, className }) =
   <div className="flex flex-col items-center">
     <div className={`w-20 h-20 bg-primary ${className}`} />
     <p className="text-sm font-medium text-foreground mt-3">{name}</p>
-    <p className="text-xs text-muted font-mono">{value}</p>
+    <p className="text-xs text-subtle font-mono">{value}</p>
   </div>
 );
 
@@ -83,7 +83,7 @@ const SpacingPage = () => {
     <div className="p-8 bg-page-background min-h-screen">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-2xl font-bold text-foreground mb-2">Spacing & Radius</h1>
-        <p className="text-muted mb-8">
+        <p className="text-subtle mb-8">
           Consistent spacing and border radius values for the GitLaw design system.
         </p>
 
@@ -92,7 +92,7 @@ const SpacingPage = () => {
           <h2 className="text-xl font-semibold text-foreground mb-6 pb-2 border-b border-border">
             GitLaw Spacing Scale
           </h2>
-          <p className="text-sm text-muted mb-4">
+          <p className="text-sm text-subtle mb-4">
             Custom spacing tokens defined for GitLaw. Use these for component-specific spacing.
           </p>
           <div className="bg-card p-6 rounded-gitlaw-m border border-border">
@@ -114,7 +114,7 @@ const SpacingPage = () => {
           <h2 className="text-xl font-semibold text-foreground mb-6 pb-2 border-b border-border">
             Tailwind Spacing Scale
           </h2>
-          <p className="text-sm text-muted mb-4">
+          <p className="text-sm text-subtle mb-4">
             Standard Tailwind spacing values. Use for general layout and component spacing.
           </p>
           <div className="bg-card p-6 rounded-gitlaw-m border border-border">
@@ -129,7 +129,7 @@ const SpacingPage = () => {
           <h2 className="text-xl font-semibold text-foreground mb-6 pb-2 border-b border-border">
             Border Radius
           </h2>
-          <p className="text-sm text-muted mb-4">
+          <p className="text-sm text-subtle mb-4">
             Custom border radius values for GitLaw components.
           </p>
           <div className="bg-card p-6 rounded-gitlaw-m border border-border">
@@ -158,7 +158,7 @@ const SpacingPage = () => {
             {/* Card Padding Example */}
             <div className="bg-card rounded-gitlaw-m border border-border overflow-hidden">
               <div className="p-4 border-b border-border">
-                <p className="text-xs text-muted font-mono mb-1">Card with p-6 (24px padding)</p>
+                <p className="text-xs text-subtle font-mono mb-1">Card with p-6 (24px padding)</p>
               </div>
               <div className="p-6 bg-purple-50">
                 <div className="bg-card p-4 rounded-gitlaw-m border border-primary border-dashed">
@@ -170,7 +170,7 @@ const SpacingPage = () => {
             {/* Gap Example */}
             <div className="bg-card rounded-gitlaw-m border border-border overflow-hidden">
               <div className="p-4 border-b border-border">
-                <p className="text-xs text-muted font-mono mb-1">Flex with gap-2 (8px gap)</p>
+                <p className="text-xs text-subtle font-mono mb-1">Flex with gap-2 (8px gap)</p>
               </div>
               <div className="p-6">
                 <div className="flex gap-2">
@@ -184,7 +184,7 @@ const SpacingPage = () => {
             {/* Margin Example */}
             <div className="bg-card rounded-gitlaw-m border border-border overflow-hidden">
               <div className="p-4 border-b border-border">
-                <p className="text-xs text-muted font-mono mb-1">Stack with space-y-4 (16px vertical spacing)</p>
+                <p className="text-xs text-subtle font-mono mb-1">Stack with space-y-4 (16px vertical spacing)</p>
               </div>
               <div className="p-6">
                 <div className="space-y-4">

@@ -29,7 +29,7 @@ const TypeSample: React.FC<TypeSampleProps> = ({
   <div className="py-4 border-b border-border last:border-b-0">
     <div className="flex items-baseline gap-4 mb-2">
       <span className="text-sm font-medium text-primary w-24">{name}</span>
-      <span className="text-xs text-muted font-mono">
+      <span className="text-xs text-subtle font-mono">
         {size} / {lineHeight}
       </span>
     </div>
@@ -59,7 +59,7 @@ const TypographyPage = () => {
     <div className="p-8 bg-page-background min-h-screen">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-2xl font-bold text-foreground mb-2">Typography</h1>
-        <p className="text-muted mb-8">
+        <p className="text-subtle mb-8">
           GitLaw uses DM Sans for UI text and DM Serif Text for display headings.
         </p>
 
@@ -70,9 +70,9 @@ const TypographyPage = () => {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-card p-6 rounded-gitlaw-m border border-border">
-              <p className="text-xs text-muted mb-2 font-mono">font-sans</p>
+              <p className="text-xs text-subtle mb-2 font-mono">font-sans</p>
               <p className="text-2xl font-sans text-foreground mb-2">DM Sans</p>
-              <p className="text-sm text-muted font-sans">
+              <p className="text-sm text-subtle font-sans">
                 Primary font for all UI elements, body text, and labels.
               </p>
               <div className="mt-4 pt-4 border-t border-border">
@@ -84,9 +84,9 @@ const TypographyPage = () => {
               </div>
             </div>
             <div className="bg-card p-6 rounded-gitlaw-m border border-border">
-              <p className="text-xs text-muted mb-2 font-mono">font-serif</p>
+              <p className="text-xs text-subtle mb-2 font-mono">font-serif</p>
               <p className="text-2xl font-serif text-foreground mb-2">DM Serif Text</p>
-              <p className="text-sm text-muted font-sans">
+              <p className="text-sm text-subtle font-sans">
                 Display font for marketing headings and special emphasis.
               </p>
               <div className="mt-4 pt-4 border-t border-border">
@@ -122,7 +122,7 @@ const TypographyPage = () => {
               <div key={weight.name} className="py-4 border-b border-border last:border-b-0">
                 <div className="flex items-baseline gap-4 mb-2">
                   <span className="text-sm font-medium text-primary w-24">{weight.name}</span>
-                  <span className="text-xs text-muted font-mono">{weight.weight}</span>
+                  <span className="text-xs text-subtle font-mono">{weight.weight}</span>
                 </div>
                 <p className={`text-xl text-foreground ${weight.className}`}>
                   The quick brown fox jumps over the lazy dog
@@ -140,15 +140,15 @@ const TypographyPage = () => {
           <div className="bg-card p-6 rounded-gitlaw-m border border-border">
             <div className="space-y-4">
               <div className="flex items-center gap-4">
-                <span className="text-sm font-mono text-muted w-40">text-foreground</span>
+                <span className="text-sm font-mono text-subtle w-40">text-foreground</span>
                 <span className="text-base text-foreground">Primary text for headings and body</span>
               </div>
               <div className="flex items-center gap-4">
-                <span className="text-sm font-mono text-muted w-40">text-muted</span>
-                <span className="text-base text-muted">Secondary text for descriptions</span>
+                <span className="text-sm font-mono text-subtle w-40">text-subtle</span>
+                <span className="text-base text-subtle">Secondary text for descriptions</span>
               </div>
               <div className="flex items-center gap-4">
-                <span className="text-sm font-mono text-muted w-40">text-primary</span>
+                <span className="text-sm font-mono text-subtle w-40">text-primary</span>
                 <span className="text-base text-primary">Brand colored text for emphasis</span>
               </div>
               <div className="flex items-center gap-4 bg-primary p-2 rounded">
@@ -166,32 +166,32 @@ const TypographyPage = () => {
           </h2>
           <div className="bg-card p-6 rounded-gitlaw-m border border-border space-y-6">
             <div>
-              <p className="text-xs text-muted mb-1 font-mono">Page heading</p>
+              <p className="text-xs text-subtle mb-1 font-mono">Page heading</p>
               <h1 className="text-2xl font-bold text-foreground">Dashboard Overview</h1>
             </div>
             <div>
-              <p className="text-xs text-muted mb-1 font-mono">Section heading</p>
+              <p className="text-xs text-subtle mb-1 font-mono">Section heading</p>
               <h2 className="text-xl font-semibold text-foreground">Recent Documents</h2>
             </div>
             <div>
-              <p className="text-xs text-muted mb-1 font-mono">Card title</p>
+              <p className="text-xs text-subtle mb-1 font-mono">Card title</p>
               <h3 className="text-lg font-semibold text-foreground">Service Contract Template</h3>
             </div>
             <div>
-              <p className="text-xs text-muted mb-1 font-mono">Body text</p>
+              <p className="text-xs text-subtle mb-1 font-mono">Body text</p>
               <p className="text-base text-foreground">
                 This document outlines the terms and conditions for service agreements between parties.
               </p>
             </div>
             <div>
-              <p className="text-xs text-muted mb-1 font-mono">Description / Caption</p>
-              <p className="text-sm text-muted">
+              <p className="text-xs text-subtle mb-1 font-mono">Description / Caption</p>
+              <p className="text-sm text-subtle">
                 Last modified 2 days ago by John Doe
               </p>
             </div>
             <div>
-              <p className="text-xs text-muted mb-1 font-mono">Small label</p>
-              <p className="text-xs text-muted">8 files</p>
+              <p className="text-xs text-subtle mb-1 font-mono">Small label</p>
+              <p className="text-xs text-subtle">8 files</p>
             </div>
           </div>
         </section>

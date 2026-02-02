@@ -137,7 +137,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     // Main menu icon colors (using design system constants)
     menuIcon: isLanding ? dsColors.iconNegative : dsColors.iconPrimary,
     // Chat history heading: ai-chat-placeholder for landing, secondary-text for inner
-    chatHeadingText: isLanding ? 'text-foreground-ai-placeholder' : 'text-muted',
+    chatHeadingText: isLanding ? 'text-foreground-ai-placeholder' : 'text-subtle',
     // Chat history item text: negative-text for landing, primary-text for inner
     chatItemText: isLanding ? 'text-negative' : 'text-foreground',
     // Chat history icon colors (using design system constants)

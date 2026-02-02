@@ -36,7 +36,7 @@ export const changelog: ChangelogEntry[] = [
       },
       {
         "hash": "new",
-        "message": "Refactor text colors to semantic names (text-foreground, text-muted)"
+        "message": "Refactor text colors to semantic names (text-foreground, text-subtle)"
       },
       {
         "hash": "new",

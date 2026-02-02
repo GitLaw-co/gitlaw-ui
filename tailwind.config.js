@@ -30,7 +30,7 @@ export default {
         // Text Colors (from Figma Semantic Colors)
         // Using semantic names to avoid text-text-* redundancy
         foreground: '#1B1B1F',        // obsidian/950 (primary text) - use text-foreground
-        muted: '#989898',             // grey/50 (secondary text) - use text-muted
+        subtle: '#989898',            // grey/50 (secondary text) - use text-subtle
         negative: '#F7F6FF',          // purple/50 - use text-negative
         'foreground-button': '#5E49D6',   // purple/700 - use text-foreground-button
         'foreground-button-negative': '#F7F6FF', // purple/50

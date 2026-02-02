@@ -56,10 +56,10 @@ const ChangelogPage = () => {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-foreground mb-2">Changelog</h1>
-          <p className="text-muted">
+          <p className="text-subtle">
             Recent updates to the GitLaw UI design system.
           </p>
-          <p className="text-xs text-muted mt-2">
+          <p className="text-xs text-subtle mt-2">
             Last updated: {formatDate(lastUpdated)} • Auto-generated from Git commits
           </p>
         </div>
@@ -118,7 +118,7 @@ const ChangelogPage = () => {
                           >
                             {type}
                           </span>
-                          <code className="text-xs text-muted font-mono">
+                          <code className="text-xs text-subtle font-mono">
                             {commit.hash}
                           </code>
                         </div>
@@ -133,7 +133,7 @@ const ChangelogPage = () => {
 
         {/* Footer */}
         <div className="mt-12 pt-8 border-t border-border text-center">
-          <p className="text-sm text-muted">
+          <p className="text-sm text-subtle">
             To regenerate this changelog, run:{' '}
             <code className="bg-muted px-2 py-1 rounded text-xs font-mono">
               node scripts/generate-changelog.js

@@ -138,7 +138,7 @@ export const Input: React.FC<InputProps> = ({
           disabled={disabled}
           className={`
             flex-1 bg-transparent outline-none font-normal
-            text-foreground placeholder:text-muted
+            text-foreground placeholder:text-subtle
             ${sizeConfig.input}
             ${disabled ? 'cursor-not-allowed' : ''}
           `}
@@ -147,7 +147,7 @@ export const Input: React.FC<InputProps> = ({
           <button
             type="button"
             onClick={handleClear}
-            className="shrink-0 text-foreground hover:text-muted transition-colors"
+            className="shrink-0 text-foreground hover:text-subtle transition-colors"
           >
             {rightIcon || <Icon name="x" className="size-6" color={colors.textPrimary} />}
           </button>

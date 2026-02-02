@@ -201,7 +201,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
             {primaryText}
           </p>
           {showSecondaryText && (
-            <p className="text-sm font-normal text-muted truncate leading-[1.4]">
+            <p className="text-sm font-normal text-subtle truncate leading-[1.4]">
               {secondaryText}
             </p>
           )}
@@ -214,7 +214,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
             <Badge type="red" count={rBadgeCount} />
           )}
           {showRLabel && (
-            <span className="text-sm text-muted min-w-6">{rLabel}</span>
+            <span className="text-sm text-subtle min-w-6">{rLabel}</span>
           )}
           {showRButton && (
             <button className="flex items-center gap-1 px-3 py-2 h-8 rounded bg-secondary text-xs text-foreground-button">

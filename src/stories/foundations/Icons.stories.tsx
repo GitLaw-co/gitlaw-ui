@@ -50,7 +50,7 @@ const IconCard: React.FC<IconCardProps> = ({ id, filename, name, colorFilter, on
     >
       <div className="w-10 h-10 flex items-center justify-center mb-2">
         {imageError ? (
-          <div className="text-xs text-muted text-center">
+          <div className="text-xs text-subtle text-center">
             Not found
           </div>
         ) : (
@@ -63,7 +63,7 @@ const IconCard: React.FC<IconCardProps> = ({ id, filename, name, colorFilter, on
           />
         )}
       </div>
-      <p className="text-xs text-muted group-hover:text-primary text-center truncate w-full">
+      <p className="text-xs text-subtle group-hover:text-primary text-center truncate w-full">
         {copied ? 'Copied!' : id}
       </p>
     </button>
@@ -91,7 +91,7 @@ const IconsPage = () => {
     <div className="p-8 bg-page-background min-h-screen">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-2xl font-bold text-foreground mb-2">Icons</h1>
-        <p className="text-muted mb-6">
+        <p className="text-subtle mb-6">
           {icons.length} icons available. Click to copy the icon ID.
         </p>
 
@@ -110,7 +110,7 @@ const IconsPage = () => {
 
           {/* Category Filter */}
           <div className="flex items-center gap-2">
-            <span className="text-sm text-muted">Category:</span>
+            <span className="text-sm text-subtle">Category:</span>
             <select
               value={selectedCategory || ''}
               onChange={(e) => setSelectedCategory(e.target.value || null)}
@@ -127,7 +127,7 @@ const IconsPage = () => {
 
           {/* Color Selector */}
           <div className="flex items-center gap-2">
-            <span className="text-sm text-muted">Color:</span>
+            <span className="text-sm text-subtle">Color:</span>
             <div className="flex gap-1">
               {colorOptions.map((color) => (
                 <button
@@ -154,7 +154,7 @@ const IconsPage = () => {
         )}
 
         {/* Results count */}
-        <p className="text-sm text-muted mb-4">
+        <p className="text-sm text-subtle mb-4">
           Showing {filteredIcons.length} of {icons.length} icons
         </p>
 
@@ -174,7 +174,7 @@ const IconsPage = () => {
 
         {filteredIcons.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-muted">No icons found matching "{searchQuery}"</p>
+            <p className="text-subtle">No icons found matching "{searchQuery}"</p>
           </div>
         )}
 
@@ -202,23 +202,23 @@ const IconsPage = () => {
                 <div className="flex items-end gap-4 mt-2">
                   <div className="flex flex-col items-center">
                     <img src="/icons/check.svg" alt="Check" className="w-4 h-4" />
-                    <span className="text-xs text-muted mt-1">w-4</span>
+                    <span className="text-xs text-subtle mt-1">w-4</span>
                   </div>
                   <div className="flex flex-col items-center">
                     <img src="/icons/check.svg" alt="Check" className="w-5 h-5" />
-                    <span className="text-xs text-muted mt-1">w-5</span>
+                    <span className="text-xs text-subtle mt-1">w-5</span>
                   </div>
                   <div className="flex flex-col items-center">
                     <img src="/icons/check.svg" alt="Check" className="w-6 h-6" />
-                    <span className="text-xs text-muted mt-1">w-6</span>
+                    <span className="text-xs text-subtle mt-1">w-6</span>
                   </div>
                   <div className="flex flex-col items-center">
                     <img src="/icons/check.svg" alt="Check" className="w-8 h-8" />
-                    <span className="text-xs text-muted mt-1">w-8</span>
+                    <span className="text-xs text-subtle mt-1">w-8</span>
                   </div>
                   <div className="flex flex-col items-center">
                     <img src="/icons/check.svg" alt="Check" className="w-10 h-10" />
-                    <span className="text-xs text-muted mt-1">w-10</span>
+                    <span className="text-xs text-subtle mt-1">w-10</span>
                   </div>
                 </div>
               </div>
@@ -232,7 +232,7 @@ const IconsPage = () => {
             Common Use Cases
           </h2>
           <div className="bg-card p-6 rounded-gitlaw-m border border-border">
-            <ul className="text-sm text-muted space-y-1 ml-4 list-disc">
+            <ul className="text-sm text-subtle space-y-1 ml-4 list-disc">
               <li><strong>Navigation:</strong> arrow-left, arrow-right, chevron-down, menu, home</li>
               <li><strong>Actions:</strong> check, x, plus, minus, edit, trash-2</li>
               <li><strong>Status:</strong> check-circle, alert-circle, info, bell</li>

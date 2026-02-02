@@ -183,7 +183,7 @@ export const Card: React.FC<CardProps> = ({
 
       {/* Description - sm (14px), secondary-text */}
       {description && (
-        <p className="text-sm font-normal text-muted leading-[1.4]">
+        <p className="text-sm font-normal text-subtle leading-[1.4]">
           {description}
         </p>
       )}
@@ -199,7 +199,7 @@ export const Card: React.FC<CardProps> = ({
           <div className="flex flex-col flex-1 min-w-0">
             <h3 className="text-base font-normal text-foreground leading-[1.4] truncate">{title}</h3>
             {/* File count hidden under 200px */}
-            <span className="text-xs font-normal text-muted leading-[1.4] hidden @[200px]:block">
+            <span className="text-xs font-normal text-subtle leading-[1.4] hidden @[200px]:block">
               {filesCount} files
             </span>
           </div>
@@ -282,7 +282,7 @@ export const Card: React.FC<CardProps> = ({
           {/* Visibility row */}
           <div className="absolute bottom-4 @[200px]:bottom-6 left-0 right-0 px-4 @[200px]:px-6 flex items-center gap-2">
             {getVisibilityIcon()}
-            <span className="text-sm font-normal text-muted leading-[1.4]">
+            <span className="text-sm font-normal text-subtle leading-[1.4]">
               {getVisibilityLabel()}
             </span>
           </div>

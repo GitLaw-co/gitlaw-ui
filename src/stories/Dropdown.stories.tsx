@@ -111,7 +111,7 @@ export const Interactive: Story = {
   },
   render: (args) => (
     <div>
-      <p className="text-sm text-muted mb-4">Click items to see console logs.</p>
+      <p className="text-sm text-subtle mb-4">Click items to see console logs.</p>
       <Dropdown {...args} />
     </div>
   ),

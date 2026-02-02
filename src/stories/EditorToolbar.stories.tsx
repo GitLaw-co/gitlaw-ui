@@ -101,7 +101,7 @@ export const Interactive: Story = {
   },
   render: (args) => (
     <div>
-      <p className="text-sm text-muted mb-4">
+      <p className="text-sm text-subtle mb-4">
         Hover over icons to see tooltips. Click actions to see console logs.
       </p>
       <EditorToolbar
@@ -134,23 +134,23 @@ export const AllVariants: Story = {
   render: () => (
     <div className="flex flex-col gap-6">
       <div>
-        <p className="text-sm text-muted mb-2">Desktop (xs) - Editing</p>
+        <p className="text-sm text-subtle mb-2">Desktop (xs) - Editing</p>
         <EditorToolbar size="xs" status="editing" />
       </div>
       <div>
-        <p className="text-sm text-muted mb-2">Mobile (s) - Editing</p>
+        <p className="text-sm text-subtle mb-2">Mobile (s) - Editing</p>
         <EditorToolbar size="s" status="editing" />
       </div>
       <div>
-        <p className="text-sm text-muted mb-2">Desktop (xs) - Editing (Undo/Redo disabled)</p>
+        <p className="text-sm text-subtle mb-2">Desktop (xs) - Editing (Undo/Redo disabled)</p>
         <EditorToolbar size="xs" status="editing" undoDisabled redoDisabled />
       </div>
       <div>
-        <p className="text-sm text-muted mb-2">Desktop (xs) - Reviewing</p>
+        <p className="text-sm text-subtle mb-2">Desktop (xs) - Reviewing</p>
         <EditorToolbar size="xs" status="reviewing" />
       </div>
       <div>
-        <p className="text-sm text-muted mb-2">Mobile (s) - Reviewing</p>
+        <p className="text-sm text-subtle mb-2">Mobile (s) - Reviewing</p>
         <EditorToolbar size="s" status="reviewing" />
       </div>
     </div>

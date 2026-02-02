@@ -71,7 +71,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
           <div className="flex flex-col flex-1">
             <span className="text-base text-foreground">{item.label}</span>
             {item.secondaryLabel && (
-              <span className="text-sm text-muted">
+              <span className="text-sm text-subtle">
                 {item.secondaryLabel}
               </span>
             )}

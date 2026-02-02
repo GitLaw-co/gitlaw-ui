@@ -126,7 +126,7 @@ export const Select: React.FC<SelectProps> = ({
   const widthClass = align === 'fill' ? 'w-full' : 'w-auto';
   const isHorizontal = labelPosition === 'left';
 
-  const textColorClass = status === 'empty' ? 'text-muted' : 'text-foreground';
+  const textColorClass = status === 'empty' ? 'text-subtle' : 'text-foreground';
 
   const renderLabel = () => {
     if (!showLabel) return null;
