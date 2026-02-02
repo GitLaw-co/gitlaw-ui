@@ -3,7 +3,7 @@ import { Tooltip } from '../components/Tooltip';
 import { Button } from '../components/Button';
 
 const meta: Meta<typeof Tooltip> = {
-  title: 'Components/Data Display/Tooltip',
+  title: 'Components/Tooltip',
   component: Tooltip,
   parameters: {
     layout: 'centered',

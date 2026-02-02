@@ -1,6 +1,7 @@
 import React from 'react';
 import { Icon } from './Icon';
 import { Tooltip } from './Tooltip';
+import { colors } from '../specs';
 
 // Import logo SVGs as URLs
 // Note: File names are swapped - "inner" files have white logos, "landing" files have purple logos
@@ -320,7 +321,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <span className="text-base font-normal text-text-primary truncate flex-1 text-left">
                 {userName}
               </span>
-              <Icon name="chevron-up" className={ICON_SIZE} color="#1B1B1F" />
+              <Icon name="chevron-up" className={ICON_SIZE} color={colors.textPrimary} />
             </button>
           )}
         </div>

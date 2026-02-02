@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { MenuItem } from '../components/MenuItem';
 
 const meta: Meta<typeof MenuItem> = {
-  title: 'Components/Navigation/MenuItem',
+  title: 'Components/MenuItem',
   component: MenuItem,
   parameters: {
     layout: 'centered',

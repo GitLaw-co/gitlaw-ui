@@ -29,8 +29,14 @@ const preview: Preview = {
     },
     options: {
       storySort: {
-        method: 'alphabetical',
-        order: ['Introduction', 'Components', '*'],
+        order: [
+          'Introduction',
+          'Foundations',
+          ['Colors', 'Typography', 'Spacing', 'Icons', 'Illustrations'],
+          'Components',
+          ['Avatar', 'Badge', 'Button', 'Card', 'ChatInput', 'Dialog', 'Input', 'MenuItem', 'Select', 'Sidebar', 'Switch', 'Tab', 'Tag', 'TextField', 'Toast', 'Tooltip'],
+          '*',
+        ],
       },
     },
   },

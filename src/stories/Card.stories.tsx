@@ -1,11 +1,12 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { colors } from '../specs';
 import { Card } from '../components/Card';
 import { Button } from '../components/Button';
 import { Trash2, ArrowDownToLine, FolderInput, Check } from '../icons';
 
 const meta: Meta<typeof Card> = {
-  title: 'Components/Data Display/Card',
+  title: 'Components/Card',
   component: Card,
   parameters: {
     layout: 'centered',
@@ -439,7 +440,7 @@ const InteractiveDemo = () => {
                 variant="secondary"
                 size="s"
                 showLeftIcon
-                leftIcon={<Trash2 className="size-4" color="#5E49D6" />}
+                leftIcon={<Trash2 className="size-4" color={colors.iconPrimary} />}
               >
                 Delete
               </Button>
@@ -447,7 +448,7 @@ const InteractiveDemo = () => {
                 variant="secondary"
                 size="s"
                 showLeftIcon
-                leftIcon={<ArrowDownToLine className="size-4" color="#5E49D6" />}
+                leftIcon={<ArrowDownToLine className="size-4" color={colors.iconPrimary} />}
               >
                 Download
               </Button>
@@ -455,7 +456,7 @@ const InteractiveDemo = () => {
                 variant="secondary"
                 size="s"
                 showLeftIcon
-                leftIcon={<FolderInput className="size-4" color="#5E49D6" />}
+                leftIcon={<FolderInput className="size-4" color={colors.iconPrimary} />}
               >
                 Move
               </Button>
@@ -463,7 +464,7 @@ const InteractiveDemo = () => {
                 variant="primary"
                 size="s"
                 showLeftIcon
-                leftIcon={<Check className="size-4" color="#FFFFFF" />}
+                leftIcon={<Check className="size-4" color={colors.white} />}
                 onClick={() => setSelectedIds(new Set())}
               >
                 Done

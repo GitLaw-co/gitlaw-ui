@@ -3,7 +3,7 @@ import { Tab, Tabs } from '../components/Tab';
 
 // Tab Stories
 const tabMeta: Meta<typeof Tab> = {
-  title: 'Components/Navigation/Tab',
+  title: 'Components/Tab',
   component: Tab,
   parameters: {
     layout: 'centered',

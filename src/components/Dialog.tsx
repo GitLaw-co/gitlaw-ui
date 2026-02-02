@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon } from './Icon';
 import { Button } from './Button';
-import { dialogTailwindClasses } from '../specs';
+import { dialogTailwindClasses, colors } from '../specs';
 
 export interface DialogProps {
   /** Dialog title */
@@ -53,7 +53,7 @@ export const Dialog: React.FC<DialogProps> = ({
             onClick={onClose}
             className={dialogTailwindClasses.closeButton}
           >
-            <Icon name="x" className={dialogTailwindClasses.closeIcon} color="#1b1b1f" />
+            <Icon name="x" className={dialogTailwindClasses.closeIcon} color={colors.textPrimary} />
           </button>
         )}
       </div>
@@ -70,7 +70,7 @@ export const Dialog: React.FC<DialogProps> = ({
           variant="outline"
           size="m"
           showLeftIcon
-          leftIcon={<Icon name="x" className={dialogTailwindClasses.buttonIcon} color="#5E49D6" />}
+          leftIcon={<Icon name="x" className={dialogTailwindClasses.buttonIcon} color={colors.iconPrimary} />}
           onClick={onSecondaryClick}
           className="flex-1"
         >
@@ -82,7 +82,7 @@ export const Dialog: React.FC<DialogProps> = ({
           variant="primary"
           size="m"
           showLeftIcon
-          leftIcon={<Icon name="check" className={dialogTailwindClasses.buttonIcon} color="#F7F6FF" />}
+          leftIcon={<Icon name="check" className={dialogTailwindClasses.buttonIcon} color={colors.iconNegative} />}
           onClick={onPrimaryClick}
           className="flex-1"
         >

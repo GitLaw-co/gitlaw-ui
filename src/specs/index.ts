@@ -6,6 +6,7 @@
  *
  * Usage:
  *   import { buttonSpecs, buttonTailwindClasses } from '../specs';
+ *   import { colors, iconColors } from '../specs';
  *
  * When updating components:
  * 1. First update the specs file based on Figma changes
@@ -15,3 +16,4 @@
 
 export * from './button.specs';
 export * from './dialog.specs';
+export * from './colors';

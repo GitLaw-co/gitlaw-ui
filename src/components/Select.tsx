@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Icon } from './Icon';
+import { colors } from '../specs';
 
 export type SelectSize = 'xs' | 's' | 'm' | 'l' | 'xl';
 export type SelectStatus = 'empty' | 'default';
@@ -150,7 +151,7 @@ export const Select: React.FC<SelectProps> = ({
       <div className={`flex items-center flex-1 min-w-0 ${sizeConfig.gap}`}>
         {showLeftIcon && (
           <span className="shrink-0 text-text-primary">
-            {leftIcon || <Icon name="user" className="size-6" color="#1b1b1f" />}
+            {leftIcon || <Icon name="user" className="size-6" color={colors.textPrimary} />}
           </span>
         )}
         <span className={`flex-1 truncate font-normal ${sizeConfig.text} ${textColorClass}`}>
@@ -158,7 +159,7 @@ export const Select: React.FC<SelectProps> = ({
         </span>
       </div>
       <span className="shrink-0 text-text-primary">
-        {rightIcon || <Icon name="chevron-down" className="size-6" color="#1b1b1f" />}
+        {rightIcon || <Icon name="chevron-down" className="size-6" color={colors.textPrimary} />}
       </span>
     </div>
   );

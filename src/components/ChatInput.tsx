@@ -1,5 +1,6 @@
 import React from 'react';
 import { Icon } from './Icon';
+import { colors } from '../specs';
 
 export type ChatInputStatus = 'active' | 'populated' | 'working';
 export type ChatInputSize = 'l' | 'm';
@@ -48,11 +49,11 @@ const defaultQuickActions: QuickAction[] = [
 const QuickActionIcon: React.FC<{ icon: string }> = ({ icon }) => {
   switch (icon) {
     case 'draft':
-      return <Icon name="file-plus" className="size-4" color="#5E49D6" />;
+      return <Icon name="file-plus" className="size-4" color={colors.iconPrimary} />;
     case 'review':
-      return <Icon name="file-search" className="size-4" color="#5E49D6" />;
+      return <Icon name="file-search" className="size-4" color={colors.iconPrimary} />;
     case 'summarize':
-      return <Icon name="align-left" className="size-4" color="#5E49D6" />;
+      return <Icon name="align-left" className="size-4" color={colors.iconPrimary} />;
     default:
       return null;
   }
@@ -102,7 +103,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
             onClick={onStopClick}
             className="ml-auto p-1 hover:bg-secondary rounded transition-colors"
           >
-            <Icon name="square" className="size-6" color="#5E49D6" />
+            <Icon name="square" className="size-6" color={colors.iconPrimary} />
           </button>
         </div>
       </div>
@@ -145,7 +146,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
               p-1 rounded transition-colors shrink-0
             "
           >
-            <Icon name="arrow-up" className="size-6" color="#F7F6FF" />
+            <Icon name="arrow-up" className="size-6" color={colors.iconNegative} />
           </button>
         )}
       </div>
@@ -159,14 +160,14 @@ export const ChatInput: React.FC<ChatInputProps> = ({
             onClick={onAttachmentClick}
             className="p-1 hover:bg-secondary rounded transition-colors"
           >
-            <Icon name="paperclip" className="size-6" color="#5E49D6" />
+            <Icon name="paperclip" className="size-6" color={colors.iconPrimary} />
           </button>
           <button
             type="button"
             onClick={onSettingsClick}
             className="p-1 hover:bg-secondary rounded transition-colors"
           >
-            <Icon name="settings-2" className="size-6" color="#5E49D6" />
+            <Icon name="settings-2" className="size-6" color={colors.iconPrimary} />
           </button>
         </div>
 

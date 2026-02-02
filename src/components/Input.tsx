@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Icon } from './Icon';
+import { colors } from '../specs';
 
 export type InputSize = 'xs' | 's' | 'm' | 'l' | 'xl';
 export type InputStatus = 'empty' | 'populated' | 'active';
@@ -124,7 +125,7 @@ export const Input: React.FC<InputProps> = ({
       >
         {showLeftIcon && (
           <span className="shrink-0 text-text-primary">
-            {leftIcon || <Icon name="search" className="size-6" color="#1b1b1f" />}
+            {leftIcon || <Icon name="search" className="size-6" color={colors.textPrimary} />}
           </span>
         )}
         <input
@@ -148,7 +149,7 @@ export const Input: React.FC<InputProps> = ({
             onClick={handleClear}
             className="shrink-0 text-text-primary hover:text-text-secondary transition-colors"
           >
-            {rightIcon || <Icon name="x" className="size-6" color="#1b1b1f" />}
+            {rightIcon || <Icon name="x" className="size-6" color={colors.textPrimary} />}
           </button>
         )}
       </div>

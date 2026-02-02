@@ -1,5 +1,6 @@
 import React from 'react';
 import { Icon } from './Icon';
+import { colors } from '../specs';
 
 export type MenuItemLeftElement = 'icon' | 'avatar' | 'clause' | 'select' | 'mini-users';
 
@@ -58,7 +59,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
 
     switch (leftElement) {
       case 'icon':
-        return leftIcon || <Icon name="circle-dashed" className="size-6" color="#1b1b1f" />;
+        return leftIcon || <Icon name="circle-dashed" className="size-6" color={colors.textPrimary} />;
 
       case 'avatar':
         return (
@@ -74,7 +75,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
       case 'clause':
         return (
           <div className="size-8 rounded-full bg-backgrounds-tag-background flex items-center justify-center shrink-0">
-            <Icon name="info" className="size-6" color="#15803d" />
+            <Icon name="info" className="size-6" color={colors.positive} />
           </div>
         );
 
@@ -86,7 +87,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
               ${selected ? 'bg-primary border-primary' : 'bg-white border-secondary'}
             `}
           >
-            {selected && <Icon name="check" className="size-3" color="#f7f6ff" />}
+            {selected && <Icon name="check" className="size-3" color={colors.iconNegative} />}
           </div>
         );
 
@@ -137,13 +138,13 @@ export const MenuItem: React.FC<MenuItemProps> = ({
 
       {showRightElement && (
         <div className="relative flex items-center justify-end min-h-6 shrink-0">
-          <Icon name="check" className="size-6" color="#5e49d6" />
+          <Icon name="check" className="size-6" color={colors.iconPrimary} />
         </div>
       )}
 
       {showTick && (
         <div className="absolute -top-1 -right-1 bg-primary rounded p-1 flex items-center justify-center">
-          <Icon name="check" className="size-6" color="#f7f6ff" />
+          <Icon name="check" className="size-6" color={colors.iconNegative} />
         </div>
       )}
     </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Icon } from './Icon';
+import { colors } from '../specs';
 
 export type ToastVariant = 'default' | 'success' | 'error' | 'warning';
 
@@ -54,7 +55,7 @@ export const Toast: React.FC<ToastProps> = ({
             transition-colors shrink-0
           "
         >
-          <Icon name="check" className="size-6" color="#F7F6FF" />
+          <Icon name="check" className="size-6" color={colors.iconNegative} />
           <span>{actionLabel}</span>
         </button>
       )}
