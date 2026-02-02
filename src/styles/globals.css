@@ -41,6 +41,11 @@
   /* Active States */
   --active-border: #5e49d6;
 
+  /* Illustration Colors (themeable for dark mode) */
+  --color-illustration-primary: #382C80;    /* purple/900 - main/dark strokes */
+  --color-illustration-secondary: #7F72FF;  /* purple/500 - lighter accents */
+  --color-illustration-base: #FFFFFF;       /* white - base/background fills */
+
   /* Spacing */
   --xs: 4px;
   --s: 4px;
