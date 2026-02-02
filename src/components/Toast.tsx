@@ -33,7 +33,7 @@ export const Toast: React.FC<ToastProps> = ({
   return (
     <div
       className={`
-        bg-primary rounded-lg shadow-[0px_10px_40px_0px_rgba(0,0,0,0.05)]
+        bg-primary rounded-lg shadow-card
         flex items-center gap-4 px-4 py-2
         ${className}
       `}

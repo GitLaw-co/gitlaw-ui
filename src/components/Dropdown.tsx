@@ -41,7 +41,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
       className={`
         w-[220px] max-w-[360px] p-2 rounded-lg
         bg-card
-        shadow-[0px_10px_40px_0px_rgba(0,0,0,0.05)]
+        shadow-card
         flex flex-col gap-px
         ${className}
       `}

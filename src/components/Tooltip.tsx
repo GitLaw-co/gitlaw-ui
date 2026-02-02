@@ -68,7 +68,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
       {isVisible && (
         <div
           className={`
-            absolute z-50 rounded-lg shadow-[0px_10px_40px_0px_rgba(0,0,0,0.05)]
+            absolute z-50 rounded-lg shadow-card
             flex items-center whitespace-nowrap
             ${bg} ${padding} ${positionClasses}
           `}

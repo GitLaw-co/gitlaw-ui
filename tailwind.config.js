@@ -166,6 +166,9 @@ export default {
         'gitlaw-m': '8px',
         'gitlaw-full': '1000px',
       },
+      boxShadow: {
+        'card': '0px 10px 40px 0px rgba(0, 0, 0, 0.05)',
+      },
     },
   },
   plugins: [require('@tailwindcss/container-queries')],

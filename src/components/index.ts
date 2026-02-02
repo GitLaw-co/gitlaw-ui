@@ -54,3 +54,6 @@ export type { EditorHeaderProps } from './EditorHeader';
 
 export { EditorToolbar } from './EditorToolbar';
 export type { EditorToolbarProps, EditorToolbarSize, EditorToolbarStatus } from './EditorToolbar';
+
+export { Dropdown } from './Dropdown';
+export type { DropdownProps, DropdownItem } from './Dropdown';

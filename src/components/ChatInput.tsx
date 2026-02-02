@@ -88,7 +88,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
       <div
         className={`
           bg-white border border-border ${roundedClass}
-          shadow-[0px_10px_40px_0px_rgba(0,0,0,0.05)]
+          shadow-card
           flex flex-col ${paddingClass}
           w-full max-w-[624px]
           ${className}
@@ -115,7 +115,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
     <div
       className={`
         bg-white ${roundedClass}
-        shadow-[0px_10px_40px_0px_rgba(0,0,0,0.05)]
+        shadow-card
         flex flex-col ${gapClass} ${paddingClass}
         w-full max-w-[624px]
         ${className}
