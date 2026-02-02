@@ -28,16 +28,33 @@ const preview: Preview = {
       ],
     },
     options: {
-      storySort: {
-        order: [
+      storySort: (a, b) => {
+        const order = [
           'Introduction',
           'Foundations',
-          ['Colors', 'Typography', 'Spacing', 'Icons', 'Illustrations'],
           'Components',
-          ['Avatar', 'Badge', 'Button', 'Card', 'ChatInput', 'Dialog', 'Input', 'MenuItem', 'Select', 'Sidebar', 'Switch', 'Tab', 'Tag', 'TextField', 'Toast', 'Tooltip'],
           'Changelog',
-          '*',
-        ],
+        ];
+
+        const aTitle = a.title || a.id;
+        const bTitle = b.title || b.id;
+
+        // Get the top-level category
+        const aCategory = aTitle.split('/')[0];
+        const bCategory = bTitle.split('/')[0];
+
+        const aIndex = order.indexOf(aCategory);
+        const bIndex = order.indexOf(bCategory);
+
+        // If both are in order array, sort by order
+        if (aIndex !== -1 && bIndex !== -1) {
+          return aIndex - bIndex;
+        }
+        // If only one is in order, prioritize it
+        if (aIndex !== -1) return -1;
+        if (bIndex !== -1) return 1;
+        // Otherwise alphabetical
+        return aTitle.localeCompare(bTitle);
       },
     },
   },
