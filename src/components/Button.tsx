@@ -55,7 +55,14 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   const isIcon = variant === 'icon';
   const isDisabled = variant === 'disabled' || disabled;
-  const iconColor = ['primary', 'destructive'].includes(variant) ? colors.textButtonNegative : colors.textButton;
+
+  // Determine icon color based on variant
+  const getIconColor = () => {
+    if (isDisabled) return colors.iconDisabled;
+    if (['primary', 'destructive'].includes(variant)) return colors.textButtonNegative;
+    return colors.textButton;
+  };
+  const iconColor = getIconColor();
 
   const baseClasses = 'inline-flex items-center justify-center rounded font-normal transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50';
   const sizeClass = isIcon ? iconSizeClasses[size] : sizeClasses[size];

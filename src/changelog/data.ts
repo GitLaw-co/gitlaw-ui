@@ -1,5 +1,5 @@
 // Auto-generated changelog from git commits
-// Generated: 2026-02-02T11:00:55.147Z
+// Generated: 2026-02-02T12:29:58.734Z
 // Run: node scripts/generate-changelog.js
 
 export interface ChangelogEntry {
@@ -14,6 +14,34 @@ export const changelog: ChangelogEntry[] = [
   {
     "date": "2026-02-02",
     "commits": [
+      {
+        "hash": "63074fd",
+        "message": "Replace hardcoded hex colors with design system constants"
+      },
+      {
+        "hash": "d2a6944",
+        "message": "Update illustrations to use CSS custom properties"
+      },
+      {
+        "hash": "4bdd660",
+        "message": "Add signature icon to icon set"
+      },
+      {
+        "hash": "c8e358b",
+        "message": "Clean up sidebar sort configuration"
+      },
+      {
+        "hash": "26388a6",
+        "message": "Fix sidebar sort order - move Changelog to bottom"
+      },
+      {
+        "hash": "717a81d",
+        "message": "Move Changelog to bottom of sidebar"
+      },
+      {
+        "hash": "3500fdb",
+        "message": "Update changelog data"
+      },
       {
         "hash": "ac3edbf",
         "message": "Add auto-generated changelog from Git commits"
