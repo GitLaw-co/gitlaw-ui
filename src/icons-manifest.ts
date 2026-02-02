@@ -1,5 +1,5 @@
 // Auto-generated manifest of all icons
-// Total: 1474 icons across 25 categories
+// Total: 1475 icons across 25 categories
 
 export interface IconInfo {
   id: string;
@@ -11824,6 +11824,18 @@ export const icons: IconInfo[] = [
     "name": "Signal",
     "keywords": [
       "signal"
+    ],
+    "category": "General"
+  },
+  {
+    "id": "signature",
+    "filename": "signature.svg",
+    "name": "Signature",
+    "keywords": [
+      "signature",
+      "sign",
+      "autograph",
+      "handwriting"
     ],
     "category": "General"
   },
@@ -24603,6 +24615,18 @@ export const iconsByCategory: Record<IconCategory, IconInfo[]> = {
       "name": "Signal",
       "keywords": [
         "signal"
+      ],
+      "category": "General"
+    },
+    {
+      "id": "signature",
+      "filename": "signature.svg",
+      "name": "Signature",
+      "keywords": [
+        "signature",
+        "sign",
+        "autograph",
+        "handwriting"
       ],
       "category": "General"
     },
