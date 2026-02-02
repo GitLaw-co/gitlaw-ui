@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "build-storybook": "node scripts/generate-changelog.js && storybook build",
+    "changelog": "node scripts/generate-changelog.js",
     "deploy": "npm run build-storybook && gh-pages -d storybook-static"
   },
   "dependencies": {
