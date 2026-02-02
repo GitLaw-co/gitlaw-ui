@@ -1,0 +1,1 @@
+const F={primary:"#5E49D6",destructive:"#E11D48",alert:"#F97316",positive:"#15803D",textPrimary:"#1B1B1F",iconPrimary:"#5E49D6",iconSecondary:"#989898",iconDisabled:"#CFC8F3",iconNegative:"#F7F6FF",white:"#FFFFFF"};export{F as c};

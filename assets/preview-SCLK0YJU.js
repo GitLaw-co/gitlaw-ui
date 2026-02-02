@@ -1,0 +1,1 @@
+const e={parameters:{actions:{argTypesRegex:"^on[A-Z].*"},controls:{matchers:{color:/(background|color)$/i,date:/Date$/i}},backgrounds:{default:"light",values:[{name:"light",value:"#f7f6ff"},{name:"dark",value:"#1b1b1f"},{name:"white",value:"#ffffff"}]},options:{storySort:{order:["Introduction","Foundations","Components","Changelog"]}}}};export{e as default};
