@@ -122,13 +122,14 @@ import { colors } from '../specs';
 
 ## Deployment
 
-Always deploy after making changes:
+**Vercel (automatic):**
+- Pushes to `main` branch auto-deploy to Vercel
+- Live at: https://gitlaw-ui.vercel.app
 
+**GitHub Pages (manual):**
 ```bash
 npm run deploy
 ```
-
-This builds Storybook and deploys to GitHub Pages.
 
 ## Git Workflow
 
