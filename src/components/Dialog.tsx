@@ -70,24 +70,24 @@ export const Dialog: React.FC<DialogProps> = ({
 
       {/* Button container */}
       <div className="flex items-center justify-end gap-2 py-2">
-        {/* Secondary button (outline) */}
+        {/* Secondary button (outline) - Dialog uses 24px icons per Figma */}
         <Button
           variant="outline"
           size="m"
           showLeftIcon
-          leftIcon={<Icon name="x" className="size-4" color="#5E49D6" />}
+          leftIcon={<Icon name="x" className="size-6" color="#5E49D6" />}
           onClick={onSecondaryClick}
           className="flex-1"
         >
           {secondaryLabel}
         </Button>
 
-        {/* Primary button (filled) */}
+        {/* Primary button (filled) - Dialog uses 24px icons per Figma */}
         <Button
           variant="primary"
           size="m"
           showLeftIcon
-          leftIcon={<Icon name="check" className="size-4" color="#F7F6FF" />}
+          leftIcon={<Icon name="check" className="size-6" color="#F7F6FF" />}
           onClick={onPrimaryClick}
           className="flex-1"
         >
