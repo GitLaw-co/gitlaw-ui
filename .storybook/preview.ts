@@ -35,6 +35,7 @@ const preview: Preview = {
           ['Colors', 'Typography', 'Spacing', 'Icons', 'Illustrations'],
           'Components',
           ['Avatar', 'Badge', 'Button', 'Card', 'ChatInput', 'Dialog', 'Input', 'MenuItem', 'Select', 'Sidebar', 'Switch', 'Tab', 'Tag', 'TextField', 'Toast', 'Tooltip'],
+          'Changelog',
           '*',
         ],
       },
