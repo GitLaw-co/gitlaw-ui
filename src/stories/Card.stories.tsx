@@ -439,7 +439,7 @@ const InteractiveDemo = () => {
                 variant="secondary"
                 size="s"
                 showLeftIcon
-                leftIcon={<Trash2 className="size-6" color="#5E49D6" />}
+                leftIcon={<Trash2 className="size-4" color="#5E49D6" />}
               >
                 Delete
               </Button>
@@ -447,7 +447,7 @@ const InteractiveDemo = () => {
                 variant="secondary"
                 size="s"
                 showLeftIcon
-                leftIcon={<ArrowDownToLine className="size-6" color="#5E49D6" />}
+                leftIcon={<ArrowDownToLine className="size-4" color="#5E49D6" />}
               >
                 Download
               </Button>
@@ -455,7 +455,7 @@ const InteractiveDemo = () => {
                 variant="secondary"
                 size="s"
                 showLeftIcon
-                leftIcon={<FolderInput className="size-6" color="#5E49D6" />}
+                leftIcon={<FolderInput className="size-4" color="#5E49D6" />}
               >
                 Move
               </Button>
@@ -463,7 +463,7 @@ const InteractiveDemo = () => {
                 variant="primary"
                 size="s"
                 showLeftIcon
-                leftIcon={<Check className="size-6" color="#FFFFFF" />}
+                leftIcon={<Check className="size-4" color="#FFFFFF" />}
                 onClick={() => setSelectedIds(new Set())}
               >
                 Done

@@ -75,7 +75,7 @@ export const Dialog: React.FC<DialogProps> = ({
           variant="outline"
           size="m"
           showLeftIcon
-          leftIcon={<Icon name="x" className="size-5" color="#5E49D6" />}
+          leftIcon={<Icon name="x" className="size-4" color="#5E49D6" />}
           onClick={onSecondaryClick}
           className="flex-1"
         >
@@ -87,7 +87,7 @@ export const Dialog: React.FC<DialogProps> = ({
           variant="primary"
           size="m"
           showLeftIcon
-          leftIcon={<Icon name="check" className="size-5" color="#F7F6FF" />}
+          leftIcon={<Icon name="check" className="size-4" color="#F7F6FF" />}
           onClick={onPrimaryClick}
           className="flex-1"
         >
