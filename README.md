@@ -144,7 +144,119 @@ src/
 - [Figma UI-v3 Library](https://www.figma.com/design/czek1GvIeHMJnnvc3aqWHK/UI-v3)
 - [Figma Typography & Icons](https://www.figma.com/design/EhLq6bat0Gx4dRJpYGFGw9/Typography---Icons)
 
-## Contributing
+## Contributing with Claude Code
+
+This project is designed for AI-assisted development with Claude Code. Follow these steps to get set up:
+
+### 1. Install Claude Code
+
+```bash
+# Install Claude Code CLI globally
+npm install -g @anthropic-ai/claude-code
+
+# Verify installation
+claude --version
+```
+
+Or download from [claude.ai/code](https://claude.ai/code)
+
+### 2. Clone and Open Project
+
+```bash
+# Clone the repository
+git clone https://github.com/GitLaw-co/gitlaw-ui.git
+cd gitlaw-ui
+
+# Install dependencies
+npm install
+
+# Open with Claude Code
+claude
+```
+
+### 3. Set Up Figma MCP (Model Context Protocol)
+
+Figma MCP allows Claude to read designs directly from Figma. This enables design-to-code workflow.
+
+#### Step 1: Get Figma Access Token
+
+1. Go to [Figma Account Settings](https://www.figma.com/settings)
+2. Scroll to **Personal access tokens**
+3. Click **Generate new token**
+4. Give it a name (e.g., "Claude Code")
+5. Copy the token (you won't see it again!)
+
+#### Step 2: Configure Figma MCP in Claude Code
+
+Add to your Claude Code MCP config file (`~/.claude/mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "figma": {
+      "command": "npx",
+      "args": ["-y", "figma-mcp", "--figma-api-key=YOUR_FIGMA_TOKEN"]
+    }
+  }
+}
+```
+
+Replace `YOUR_FIGMA_TOKEN` with your actual token.
+
+#### Step 3: Restart Claude Code
+
+```bash
+# Exit and restart Claude Code
+claude
+```
+
+#### Step 4: Test Figma Connection
+
+In Claude Code, try:
+```
+Can you read this Figma file? https://www.figma.com/design/czek1GvIeHMJnnvc3aqWHK/UI-v3
+```
+
+### 4. Workflow: Adding Components
+
+Once set up, you can ask Claude to:
+
+1. **Read Figma designs**: "Look at this Figma frame and implement it"
+2. **Add components**: "Add this button variant from Figma"
+3. **Update styles**: "Update the colors to match Figma"
+4. **Add icons/illustrations**: Copy SVG to `Assets/` folder, then ask Claude to add it
+
+Example workflow:
+```
+# In Claude Code:
+"I've added an illustration to Assets/Zest Illustration Set/new-illustration.svg - please add it to the Storybook"
+```
+
+### 5. Key Commands
+
+| Task | Command |
+|------|---------|
+| Start Storybook | `npm run storybook` |
+| Deploy to GitHub Pages | `npm run deploy` |
+| Update illustration colors | `node scripts/update-illustration-colors.js` |
+
+### 6. Git Workflow
+
+```bash
+# Create feature branch
+git checkout -b feature/your-feature
+
+# Make changes with Claude Code...
+
+# Commit and push
+git add .
+git commit -m "Add new feature"
+git push origin feature/your-feature
+
+# Create Pull Request on GitHub
+```
+
+## Traditional Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/new-component`)
