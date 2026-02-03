@@ -48,10 +48,19 @@ Prototypes/        ← 📋 Planned
 | ChatInput | ✅ Stable | AI chat interface |
 | Icon | ✅ Stable | 1,475 icons with color support |
 
+## Setup
+
+```bash
+npm install
+```
+
+Requires Node.js 18+.
+
 ## Quick Commands
 
 | Task | Command |
 |------|---------|
+| Install dependencies | `npm install` |
 | Start Storybook | `npm run storybook` |
 | Deploy to GitHub Pages | `npm run deploy` |
 | Update illustration colors | `node scripts/update-illustration-colors.js` |
