@@ -157,14 +157,11 @@ export const Input: React.FC<InputProps> = ({
   const sizeConfig = sizeClasses[size];
   const contextConfig = contextClasses[context];
 
-  // Document context: always show left icon, never show label, hug content with max-width
+  // Document context: always show left icon, never show label
   const isDocumentContext =
     context === "document-empty" || context === "document-filled";
 
-  // Document context always hugs, otherwise respect align prop
-  const isHug = isDocumentContext || align === "hug";
-
-  const widthClass = isHug ? "w-auto" : "w-full";
+  const widthClass = align === "fill" ? "w-full" : "w-auto";
   const shouldShowLabel = showLabel && !isDocumentContext;
   const shouldShowLeftIcon = showLeftIcon || isDocumentContext;
 
@@ -175,7 +172,7 @@ export const Input: React.FC<InputProps> = ({
   const iconClass = sizeConfig.icon;
 
   return (
-    <div className={`${isHug ? "inline-flex" : "flex"} flex-col gap-2 ${widthClass} ${className}`}>
+    <div className={`flex flex-col gap-2 ${widthClass} ${className}`}>
       {shouldShowLabel && (
         <label className={`font-semibold text-foreground ${sizeConfig.label}`}>
           {label}
@@ -183,7 +180,7 @@ export const Input: React.FC<InputProps> = ({
       )}
       <div
         className={`
-          ${isHug ? "inline-flex" : "flex"} items-center rounded overflow-hidden
+          flex items-center rounded overflow-hidden
           border transition-colors
           ${contextConfig.bg}
           ${sizeConfig.container}
@@ -210,9 +207,8 @@ export const Input: React.FC<InputProps> = ({
           onBlur={() => setIsFocused(false)}
           placeholder={placeholder}
           disabled={disabled}
-          size={isHug ? Math.max(value?.length || 0, placeholder?.length || 0, 1) : undefined}
           className={`
-            ${isHug ? "" : "flex-1"} bg-transparent outline-none font-normal
+            flex-1 bg-transparent outline-none font-normal
             text-foreground placeholder:text-subtle
             ${sizeConfig.input}
             ${disabled ? "cursor-not-allowed" : ""}
