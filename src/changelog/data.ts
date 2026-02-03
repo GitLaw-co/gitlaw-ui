@@ -1,5 +1,5 @@
 // Auto-generated changelog from git commits
-// Generated: 2026-02-03T14:05:08.552Z
+// Generated: 2026-02-03T16:30:45.165Z
 // Run: node scripts/generate-changelog.js
 
 export interface ChangelogEntry {
@@ -14,6 +14,38 @@ export const changelog: ChangelogEntry[] = [
   {
     "date": "2026-02-03",
     "commits": [
+      {
+        "hash": "350a7cf",
+        "message": "Various component updates and new EditorPaper/EditorSection components"
+      },
+      {
+        "hash": "d890500",
+        "message": "Add Node.js version constraints"
+      },
+      {
+        "hash": "43ef064",
+        "message": "Document MDX table support addon requirement in CLAUDE.md"
+      },
+      {
+        "hash": "4adc218",
+        "message": "Add setup section with npm install to CLAUDE.md"
+      },
+      {
+        "hash": "1271446",
+        "message": "Clarify Figma MCP 403 error handling in CLAUDE.md"
+      },
+      {
+        "hash": "96ff739",
+        "message": "Add Figma MCP 403 auth timeout note to CLAUDE.md"
+      },
+      {
+        "hash": "bbce3bb",
+        "message": "Add animated rotating placeholders to ChatInput"
+      },
+      {
+        "hash": "1d15c98",
+        "message": "Remove custom icons, fix Card selection ring, add ChatInput tooltips"
+      },
       {
         "hash": "94ef3f6",
         "message": "Disable Vercel deployments for gh-pages branch"
@@ -176,43 +208,6 @@ export const changelog: ChangelogEntry[] = [
       {
         "hash": "aef3894",
         "message": "Add Foundations section with Icons and Illustrations galleries"
-      },
-      {
-        "hash": "c764775",
-        "message": "Add Vercel deployment configuration"
-      },
-      {
-        "hash": "b9bd21f",
-        "message": "Update action header with Button components and icons"
-      },
-      {
-        "hash": "5bcb6e0",
-        "message": "Add new components and update Card with selection/rubber band"
-      },
-      {
-        "hash": "febe67d",
-        "message": "Fix folder card padding for responsive breakpoint"
-      },
-      {
-        "hash": "f4a4896",
-        "message": "Add Card component with file, template, and folder variants"
-      }
-    ]
-  },
-  {
-    "date": "2026-01-29",
-    "commits": [
-      {
-        "hash": "8783728",
-        "message": "Add Tooltip component and integrate with Sidebar"
-      },
-      {
-        "hash": "588785c",
-        "message": "Fix Sidebar layout and styling"
-      },
-      {
-        "hash": "6987319",
-        "message": "Initial commit: GitLaw UI Storybook"
       }
     ]
   }
