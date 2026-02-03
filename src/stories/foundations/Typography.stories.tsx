@@ -69,42 +69,42 @@ const TypographyPage = () => {
             Font Families
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-card p-6 rounded-gitlaw-m border border-border">
+            <div className="bg-card p-6 rounded-gitlaw-m border border-border overflow-hidden">
               <p className="text-xs text-subtle mb-2 font-mono">font-sans</p>
               <p className="text-2xl font-sans text-foreground mb-2">DM Sans</p>
               <p className="text-sm text-subtle font-sans">
                 Primary font for all UI elements, body text, and labels.
               </p>
               <div className="mt-4 pt-4 border-t border-border">
-                <p className="font-sans text-lg">
+                <p className="font-sans text-base break-all">
                   ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />
                   abcdefghijklmnopqrstuvwxyz<br />
                   0123456789
                 </p>
               </div>
             </div>
-            <div className="bg-card p-6 rounded-gitlaw-m border border-border">
+            <div className="bg-card p-6 rounded-gitlaw-m border border-border overflow-hidden">
               <p className="text-xs text-subtle mb-2 font-mono">font-serif</p>
               <p className="text-2xl font-serif text-foreground mb-2">DM Serif Text</p>
               <p className="text-sm text-subtle font-sans">
                 Display font for marketing headings and special emphasis.
               </p>
               <div className="mt-4 pt-4 border-t border-border">
-                <p className="font-serif text-lg">
+                <p className="font-serif text-base break-all">
                   ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />
                   abcdefghijklmnopqrstuvwxyz<br />
                   0123456789
                 </p>
               </div>
             </div>
-            <div className="bg-card p-6 rounded-gitlaw-m border border-border">
+            <div className="bg-card p-6 rounded-gitlaw-m border border-border overflow-hidden">
               <p className="text-xs text-subtle mb-2 font-mono">font-document</p>
               <p className="text-2xl font-document text-foreground mb-2">Merriweather</p>
               <p className="text-sm text-subtle font-sans">
                 Document font for legal documents and contracts in the editor.
               </p>
               <div className="mt-4 pt-4 border-t border-border">
-                <p className="font-document text-lg">
+                <p className="font-document text-base break-all">
                   ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />
                   abcdefghijklmnopqrstuvwxyz<br />
                   0123456789
