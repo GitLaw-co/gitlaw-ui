@@ -42,7 +42,7 @@ const TextColorSwatch: React.FC<TextColorSwatchProps> = ({ name, value, textClas
     <div
       className={`w-full h-16 rounded-gitlaw-m border border-border ${bgClassName} flex items-center justify-center`}
     >
-      <span className={`text-lg font-semibold ${textClassName}`}>Aa</span>
+      <span className="text-lg font-semibold" style={{ color: value }}>Aa</span>
     </div>
     <p className="text-sm font-medium mt-2 text-foreground">
       {name}
@@ -218,12 +218,12 @@ const ColorsPage = () => {
           <div className="mb-10">
             <h3 className="text-lg font-semibold text-foreground mb-4">Text</h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4">
-              <TextColorSwatch name="Primary" value="#1B1B1F" textClassName="text-text-primary" />
-              <TextColorSwatch name="Secondary" value="#989898" textClassName="text-text-secondary" />
-              <TextColorSwatch name="Negative" value="#F7F6FF" textClassName="text-text-negative" bgClassName="bg-primary" />
-              <TextColorSwatch name="Button" value="#5E49D6" textClassName="text-text-button" />
-              <TextColorSwatch name="Button Negative" value="#F7F6FF" textClassName="text-text-button-negative" bgClassName="bg-primary" />
-              <TextColorSwatch name="Button Disabled" value="#CFC8F3" textClassName="text-text-button-disabled" />
+              <TextColorSwatch name="Primary" value="#1B1B1F" textClassName="" />
+              <TextColorSwatch name="Secondary" value="#989898" textClassName="" />
+              <TextColorSwatch name="Negative" value="#F7F6FF" textClassName="" bgClassName="bg-primary" />
+              <TextColorSwatch name="Button" value="#5E49D6" textClassName="" />
+              <TextColorSwatch name="Button Negative" value="#F7F6FF" textClassName="" bgClassName="bg-primary" />
+              <TextColorSwatch name="Button Disabled" value="#CFC8F3" textClassName="" />
             </div>
           </div>
         </div>
