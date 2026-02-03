@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "GitLaw UI Component Library",
   "main": "index.js",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "build-storybook": "node scripts/generate-changelog.js && storybook build",
