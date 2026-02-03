@@ -11,6 +11,8 @@ export type MenuItemLeftElement =
   | "select"
   | "mini-users";
 
+export type MenuItemWidth = "fill" | "hug";
+
 export interface MenuItemProps {
   /** Primary text content */
   primaryText?: string;
@@ -40,6 +42,8 @@ export interface MenuItemProps {
   onClick?: () => void;
   /** Additional CSS classes */
   className?: string;
+  /** Width behavior - fill container or hug content */
+  width?: MenuItemWidth;
 
   // R Element props - all can be shown independently or combined
   /** Show label text in R element */
@@ -103,6 +107,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
   selected = false,
   onClick,
   className = "",
+  width = "hug",
   // R Element props
   showRLabel = false,
   rLabel = "Label",
@@ -127,6 +132,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
   showRTags = false,
   rTagLabel = "Label",
 }) => {
+  const widthClass = width === "fill" ? "w-full" : "w-fit";
   // Check if any R element is shown
   const hasRElement =
     showRLabel ||
@@ -214,7 +220,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
   return (
     <div
       className={`
-        relative flex items-center gap-2 min-h-12 p-3 w-[310px] cursor-pointer
+        relative flex items-center gap-2 min-h-12 p-3 ${widthClass} cursor-pointer
         ${className}
       `}
       onClick={onClick}

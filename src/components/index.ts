@@ -26,7 +26,7 @@ export { Switch } from "./Switch";
 export type { SwitchProps, SwitchSize } from "./Switch";
 
 export { MenuItem } from "./MenuItem";
-export type { MenuItemProps, MenuItemLeftElement } from "./MenuItem";
+export type { MenuItemProps, MenuItemLeftElement, MenuItemWidth } from "./MenuItem";
 
 export { Select } from "./Select";
 export type {

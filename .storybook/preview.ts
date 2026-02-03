@@ -63,6 +63,8 @@ const preview: Preview = {
             "Toast",
             "Tooltip",
           ],
+          "Prototypes",
+          ["DocumentMenuItem"],
           "Changelog",
         ],
       },
