@@ -1,11 +1,11 @@
-import React from 'react';
-import { Icon } from './Icon';
-import { Button } from './Button';
-import { Tooltip } from './Tooltip';
-import { colors } from '../specs';
+import React from "react";
+import { Icon } from "./Icon";
+import { Button } from "./Button";
+import { Tooltip } from "./Tooltip";
+import { colors } from "../specs";
 
-export type EditorToolbarSize = 'xs' | 's';
-export type EditorToolbarStatus = 'editing' | 'reviewing';
+export type EditorToolbarSize = "xs" | "s";
+export type EditorToolbarStatus = "editing" | "reviewing";
 
 export interface EditorToolbarProps {
   /** Toolbar size - xs for desktop, s for mobile (easier to tap) */
@@ -66,15 +66,15 @@ const ToolButton: React.FC<{
   disabled?: boolean;
 }> = ({ icon, label, onClick, size, isFirst = false, disabled = false }) => {
   // Map toolbar size to button size: xs -> xs, s -> s
-  const buttonSize = size === 'xs' ? 'xs' : 's';
+  const buttonSize = size === "xs" ? "xs" : "s";
   // Icon size matches button.specs: xs=12px, s=16px (iconOnlyIconSize)
-  const iconSize = size === 'xs' ? 'size-3' : 'size-4';
+  const iconSize = size === "xs" ? "size-3" : "size-4";
   // Icon color: black when enabled, secondary (grey) when disabled
   const iconColor = disabled ? colors.iconSecondary : colors.iconBlack;
 
   return (
     <Tooltip content={label} type="purple" position="bottom" size="s">
-      <div className={isFirst ? '' : 'border-l border-purple-200'}>
+      <div className={isFirst ? "" : "border-l border-purple-200"}>
         <Button
           variant="icon"
           size={buttonSize}
@@ -97,11 +97,11 @@ const ToolButtonWithDropdown: React.FC<{
   isFirst?: boolean;
 }> = ({ icon, label, onClick, size, isFirst = false }) => {
   // Container height: xs=24px, s=32px
-  const buttonHeight = size === 'xs' ? 'h-6' : 'h-8';
+  const buttonHeight = size === "xs" ? "h-6" : "h-8";
   // Icon size matches button.specs: xs=12px, s=16px
-  const iconSize = size === 'xs' ? 'size-3' : 'size-4';
+  const iconSize = size === "xs" ? "size-3" : "size-4";
   // Chevron: xs=10px, s=12px (slightly smaller than main icon)
-  const chevronSize = size === 'xs' ? 'size-2.5' : 'size-3';
+  const chevronSize = size === "xs" ? "size-2.5" : "size-3";
 
   return (
     <Tooltip content={label} type="purple" position="bottom" size="s">
@@ -110,11 +110,15 @@ const ToolButtonWithDropdown: React.FC<{
         className={`
           ${buttonHeight} flex items-center justify-center gap-0 px-1
           hover:bg-secondary/30 transition-colors rounded-none
-          ${isFirst ? '' : 'border-l border-purple-200'}
+          ${isFirst ? "" : "border-l border-purple-200"}
         `}
       >
         <Icon name={icon} className={iconSize} color={colors.iconBlack} />
-        <Icon name="chevron-down" className={chevronSize} color={colors.iconBlack} />
+        <Icon
+          name="chevron-down"
+          className={chevronSize}
+          color={colors.iconBlack}
+        />
       </button>
     </Tooltip>
   );
@@ -126,9 +130,9 @@ const TextStyleButton: React.FC<{
   size: EditorToolbarSize;
 }> = ({ onClick, size }) => {
   // Map toolbar size to button size
-  const buttonSize = size === 'xs' ? 'xs' : 's';
+  const buttonSize = size === "xs" ? "xs" : "s";
   // Chevron size matches button.specs iconSize: xs=12px, s=16px
-  const chevronSize = size === 'xs' ? 'size-3' : 'size-4';
+  const chevronSize = size === "xs" ? "size-3" : "size-4";
 
   return (
     <Button
@@ -136,7 +140,13 @@ const TextStyleButton: React.FC<{
       size={buttonSize}
       onClick={onClick}
       showRightIcon
-      rightIcon={<Icon name="chevron-down" className={chevronSize} color={colors.iconBlack} />}
+      rightIcon={
+        <Icon
+          name="chevron-down"
+          className={chevronSize}
+          color={colors.iconBlack}
+        />
+      }
       className="rounded-none text-foreground"
     >
       Normal text
@@ -154,8 +164,8 @@ const ToolGroup: React.FC<{
 );
 
 export const EditorToolbar: React.FC<EditorToolbarProps> = ({
-  size = 'xs',
-  status = 'editing',
+  size = "xs",
+  status = "editing",
   onUndo,
   undoDisabled = false,
   onRedo,
@@ -176,20 +186,20 @@ export const EditorToolbar: React.FC<EditorToolbarProps> = ({
   onHighlight,
   onSuggestEdits,
   onBackToEdit,
-  className = '',
+  className = "",
 }) => {
   // Button sizes based on Figma: xs=24px height, s=32px height
-  const buttonSize = size === 'xs' ? 'xs' : 's';
+  const buttonSize = size === "xs" ? "xs" : "s";
   // Icon size in buttons with text: xs=12px, s=16px (from button.specs.ts)
-  const buttonIconSize = size === 'xs' ? 'size-3' : 'size-4';
+  const buttonIconSize = size === "xs" ? "size-3" : "size-4";
 
-  if (status === 'reviewing') {
+  if (status === "reviewing") {
     // Match height to editing variant: xs=40px (h-10), s=48px (h-12)
-    const containerHeight = size === 'xs' ? 'h-10' : 'h-12';
+    const containerHeight = size === "xs" ? "h-10" : "h-12";
     // Text size: xs=12px (text-xs), s=14px (text-sm)
-    const reviewingTextSize = size === 'xs' ? 'text-xs' : 'text-sm';
+    const reviewingTextSize = size === "xs" ? "text-xs" : "text-sm";
     // Icon size: xs=16px, s=24px
-    const reviewingIconSize = size === 'xs' ? 'size-4' : 'size-6';
+    const reviewingIconSize = size === "xs" ? "size-4" : "size-6";
 
     return (
       <div
@@ -238,8 +248,21 @@ export const EditorToolbar: React.FC<EditorToolbarProps> = ({
       <div className="flex items-center gap-1">
         {/* Undo/Redo group */}
         <ToolGroup>
-          <ToolButton icon="undo-2" label="Undo" onClick={onUndo} size={size} isFirst disabled={undoDisabled} />
-          <ToolButton icon="redo-2" label="Redo" onClick={onRedo} size={size} disabled={redoDisabled} />
+          <ToolButton
+            icon="undo-2"
+            label="Undo"
+            onClick={onUndo}
+            size={size}
+            isFirst
+            disabled={undoDisabled}
+          />
+          <ToolButton
+            icon="redo-2"
+            label="Redo"
+            onClick={onRedo}
+            size={size}
+            disabled={redoDisabled}
+          />
         </ToolGroup>
 
         {/* Text style dropdown */}
@@ -249,31 +272,100 @@ export const EditorToolbar: React.FC<EditorToolbarProps> = ({
 
         {/* Text formatting group: B I U S */}
         <ToolGroup>
-          <ToolButton icon="bold" label="Bold" onClick={onBold} size={size} isFirst />
-          <ToolButton icon="italic" label="Italic" onClick={onItalic} size={size} />
-          <ToolButton icon="underline" label="Underline" onClick={onUnderline} size={size} />
-          <ToolButton icon="strikethrough" label="Strikethrough" onClick={onStrikethrough} size={size} />
+          <ToolButton
+            icon="bold"
+            label="Bold"
+            onClick={onBold}
+            size={size}
+            isFirst
+          />
+          <ToolButton
+            icon="italic"
+            label="Italic"
+            onClick={onItalic}
+            size={size}
+          />
+          <ToolButton
+            icon="underline"
+            label="Underline"
+            onClick={onUnderline}
+            size={size}
+          />
+          <ToolButton
+            icon="strikethrough"
+            label="Strikethrough"
+            onClick={onStrikethrough}
+            size={size}
+          />
         </ToolGroup>
 
         {/* Lists group */}
         <ToolGroup>
-          <ToolButton icon="list" label="Bullet list" onClick={onList} size={size} isFirst />
-          <ToolButton icon="list-ordered" label="Numbered list" onClick={onOrderedList} size={size} />
+          <ToolButton
+            icon="list"
+            label="Bullet list"
+            onClick={onList}
+            size={size}
+            isFirst
+          />
+          <ToolButton
+            icon="list-ordered"
+            label="Numbered list"
+            onClick={onOrderedList}
+            size={size}
+          />
         </ToolGroup>
 
         {/* Insert group: link, image, table, hr, quote */}
         <ToolGroup>
-          <ToolButton icon="link-2" label="Insert link" onClick={onLink} size={size} isFirst />
-          <ToolButton icon="image" label="Insert image" onClick={onImage} size={size} />
-          <ToolButton icon="table" label="Insert table" onClick={onTable} size={size} />
-          <ToolButton icon="minus" label="Horizontal rule" onClick={onHorizontalRule} size={size} />
-          <ToolButton icon="quote" label="Block quote" onClick={onQuote} size={size} />
+          <ToolButton
+            icon="link-2"
+            label="Insert link"
+            onClick={onLink}
+            size={size}
+            isFirst
+          />
+          <ToolButton
+            icon="image"
+            label="Insert image"
+            onClick={onImage}
+            size={size}
+          />
+          <ToolButton
+            icon="table"
+            label="Insert table"
+            onClick={onTable}
+            size={size}
+          />
+          <ToolButton
+            icon="minus"
+            label="Horizontal rule"
+            onClick={onHorizontalRule}
+            size={size}
+          />
+          <ToolButton
+            icon="quote"
+            label="Block quote"
+            onClick={onQuote}
+            size={size}
+          />
         </ToolGroup>
 
         {/* Code & highlight group */}
         <ToolGroup>
-          <ToolButton icon="code" label="Code" onClick={onCode} size={size} isFirst />
-          <ToolButtonWithDropdown icon="highlighter" label="Highlight" onClick={onHighlight} size={size} />
+          <ToolButton
+            icon="code"
+            label="Code"
+            onClick={onCode}
+            size={size}
+            isFirst
+          />
+          <ToolButtonWithDropdown
+            icon="highlighter"
+            label="Highlight"
+            onClick={onHighlight}
+            size={size}
+          />
         </ToolGroup>
       </div>
 

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-export type TooltipSize = 's' | 'm' | 'l';
-export type TooltipType = 'neutral' | 'purple';
-export type TooltipPosition = 'right' | 'top' | 'bottom' | 'left';
+export type TooltipSize = "s" | "m" | "l";
+export type TooltipType = "neutral" | "purple";
+export type TooltipPosition = "right" | "top" | "bottom" | "left";
 
 export interface TooltipProps {
   /** The content to show in the tooltip */
@@ -21,32 +21,32 @@ export interface TooltipProps {
 
 // Size configuration
 const sizeConfig: Record<TooltipSize, { text: string; padding: string }> = {
-  s: { text: 'text-xs', padding: 'px-2 py-2' },
-  m: { text: 'text-sm', padding: 'px-3 py-2.5' },
-  l: { text: 'text-base', padding: 'px-3 py-3' },
+  s: { text: "text-xs", padding: "px-2 py-2" },
+  m: { text: "text-sm", padding: "px-3 py-2.5" },
+  l: { text: "text-base", padding: "px-3 py-3" },
 };
 
 // Type configuration
 const typeConfig: Record<TooltipType, { bg: string; text: string }> = {
-  neutral: { bg: 'bg-card', text: 'text-foreground' },
-  purple: { bg: 'bg-primary', text: 'text-negative' },
+  neutral: { bg: "bg-card", text: "text-foreground" },
+  purple: { bg: "bg-primary", text: "text-negative" },
 };
 
 // Position configuration - using CSS classes for absolute positioning
 const positionConfig: Record<TooltipPosition, string> = {
-  right: 'left-full top-1/2 -translate-y-1/2 ml-4',
-  left: 'right-full top-1/2 -translate-y-1/2 mr-4',
-  top: 'bottom-full left-1/2 -translate-x-1/2 mb-4',
-  bottom: 'top-full left-1/2 -translate-x-1/2 mt-4',
+  right: "left-full top-1/2 -translate-y-1/2 ml-4",
+  left: "right-full top-1/2 -translate-y-1/2 mr-4",
+  top: "bottom-full left-1/2 -translate-x-1/2 mb-4",
+  bottom: "top-full left-1/2 -translate-x-1/2 mt-4",
 };
 
 export const Tooltip: React.FC<TooltipProps> = ({
   content,
   children,
-  size = 'm',
-  type = 'neutral',
+  size = "m",
+  type = "neutral",
   disabled = false,
-  position = 'right',
+  position = "right",
 }) => {
   const [isVisible, setIsVisible] = useState(false);
 

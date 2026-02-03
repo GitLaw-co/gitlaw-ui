@@ -1,6 +1,6 @@
-import React from 'react';
-import { Button } from './Button';
-import { Tooltip } from './Tooltip';
+import React from "react";
+import { Button } from "./Button";
+import { Tooltip } from "./Tooltip";
 
 export interface EditorHeaderProps {
   /** Document title */
@@ -35,18 +35,13 @@ const ActionButton: React.FC<{
 }> = ({ icon, label, onClick }) => (
   <Tooltip content={label} type="purple" position="bottom" size="s">
     <div>
-      <Button
-        variant="icon"
-        size="m"
-        onClick={onClick}
-        leftIconName={icon}
-      />
+      <Button variant="icon" size="m" onClick={onClick} leftIconName={icon} />
     </div>
   </Tooltip>
 );
 
 export const EditorHeader: React.FC<EditorHeaderProps> = ({
-  title = 'Untitled document',
+  title = "Untitled document",
   showShare = true,
   onClose,
   onTitleClick,
@@ -56,7 +51,7 @@ export const EditorHeader: React.FC<EditorHeaderProps> = ({
   onDownload,
   onVersions,
   onMore,
-  className = '',
+  className = "",
 }) => {
   return (
     <div
@@ -70,12 +65,7 @@ export const EditorHeader: React.FC<EditorHeaderProps> = ({
       {/* Left section: Close button + Title + Ellipsis - 4px gaps */}
       <div className="flex items-center gap-1">
         {/* Close button */}
-        <Button
-          variant="icon"
-          size="m"
-          onClick={onClose}
-          leftIconName="x"
-        />
+        <Button variant="icon" size="m" onClick={onClose} leftIconName="x" />
 
         {/* Title/Breadcrumb - 4px gap */}
         <div className="flex items-center gap-1">
@@ -111,8 +101,16 @@ export const EditorHeader: React.FC<EditorHeaderProps> = ({
 
         {/* Icon buttons - 4px gaps */}
         <div className="flex items-center gap-1">
-          <ActionButton icon="signature" label="Start eSign" onClick={onESign} />
-          <ActionButton icon="arrow-down-to-line" label="Download" onClick={onDownload} />
+          <ActionButton
+            icon="signature"
+            label="Start eSign"
+            onClick={onESign}
+          />
+          <ActionButton
+            icon="arrow-down-to-line"
+            label="Download"
+            onClick={onDownload}
+          />
           <ActionButton icon="history" label="Versions" onClick={onVersions} />
           <ActionButton icon="menu" label="More" onClick={onMore} />
         </div>

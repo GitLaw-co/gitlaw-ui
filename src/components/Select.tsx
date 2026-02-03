@@ -1,11 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Icon } from './Icon';
-import { colors } from '../specs';
+import React, { useState, useRef, useEffect } from "react";
+import { Icon } from "./Icon";
+import { colors } from "../specs";
 
-export type SelectSize = 'xs' | 's' | 'm' | 'l' | 'xl';
-export type SelectStatus = 'empty' | 'default';
-export type SelectAlign = 'fill' | 'hug';
-export type SelectLabelPosition = 'top' | 'left';
+export type SelectSize = "xs" | "s" | "m" | "l" | "xl";
+export type SelectStatus = "empty" | "default";
+export type SelectAlign = "fill" | "hug";
+export type SelectLabelPosition = "top" | "left";
 
 export interface SelectOption {
   value: string;
@@ -45,73 +45,79 @@ export interface SelectProps {
   disabled?: boolean;
 }
 
-const sizeClasses: Record<SelectSize, { container: string; text: string; label: string; gap: string }> = {
+const sizeClasses: Record<
+  SelectSize,
+  { container: string; text: string; label: string; gap: string }
+> = {
   xl: {
-    container: 'gap-3 p-4 min-h-14',
-    text: 'text-base',
-    label: 'text-base',
-    gap: 'gap-2',
+    container: "gap-3 p-4 min-h-14",
+    text: "text-base",
+    label: "text-base",
+    gap: "gap-2",
   },
   l: {
-    container: 'gap-2 p-3 min-h-12',
-    text: 'text-sm',
-    label: 'text-sm',
-    gap: 'gap-2',
+    container: "gap-2 p-3 min-h-12",
+    text: "text-sm",
+    label: "text-sm",
+    gap: "gap-2",
   },
   m: {
-    container: 'gap-2 p-2 min-h-9',
-    text: 'text-sm',
-    label: 'text-sm',
-    gap: 'gap-1',
+    container: "gap-2 p-2 min-h-9",
+    text: "text-sm",
+    label: "text-sm",
+    gap: "gap-1",
   },
   s: {
-    container: 'gap-1 px-2 py-1 min-h-7',
-    text: 'text-sm',
-    label: 'text-sm',
-    gap: 'gap-1',
+    container: "gap-1 px-2 py-1 min-h-7",
+    text: "text-sm",
+    label: "text-sm",
+    gap: "gap-1",
   },
   xs: {
-    container: 'gap-1 px-2 py-1 min-h-6',
-    text: 'text-xs',
-    label: 'text-xs',
-    gap: 'gap-1',
+    container: "gap-1 px-2 py-1 min-h-6",
+    text: "text-xs",
+    label: "text-xs",
+    gap: "gap-1",
   },
 };
 
 export const Select: React.FC<SelectProps> = ({
-  size = 'm',
+  size = "m",
   status: controlledStatus,
-  align = 'fill',
-  labelPosition = 'top',
-  placeholder = 'Select an option',
+  align = "fill",
+  labelPosition = "top",
+  placeholder = "Select an option",
   value: controlledValue,
   options = [],
   onChange,
   showLabel = false,
-  label = 'Label',
+  label = "Label",
   showLeftIcon = false,
   leftIcon,
   rightIcon,
-  className = '',
+  className = "",
   disabled = false,
 }) => {
-  const [internalValue, setInternalValue] = useState('');
+  const [internalValue, setInternalValue] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
 
   const value = controlledValue !== undefined ? controlledValue : internalValue;
-  const status = controlledStatus || (value ? 'default' : 'empty');
-  const selectedOption = options.find(opt => opt.value === value);
+  const status = controlledStatus || (value ? "default" : "empty");
+  const selectedOption = options.find((opt) => opt.value === value);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (selectRef.current && !selectRef.current.contains(event.target as Node)) {
+      if (
+        selectRef.current &&
+        !selectRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const handleSelect = (optionValue: string) => {
@@ -123,15 +129,17 @@ export const Select: React.FC<SelectProps> = ({
   };
 
   const sizeConfig = sizeClasses[size];
-  const widthClass = align === 'fill' ? 'w-full' : 'w-auto';
-  const isHorizontal = labelPosition === 'left';
+  const widthClass = align === "fill" ? "w-full" : "w-auto";
+  const isHorizontal = labelPosition === "left";
 
-  const textColorClass = status === 'empty' ? 'text-subtle' : 'text-foreground';
+  const textColorClass = status === "empty" ? "text-subtle" : "text-foreground";
 
   const renderLabel = () => {
     if (!showLabel) return null;
     return (
-      <label className={`font-semibold text-foreground ${sizeConfig.label} ${isHorizontal ? 'shrink-0' : ''}`}>
+      <label
+        className={`font-semibold text-foreground ${sizeConfig.label} ${isHorizontal ? "shrink-0" : ""}`}
+      >
         {label}
       </label>
     );
@@ -143,23 +151,33 @@ export const Select: React.FC<SelectProps> = ({
         flex items-center bg-white rounded overflow-hidden
         border border-input-border
         ${sizeConfig.container}
-        ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
-        ${align === 'fill' && isHorizontal ? 'flex-1' : widthClass}
+        ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
+        ${align === "fill" && isHorizontal ? "flex-1" : widthClass}
       `}
       onClick={() => !disabled && setIsOpen(!isOpen)}
     >
       <div className={`flex items-center flex-1 min-w-0 ${sizeConfig.gap}`}>
         {showLeftIcon && (
           <span className="shrink-0 text-foreground">
-            {leftIcon || <Icon name="user" className="size-6" color={colors.textPrimary} />}
+            {leftIcon || (
+              <Icon name="user" className="size-6" color={colors.textPrimary} />
+            )}
           </span>
         )}
-        <span className={`flex-1 truncate font-normal ${sizeConfig.text} ${textColorClass}`}>
+        <span
+          className={`flex-1 truncate font-normal ${sizeConfig.text} ${textColorClass}`}
+        >
           {selectedOption?.label || placeholder}
         </span>
       </div>
       <span className="shrink-0 text-foreground">
-        {rightIcon || <Icon name="chevron-down" className="size-6" color={colors.textPrimary} />}
+        {rightIcon || (
+          <Icon
+            name="chevron-down"
+            className="size-6"
+            color={colors.textPrimary}
+          />
+        )}
       </span>
     </div>
   );
@@ -174,8 +192,8 @@ export const Select: React.FC<SelectProps> = ({
         ${className}
       `}
     >
-      {labelPosition === 'top' && renderLabel()}
-      {labelPosition === 'left' && renderLabel()}
+      {labelPosition === "top" && renderLabel()}
+      {labelPosition === "left" && renderLabel()}
       {renderDropdown()}
 
       {isOpen && options.length > 0 && (
@@ -186,7 +204,7 @@ export const Select: React.FC<SelectProps> = ({
               className={`
                 px-3 py-2 cursor-pointer transition-colors
                 ${sizeConfig.text}
-                ${option.value === value ? 'bg-secondary text-foreground' : 'text-foreground hover:bg-secondary/50'}
+                ${option.value === value ? "bg-secondary text-foreground" : "text-foreground hover:bg-secondary/50"}
               `}
               onClick={() => handleSelect(option.value)}
             >

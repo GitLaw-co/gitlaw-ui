@@ -1,7 +1,7 @@
-import React from 'react';
-import { Badge } from './Badge';
+import React from "react";
+import { Badge } from "./Badge";
 
-export type TabStatus = 'default' | 'selected' | 'selected-underlined';
+export type TabStatus = "default" | "selected" | "selected-underlined";
 
 export interface TabProps {
   /** The label text */
@@ -19,15 +19,15 @@ export interface TabProps {
 }
 
 export const Tab: React.FC<TabProps> = ({
-  label = 'Activity',
-  status = 'default',
+  label = "Activity",
+  status = "default",
   showBadge = false,
   badgeCount = 7,
   onClick,
-  className = '',
+  className = "",
 }) => {
-  const isSelected = status === 'selected' || status === 'selected-underlined';
-  const hasUnderline = status === 'selected-underlined';
+  const isSelected = status === "selected" || status === "selected-underlined";
+  const hasUnderline = status === "selected-underlined";
 
   return (
     <button
@@ -37,7 +37,7 @@ export const Tab: React.FC<TabProps> = ({
         inline-flex items-center justify-center gap-2
         px-2 py-4
         transition-colors
-        ${hasUnderline ? 'border-b-2 border-primary' : ''}
+        ${hasUnderline ? "border-b-2 border-primary" : ""}
         ${className}
       `}
     >
@@ -45,14 +45,12 @@ export const Tab: React.FC<TabProps> = ({
         className={`
           font-semibold text-base text-primary
           overflow-hidden text-ellipsis
-          ${!isSelected ? 'opacity-30' : ''}
+          ${!isSelected ? "opacity-30" : ""}
         `}
       >
         {label}
       </span>
-      {showBadge && (
-        <Badge type="secondary" count={badgeCount} />
-      )}
+      {showBadge && <Badge type="secondary" count={badgeCount} />}
     </button>
   );
 };
@@ -78,7 +76,7 @@ export const Tabs: React.FC<TabsProps> = ({
   selectedIndex = 0,
   onSelect,
   showBadges = false,
-  className = '',
+  className = "",
 }) => {
   return (
     <div className={`inline-flex items-center ${className}`}>
@@ -86,7 +84,7 @@ export const Tabs: React.FC<TabsProps> = ({
         <Tab
           key={index}
           label={tab.label}
-          status={index === selectedIndex ? 'selected-underlined' : 'default'}
+          status={index === selectedIndex ? "selected-underlined" : "default"}
           showBadge={showBadges && tab.badgeCount !== undefined}
           badgeCount={tab.badgeCount}
           onClick={() => onSelect?.(index)}

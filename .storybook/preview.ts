@@ -1,9 +1,9 @@
-import type { Preview } from '@storybook/react';
-import '../src/styles/globals.css';
+import type { Preview } from "@storybook/react";
+import "../src/styles/globals.css";
 
 const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: '^on[A-Z].*' },
+    actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -11,25 +11,61 @@ const preview: Preview = {
       },
     },
     backgrounds: {
-      default: 'light',
+      default: "light",
       values: [
         {
-          name: 'light',
-          value: '#f7f6ff',
+          name: "light",
+          value: "#f7f6ff",
         },
         {
-          name: 'dark',
-          value: '#1b1b1f',
+          name: "dark",
+          value: "#1b1b1f",
         },
         {
-          name: 'white',
-          value: '#ffffff',
+          name: "white",
+          value: "#ffffff",
         },
       ],
     },
     options: {
       storySort: {
-        order: ['Introduction', 'Foundations', 'Components', 'Changelog'],
+        order: [
+          "Introduction",
+          "Foundations",
+          [
+            "Colors",
+            "Typography",
+            "Icons",
+            "Illustrations",
+            "Spacing",
+            "Breakpoints",
+          ],
+          "Components",
+          [
+            "Button",
+            "Input",
+            "Select",
+            "TextField",
+            "ChatInput",
+            "Switch",
+            "Dropdown",
+            "Dialog",
+            "Tooltip",
+            "Card",
+            "Badge",
+            "Tag",
+            "Avatar",
+            "Tab",
+            "MenuItem",
+            "Toast",
+            "Sidebar",
+            "EditorToolbar",
+            "EditorHeader",
+            "EditorPaper",
+            "EditorSection",
+          ],
+          "Changelog",
+        ],
       },
     },
   },

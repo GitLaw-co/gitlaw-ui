@@ -1,7 +1,7 @@
-import React from 'react';
-import { Icon } from './Icon';
-import { Button } from './Button';
-import { dialogTailwindClasses, colors } from '../specs';
+import React from "react";
+import { Icon } from "./Icon";
+import { Button } from "./Button";
+import { dialogTailwindClasses, colors } from "../specs";
 // Note: Dialog uses Icon directly for close button, and leftIconName for Button icons
 
 export interface DialogProps {
@@ -30,14 +30,14 @@ export interface DialogProps {
 export const Dialog: React.FC<DialogProps> = ({
   title,
   message,
-  primaryLabel = 'Save changes',
-  secondaryLabel = 'Discard changes',
+  primaryLabel = "Save changes",
+  secondaryLabel = "Discard changes",
   showCloseButton = true,
   onPrimaryClick,
   onSecondaryClick,
   onClose,
   open = true,
-  className = '',
+  className = "",
 }) => {
   if (!open) return null;
 
@@ -45,24 +45,24 @@ export const Dialog: React.FC<DialogProps> = ({
     <div className={`${dialogTailwindClasses.container} ${className}`}>
       {/* Header with title and close button */}
       <div className={dialogTailwindClasses.header}>
-        <h2 className={dialogTailwindClasses.title}>
-          {title}
-        </h2>
+        <h2 className={dialogTailwindClasses.title}>{title}</h2>
         {showCloseButton && (
           <button
             type="button"
             onClick={onClose}
             className={dialogTailwindClasses.closeButton}
           >
-            <Icon name="x" className={dialogTailwindClasses.closeIcon} color={colors.textPrimary} />
+            <Icon
+              name="x"
+              className={dialogTailwindClasses.closeIcon}
+              color={colors.textPrimary}
+            />
           </button>
         )}
       </div>
 
       {/* Message */}
-      <p className={dialogTailwindClasses.message}>
-        {message}
-      </p>
+      <p className={dialogTailwindClasses.message}>{message}</p>
 
       {/* Button container */}
       <div className={dialogTailwindClasses.buttonContainer}>

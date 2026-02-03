@@ -1,5 +1,5 @@
 // Auto-generated changelog from git commits
-// Generated: 2026-02-02T12:39:59.371Z
+// Generated: 2026-02-03T14:05:08.552Z
 // Run: node scripts/generate-changelog.js
 
 export interface ChangelogEntry {
@@ -12,39 +12,68 @@ export interface ChangelogEntry {
 
 export const changelog: ChangelogEntry[] = [
   {
+    "date": "2026-02-03",
+    "commits": [
+      {
+        "hash": "94ef3f6",
+        "message": "Disable Vercel deployments for gh-pages branch"
+      }
+    ]
+  },
+  {
     "date": "2026-02-02",
     "commits": [
       {
-        "hash": "new",
-        "message": "Add Dropdown component with adaptive width (220-360px)"
+        "hash": "d77c6ea",
+        "message": "Enable MDX tables with @storybook/addon-mdx-gfm"
       },
       {
-        "hash": "new",
-        "message": "Add EditorHeader component with title, close, and share actions"
+        "hash": "4f64d11",
+        "message": "Update Introduction.mdx with complete design tokens"
       },
       {
-        "hash": "new",
-        "message": "Add EditorToolbar component with formatting tools"
+        "hash": "f5ad1c3",
+        "message": "Add shadow-card CSS utility and apply to all card-like components"
       },
       {
-        "hash": "new",
-        "message": "Add MenuItem R element options (label, icons, button, badge, switch, avatar, tags)"
+        "hash": "13d297f",
+        "message": "Add tidy up routine to CLAUDE.md"
       },
       {
-        "hash": "new",
-        "message": "Add Button leftIconName/rightIconName props for automatic icon sizing"
+        "hash": "028c307",
+        "message": "Tidy up: add shadow-card utility and export Dropdown"
       },
       {
-        "hash": "new",
-        "message": "Refactor text colors to semantic names (text-foreground, text-subtle)"
+        "hash": "9bf4aea",
+        "message": "Fix text-muted color conflict - rename to text-subtle"
       },
       {
-        "hash": "new",
-        "message": "Fix Switch visibility when unchecked (bg-secondary instead of white)"
+        "hash": "1f3bca9",
+        "message": "Add new components and refactor text colors"
       },
       {
-        "hash": "new",
-        "message": "Update Dialog width to 400px and fix header padding"
+        "hash": "ca340ac",
+        "message": "Add component inventory and API patterns to CLAUDE.md"
+      },
+      {
+        "hash": "4d15a60",
+        "message": "Update CLAUDE.md with Vercel auto-deploy info"
+      },
+      {
+        "hash": "05746eb",
+        "message": "Add CLAUDE.md with project-specific instructions for Claude Code"
+      },
+      {
+        "hash": "b5fae93",
+        "message": "Simplify Claude Code setup instructions"
+      },
+      {
+        "hash": "9761311",
+        "message": "Add Claude Code and Figma MCP setup instructions"
+      },
+      {
+        "hash": "188578b",
+        "message": "Add Vercel configuration for Storybook build"
       },
       {
         "hash": "efe75ed",
@@ -184,51 +213,9 @@ export const changelog: ChangelogEntry[] = [
       {
         "hash": "6987319",
         "message": "Initial commit: GitLaw UI Storybook"
-      },
-      {
-        "hash": "fcf5a8b",
-        "message": "Update color tokens to match Figma design system"
-      }
-    ]
-  },
-  {
-    "date": "2026-01-28",
-    "commits": [
-      {
-        "hash": "107654d",
-        "message": "Update Introduction with ListItem, Select, and TextField components"
-      },
-      {
-        "hash": "a45a50e",
-        "message": "Revert sidebar components for redesign"
-      },
-      {
-        "hash": "a196e30",
-        "message": "Add Sidebar components with expanded/collapsed states and variants"
-      },
-      {
-        "hash": "230a1ba",
-        "message": "Replace TextCursor icon with CircleDashed"
-      },
-      {
-        "hash": "52193e9",
-        "message": "Fix icon stroke weight to 1px to match design system"
-      },
-      {
-        "hash": "fb28476",
-        "message": "Add ListItem, Select, and TextField components from Figma"
-      }
-    ]
-  },
-  {
-    "date": "2026-01-26",
-    "commits": [
-      {
-        "hash": "1eb8839",
-        "message": "Initial commit: GitLaw UI Storybook"
       }
     ]
   }
 ];
 
-export const lastUpdated = "2026-02-02";
+export const lastUpdated = "2026-02-03";

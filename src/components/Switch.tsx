@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-export type SwitchSize = 's' | 'm';
+export type SwitchSize = "s" | "m";
 
 export interface SwitchProps {
   /** Current checked state */
@@ -17,21 +17,21 @@ export interface SwitchProps {
 
 const sizeClasses: Record<SwitchSize, { track: string; thumb: string }> = {
   s: {
-    track: 'w-8 h-4',
-    thumb: 'w-3.5 h-3',
+    track: "w-8 h-4",
+    thumb: "w-3.5 h-3",
   },
   m: {
-    track: 'w-10 h-5',
-    thumb: 'w-5 h-4',
+    track: "w-10 h-5",
+    thumb: "w-5 h-4",
   },
 };
 
 export const Switch: React.FC<SwitchProps> = ({
   checked = false,
-  size = 'm',
+  size = "m",
   onChange,
   disabled = false,
-  className = '',
+  className = "",
 }) => {
   const sizeConfig = sizeClasses[size];
 
@@ -53,8 +53,8 @@ export const Switch: React.FC<SwitchProps> = ({
         rounded-sm py-0.5
         transition-colors
         ${sizeConfig.track}
-        ${checked ? 'bg-primary justify-end pr-0.5' : 'bg-secondary justify-start pl-0.5'}
-        ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
+        ${checked ? "bg-primary justify-end pr-0.5" : "bg-secondary justify-start pl-0.5"}
+        ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
         ${className}
       `}
     >

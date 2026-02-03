@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-export type BadgeType = 'primary' | 'secondary' | 'red' | 'orange' | 'green';
+export type BadgeType = "primary" | "secondary" | "red" | "orange" | "green";
 
 export interface BadgeProps {
   /** The color type of the badge */
@@ -15,32 +15,32 @@ export interface BadgeProps {
 
 const typeClasses: Record<BadgeType, { bg: string; text: string }> = {
   primary: {
-    bg: 'bg-primary',
-    text: 'text-negative',
+    bg: "bg-primary",
+    text: "text-negative",
   },
   secondary: {
-    bg: 'bg-secondary',
-    text: 'text-foreground-button',
+    bg: "bg-secondary",
+    text: "text-foreground-button",
   },
   red: {
-    bg: 'bg-destructive',
-    text: 'text-negative',
+    bg: "bg-destructive",
+    text: "text-negative",
   },
   orange: {
-    bg: 'bg-alert',
-    text: 'text-negative',
+    bg: "bg-alert",
+    text: "text-negative",
   },
   green: {
-    bg: 'bg-positive',
-    text: 'text-negative',
+    bg: "bg-positive",
+    text: "text-negative",
   },
 };
 
 export const Badge: React.FC<BadgeProps> = ({
-  type = 'red',
+  type = "red",
   showNumber = true,
   count = 7,
-  className = '',
+  className = "",
 }) => {
   const typeConfig = typeClasses[type];
 
@@ -66,7 +66,7 @@ export const Badge: React.FC<BadgeProps> = ({
       `}
     >
       <span className={`text-xxs font-normal ${typeConfig.text}`}>
-        {count > 99 ? '99+' : count}
+        {count > 99 ? "99+" : count}
       </span>
     </div>
   );

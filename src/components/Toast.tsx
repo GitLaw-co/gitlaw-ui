@@ -1,8 +1,8 @@
-import React from 'react';
-import { Icon } from './Icon';
-import { colors } from '../specs';
+import React from "react";
+import { Icon } from "./Icon";
+import { colors } from "../specs";
 
-export type ToastVariant = 'default' | 'success' | 'error' | 'warning';
+export type ToastVariant = "default" | "success" | "error" | "warning";
 
 export interface ToastProps {
   /** Toast message */
@@ -23,12 +23,12 @@ export interface ToastProps {
 
 export const Toast: React.FC<ToastProps> = ({
   message,
-  variant = 'default',
-  actionLabel = 'Action',
+  variant = "default",
+  actionLabel = "Action",
   showAction = true,
   onActionClick,
   onClose,
-  className = '',
+  className = "",
 }) => {
   return (
     <div

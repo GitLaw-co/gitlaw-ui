@@ -60,7 +60,7 @@ const TypographyPage = () => {
       <div className="max-w-4xl mx-auto">
         <h1 className="text-2xl font-bold text-foreground mb-2">Typography</h1>
         <p className="text-subtle mb-8">
-          GitLaw uses DM Sans for UI text and DM Serif Text for display headings.
+          GitLaw uses DM Sans for UI text, DM Serif Text for display headings, and Merriweather for document content.
         </p>
 
         {/* Font Families */}
@@ -68,7 +68,7 @@ const TypographyPage = () => {
           <h2 className="text-xl font-semibold text-foreground mb-6 pb-2 border-b border-border">
             Font Families
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-card p-6 rounded-gitlaw-m border border-border">
               <p className="text-xs text-subtle mb-2 font-mono">font-sans</p>
               <p className="text-2xl font-sans text-foreground mb-2">DM Sans</p>
@@ -91,6 +91,20 @@ const TypographyPage = () => {
               </p>
               <div className="mt-4 pt-4 border-t border-border">
                 <p className="font-serif text-lg">
+                  ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />
+                  abcdefghijklmnopqrstuvwxyz<br />
+                  0123456789
+                </p>
+              </div>
+            </div>
+            <div className="bg-card p-6 rounded-gitlaw-m border border-border">
+              <p className="text-xs text-subtle mb-2 font-mono">font-document</p>
+              <p className="text-2xl font-document text-foreground mb-2">Merriweather</p>
+              <p className="text-sm text-subtle font-sans">
+                Document font for legal documents and contracts in the editor.
+              </p>
+              <div className="mt-4 pt-4 border-t border-border">
+                <p className="font-document text-lg">
                   ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />
                   abcdefghijklmnopqrstuvwxyz<br />
                   0123456789

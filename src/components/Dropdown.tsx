@@ -1,6 +1,6 @@
-import React from 'react';
-import { Icon } from './Icon';
-import { colors } from '../specs';
+import React from "react";
+import { Icon } from "./Icon";
+import { colors } from "../specs";
 
 export interface DropdownItem {
   /** Unique identifier for the item */
@@ -34,7 +34,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
   items,
   heading,
   showIcons = true,
-  className = '',
+  className = "",
 }) => {
   return (
     <div
@@ -44,7 +44,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
         flex flex-col gap-px
         ${className}
       `}
-      style={{ width: 'max-content', minWidth: '220px', maxWidth: '360px' }}
+      style={{ width: "max-content", minWidth: "220px", maxWidth: "360px" }}
     >
       {heading && (
         <div className="px-3 py-2 text-base font-semibold text-foreground">
@@ -60,19 +60,21 @@ export const Dropdown: React.FC<DropdownProps> = ({
             w-full px-3 py-3 rounded-none
             flex items-center gap-2 text-left
             transition-colors
-            ${item.disabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-secondary/30 cursor-pointer'}
-            ${item.selected ? 'bg-secondary/20' : ''}
+            ${item.disabled ? "opacity-50 cursor-not-allowed" : "hover:bg-secondary/30 cursor-pointer"}
+            ${item.selected ? "bg-secondary/20" : ""}
           `}
         >
           {showIcons && item.icon && (
-            <Icon name={item.icon} className="size-5" color={colors.iconBlack} />
+            <Icon
+              name={item.icon}
+              className="size-5"
+              color={colors.iconBlack}
+            />
           )}
           <div className="flex flex-col flex-1">
             <span className="text-base text-foreground">{item.label}</span>
             {item.secondaryLabel && (
-              <span className="text-sm text-subtle">
-                {item.secondaryLabel}
-              </span>
+              <span className="text-sm text-subtle">{item.secondaryLabel}</span>
             )}
           </div>
           {item.selected && (

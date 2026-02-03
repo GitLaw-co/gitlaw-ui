@@ -1,10 +1,15 @@
-import React from 'react';
-import { Icon } from './Icon';
-import { Switch } from './Switch';
-import { Badge } from './Badge';
-import { colors } from '../specs';
+import React from "react";
+import { Icon } from "./Icon";
+import { Switch } from "./Switch";
+import { Badge } from "./Badge";
+import { colors } from "../specs";
 
-export type MenuItemLeftElement = 'icon' | 'avatar' | 'clause' | 'select' | 'mini-users';
+export type MenuItemLeftElement =
+  | "icon"
+  | "avatar"
+  | "clause"
+  | "select"
+  | "mini-users";
 
 export interface MenuItemProps {
   /** Primary text content */
@@ -84,9 +89,9 @@ export interface MenuItemProps {
 }
 
 export const MenuItem: React.FC<MenuItemProps> = ({
-  primaryText = 'Primary',
-  secondaryText = '2 minutes ago',
-  leftElement = 'icon',
+  primaryText = "Primary",
+  secondaryText = "2 minutes ago",
+  leftElement = "icon",
   showLeftElement = true,
   showSecondaryText = false,
   showBackground = false,
@@ -94,19 +99,19 @@ export const MenuItem: React.FC<MenuItemProps> = ({
   showTick = false,
   leftIcon,
   avatarSrc,
-  avatarInitials = 'AC',
+  avatarInitials = "AC",
   selected = false,
   onClick,
-  className = '',
+  className = "",
   // R Element props
   showRLabel = false,
-  rLabel = 'Label',
+  rLabel = "Label",
   showRIcon1 = false,
-  rIcon1 = 'check',
+  rIcon1 = "check",
   showRIcon2 = false,
-  rIcon2 = 'check',
+  rIcon2 = "check",
   showRButton = false,
-  rButtonLabel = 'Action',
+  rButtonLabel = "Action",
   showRButtonSet = false,
   onRButtonSetCancel,
   onRButtonSetConfirm,
@@ -120,50 +125,78 @@ export const MenuItem: React.FC<MenuItemProps> = ({
   showRMediumAvatar = false,
   rMediumAvatarSrc,
   showRTags = false,
-  rTagLabel = 'Label',
+  rTagLabel = "Label",
 }) => {
   // Check if any R element is shown
-  const hasRElement = showRLabel || showRIcon1 || showRIcon2 || showRButton ||
-    showRButtonSet || showRBadge || showRSwitch || showRLargeAvatar ||
-    showRMediumAvatar || showRTags;
+  const hasRElement =
+    showRLabel ||
+    showRIcon1 ||
+    showRIcon2 ||
+    showRButton ||
+    showRButtonSet ||
+    showRBadge ||
+    showRSwitch ||
+    showRLargeAvatar ||
+    showRMediumAvatar ||
+    showRTags;
   const renderLeftElement = () => {
     if (!showLeftElement) return null;
 
     switch (leftElement) {
-      case 'icon':
-        return leftIcon || <Icon name="circle-dashed" className="size-6" color={colors.textPrimary} />;
+      case "icon":
+        return (
+          leftIcon || (
+            <Icon
+              name="circle-dashed"
+              className="size-6"
+              color={colors.textPrimary}
+            />
+          )
+        );
 
-      case 'avatar':
+      case "avatar":
         return (
           <div className="size-8 rounded bg-primary flex items-center justify-center shrink-0">
             {avatarSrc ? (
-              <img src={avatarSrc} alt="" className="w-full h-full object-cover rounded" />
+              <img
+                src={avatarSrc}
+                alt=""
+                className="w-full h-full object-cover rounded"
+              />
             ) : (
-              <span className="text-sm font-black text-negative">{avatarInitials}</span>
+              <span className="text-sm font-black text-negative">
+                {avatarInitials}
+              </span>
             )}
           </div>
         );
 
-      case 'clause':
+      case "clause":
         return (
           <div className="size-8 rounded-full bg-backgrounds-tag-background flex items-center justify-center shrink-0">
             <Icon name="info" className="size-6" color={colors.positive} />
           </div>
         );
 
-      case 'select':
+      case "select":
         return (
           <div
             className={`
               size-4 rounded-sm border shrink-0 flex items-center justify-center
-              ${selected ? 'bg-primary border-primary' : 'bg-white border-secondary'}
+              ${selected ? "bg-primary border-primary" : "bg-white border-secondary"}
             `}
           >
-            {selected && <Icon name="check" className="size-3" color={colors.iconNegative} />}
+            {selected && (
+              <Icon
+                name="check"
+                className="size-3"
+                color={colors.iconNegative}
+              />
+            )}
           </div>
         );
 
-      case 'mini-users':
+      case "mini-users":
         return (
           <div className="flex items-center -space-x-1 shrink-0">
             <div className="size-4 rounded bg-gray-300 border-2 border-white z-10" />
@@ -210,15 +243,17 @@ export const MenuItem: React.FC<MenuItemProps> = ({
 
       {hasRElement && (
         <div className="relative flex items-center gap-2 justify-end min-h-6 shrink-0">
-          {showRBadge && (
-            <Badge type="red" count={rBadgeCount} />
-          )}
+          {showRBadge && <Badge type="red" count={rBadgeCount} />}
           {showRLabel && (
             <span className="text-sm text-subtle min-w-6">{rLabel}</span>
           )}
           {showRButton && (
             <button className="flex items-center gap-1 px-3 py-2 h-8 rounded bg-secondary text-xs text-foreground-button">
-              <Icon name="check" className="size-6" color={colors.iconPrimary} />
+              <Icon
+                name="check"
+                className="size-6"
+                color={colors.iconPrimary}
+              />
               <span>{rButtonLabel}</span>
             </button>
           )}
@@ -226,28 +261,46 @@ export const MenuItem: React.FC<MenuItemProps> = ({
             <div className="flex items-center gap-2">
               <button
                 className="flex items-center justify-center size-8 rounded"
-                onClick={(e) => { e.stopPropagation(); onRButtonSetCancel?.(); }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onRButtonSetCancel?.();
+                }}
               >
                 <Icon name="x" className="size-6" color={colors.iconPrimary} />
               </button>
               <button
                 className="flex items-center justify-center size-8 rounded"
-                onClick={(e) => { e.stopPropagation(); onRButtonSetConfirm?.(); }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onRButtonSetConfirm?.();
+                }}
               >
-                <Icon name="check" className="size-6" color={colors.iconPrimary} />
+                <Icon
+                  name="check"
+                  className="size-6"
+                  color={colors.iconPrimary}
+                />
               </button>
             </div>
           )}
           {showRTags && (
             <div className="flex items-center gap-2 px-4 py-2 rounded bg-backgrounds-tag-background">
-              <Icon name="user-round" className="size-6" color={colors.positive} />
+              <Icon
+                name="user-round"
+                className="size-6"
+                color={colors.positive}
+              />
               <span className="text-sm text-foreground-tag">{rTagLabel}</span>
             </div>
           )}
           {showRLargeAvatar && (
             <div className="size-16 rounded overflow-hidden shrink-0">
               {rLargeAvatarSrc ? (
-                <img src={rLargeAvatarSrc} alt="" className="w-full h-full object-cover" />
+                <img
+                  src={rLargeAvatarSrc}
+                  alt=""
+                  className="w-full h-full object-cover"
+                />
               ) : (
                 <div className="w-full h-full bg-primary" />
               )}
@@ -256,7 +309,11 @@ export const MenuItem: React.FC<MenuItemProps> = ({
           {showRMediumAvatar && (
             <div className="size-8 rounded overflow-hidden shrink-0">
               {rMediumAvatarSrc ? (
-                <img src={rMediumAvatarSrc} alt="" className="w-full h-full object-cover" />
+                <img
+                  src={rMediumAvatarSrc}
+                  alt=""
+                  className="w-full h-full object-cover"
+                />
               ) : (
                 <div className="w-full h-full bg-primary" />
               )}
@@ -269,10 +326,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
             <Icon name={rIcon2} className="size-6" color={colors.iconPrimary} />
           )}
           {showRSwitch && (
-            <Switch
-              checked={rSwitchChecked}
-              onChange={onRSwitchChange}
-            />
+            <Switch checked={rSwitchChecked} onChange={onRSwitchChange} />
           )}
         </div>
       )}

@@ -1,9 +1,9 @@
-import React from 'react';
-import { Icon } from './Icon';
-import { colors } from '../specs';
+import React from "react";
+import { Icon } from "./Icon";
+import { colors } from "../specs";
 
-export type AvatarType = 'image' | 'initials' | 'icon' | 'empty';
-export type AvatarSize = 'S' | 'M' | 'L' | 'XL';
+export type AvatarType = "image" | "initials" | "icon" | "empty";
+export type AvatarSize = "S" | "M" | "L" | "XL";
 
 export interface AvatarProps {
   /** The type of avatar content */
@@ -24,41 +24,44 @@ export interface AvatarProps {
   className?: string;
 }
 
-const sizeClasses: Record<AvatarSize, { container: string; text: string; icon: string }> = {
+const sizeClasses: Record<
+  AvatarSize,
+  { container: string; text: string; icon: string }
+> = {
   S: {
-    container: 'size-6',
-    text: 'text-xs',
-    icon: 'size-6',
+    container: "size-6",
+    text: "text-xs",
+    icon: "size-6",
   },
   M: {
-    container: 'size-8',
-    text: 'text-sm',
-    icon: 'size-6',
+    container: "size-8",
+    text: "text-sm",
+    icon: "size-6",
   },
   L: {
-    container: 'size-12',
-    text: 'text-xl',
-    icon: 'size-6',
+    container: "size-12",
+    text: "text-xl",
+    icon: "size-6",
   },
   XL: {
-    container: 'size-16',
-    text: 'text-2xl',
-    icon: 'size-6',
+    container: "size-16",
+    text: "text-2xl",
+    icon: "size-6",
   },
 };
 
 export const Avatar: React.FC<AvatarProps> = ({
-  type = 'image',
-  size = 'M',
+  type = "image",
+  size = "M",
   src,
-  initials = 'AC',
-  alt = 'Avatar',
+  initials = "AC",
+  alt = "Avatar",
   showEdit = false,
   onEditClick,
-  className = '',
+  className = "",
 }) => {
   const sizeConfig = sizeClasses[size];
-  const bgColor = type === 'image' ? '' : 'bg-primary';
+  const bgColor = type === "image" ? "" : "bg-primary";
 
   return (
     <div className={`relative inline-block ${className}`}>
@@ -70,27 +73,31 @@ export const Avatar: React.FC<AvatarProps> = ({
           flex items-center justify-center
         `}
       >
-        {type === 'image' && src && (
-          <img
-            src={src}
-            alt={alt}
-            className="w-full h-full object-cover"
-          />
+        {type === "image" && src && (
+          <img src={src} alt={alt} className="w-full h-full object-cover" />
         )}
 
-        {type === 'initials' && (
+        {type === "initials" && (
           <span className={`font-black text-negative ${sizeConfig.text}`}>
             {initials}
           </span>
         )}
 
-        {type === 'icon' && (
-          <Icon name="building" className={sizeConfig.icon} color={colors.iconNegative} />
+        {type === "icon" && (
+          <Icon
+            name="building"
+            className={sizeConfig.icon}
+            color={colors.iconNegative}
+          />
         )}
 
-        {type === 'empty' && (
+        {type === "empty" && (
           <div className="flex flex-col items-center justify-center gap-1">
-            <Icon name="image-up" className="size-4" color={colors.iconNegative} />
+            <Icon
+              name="image-up"
+              className="size-4"
+              color={colors.iconNegative}
+            />
             <span className="text-xxs text-negative">Add</span>
           </div>
         )}
