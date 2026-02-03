@@ -56,6 +56,8 @@ npm install
 
 Requires Node.js 18+.
 
+**Note:** MDX table support requires `@storybook/addon-mdx-gfm` (already configured in `.storybook/main.ts`).
+
 ## Quick Commands
 
 | Task | Command |
