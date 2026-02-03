@@ -210,7 +210,7 @@ export const Input: React.FC<InputProps> = ({
           onBlur={() => setIsFocused(false)}
           placeholder={placeholder}
           disabled={disabled}
-          style={isHug ? { width: `${Math.max(value?.length || 0, placeholder?.length || 0, 6) + 1}ch` } : undefined}
+          style={isHug ? { width: `${Math.max(value?.length || 0, placeholder?.length || 0, 4)}ch` } : undefined}
           className={`
             ${isHug ? "min-w-0" : "flex-1"} bg-transparent outline-none font-normal
             text-foreground placeholder:text-subtle
