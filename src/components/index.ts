@@ -105,3 +105,12 @@ export type {
 
 export { EditorSection } from "./EditorSection";
 export type { EditorSectionProps } from "./EditorSection";
+
+export { ChatThread } from "./ChatThread";
+export type { ChatThreadProps, ChatMessage } from "./ChatThread";
+
+export { ChatUserMessage } from "./ChatUserMessage";
+export type { ChatUserMessageProps } from "./ChatUserMessage";
+
+export { ChatAssistantMessage } from "./ChatAssistantMessage";
+export type { ChatAssistantMessageProps } from "./ChatAssistantMessage";

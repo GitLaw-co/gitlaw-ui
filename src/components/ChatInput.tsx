@@ -43,6 +43,8 @@ export interface ChatInputProps {
   onStopClick?: () => void;
   /** Additional CSS classes */
   className?: string;
+  /** Allow input to fill full container width */
+  fullWidth?: boolean;
 }
 
 const defaultQuickActions: QuickAction[] = [
@@ -104,6 +106,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
   onSettingsClick,
   onStopClick,
   className = "",
+  fullWidth = false,
 }) => {
   const isWorking = status === "working";
   const isPopulated = status === "populated" || value.length > 0;
@@ -142,6 +145,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
   const paddingClass = isLarge ? "p-6" : "p-4";
   const gapClass = isLarge ? "gap-6" : "gap-4";
   const roundedClass = isLarge ? "rounded-xl" : "rounded-lg";
+  const textSizeClass = isLarge ? "text-lg" : "text-base";
 
   // Working state
   if (isWorking) {
@@ -151,7 +155,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
           bg-white border border-border ${roundedClass}
           shadow-card
           flex flex-col ${paddingClass}
-          w-full max-w-[624px]
+          w-full ${fullWidth ? "" : "max-w-[624px]"}
           ${className}
         `}
       >
@@ -178,7 +182,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
         bg-white ${roundedClass}
         shadow-card
         flex flex-col ${gapClass} ${paddingClass}
-        w-full max-w-[624px]
+        w-full ${fullWidth ? "" : "max-w-[624px]"}
         ${className}
       `}
     >
@@ -191,18 +195,18 @@ export const ChatInput: React.FC<ChatInputProps> = ({
             value={value}
             onChange={(e) => onChange?.(e.target.value)}
             placeholder=""
-            className="
-              w-full text-lg font-normal leading-[1.4]
+            className={`
+              w-full ${textSizeClass} font-normal leading-[1.4]
               text-foreground
               bg-transparent outline-none
-            "
+            `}
           />
           {/* Custom animated placeholder */}
           {!value && (
             <span
               className={`
                 absolute left-0 top-1/2 -translate-y-1/2
-                text-lg font-normal leading-[1.4]
+                ${textSizeClass} font-normal leading-[1.4]
                 text-purple-300 pointer-events-none
                 transition-opacity duration-200 ease-in-out
                 ${isAnimating ? "opacity-0" : "opacity-100"}
