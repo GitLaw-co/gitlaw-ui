@@ -202,15 +202,17 @@ import { colors } from '../specs';
 - Check both variants and states (hover, active, disabled, etc.)
 - Never guess specs - if unclear, fetch from Figma again
 
-**Icon Size Note:**
-Figma MCP often reports icons as 24px regardless of actual size. Deduce correct icon size from:
-1. **Container/button size** - icon should fit with appropriate padding
-2. **Visual ratio** - check screenshot to see icon-to-container proportion
-3. **Button specs** - refer to `src/specs/button.specs.ts` for icon sizes per button size:
-   - xs (24px button) → 12px icon
-   - s (32px button) → 16px icon
-   - m (40px button) → 16-24px icon
-   - l (54px button) → 20-48px icon
+**⚠️ Figma MCP 403 Error:**
+If you receive a 403 error when using Figma MCP tools, this means the authentication has timed out. Ask the user to restart Claude to refresh the Figma authentication.
+
+**⚠️ Icon Size Note (Figma MCP Bug):**
+Figma MCP has a known bug where it often reports icon sizes as 24px regardless of actual size. **Always double-check icon sizes** - never trust the Figma MCP icon size values directly. Deduce correct icon size from:
+1. **Ask the user** - if unsure, confirm with the user
+2. **Container/button size** - icon should fit with appropriate padding
+3. **Visual ratio** - check screenshot to see icon-to-container proportion
+4. **Existing specs** - refer to established component specs:
+   - Input icons: xs=12px, s=16px, m=20px, l=24px, xl=24px
+   - Button icons: xs=12px, s=16px, m=16-24px, l=20-48px
 
 **Component Template:**
 
