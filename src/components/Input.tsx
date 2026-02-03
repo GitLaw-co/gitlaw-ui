@@ -212,7 +212,7 @@ export const Input: React.FC<InputProps> = ({
           disabled={disabled}
           size={isHug ? Math.max(value?.length || 0, placeholder?.length || 0, 1) : undefined}
           className={`
-            ${isHug ? "w-0 min-w-0 flex-shrink" : "flex-1"} bg-transparent outline-none font-normal
+            ${isHug ? "" : "flex-1"} bg-transparent outline-none font-normal
             text-foreground placeholder:text-subtle
             ${sizeConfig.input}
             ${disabled ? "cursor-not-allowed" : ""}
