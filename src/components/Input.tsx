@@ -210,8 +210,9 @@ export const Input: React.FC<InputProps> = ({
           onBlur={() => setIsFocused(false)}
           placeholder={placeholder}
           disabled={disabled}
+          size={align === "hug" && !isDocumentContext ? (value?.length || placeholder?.length || 10) : undefined}
           className={`
-            flex-1 bg-transparent outline-none font-normal
+            ${align === "hug" && !isDocumentContext ? "w-auto min-w-[60px]" : "flex-1"} bg-transparent outline-none font-normal
             text-foreground placeholder:text-subtle
             ${sizeConfig.input}
             ${disabled ? "cursor-not-allowed" : ""}
