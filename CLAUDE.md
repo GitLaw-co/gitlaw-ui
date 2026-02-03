@@ -203,7 +203,7 @@ import { colors } from '../specs';
 - Never guess specs - if unclear, fetch from Figma again
 
 **⚠️ Figma MCP 403 Error:**
-If you receive a 403 error when using Figma MCP tools, this means the authentication has timed out. Ask the user to restart Claude to refresh the Figma authentication.
+If Figma MCP was previously working and you receive a 403 error, this means the authentication has timed out. Ask the user to restart Claude to refresh the Figma authentication. If Figma MCP has never been connected, ask the user to set up and authorize the Figma MCP integration first.
 
 **⚠️ Icon Size Note (Figma MCP Bug):**
 Figma MCP has a known bug where it often reports icon sizes as 24px regardless of actual size. **Always double-check icon sizes** - never trust the Figma MCP icon size values directly. Deduce correct icon size from:
