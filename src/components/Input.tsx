@@ -174,8 +174,10 @@ export const Input: React.FC<InputProps> = ({
 
   const iconClass = sizeConfig.icon;
 
+  const isHug = align === "hug" && !isDocumentContext;
+
   return (
-    <div className={`flex flex-col gap-2 ${widthClass} ${className}`}>
+    <div className={`${isHug ? "inline-flex" : "flex"} flex-col gap-2 ${widthClass} ${className}`}>
       {shouldShowLabel && (
         <label className={`font-semibold text-foreground ${sizeConfig.label}`}>
           {label}
@@ -183,7 +185,7 @@ export const Input: React.FC<InputProps> = ({
       )}
       <div
         className={`
-          flex items-center rounded overflow-hidden
+          ${isHug ? "inline-flex" : "flex"} items-center rounded overflow-hidden
           border transition-colors
           ${contextConfig.bg}
           ${sizeConfig.container}
@@ -210,9 +212,9 @@ export const Input: React.FC<InputProps> = ({
           onBlur={() => setIsFocused(false)}
           placeholder={placeholder}
           disabled={disabled}
-          size={align === "hug" && !isDocumentContext ? (value?.length || placeholder?.length || 10) : undefined}
+          size={isHug ? (value?.length || placeholder?.length || 10) : undefined}
           className={`
-            ${align === "hug" && !isDocumentContext ? "w-auto min-w-[60px]" : "flex-1"} bg-transparent outline-none font-normal
+            ${isHug ? "w-auto" : "flex-1"} bg-transparent outline-none font-normal
             text-foreground placeholder:text-subtle
             ${sizeConfig.input}
             ${disabled ? "cursor-not-allowed" : ""}
