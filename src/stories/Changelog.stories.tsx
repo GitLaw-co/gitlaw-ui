@@ -1,4 +1,3 @@
-import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { changelog, lastUpdated } from '../changelog/data';
 import { Icon } from '../components/Icon';

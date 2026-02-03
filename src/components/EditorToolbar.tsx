@@ -190,8 +190,6 @@ export const EditorToolbar: React.FC<EditorToolbarProps> = ({
 }) => {
   // Button sizes based on Figma: xs=24px height, s=32px height
   const buttonSize = size === "xs" ? "xs" : "s";
-  // Icon size in buttons with text: xs=12px, s=16px (from button.specs.ts)
-  const buttonIconSize = size === "xs" ? "size-3" : "size-4";
 
   if (status === "reviewing") {
     // Match height to editing variant: xs=40px (h-10), s=48px (h-12)

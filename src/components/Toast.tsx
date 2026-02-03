@@ -23,11 +23,11 @@ export interface ToastProps {
 
 export const Toast: React.FC<ToastProps> = ({
   message,
-  variant = "default",
+  variant: _variant = "default",
   actionLabel = "Action",
   showAction = true,
   onActionClick,
-  onClose,
+  onClose: _onClose,
   className = "",
 }) => {
   return (

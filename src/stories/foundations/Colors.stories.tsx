@@ -37,7 +37,7 @@ interface TextColorSwatchProps {
   bgClassName?: string;
 }
 
-const TextColorSwatch: React.FC<TextColorSwatchProps> = ({ name, value, textClassName, bgClassName = 'bg-card' }) => (
+const TextColorSwatch: React.FC<TextColorSwatchProps> = ({ name, value, textClassName: _textClassName, bgClassName = 'bg-card' }) => (
   <div className="flex flex-col">
     <div
       className={`w-full h-16 rounded-gitlaw-m border border-border ${bgClassName} flex items-center justify-center`}

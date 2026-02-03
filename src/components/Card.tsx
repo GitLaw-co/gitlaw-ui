@@ -77,7 +77,7 @@ export const Card: React.FC<CardProps> = ({
 }) => {
   const isFolder = type === "folder";
   const lastClickTime = useRef<number>(0);
-  const clickTimeout = useRef<NodeJS.Timeout | null>(null);
+  const clickTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Custom click handler with configurable double-click threshold
   const handleClick = useCallback(() => {

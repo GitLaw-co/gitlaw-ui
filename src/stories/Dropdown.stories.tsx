@@ -117,12 +117,6 @@ export const Interactive: Story = {
       { id: '4', label: 'Get link', icon: 'link', onClick: () => console.log('Get link clicked') },
     ],
   },
-  render: (args) => (
-    <div>
-      <p className="text-sm text-subtle mb-4">Click items to see console logs.</p>
-      <Dropdown {...args} />
-    </div>
-  ),
 };
 
 // Document actions menu (like in editor)

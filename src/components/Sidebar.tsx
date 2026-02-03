@@ -3,14 +3,6 @@ import { Icon } from "./Icon";
 import { Tooltip } from "./Tooltip";
 import { colors as dsColors } from "../specs";
 
-// Import logo SVGs as URLs
-// Note: File names are swapped - "inner" files have white logos, "landing" files have purple logos
-// So we swap them here to use the correct colors for each variant
-import innerLogoCollapsed from "../../Assets/landing-logo-collapsed.svg"; // purple logo for light bg
-import innerLogoExpanded from "../../Assets/landing-logo-expanded.svg"; // purple logo for light bg
-import landingLogoCollapsed from "../../Assets/inner-logo-collapsed.svg"; // white logo for dark bg
-import landingLogoExpanded from "../../Assets/inner-logo-expanded.svg"; // white logo for dark bg
-
 export type SidebarVariant = "landing" | "inner";
 export type SidebarStatus = "collapsed" | "expanded";
 export type SidebarUser = "signed-in" | "signed-out";
@@ -161,13 +153,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
     menuItems ||
     (isSignedIn ? defaultSignedInMenuItems : defaultSignedOutMenuItems);
 
-  // Get the correct logo based on variant and status
-  const getLogo = () => {
-    if (isLanding) {
-      return isCollapsed ? landingLogoCollapsed : landingLogoExpanded;
-    }
-    return isCollapsed ? innerLogoCollapsed : innerLogoExpanded;
-  };
+  // Get the logo color based on variant
+  const logoColor = isLanding ? dsColors.iconNegative : dsColors.iconPrimary;
 
   // Color configuration based on variant
   // Landing: dark purple background (primary) with light text/icons
@@ -221,14 +208,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 className={`flex items-center justify-center h-12 p-3 rounded ${themeColors.hoverBg} transition-colors`}
                 aria-label="Open sidebar"
               >
-                <img src={getLogo()} alt="GitLaw" className="h-8" />
+                <Icon name="scale" className="size-8" color={logoColor} />
               </button>
             </Tooltip>
           ) : (
             // Expanded: Show logo and controls
             <>
-              <div className="flex items-center px-3 h-12">
-                <img src={getLogo()} alt="GitLaw" className="h-8" />
+              <div className="flex items-center gap-2 px-3 h-12">
+                <Icon name="scale" className="size-8" color={logoColor} />
+                <span className={`font-semibold text-lg ${isLanding ? "text-foreground-button-negative" : "text-foreground-button"}`}>
+                  GitLaw
+                </span>
               </div>
               <div className="flex items-center gap-1">
                 <button

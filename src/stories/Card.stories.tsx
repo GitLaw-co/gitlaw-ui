@@ -467,7 +467,7 @@ const InteractiveDemo = () => {
     });
   };
 
-  const handleDoubleClick = (id: string, title: string) => {
+  const handleDoubleClick = (_id: string, title: string) => {
     alert(`Opening: ${title}`);
   };
 
