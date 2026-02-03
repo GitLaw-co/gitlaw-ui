@@ -1,51 +1,51 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
-import { colors } from '../specs';
-import { Card } from '../components/Card';
-import { Button } from '../components/Button';
-import { Trash2, ArrowDownToLine, FolderInput, Check } from '../icons';
+import React, { useState, useRef, useCallback, useEffect } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
+import { colors } from "../specs";
+import { Card } from "../components/Card";
+import { Button } from "../components/Button";
+import { Icon } from "../components/Icon";
 
 const meta: Meta<typeof Card> = {
-  title: 'Components/Card',
+  title: "Components/Card",
   component: Card,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     type: {
-      control: 'select',
-      options: ['file', 'template', 'folder'],
-      description: 'Card type',
+      control: "select",
+      options: ["file", "template", "folder"],
+      description: "Card type",
     },
     title: {
-      control: 'text',
-      description: 'Card title',
+      control: "text",
+      description: "Card title",
     },
     description: {
-      control: 'text',
-      description: 'Card description (for file/template)',
+      control: "text",
+      description: "Card description (for file/template)",
     },
     visibility: {
-      control: 'select',
-      options: ['private', 'public', 'shared', 'organization'],
-      description: 'Visibility status',
+      control: "select",
+      options: ["private", "public", "shared", "organization"],
+      description: "Visibility status",
     },
     organizationName: {
-      control: 'text',
-      description: 'Organization name (when visibility is organization)',
+      control: "text",
+      description: "Organization name (when visibility is organization)",
     },
     starred: {
-      control: 'boolean',
-      description: 'Whether card is starred',
+      control: "boolean",
+      description: "Whether card is starred",
     },
     selected: {
-      control: 'boolean',
-      description: 'Whether card is selected (shows 2px primary border)',
+      control: "boolean",
+      description: "Whether card is selected (shows 2px primary border)",
     },
     onFileClick: {
-      action: 'file clicked',
-      description: 'Callback when a file within a folder is clicked',
+      action: "file clicked",
+      description: "Callback when a file within a folder is clicked",
     },
   },
   decorators: [
@@ -62,28 +62,29 @@ type Story = StoryObj<typeof Card>;
 
 // Sample data
 const sampleFiles = [
-  { id: '1', name: 'Service Design Agreement' },
-  { id: '2', name: 'Client Engagement Contract' },
-  { id: '3', name: 'Non-Disclosure Agreement' },
-  { id: '4', name: 'Consulting Services Agreement' },
-  { id: '5', name: 'Partnership Agreement' },
-  { id: '6', name: 'Employment Contract' },
+  { id: "1", name: "Service Design Agreement" },
+  { id: "2", name: "Client Engagement Contract" },
+  { id: "3", name: "Non-Disclosure Agreement" },
+  { id: "4", name: "Consulting Services Agreement" },
+  { id: "5", name: "Partnership Agreement" },
+  { id: "6", name: "Employment Contract" },
 ];
 
 // Default File Card
 export const FileCard: Story = {
   args: {
-    type: 'file',
-    title: 'Service Contract Template',
-    description: 'Explains how Mozilla handles minimal personal data for Facebook pages, with no sharing without consent.',
-    ownerName: 'Whisk',
-    ownerInitials: 'WH',
-    visibility: 'private',
+    type: "file",
+    title: "Service Contract Template",
+    description:
+      "Explains how Mozilla handles minimal personal data for Facebook pages, with no sharing without consent.",
+    ownerName: "Whisk",
+    ownerInitials: "WH",
+    visibility: "private",
     starred: false,
     selected: false,
   },
   render: (args) => (
-    <div style={{ width: '240px' }}>
+    <div style={{ width: "240px" }}>
       <Card {...args} />
     </div>
   ),
@@ -92,17 +93,18 @@ export const FileCard: Story = {
 // Selected File Card
 export const SelectedFileCard: Story = {
   args: {
-    type: 'file',
-    title: 'Design Services Agreement',
-    description: 'Explains how Mozilla handles minimal personal data for Facebook pages, with no sharing without consent.',
-    ownerName: 'Alex Carter',
-    ownerInitials: 'AC',
-    visibility: 'private',
+    type: "file",
+    title: "Design Services Agreement",
+    description:
+      "Explains how Mozilla handles minimal personal data for Facebook pages, with no sharing without consent.",
+    ownerName: "Alex Carter",
+    ownerInitials: "AC",
+    visibility: "private",
     starred: false,
     selected: true,
   },
   render: (args) => (
-    <div style={{ width: '240px' }}>
+    <div style={{ width: "240px" }}>
       <Card {...args} />
     </div>
   ),
@@ -111,17 +113,18 @@ export const SelectedFileCard: Story = {
 // Starred File Card
 export const StarredFileCard: Story = {
   args: {
-    type: 'file',
-    title: 'Service Contract Template',
-    description: 'Explains how Mozilla handles minimal personal data for Facebook pages, with no sharing without consent.',
-    ownerName: 'Whisk',
-    ownerInitials: 'WH',
-    visibility: 'private',
+    type: "file",
+    title: "Service Contract Template",
+    description:
+      "Explains how Mozilla handles minimal personal data for Facebook pages, with no sharing without consent.",
+    ownerName: "Whisk",
+    ownerInitials: "WH",
+    visibility: "private",
     starred: true,
     selected: false,
   },
   render: (args) => (
-    <div style={{ width: '240px' }}>
+    <div style={{ width: "240px" }}>
       <Card {...args} />
     </div>
   ),
@@ -130,15 +133,15 @@ export const StarredFileCard: Story = {
 // Folder Card
 export const FolderCard: Story = {
   args: {
-    type: 'folder',
-    title: 'Service Contract Template',
+    type: "folder",
+    title: "Service Contract Template",
     filesCount: 8,
     files: sampleFiles,
     starred: false,
     selected: false,
   },
   render: (args) => (
-    <div style={{ width: '240px' }}>
+    <div style={{ width: "240px" }}>
       <Card {...args} />
     </div>
   ),
@@ -147,15 +150,15 @@ export const FolderCard: Story = {
 // Selected Folder Card
 export const SelectedFolderCard: Story = {
   args: {
-    type: 'folder',
-    title: 'Service Contract Template',
+    type: "folder",
+    title: "Service Contract Template",
     filesCount: 8,
     files: sampleFiles,
     starred: false,
     selected: true,
   },
   render: (args) => (
-    <div style={{ width: '240px' }}>
+    <div style={{ width: "240px" }}>
       <Card {...args} />
     </div>
   ),
@@ -165,7 +168,7 @@ export const SelectedFolderCard: Story = {
 export const VisibilityStates: Story = {
   render: () => (
     <div className="flex gap-2">
-      <div style={{ width: '220px' }}>
+      <div style={{ width: "220px" }}>
         <Card
           type="file"
           title="Private Document"
@@ -175,7 +178,7 @@ export const VisibilityStates: Story = {
           visibility="private"
         />
       </div>
-      <div style={{ width: '220px' }}>
+      <div style={{ width: "220px" }}>
         <Card
           type="file"
           title="Public Document"
@@ -185,7 +188,7 @@ export const VisibilityStates: Story = {
           visibility="public"
         />
       </div>
-      <div style={{ width: '220px' }}>
+      <div style={{ width: "220px" }}>
         <Card
           type="file"
           title="Shared Document"
@@ -195,7 +198,7 @@ export const VisibilityStates: Story = {
           visibility="shared"
         />
       </div>
-      <div style={{ width: '220px' }}>
+      <div style={{ width: "220px" }}>
         <Card
           type="file"
           title="Organization Document"
@@ -215,9 +218,11 @@ export const ResponsiveSizes: Story = {
   render: () => (
     <div className="flex flex-col gap-8">
       <div>
-        <h3 className="text-sm font-semibold mb-4 text-subtle">Under 200px (compact: no star, no file count, 16px padding)</h3>
+        <h3 className="text-sm font-semibold mb-4 text-subtle">
+          Under 200px (compact: no star, no file count, 16px padding)
+        </h3>
         <div className="flex gap-2">
-          <div style={{ width: '180px' }}>
+          <div style={{ width: "180px" }}>
             <Card
               type="file"
               title="Compact File"
@@ -228,7 +233,7 @@ export const ResponsiveSizes: Story = {
               starred={true}
             />
           </div>
-          <div style={{ width: '180px' }}>
+          <div style={{ width: "180px" }}>
             <Card
               type="folder"
               title="Compact Folder"
@@ -240,9 +245,11 @@ export const ResponsiveSizes: Story = {
         </div>
       </div>
       <div>
-        <h3 className="text-sm font-semibold mb-4 text-subtle">200px+ (full: star visible, file count visible, 24px padding)</h3>
+        <h3 className="text-sm font-semibold mb-4 text-subtle">
+          200px+ (full: star visible, file count visible, 24px padding)
+        </h3>
         <div className="flex gap-2">
-          <div style={{ width: '240px' }}>
+          <div style={{ width: "240px" }}>
             <Card
               type="file"
               title="Standard File"
@@ -253,7 +260,7 @@ export const ResponsiveSizes: Story = {
               starred={true}
             />
           </div>
-          <div style={{ width: '240px' }}>
+          <div style={{ width: "240px" }}>
             <Card
               type="folder"
               title="Standard Folder"
@@ -291,14 +298,69 @@ const InteractiveDemo = () => {
   const cardRefs = useRef<Map<string, HTMLDivElement>>(new Map());
 
   const cards = [
-    { id: '1', type: 'folder' as const, title: 'Service Contract Template', filesCount: 8, files: sampleFiles },
-    { id: '2', type: 'file' as const, title: 'Design Services Agreement', description: 'Explains how Mozilla handles minimal personal data.', ownerName: 'Alex Carter', ownerInitials: 'AC' },
-    { id: '3', type: 'file' as const, title: 'Mutual NDA', description: 'Explains how Mozilla handles minimal personal data.', ownerName: 'Open Legal Library', ownerInitials: 'OL' },
-    { id: '4', type: 'file' as const, title: 'Client Engagement Framework', description: 'Explains how Mozilla handles minimal personal data.', ownerName: 'Open Legal Library', ownerInitials: 'OL' },
-    { id: '5', type: 'file' as const, title: 'Project Collaboration Contract', description: 'Explains how Mozilla handles minimal personal data.', ownerName: 'Blake Logan', ownerInitials: 'BL' },
-    { id: '6', type: 'file' as const, title: 'Design Services Agreement', description: 'Explains how Mozilla handles minimal personal data.', ownerName: 'John Titor', ownerInitials: 'JT' },
-    { id: '7', type: 'file' as const, title: 'Creative Partnership Agreement', description: 'Explains how Mozilla handles minimal personal data.', ownerName: 'Blake Logan', ownerInitials: 'BL' },
-    { id: '8', type: 'file' as const, title: 'Service Contract Template', description: 'Explains how Mozilla handles minimal personal data.', ownerName: 'Alex Carter', ownerInitials: 'AC' },
+    {
+      id: "1",
+      type: "folder" as const,
+      title: "Service Contract Template",
+      filesCount: 8,
+      files: sampleFiles,
+    },
+    {
+      id: "2",
+      type: "file" as const,
+      title: "Design Services Agreement",
+      description: "Explains how Mozilla handles minimal personal data.",
+      ownerName: "Alex Carter",
+      ownerInitials: "AC",
+    },
+    {
+      id: "3",
+      type: "file" as const,
+      title: "Mutual NDA",
+      description: "Explains how Mozilla handles minimal personal data.",
+      ownerName: "Open Legal Library",
+      ownerInitials: "OL",
+    },
+    {
+      id: "4",
+      type: "file" as const,
+      title: "Client Engagement Framework",
+      description: "Explains how Mozilla handles minimal personal data.",
+      ownerName: "Open Legal Library",
+      ownerInitials: "OL",
+    },
+    {
+      id: "5",
+      type: "file" as const,
+      title: "Project Collaboration Contract",
+      description: "Explains how Mozilla handles minimal personal data.",
+      ownerName: "Blake Logan",
+      ownerInitials: "BL",
+    },
+    {
+      id: "6",
+      type: "file" as const,
+      title: "Design Services Agreement",
+      description: "Explains how Mozilla handles minimal personal data.",
+      ownerName: "John Titor",
+      ownerInitials: "JT",
+    },
+    {
+      id: "7",
+      type: "file" as const,
+      title: "Creative Partnership Agreement",
+      description: "Explains how Mozilla handles minimal personal data.",
+      ownerName: "Blake Logan",
+      ownerInitials: "BL",
+    },
+    {
+      id: "8",
+      type: "file" as const,
+      title: "Service Contract Template",
+      description: "Explains how Mozilla handles minimal personal data.",
+      ownerName: "Alex Carter",
+      ownerInitials: "AC",
+    },
   ];
 
   const getCardPositions = useCallback((): CardPosition[] => {
@@ -311,39 +373,44 @@ const InteractiveDemo = () => {
     return positions;
   }, []);
 
-  const getCardsInSelection = useCallback((box: SelectionBox): Set<string> => {
-    const containerRect = containerRef.current?.getBoundingClientRect();
-    if (!containerRect) return new Set();
+  const getCardsInSelection = useCallback(
+    (box: SelectionBox): Set<string> => {
+      const containerRect = containerRef.current?.getBoundingClientRect();
+      if (!containerRect) return new Set();
 
-    // Convert selection box to absolute screen coordinates
-    const selectionLeft = Math.min(box.startX, box.endX) + containerRect.left;
-    const selectionRight = Math.max(box.startX, box.endX) + containerRect.left;
-    const selectionTop = Math.min(box.startY, box.endY) + containerRect.top;
-    const selectionBottom = Math.max(box.startY, box.endY) + containerRect.top;
+      // Convert selection box to absolute screen coordinates
+      const selectionLeft = Math.min(box.startX, box.endX) + containerRect.left;
+      const selectionRight =
+        Math.max(box.startX, box.endX) + containerRect.left;
+      const selectionTop = Math.min(box.startY, box.endY) + containerRect.top;
+      const selectionBottom =
+        Math.max(box.startY, box.endY) + containerRect.top;
 
-    const selected = new Set<string>();
-    const positions = getCardPositions();
+      const selected = new Set<string>();
+      const positions = getCardPositions();
 
-    positions.forEach(({ id, rect }) => {
-      // Check if card intersects with selection box (using absolute coordinates)
-      const intersects = !(
-        rect.right < selectionLeft ||
-        rect.left > selectionRight ||
-        rect.bottom < selectionTop ||
-        rect.top > selectionBottom
-      );
-      if (intersects) {
-        selected.add(id);
-      }
-    });
+      positions.forEach(({ id, rect }) => {
+        // Check if card intersects with selection box (using absolute coordinates)
+        const intersects = !(
+          rect.right < selectionLeft ||
+          rect.left > selectionRight ||
+          rect.bottom < selectionTop ||
+          rect.top > selectionBottom
+        );
+        if (intersects) {
+          selected.add(id);
+        }
+      });
 
-    return selected;
-  }, [getCardPositions]);
+      return selected;
+    },
+    [getCardPositions],
+  );
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     // Don't start drag if clicking on a card or a button
     const target = e.target as HTMLElement;
-    if (target.closest('[data-card="true"]') || target.closest('button')) {
+    if (target.closest('[data-card="true"]') || target.closest("button")) {
       return;
     }
 
@@ -358,16 +425,19 @@ const InteractiveDemo = () => {
     }
   }, []);
 
-  const handleMouseMove = useCallback((e: MouseEvent) => {
-    if (isDragging && selectionBox && containerRef.current) {
-      const containerRect = containerRef.current.getBoundingClientRect();
-      const x = e.clientX - containerRect.left;
-      const y = e.clientY - containerRect.top;
-      const newBox = { ...selectionBox, endX: x, endY: y };
-      setSelectionBox(newBox);
-      setSelectedIds(getCardsInSelection(newBox));
-    }
-  }, [isDragging, selectionBox, getCardsInSelection]);
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
+      if (isDragging && selectionBox && containerRef.current) {
+        const containerRect = containerRef.current.getBoundingClientRect();
+        const x = e.clientX - containerRect.left;
+        const y = e.clientY - containerRect.top;
+        const newBox = { ...selectionBox, endX: x, endY: y };
+        setSelectionBox(newBox);
+        setSelectedIds(getCardsInSelection(newBox));
+      }
+    },
+    [isDragging, selectionBox, getCardsInSelection],
+  );
 
   const handleMouseUp = useCallback(() => {
     setIsDragging(false);
@@ -376,11 +446,11 @@ const InteractiveDemo = () => {
 
   useEffect(() => {
     if (isDragging) {
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUp);
+      document.addEventListener("mousemove", handleMouseMove);
+      document.addEventListener("mouseup", handleMouseUp);
       return () => {
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseup', handleMouseUp);
+        document.removeEventListener("mousemove", handleMouseMove);
+        document.removeEventListener("mouseup", handleMouseUp);
       };
     }
   }, [isDragging, handleMouseMove, handleMouseUp]);
@@ -404,15 +474,15 @@ const InteractiveDemo = () => {
   const getSelectionBoxStyle = (): React.CSSProperties | undefined => {
     if (!selectionBox) return undefined;
     return {
-      position: 'absolute',
+      position: "absolute",
       left: Math.min(selectionBox.startX, selectionBox.endX),
       top: Math.min(selectionBox.startY, selectionBox.endY),
       width: Math.abs(selectionBox.endX - selectionBox.startX),
       height: Math.abs(selectionBox.endY - selectionBox.startY),
-      backgroundColor: 'rgba(94, 73, 214, 0.1)',
-      border: '2px solid rgba(94, 73, 214, 0.5)',
-      borderRadius: '4px',
-      pointerEvents: 'none',
+      backgroundColor: "rgba(94, 73, 214, 0.1)",
+      border: "2px solid rgba(94, 73, 214, 0.5)",
+      borderRadius: "4px",
+      pointerEvents: "none",
       zIndex: 50,
     };
   };
@@ -421,18 +491,20 @@ const InteractiveDemo = () => {
     <div
       ref={containerRef}
       className="relative select-none w-full"
-      style={{ minHeight: '800px', minWidth: '1400px' }}
+      style={{ minHeight: "800px", minWidth: "1400px" }}
       onMouseDown={handleMouseDown}
     >
       {/* Selection rectangle - rendered at container level */}
       {selectionBox && <div style={getSelectionBoxStyle()} />}
 
       {/* Content wrapper - fixed width, centered */}
-      <div style={{ width: GRID_WIDTH, margin: '0 auto' }}>
+      <div style={{ width: GRID_WIDTH, margin: "0 auto" }}>
         {/* Header - aligned with grid */}
         <div className="flex items-center justify-between mb-6">
           <p className="text-lg font-semibold text-primary">
-            {selectedIds.size > 0 ? `${selectedIds.size} file${selectedIds.size > 1 ? 's' : ''} selected` : 'Click or drag to select'}
+            {selectedIds.size > 0
+              ? `${selectedIds.size} file${selectedIds.size > 1 ? "s" : ""} selected`
+              : "Click or drag to select"}
           </p>
           {selectedIds.size > 0 && (
             <div className="flex items-center gap-1">
@@ -440,7 +512,13 @@ const InteractiveDemo = () => {
                 variant="secondary"
                 size="s"
                 showLeftIcon
-                leftIcon={<Trash2 className="size-4" color={colors.iconPrimary} />}
+                leftIcon={
+                  <Icon
+                    name="trash-2"
+                    className="size-4"
+                    color={colors.iconPrimary}
+                  />
+                }
               >
                 Delete
               </Button>
@@ -448,7 +526,13 @@ const InteractiveDemo = () => {
                 variant="secondary"
                 size="s"
                 showLeftIcon
-                leftIcon={<ArrowDownToLine className="size-4" color={colors.iconPrimary} />}
+                leftIcon={
+                  <Icon
+                    name="arrow-down-to-line"
+                    className="size-4"
+                    color={colors.iconPrimary}
+                  />
+                }
               >
                 Download
               </Button>
@@ -456,7 +540,13 @@ const InteractiveDemo = () => {
                 variant="secondary"
                 size="s"
                 showLeftIcon
-                leftIcon={<FolderInput className="size-4" color={colors.iconPrimary} />}
+                leftIcon={
+                  <Icon
+                    name="folder-input"
+                    className="size-4"
+                    color={colors.iconPrimary}
+                  />
+                }
               >
                 Move
               </Button>
@@ -464,7 +554,9 @@ const InteractiveDemo = () => {
                 variant="primary"
                 size="s"
                 showLeftIcon
-                leftIcon={<Check className="size-4" color={colors.white} />}
+                leftIcon={
+                  <Icon name="check" className="size-4" color={colors.white} />
+                }
                 onClick={() => setSelectedIds(new Set())}
               >
                 Done
@@ -486,11 +578,17 @@ const InteractiveDemo = () => {
               <Card
                 type={card.type}
                 title={card.title}
-                description={card.type === 'file' ? card.description : undefined}
-                ownerName={card.type === 'file' ? card.ownerName : undefined}
-                ownerInitials={card.type === 'file' ? card.ownerInitials : undefined}
-                filesCount={card.type === 'folder' ? card.filesCount : undefined}
-                files={card.type === 'folder' ? card.files : undefined}
+                description={
+                  card.type === "file" ? card.description : undefined
+                }
+                ownerName={card.type === "file" ? card.ownerName : undefined}
+                ownerInitials={
+                  card.type === "file" ? card.ownerInitials : undefined
+                }
+                filesCount={
+                  card.type === "folder" ? card.filesCount : undefined
+                }
+                files={card.type === "folder" ? card.files : undefined}
                 visibility="private"
                 selected={selectedIds.has(card.id)}
                 onClick={() => toggleSelection(card.id)}
@@ -502,7 +600,8 @@ const InteractiveDemo = () => {
 
         {/* Footer hint */}
         <p className="text-xs text-subtle mt-6">
-          Click to select/deselect. Drag anywhere for rubber band selection. Double click to open.
+          Click to select/deselect. Drag anywhere for rubber band selection.
+          Double click to open.
         </p>
       </div>
     </div>

@@ -1,14 +1,15 @@
-import React from 'react';
-import { Icon } from './Icon';
-import { colors } from '../specs';
+import React from "react";
+import { Icon } from "./Icon";
+import { Tooltip } from "./Tooltip";
+import { colors } from "../specs";
 
-export type ChatInputStatus = 'active' | 'populated' | 'working';
-export type ChatInputSize = 'l' | 'm';
+export type ChatInputStatus = "active" | "populated" | "working";
+export type ChatInputSize = "l" | "m";
 
 export interface QuickAction {
   id: string;
   label: string;
-  icon: 'draft' | 'review' | 'summarize';
+  icon: "draft" | "review" | "summarize";
 }
 
 export interface ChatInputProps {
@@ -41,29 +42,45 @@ export interface ChatInputProps {
 }
 
 const defaultQuickActions: QuickAction[] = [
-  { id: 'draft', label: 'Draft', icon: 'draft' },
-  { id: 'review', label: 'Review', icon: 'review' },
-  { id: 'summarize', label: 'Summarize', icon: 'summarize' },
+  { id: "draft", label: "Draft", icon: "draft" },
+  { id: "review", label: "Review", icon: "review" },
+  { id: "summarize", label: "Summarize", icon: "summarize" },
 ];
+
+const quickActionTooltips: Record<string, string> = {
+  draft: "Draft a new document",
+  review: "Review a document",
+  summarize: "Summarize a document",
+};
 
 const QuickActionIcon: React.FC<{ icon: string }> = ({ icon }) => {
   switch (icon) {
-    case 'draft':
-      return <Icon name="file-plus" className="size-4" color={colors.iconPrimary} />;
-    case 'review':
-      return <Icon name="file-search" className="size-4" color={colors.iconPrimary} />;
-    case 'summarize':
-      return <Icon name="align-left" className="size-4" color={colors.iconPrimary} />;
+    case "draft":
+      return (
+        <Icon name="file-plus" className="size-4" color={colors.iconPrimary} />
+      );
+    case "review":
+      return (
+        <Icon
+          name="file-search"
+          className="size-4"
+          color={colors.iconPrimary}
+        />
+      );
+    case "summarize":
+      return (
+        <Icon name="align-left" className="size-4" color={colors.iconPrimary} />
+      );
     default:
       return null;
   }
 };
 
 export const ChatInput: React.FC<ChatInputProps> = ({
-  status = 'active',
-  size = 'l',
-  placeholder = 'Draft a mutual NDA',
-  value = '',
+  status = "active",
+  size = "l",
+  placeholder = "Draft a mutual NDA",
+  value = "",
   showQuickActions = true,
   quickActions = defaultQuickActions,
   onChange,
@@ -72,15 +89,15 @@ export const ChatInput: React.FC<ChatInputProps> = ({
   onAttachmentClick,
   onSettingsClick,
   onStopClick,
-  className = '',
+  className = "",
 }) => {
-  const isWorking = status === 'working';
-  const isPopulated = status === 'populated' || value.length > 0;
-  const isLarge = size === 'l';
+  const isWorking = status === "working";
+  const isPopulated = status === "populated" || value.length > 0;
+  const isLarge = size === "l";
 
-  const paddingClass = isLarge ? 'p-6' : 'p-4';
-  const gapClass = isLarge ? 'gap-6' : 'gap-4';
-  const roundedClass = isLarge ? 'rounded-xl' : 'rounded-lg';
+  const paddingClass = isLarge ? "p-6" : "p-4";
+  const gapClass = isLarge ? "gap-6" : "gap-4";
+  const roundedClass = isLarge ? "rounded-xl" : "rounded-lg";
 
   // Working state
   if (isWorking) {
@@ -146,7 +163,11 @@ export const ChatInput: React.FC<ChatInputProps> = ({
               p-1 rounded transition-colors shrink-0
             "
           >
-            <Icon name="arrow-up" className="size-6" color={colors.iconNegative} />
+            <Icon
+              name="arrow-up"
+              className="size-6"
+              color={colors.iconNegative}
+            />
           </button>
         )}
       </div>
@@ -155,40 +176,64 @@ export const ChatInput: React.FC<ChatInputProps> = ({
       <div className="flex items-center justify-between w-full">
         {/* Left buttons */}
         <div className="flex items-center gap-1">
-          <button
-            type="button"
-            onClick={onAttachmentClick}
-            className="p-1 hover:bg-secondary rounded transition-colors"
+          <Tooltip content="Add a file" type="purple" position="bottom" size="s">
+            <button
+              type="button"
+              onClick={onAttachmentClick}
+              className="p-1 hover:bg-secondary rounded transition-colors"
+            >
+              <Icon
+                name="paperclip"
+                className="size-6"
+                color={colors.iconPrimary}
+              />
+            </button>
+          </Tooltip>
+          <Tooltip
+            content="Configure chat"
+            type="purple"
+            position="bottom"
+            size="s"
           >
-            <Icon name="paperclip" className="size-6" color={colors.iconPrimary} />
-          </button>
-          <button
-            type="button"
-            onClick={onSettingsClick}
-            className="p-1 hover:bg-secondary rounded transition-colors"
-          >
-            <Icon name="settings-2" className="size-6" color={colors.iconPrimary} />
-          </button>
+            <button
+              type="button"
+              onClick={onSettingsClick}
+              className="p-1 hover:bg-secondary rounded transition-colors"
+            >
+              <Icon
+                name="settings-2"
+                className="size-6"
+                color={colors.iconPrimary}
+              />
+            </button>
+          </Tooltip>
         </div>
 
         {/* Quick actions */}
         {showQuickActions && (
           <div className="flex flex-wrap items-center justify-center gap-2">
             {quickActions.map((action) => (
-              <button
+              <Tooltip
                 key={action.id}
-                type="button"
-                onClick={() => onQuickActionClick?.(action)}
-                className="
-                  bg-secondary hover:bg-secondary-hover
-                  flex items-center gap-1 h-8 px-3 py-2 rounded
-                  text-xs font-normal text-foreground-button leading-[1.4]
-                  transition-colors
-                "
+                content={quickActionTooltips[action.icon] || action.label}
+                type="purple"
+                position="bottom"
+                size="s"
               >
-                <QuickActionIcon icon={action.icon} />
-                <span>{action.label}</span>
-              </button>
+                <button
+                  type="button"
+                  onClick={() => onQuickActionClick?.(action)}
+                  className="
+                    bg-secondary hover:bg-secondary-hover
+                    flex items-center gap-1 h-8 px-3 py-2 rounded
+                    text-xs font-normal text-foreground-button leading-[1.4]
+                    transition-colors
+                  "
+                >
+                  <QuickActionIcon icon={action.icon} />
+                  <span>{action.label}</span>
+                </button>
+              </Tooltip>
             ))}
           </div>
         )}

@@ -1,9 +1,9 @@
-import React, { useRef, useCallback } from 'react';
-import { Icon } from './Icon';
-import { colors } from '../specs';
+import React, { useRef, useCallback } from "react";
+import { Icon } from "./Icon";
+import { colors } from "../specs";
 
-export type CardType = 'file' | 'template' | 'folder';
-export type CardVisibility = 'private' | 'public' | 'shared' | 'organization';
+export type CardType = "file" | "template" | "folder";
+export type CardVisibility = "private" | "public" | "shared" | "organization";
 
 export interface CardFileItem {
   id: string;
@@ -52,16 +52,16 @@ export interface CardProps {
 }
 
 // Icon size constant
-const ICON_SIZE = 'size-5';
+const ICON_SIZE = "size-5";
 
 export const Card: React.FC<CardProps> = ({
-  type = 'file',
+  type = "file",
   title,
   description,
   ownerName,
   ownerInitials,
   ownerAvatar,
-  visibility = 'private',
+  visibility = "private",
   organizationName,
   starred = false,
   selected = false,
@@ -73,9 +73,9 @@ export const Card: React.FC<CardProps> = ({
   onMenuClick,
   onFileClick,
   doubleClickThreshold = 250,
-  className = '',
+  className = "",
 }) => {
-  const isFolder = type === 'folder';
+  const isFolder = type === "folder";
   const lastClickTime = useRef<number>(0);
   const clickTimeout = useRef<NodeJS.Timeout | null>(null);
 
@@ -107,31 +107,61 @@ export const Card: React.FC<CardProps> = ({
 
   const getVisibilityLabel = () => {
     switch (visibility) {
-      case 'private':
-        return 'Private';
-      case 'public':
-        return 'Public';
-      case 'shared':
-        return 'Shared';
-      case 'organization':
-        return organizationName || 'Organization';
+      case "private":
+        return "Private";
+      case "public":
+        return "Public";
+      case "shared":
+        return "Shared";
+      case "organization":
+        return organizationName || "Organization";
       default:
-        return 'Private';
+        return "Private";
     }
   };
 
   const getVisibilityIcon = () => {
     switch (visibility) {
-      case 'private':
-        return <Icon name="lock" className="size-6 shrink-0" color={colors.iconSecondary} />;
-      case 'public':
-        return <Icon name="earth" className="size-6 shrink-0" color={colors.iconSecondary} />;
-      case 'shared':
-        return <Icon name="users-round" className="size-6 shrink-0" color={colors.iconSecondary} />;
-      case 'organization':
-        return <Icon name="building-2" className="size-6 shrink-0" color={colors.iconSecondary} />;
+      case "private":
+        return (
+          <Icon
+            name="lock"
+            className="size-6 shrink-0"
+            color={colors.iconSecondary}
+          />
+        );
+      case "public":
+        return (
+          <Icon
+            name="earth"
+            className="size-6 shrink-0"
+            color={colors.iconSecondary}
+          />
+        );
+      case "shared":
+        return (
+          <Icon
+            name="users-round"
+            className="size-6 shrink-0"
+            color={colors.iconSecondary}
+          />
+        );
+      case "organization":
+        return (
+          <Icon
+            name="building-2"
+            className="size-6 shrink-0"
+            color={colors.iconSecondary}
+          />
+        );
       default:
-        return <Icon name="lock" className="size-6 shrink-0" color={colors.iconSecondary} />;
+        return (
+          <Icon
+            name="lock"
+            className="size-6 shrink-0"
+            color={colors.iconSecondary}
+          />
+        );
     }
   };
 
@@ -144,12 +174,20 @@ export const Card: React.FC<CardProps> = ({
           <div className="flex items-center gap-1.5">
             <div className="size-6 rounded bg-primary flex items-center justify-center shrink-0">
               {ownerAvatar ? (
-                <img src={ownerAvatar} alt={ownerName} className="w-full h-full object-cover rounded" />
+                <img
+                  src={ownerAvatar}
+                  alt={ownerName}
+                  className="w-full h-full object-cover rounded"
+                />
               ) : (
-                <span className="text-[10px] font-black text-negative">{ownerInitials}</span>
+                <span className="text-[10px] font-black text-negative">
+                  {ownerInitials}
+                </span>
               )}
             </div>
-            <span className="text-xs font-normal text-foreground leading-[1.4]">{ownerName}</span>
+            <span className="text-xs font-normal text-foreground leading-[1.4]">
+              {ownerName}
+            </span>
           </div>
         )}
 
@@ -163,7 +201,11 @@ export const Card: React.FC<CardProps> = ({
             }}
             className="p-1 hover:bg-secondary rounded transition-colors hidden @[200px]:block"
           >
-            <Icon name="star" className={ICON_SIZE} color={starred ? colors.iconPrimary : colors.iconDisabled} />
+            <Icon
+              name="star"
+              className={ICON_SIZE}
+              color={starred ? colors.iconPrimary : colors.iconDisabled}
+            />
           </button>
           <button
             type="button"
@@ -173,13 +215,19 @@ export const Card: React.FC<CardProps> = ({
             }}
             className="p-1 hover:bg-secondary rounded transition-colors"
           >
-            <Icon name="ellipsis" className={ICON_SIZE} color={colors.iconSecondary} />
+            <Icon
+              name="ellipsis"
+              className={ICON_SIZE}
+              color={colors.iconSecondary}
+            />
           </button>
         </div>
       </div>
 
       {/* Title - DM Serif Text, 24px, primary-text */}
-      <h3 className="font-serif text-2xl font-normal text-foreground leading-[1.4]">{title}</h3>
+      <h3 className="font-serif text-2xl font-normal text-foreground leading-[1.4]">
+        {title}
+      </h3>
 
       {/* Description - sm (14px), secondary-text */}
       {description && (
@@ -195,9 +243,15 @@ export const Card: React.FC<CardProps> = ({
       {/* Folder header */}
       <div className="flex items-center gap-2 p-3 w-full">
         <div className="flex items-center gap-2 flex-1 min-w-0">
-          <Icon name="folder-closed" className="size-6 shrink-0" color={colors.iconPrimary} />
+          <Icon
+            name="folder-closed"
+            className="size-6 shrink-0"
+            color={colors.iconPrimary}
+          />
           <div className="flex flex-col flex-1 min-w-0">
-            <h3 className="text-base font-normal text-foreground leading-[1.4] truncate">{title}</h3>
+            <h3 className="text-base font-normal text-foreground leading-[1.4] truncate">
+              {title}
+            </h3>
             {/* File count hidden under 200px */}
             <span className="text-xs font-normal text-subtle leading-[1.4] hidden @[200px]:block">
               {filesCount} files
@@ -215,7 +269,11 @@ export const Card: React.FC<CardProps> = ({
             }}
             className="p-1 hover:bg-secondary rounded transition-colors hidden @[200px]:block"
           >
-            <Icon name="star" className={ICON_SIZE} color={starred ? colors.iconPrimary : colors.iconDisabled} />
+            <Icon
+              name="star"
+              className={ICON_SIZE}
+              color={starred ? colors.iconPrimary : colors.iconDisabled}
+            />
           </button>
           <button
             type="button"
@@ -225,7 +283,11 @@ export const Card: React.FC<CardProps> = ({
             }}
             className="p-1 hover:bg-secondary rounded transition-colors"
           >
-            <Icon name="ellipsis" className={ICON_SIZE} color={colors.iconSecondary} />
+            <Icon
+              name="ellipsis"
+              className={ICON_SIZE}
+              color={colors.iconSecondary}
+            />
           </button>
         </div>
       </div>
@@ -244,8 +306,14 @@ export const Card: React.FC<CardProps> = ({
               onFileClick?.(file);
             }}
           >
-            <Icon name="file-text" className="size-6 shrink-0" color={colors.iconDisabled} />
-            <span className="text-base font-normal text-foreground truncate">{file.name}</span>
+            <Icon
+              name="file-text"
+              className="size-6 shrink-0"
+              color={colors.iconDisabled}
+            />
+            <span className="text-base font-normal text-foreground truncate">
+              {file.name}
+            </span>
           </div>
         ))}
       </div>
@@ -259,11 +327,10 @@ export const Card: React.FC<CardProps> = ({
         w-full min-w-[160px]
         p-4 @[200px]:p-6
         transition-all
-        ${selected ? 'ring-2 ring-primary' : ''}
         ${className}
       `}
       style={{
-        aspectRatio: '3/4',
+        aspectRatio: "3/4",
       }}
       onClick={handleClick}
       data-card="true"
@@ -276,7 +343,8 @@ export const Card: React.FC<CardProps> = ({
         <div
           className="absolute bottom-0 left-0 right-0 h-[68px] pointer-events-none"
           style={{
-            background: 'linear-gradient(to bottom, transparent 0%, white 16px, white 100%)',
+            background:
+              "linear-gradient(to bottom, transparent 0%, white 16px, white 100%)",
           }}
         >
           {/* Visibility row */}
@@ -294,7 +362,17 @@ export const Card: React.FC<CardProps> = ({
         <div
           className="absolute bottom-0 left-0 right-0 h-11 pointer-events-none"
           style={{
-            background: 'linear-gradient(to top, white 0%, transparent 100%)',
+            background: "linear-gradient(to top, white 0%, transparent 100%)",
+          }}
+        />
+      )}
+
+      {/* Selection ring overlay - renders above all content */}
+      {selected && (
+        <div
+          className="absolute inset-0 rounded-lg pointer-events-none"
+          style={{
+            boxShadow: "inset 0 0 0 2px #5E49D6",
           }}
         />
       )}

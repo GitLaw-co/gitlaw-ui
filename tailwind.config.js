@@ -62,6 +62,7 @@ export default {
           bright: '#FFFFFF',     // white
           border: '#DCE3E8',     // bluish/100 (input-border) - NOT purple/200!
           disabled: '#F1F5F8',   // bluish/50 (input-disabled)
+          yellow: '#FEF37D',     // document empty input background
         },
         // Switch Colors
         switch: {
@@ -140,6 +141,7 @@ export default {
       fontFamily: {
         sans: ['DM Sans', 'sans-serif'],
         serif: ['DM Serif Text', 'serif'],
+        document: ['Merriweather', 'serif'], // Document/editor font
       },
       fontSize: {
         xxs: ['10px', { lineHeight: '1.4' }],
@@ -168,6 +170,19 @@ export default {
       },
       boxShadow: {
         card: '0px 10px 40px 0px rgba(0, 0, 0, 0.05)',
+      },
+      ringColor: {
+        primary: '#5E49D6',
+      },
+      screens: {
+        'xs': '448px',
+        'sm': '640px',
+        'md': '768px',
+        'lg': '1024px',
+        'xl': '1280px',
+        '2xl': '1536px',
+        '3xl': '1792px',
+        '4xl': '2048px',
       },
     },
   },
