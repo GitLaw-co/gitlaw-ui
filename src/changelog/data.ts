@@ -1,5 +1,5 @@
 // Auto-generated changelog from git commits
-// Generated: 2026-02-03T16:30:45.165Z
+// Generated: 2026-02-03T17:44:02.503Z
 // Run: node scripts/generate-changelog.js
 
 export interface ChangelogEntry {
@@ -14,6 +14,62 @@ export const changelog: ChangelogEntry[] = [
   {
     "date": "2026-02-03",
     "commits": [
+      {
+        "hash": "c47720b",
+        "message": "Add ChatThread component with message components and reorganize Storybook"
+      },
+      {
+        "hash": "980ddb9",
+        "message": "Fix document context Input to be inline with w-auto, not full-width"
+      },
+      {
+        "hash": "d97932b",
+        "message": "Simplify Input - remove hug customizations, keep only background color for document context"
+      },
+      {
+        "hash": "cb0ea0e",
+        "message": "Fix Input hug - remove w-0 that was hiding text"
+      },
+      {
+        "hash": "ee2b7dc",
+        "message": "Fix Input hug using size attribute with w-0 min-w-0 for tighter fit"
+      },
+      {
+        "hash": "d156705",
+        "message": "Reduce Input hug right padding by removing +1ch buffer"
+      },
+      {
+        "hash": "1ddef3d",
+        "message": "Fix Input hug using ch units for proper character-based width"
+      },
+      {
+        "hash": "b1f57d2",
+        "message": "Make document context inputs use hug behavior by default"
+      },
+      {
+        "hash": "bb17c45",
+        "message": "Fix Input hug alignment using inline-flex for proper content hugging"
+      },
+      {
+        "hash": "20830b8",
+        "message": "Fix Input hug alignment to actually hug contents"
+      },
+      {
+        "hash": "84ddabd",
+        "message": "Fix text color swatches using inline style for color"
+      },
+      {
+        "hash": "045a6ce",
+        "message": "Fix text color swatches to show actual text samples"
+      },
+      {
+        "hash": "37087b0",
+        "message": "Fix typography font demo overflow in cards"
+      },
+      {
+        "hash": "2581317",
+        "message": "Update changelog with latest commits"
+      },
       {
         "hash": "350a7cf",
         "message": "Various component updates and new EditorPaper/EditorSection components"
@@ -158,56 +214,6 @@ export const changelog: ChangelogEntry[] = [
       {
         "hash": "51776ce",
         "message": "Reorganize Storybook navigation to match README categories"
-      },
-      {
-        "hash": "aa8a720",
-        "message": "Add centralized component specs for Figma design tokens"
-      },
-      {
-        "hash": "650740b",
-        "message": "Revert Dialog icons to correct 16px size for size=m buttons"
-      },
-      {
-        "hash": "84c7486",
-        "message": "Fix Dialog button icons to match Figma specs (24px)"
-      },
-      {
-        "hash": "cce4398",
-        "message": "Fix button icon sizes in Dialog and Card.stories"
-      },
-      {
-        "hash": "35c9d03",
-        "message": "Fix icon sizes in buttons to match Figma specs"
-      },
-      {
-        "hash": "94be51e",
-        "message": "Fix Button sizes to match Figma specs"
-      },
-      {
-        "hash": "fac8718",
-        "message": "Update intro: Not intended for production use (yet!)"
-      }
-    ]
-  },
-  {
-    "date": "2026-01-31",
-    "commits": [
-      {
-        "hash": "a21510a",
-        "message": "Update README and Introduction docs"
-      },
-      {
-        "hash": "96274c1",
-        "message": "Rename project to gitlaw-ui"
-      }
-    ]
-  },
-  {
-    "date": "2026-01-30",
-    "commits": [
-      {
-        "hash": "aef3894",
-        "message": "Add Foundations section with Icons and Illustrations galleries"
       }
     ]
   }
