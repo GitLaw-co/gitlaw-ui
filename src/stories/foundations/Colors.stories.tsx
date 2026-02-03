@@ -30,6 +30,27 @@ const ColorSwatch: React.FC<ColorSwatchProps> = ({ name, value, className, textD
   </div>
 );
 
+interface TextColorSwatchProps {
+  name: string;
+  value: string;
+  textClassName: string;
+  bgClassName?: string;
+}
+
+const TextColorSwatch: React.FC<TextColorSwatchProps> = ({ name, value, textClassName, bgClassName = 'bg-card' }) => (
+  <div className="flex flex-col">
+    <div
+      className={`w-full h-16 rounded-gitlaw-m border border-border ${bgClassName} flex items-center justify-center`}
+    >
+      <span className={`text-lg font-semibold ${textClassName}`}>Aa</span>
+    </div>
+    <p className="text-sm font-medium mt-2 text-foreground">
+      {name}
+    </p>
+    <p className="text-xs text-subtle font-mono">{value}</p>
+  </div>
+);
+
 interface ColorGroupProps {
   title: string;
   colors: ColorSwatchProps[];
@@ -64,17 +85,6 @@ const ColorsPage = () => {
         { name: 'Destructive', value: '#E11D48', className: 'bg-destructive' },
         { name: 'Alert', value: '#F97316', className: 'bg-alert' },
         { name: 'Positive', value: '#15803D', className: 'bg-positive' },
-      ],
-    },
-    {
-      title: 'Text',
-      colors: [
-        { name: 'Primary', value: '#1B1B1F', className: 'bg-text-primary' },
-        { name: 'Secondary', value: '#989898', className: 'bg-text-secondary' },
-        { name: 'Negative', value: '#F7F6FF', className: 'bg-text-negative' },
-        { name: 'Button', value: '#5E49D6', className: 'bg-text-button' },
-        { name: 'Button Negative', value: '#F7F6FF', className: 'bg-text-button-negative' },
-        { name: 'Button Disabled', value: '#CFC8F3', className: 'bg-text-button-disabled' },
       ],
     },
     {
@@ -203,6 +213,19 @@ const ColorsPage = () => {
           {semanticColors.map((group) => (
             <ColorGroup key={group.title} {...group} />
           ))}
+
+          {/* Text Colors - shown with actual text samples */}
+          <div className="mb-10">
+            <h3 className="text-lg font-semibold text-foreground mb-4">Text</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4">
+              <TextColorSwatch name="Primary" value="#1B1B1F" textClassName="text-text-primary" />
+              <TextColorSwatch name="Secondary" value="#989898" textClassName="text-text-secondary" />
+              <TextColorSwatch name="Negative" value="#F7F6FF" textClassName="text-text-negative" bgClassName="bg-primary" />
+              <TextColorSwatch name="Button" value="#5E49D6" textClassName="text-text-button" />
+              <TextColorSwatch name="Button Negative" value="#F7F6FF" textClassName="text-text-button-negative" bgClassName="bg-primary" />
+              <TextColorSwatch name="Button Disabled" value="#CFC8F3" textClassName="text-text-button-disabled" />
+            </div>
+          </div>
         </div>
 
         <div>
