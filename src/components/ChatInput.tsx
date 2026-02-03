@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Icon } from "./Icon";
 import { Tooltip } from "./Tooltip";
 import { colors } from "../specs";
@@ -17,8 +17,12 @@ export interface ChatInputProps {
   status?: ChatInputStatus;
   /** Input size */
   size?: ChatInputSize;
-  /** Placeholder text */
+  /** Placeholder text (used if animatedPlaceholders is not provided) */
   placeholder?: string;
+  /** Array of placeholders to rotate through with animation */
+  animatedPlaceholders?: string[];
+  /** Interval in ms between placeholder rotations (default: 3000) */
+  placeholderInterval?: number;
   /** Input value */
   value?: string;
   /** Show quick actions */
@@ -53,6 +57,14 @@ const quickActionTooltips: Record<string, string> = {
   summarize: "Summarize a document",
 };
 
+const defaultAnimatedPlaceholders = [
+  "Draft a mutual NDA",
+  "Review my service contract",
+  "Summarize this agreement",
+  "Create a privacy policy",
+  "Help me with licensing terms",
+];
+
 const QuickActionIcon: React.FC<{ icon: string }> = ({ icon }) => {
   switch (icon) {
     case "draft":
@@ -79,7 +91,9 @@ const QuickActionIcon: React.FC<{ icon: string }> = ({ icon }) => {
 export const ChatInput: React.FC<ChatInputProps> = ({
   status = "active",
   size = "l",
-  placeholder = "Draft a mutual NDA",
+  placeholder,
+  animatedPlaceholders = defaultAnimatedPlaceholders,
+  placeholderInterval = 3000,
   value = "",
   showQuickActions = true,
   quickActions = defaultQuickActions,
@@ -94,6 +108,36 @@ export const ChatInput: React.FC<ChatInputProps> = ({
   const isWorking = status === "working";
   const isPopulated = status === "populated" || value.length > 0;
   const isLarge = size === "l";
+
+  // Animated placeholder state
+  const [currentPlaceholderIndex, setCurrentPlaceholderIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  // Use static placeholder if provided, otherwise use animated placeholders
+  const useAnimatedPlaceholders = !placeholder && animatedPlaceholders.length > 0;
+  const currentPlaceholder = useAnimatedPlaceholders
+    ? animatedPlaceholders[currentPlaceholderIndex]
+    : placeholder || "Draft a mutual NDA";
+
+  // Rotate placeholders with animation
+  useEffect(() => {
+    if (!useAnimatedPlaceholders || isPopulated) return;
+
+    const interval = setInterval(() => {
+      // Start fade out
+      setIsAnimating(true);
+
+      // After fade out, change text and fade in
+      setTimeout(() => {
+        setCurrentPlaceholderIndex(
+          (prev) => (prev + 1) % animatedPlaceholders.length
+        );
+        setIsAnimating(false);
+      }, 200); // Half of the transition duration
+    }, placeholderInterval);
+
+    return () => clearInterval(interval);
+  }, [useAnimatedPlaceholders, isPopulated, animatedPlaceholders.length, placeholderInterval]);
 
   const paddingClass = isLarge ? "p-6" : "p-4";
   const gapClass = isLarge ? "gap-6" : "gap-4";
@@ -140,18 +184,34 @@ export const ChatInput: React.FC<ChatInputProps> = ({
     >
       {/* Input row */}
       <div className="flex items-center gap-2.5 w-full">
-        {/* Text input area */}
-        <input
-          type="text"
-          value={value}
-          onChange={(e) => onChange?.(e.target.value)}
-          placeholder={placeholder}
-          className="
-            flex-1 text-lg font-normal leading-[1.4]
-            text-foreground placeholder:text-purple-300
-            bg-transparent outline-none
-          "
-        />
+        {/* Text input area with animated placeholder */}
+        <div className="flex-1 relative">
+          <input
+            type="text"
+            value={value}
+            onChange={(e) => onChange?.(e.target.value)}
+            placeholder=""
+            className="
+              w-full text-lg font-normal leading-[1.4]
+              text-foreground
+              bg-transparent outline-none
+            "
+          />
+          {/* Custom animated placeholder */}
+          {!value && (
+            <span
+              className={`
+                absolute left-0 top-1/2 -translate-y-1/2
+                text-lg font-normal leading-[1.4]
+                text-purple-300 pointer-events-none
+                transition-opacity duration-200 ease-in-out
+                ${isAnimating ? "opacity-0" : "opacity-100"}
+              `}
+            >
+              {currentPlaceholder}
+            </span>
+          )}
+        </div>
 
         {/* Submit button - only show when populated */}
         {isPopulated && (

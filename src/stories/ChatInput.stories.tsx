@@ -21,7 +21,15 @@ const meta: Meta<typeof ChatInput> = {
     },
     placeholder: {
       control: 'text',
-      description: 'Placeholder text',
+      description: 'Static placeholder text (overrides animated placeholders)',
+    },
+    animatedPlaceholders: {
+      control: 'object',
+      description: 'Array of placeholders to rotate through with animation',
+    },
+    placeholderInterval: {
+      control: 'number',
+      description: 'Interval in ms between placeholder rotations (default: 3000)',
     },
     value: {
       control: 'text',
@@ -44,23 +52,21 @@ const meta: Meta<typeof ChatInput> = {
 export default meta;
 type Story = StoryObj<typeof ChatInput>;
 
-// Active state (empty)
+// Active state with animated placeholders (default)
 export const Active: Story = {
   args: {
     status: 'active',
     size: 'l',
-    placeholder: 'Draft a mutual NDA',
     value: '',
     showQuickActions: true,
   },
 };
 
-// Populated state (with text)
+// Populated state (with text) - animated placeholder hidden when value exists
 export const Populated: Story = {
   args: {
     status: 'populated',
     size: 'l',
-    placeholder: 'Draft a mutual NDA',
     value: 'User is typing here',
     showQuickActions: true,
   },
@@ -75,12 +81,11 @@ export const Working: Story = {
   },
 };
 
-// Medium size - Active
+// Medium size - Active with animated placeholders
 export const MediumActive: Story = {
   args: {
     status: 'active',
     size: 'm',
-    placeholder: 'Draft a mutual NDA',
     value: '',
     showQuickActions: true,
   },
@@ -91,7 +96,6 @@ export const MediumPopulated: Story = {
   args: {
     status: 'populated',
     size: 'm',
-    placeholder: 'Draft a mutual NDA',
     value: 'User is typing here',
     showQuickActions: true,
   },
@@ -133,8 +137,8 @@ export const AllStates: Story = {
         <ChatInput status="working" size="l" />
       </div>
       <div>
-        <h3 className="text-sm font-semibold mb-4 text-subtle">Active State (Empty)</h3>
-        <ChatInput status="active" size="l" placeholder="Draft a mutual NDA" />
+        <h3 className="text-sm font-semibold mb-4 text-subtle">Active State (Animated Placeholders)</h3>
+        <ChatInput status="active" size="l" />
       </div>
       <div>
         <h3 className="text-sm font-semibold mb-4 text-subtle">Populated State (With Text)</h3>
@@ -144,17 +148,77 @@ export const AllStates: Story = {
   ),
 };
 
+// Animated placeholders (default behavior)
+export const AnimatedPlaceholders: Story = {
+  args: {
+    status: 'active',
+    size: 'l',
+    value: '',
+    showQuickActions: true,
+    placeholderInterval: 3000,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'By default, the ChatInput cycles through animated placeholder suggestions every 3 seconds with a smooth fade transition.',
+      },
+    },
+  },
+};
+
+// Custom animated placeholders
+export const CustomAnimatedPlaceholders: Story = {
+  args: {
+    status: 'active',
+    size: 'l',
+    value: '',
+    showQuickActions: true,
+    animatedPlaceholders: [
+      'Ask about contract clauses',
+      'Explain indemnification terms',
+      'Find similar agreements',
+      'Check for compliance issues',
+    ],
+    placeholderInterval: 2500,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'You can provide custom placeholder messages and adjust the rotation interval.',
+      },
+    },
+  },
+};
+
+// Static placeholder (overrides animation)
+export const StaticPlaceholder: Story = {
+  args: {
+    status: 'active',
+    size: 'l',
+    placeholder: 'Type your question here...',
+    value: '',
+    showQuickActions: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Providing a static `placeholder` prop disables the animated rotation.',
+      },
+    },
+  },
+};
+
 // Size comparison
 export const SizeComparison: Story = {
   render: () => (
     <div className="flex flex-col gap-6">
       <div>
-        <h3 className="text-sm font-semibold mb-4 text-subtle">Large Size</h3>
-        <ChatInput status="active" size="l" placeholder="Draft a mutual NDA" />
+        <h3 className="text-sm font-semibold mb-4 text-subtle">Large Size (with animated placeholders)</h3>
+        <ChatInput status="active" size="l" />
       </div>
       <div>
-        <h3 className="text-sm font-semibold mb-4 text-subtle">Medium Size</h3>
-        <ChatInput status="active" size="m" placeholder="Draft a mutual NDA" />
+        <h3 className="text-sm font-semibold mb-4 text-subtle">Medium Size (with animated placeholders)</h3>
+        <ChatInput status="active" size="m" />
       </div>
     </div>
   ),
