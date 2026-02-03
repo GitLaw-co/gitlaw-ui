@@ -157,11 +157,13 @@ export const Input: React.FC<InputProps> = ({
   const sizeConfig = sizeClasses[size];
   const contextConfig = contextClasses[context];
 
-  // Document context: always show left icon, never show label
+  // Document context: always show left icon, never show label, inline display
   const isDocumentContext =
     context === "document-empty" || context === "document-filled";
 
-  const widthClass = align === "fill" ? "w-full" : "w-auto";
+  // Document context is always inline (w-auto), otherwise respect align prop
+  const widthClass = isDocumentContext || align === "hug" ? "w-auto" : "w-full";
+  const displayClass = isDocumentContext || align === "hug" ? "inline-flex" : "flex";
   const shouldShowLabel = showLabel && !isDocumentContext;
   const shouldShowLeftIcon = showLeftIcon || isDocumentContext;
 
@@ -172,7 +174,7 @@ export const Input: React.FC<InputProps> = ({
   const iconClass = sizeConfig.icon;
 
   return (
-    <div className={`flex flex-col gap-2 ${widthClass} ${className}`}>
+    <div className={`${displayClass} flex-col gap-2 ${widthClass} ${className}`}>
       {shouldShowLabel && (
         <label className={`font-semibold text-foreground ${sizeConfig.label}`}>
           {label}
@@ -180,7 +182,7 @@ export const Input: React.FC<InputProps> = ({
       )}
       <div
         className={`
-          flex items-center rounded overflow-hidden
+          ${displayClass} items-center rounded overflow-hidden
           border transition-colors
           ${contextConfig.bg}
           ${sizeConfig.container}
@@ -208,7 +210,7 @@ export const Input: React.FC<InputProps> = ({
           placeholder={placeholder}
           disabled={disabled}
           className={`
-            flex-1 bg-transparent outline-none font-normal
+            bg-transparent outline-none font-normal
             text-foreground placeholder:text-subtle
             ${sizeConfig.input}
             ${disabled ? "cursor-not-allowed" : ""}
