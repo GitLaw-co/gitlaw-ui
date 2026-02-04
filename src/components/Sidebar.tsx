@@ -296,15 +296,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   })}
                 </span>
               )}
-              <span
-                className={`
-                  text-base font-normal ${themeColors.menuText} truncate
-                  ${textTransition} ${textDelay} ${textOpacity}
-                  ${isCollapsed ? "w-0 overflow-hidden" : "w-auto"}
-                `}
-              >
-                {item.label}
-              </span>
+              {!isCollapsed && (
+                <span
+                  className={`
+                    text-base font-normal ${themeColors.menuText} truncate
+                    ${textTransition} ${textDelay} ${textOpacity}
+                  `}
+                >
+                  {item.label}
+                </span>
+              )}
             </button>
           );
 
@@ -329,14 +330,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Chat History (only in expanded signed-in state) */}
       {/* 16px (mt-4) vertical margin between main nav and chat history */}
-      {isSignedIn && chatHistory.length > 0 && (
-        <div
-          className={`
-            flex flex-col mt-4 flex-1 min-h-0 overflow-y-auto
-            ${textTransition} ${textDelay} ${textOpacity}
-            ${isCollapsed ? "w-0 overflow-hidden" : "w-auto"}
-          `}
-        >
+      {!isCollapsed && isSignedIn && chatHistory.length > 0 && (
+        <div className="flex flex-col mt-4 flex-1 min-h-0 overflow-y-auto">
           {chatHistory.map((chat) => (
             <React.Fragment key={chat.id}>
               {chat.isDateHeader ? (
