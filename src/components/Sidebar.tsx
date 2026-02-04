@@ -197,13 +197,19 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   const width = isCollapsed ? "w-16" : "w-72";
 
+  // Text animation classes - fade out before collapse, fade in after expand
+  const textOpacity = isCollapsed ? "opacity-0" : "opacity-100";
+  const textTransition = "transition-opacity duration-100";
+  // Delay text fade-in when expanding (wait for width to expand first)
+  const textDelay = isCollapsed ? "" : "delay-75";
+
   return (
     <div
       className={`
         ${themeColors.bg} ${width}
         flex flex-col h-full min-h-[600px]
         px-2 py-3 relative
-        transition-all duration-200
+        transition-[width] duration-150 ease-[cubic-bezier(0,0,0.2,1)]
         ${className}
       `}
     >
@@ -230,7 +236,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <div className="flex items-center gap-2 px-3 h-12">
                 <img src={getLogo()} alt="GitLaw" className="h-8" />
               </div>
-              <div className="flex items-center gap-1">
+              <div
+                className={`
+                  flex items-center gap-1
+                  ${textTransition} ${textDelay} ${textOpacity}
+                `}
+              >
                 <button
                   type="button"
                   className={`size-10 flex items-center justify-center rounded ${themeColors.hoverBg} transition-colors`}
@@ -285,13 +296,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   })}
                 </span>
               )}
-              {!isCollapsed && (
-                <span
-                  className={`text-base font-normal ${themeColors.menuText} truncate`}
-                >
-                  {item.label}
-                </span>
-              )}
+              <span
+                className={`
+                  text-base font-normal ${themeColors.menuText} truncate
+                  ${textTransition} ${textDelay} ${textOpacity}
+                  ${isCollapsed ? "w-0 overflow-hidden" : "w-auto"}
+                `}
+              >
+                {item.label}
+              </span>
             </button>
           );
 
@@ -316,14 +329,20 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Chat History (only in expanded signed-in state) */}
       {/* 16px (mt-4) vertical margin between main nav and chat history */}
-      {!isCollapsed && isSignedIn && chatHistory.length > 0 && (
-        <div className="flex flex-col mt-4 flex-1 min-h-0 overflow-y-auto">
+      {isSignedIn && chatHistory.length > 0 && (
+        <div
+          className={`
+            flex flex-col mt-4 flex-1 min-h-0 overflow-y-auto
+            ${textTransition} ${textDelay} ${textOpacity}
+            ${isCollapsed ? "w-0 overflow-hidden" : "w-auto"}
+          `}
+        >
           {chatHistory.map((chat) => (
             <React.Fragment key={chat.id}>
               {chat.isDateHeader ? (
                 // Chat history heading: sm size, ai-chat-placeholder in landing, secondary-text in inner
                 <div
-                  className={`px-3 py-3 text-sm font-normal ${themeColors.chatHeadingText}`}
+                  className={`px-3 py-3 text-sm font-normal ${themeColors.chatHeadingText} whitespace-nowrap`}
                 >
                   {chat.label}
                 </div>
@@ -334,7 +353,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   onClick={() => onChatHistoryClick?.(chat.id)}
                   className={`
                     flex items-center gap-2 min-h-12 p-3 rounded
-                    ${themeColors.hoverBg} transition-colors text-left
+                    ${themeColors.hoverBg} transition-colors text-left whitespace-nowrap
                   `}
                 >
                   <Icon
@@ -389,7 +408,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           ) : (
             <button
               type="button"
-              className="flex items-center gap-2 min-h-12 p-3 rounded transition-colors w-full bg-card"
+              className="flex items-center gap-2 min-h-12 p-3 rounded transition-colors w-full bg-card overflow-hidden"
             >
               {/* Avatar */}
               <div className="size-8 rounded bg-primary flex items-center justify-center shrink-0">
@@ -405,14 +424,21 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   </span>
                 )}
               </div>
-              <span className="text-base font-normal text-foreground truncate flex-1 text-left">
+              <span
+                className={`
+                  text-base font-normal text-foreground truncate flex-1 text-left whitespace-nowrap
+                  ${textTransition} ${textDelay} ${textOpacity}
+                `}
+              >
                 {userName}
               </span>
-              <Icon
-                name="chevron-up"
-                className={ICON_SIZE}
-                color={themeColors.textPrimary}
-              />
+              <span className={`${textTransition} ${textDelay} ${textOpacity}`}>
+                <Icon
+                  name="chevron-up"
+                  className={ICON_SIZE}
+                  color={themeColors.textPrimary}
+                />
+              </span>
             </button>
           )}
         </div>
