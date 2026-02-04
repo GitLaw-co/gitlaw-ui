@@ -1,13 +1,13 @@
 "use client"
 
-import { Button } from "@/src/components/Button"
-import { Input } from "@/src/components/Input"
-import { Badge } from "@/src/components/Badge"
-import { Tag } from "@/src/components/Tag"
-import { Switch } from "@/src/components/Switch"
-import { Avatar } from "@/src/components/Avatar"
-import { Tab, Tabs } from "@/src/components/Tab"
-import { Card } from "@/src/components/Card"
+import { Button } from "@/components/Button"
+import { Input } from "@/components/Input"
+import { Badge } from "@/components/Badge"
+import { Tag } from "@/components/Tag"
+import { Switch } from "@/components/Switch"
+import { Avatar } from "@/components/Avatar"
+import { Tab, Tabs } from "@/components/Tab"
+import { Card } from "@/components/Card"
 import { useState } from "react"
 
 export function ComponentShowcase() {
