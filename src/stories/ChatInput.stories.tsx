@@ -1,5 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 import { ChatInput } from '../components/ChatInput';
+import { MenuItem } from '../components/MenuItem';
+import { Icon } from '../components/Icon';
+import ukFlag from '../../Assets/flags/uk-uk.svg';
 
 const meta: Meta<typeof ChatInput> = {
   title: 'Components/Chat/ChatInput',
@@ -222,4 +226,65 @@ export const SizeComparison: Story = {
       </div>
     </div>
   ),
+};
+
+// UK Flag component
+const UKFlag = () => (
+  <img src={ukFlag} alt="UK" className="size-6 rounded-sm object-cover" />
+);
+
+// With Settings Dropdown
+const ChatInputWithDropdown = () => {
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [reviewChanges, setReviewChanges] = useState(true);
+
+  const dropdownContent = (
+    <div className="w-[376px] p-2 bg-card rounded-lg shadow-card">
+      <MenuItem
+        primaryText="Review agent changes"
+        secondaryText="Review AI changes before applying"
+        showSecondaryText
+        showLeftElement
+        leftIcon={<Icon name="text-search" className="size-6" />}
+        width="fill"
+        showRSwitch
+        rSwitchChecked={reviewChanges}
+        rSwitchSize="s"
+        onRSwitchChange={(checked) => setReviewChanges(checked)}
+      />
+      <MenuItem
+        primaryText="Your jurisdiction"
+        secondaryText="England & Wales"
+        showSecondaryText
+        showLeftElement
+        leftIcon={<UKFlag />}
+        width="fill"
+        showRIcon1
+        rIcon1="chevron-right"
+      />
+    </div>
+  );
+
+  return (
+    <ChatInput
+      status="active"
+      size="l"
+      onSettingsClick={() => setShowDropdown(!showDropdown)}
+      showSettingsDropdown={showDropdown}
+      settingsDropdownContent={dropdownContent}
+      settingsDropdownPosition="top"
+      onSettingsDropdownClose={() => setShowDropdown(false)}
+    />
+  );
+};
+
+export const WithSettingsDropdown: Story = {
+  render: () => <ChatInputWithDropdown />,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Click the settings icon to toggle the jurisdiction and settings dropdown.',
+      },
+    },
+  },
 };

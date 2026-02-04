@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Icon } from "./Icon";
 import { Tooltip } from "./Tooltip";
 import { colors } from "../specs";
@@ -11,6 +11,8 @@ export interface QuickAction {
   label: string;
   icon: "draft" | "review" | "summarize";
 }
+
+export type SettingsDropdownPosition = "top" | "bottom" | "left" | "right";
 
 export interface ChatInputProps {
   /** Input status */
@@ -45,6 +47,14 @@ export interface ChatInputProps {
   className?: string;
   /** Allow input to fill full container width */
   fullWidth?: boolean;
+  /** Show settings dropdown */
+  showSettingsDropdown?: boolean;
+  /** Settings dropdown content */
+  settingsDropdownContent?: React.ReactNode;
+  /** Settings dropdown position */
+  settingsDropdownPosition?: SettingsDropdownPosition;
+  /** Called when clicking outside the dropdown to close it */
+  onSettingsDropdownClose?: () => void;
 }
 
 const defaultQuickActions: QuickAction[] = [
@@ -107,14 +117,41 @@ export const ChatInput: React.FC<ChatInputProps> = ({
   onStopClick,
   className = "",
   fullWidth = false,
+  showSettingsDropdown = false,
+  settingsDropdownContent,
+  settingsDropdownPosition = "top",
+  onSettingsDropdownClose,
 }) => {
   const isWorking = status === "working";
   const isPopulated = status === "populated" || value.length > 0;
   const isLarge = size === "l";
 
+  // Ref for dropdown click-outside detection
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Track if tooltip should be suppressed (after dropdown closes)
+  const [suppressTooltip, setSuppressTooltip] = useState(false);
+
   // Animated placeholder state
   const [currentPlaceholderIndex, setCurrentPlaceholderIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    if (!showSettingsDropdown) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        // Suppress tooltip briefly when closing dropdown
+        setSuppressTooltip(true);
+        setTimeout(() => setSuppressTooltip(false), 150);
+        onSettingsDropdownClose?.();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [showSettingsDropdown, onSettingsDropdownClose]);
 
   // Use static placeholder if provided, otherwise use animated placeholders
   const useAnimatedPlaceholders = !placeholder && animatedPlaceholders.length > 0;
@@ -253,24 +290,46 @@ export const ChatInput: React.FC<ChatInputProps> = ({
               />
             </button>
           </Tooltip>
-          <Tooltip
-            content="Jurisdiction and settings"
-            type="purple"
-            position="bottom"
-            size="s"
-          >
-            <button
-              type="button"
-              onClick={onSettingsClick}
-              className="p-1 hover:bg-secondary rounded transition-colors"
+
+          {/* Settings button with optional dropdown */}
+          <div className="relative" ref={dropdownRef}>
+            {/* Use Tooltip's disabled prop to hide tooltip when dropdown is shown */}
+            <Tooltip
+              content="Jurisdiction and settings"
+              type="purple"
+              position="bottom"
+              size="s"
+              disabled={showSettingsDropdown}
             >
-              <Icon
-                name="settings-2"
-                className="size-6"
-                color={colors.iconPrimary}
-              />
-            </button>
-          </Tooltip>
+              <button
+                type="button"
+                onClick={onSettingsClick}
+                className="p-1 hover:bg-secondary rounded transition-colors"
+              >
+                <Icon
+                  name="settings-2"
+                  className="size-6"
+                  color={colors.iconPrimary}
+                />
+              </button>
+            </Tooltip>
+
+            {/* Dropdown positioned relative to button */}
+            {settingsDropdownContent && (
+              <div
+                className={`
+                  absolute z-10 transition-opacity duration-100
+                  ${showSettingsDropdown ? "opacity-100" : "opacity-0 pointer-events-none"}
+                  ${settingsDropdownPosition === "top" ? "bottom-full mb-2 left-1/2 -translate-x-1/2" : ""}
+                  ${settingsDropdownPosition === "bottom" ? "top-full mt-2 left-1/2 -translate-x-1/2" : ""}
+                  ${settingsDropdownPosition === "left" ? "right-full mr-2 top-1/2 -translate-y-1/2" : ""}
+                  ${settingsDropdownPosition === "right" ? "left-full ml-2 top-1/2 -translate-y-1/2" : ""}
+                `}
+              >
+                {settingsDropdownContent}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Quick actions */}

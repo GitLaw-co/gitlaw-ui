@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export type TooltipSize = "s" | "m" | "l";
 export type TooltipType = "neutral" | "purple";
@@ -50,8 +50,16 @@ export const Tooltip: React.FC<TooltipProps> = ({
 }) => {
   const [isVisible, setIsVisible] = useState(false);
 
+  // Reset visibility when disabled changes
+  useEffect(() => {
+    if (disabled) {
+      setIsVisible(false);
+    }
+  }, [disabled]);
+
+  // When disabled, still render the wrapper div for consistent layout
   if (disabled) {
-    return <>{children}</>;
+    return <div className="relative inline-flex">{children}</div>;
   }
 
   const { text: textSize, padding } = sizeConfig[size];

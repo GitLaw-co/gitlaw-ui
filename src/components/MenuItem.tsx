@@ -76,6 +76,8 @@ export interface MenuItemProps {
   showRSwitch?: boolean;
   /** Switch checked state for R element */
   rSwitchChecked?: boolean;
+  /** Switch size for R element */
+  rSwitchSize?: "s" | "m";
   /** Switch change handler for R element */
   onRSwitchChange?: (checked: boolean) => void;
   /** Show large avatar in R element */
@@ -124,6 +126,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
   rBadgeCount = 7,
   showRSwitch = false,
   rSwitchChecked = false,
+  rSwitchSize = "m",
   onRSwitchChange,
   showRLargeAvatar = false,
   rLargeAvatarSrc,
@@ -221,6 +224,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
     <div
       className={`
         relative flex items-center gap-2 min-h-12 p-3 ${widthClass} cursor-pointer
+        hover:bg-secondary rounded transition-colors
         ${className}
       `}
       onClick={onClick}
@@ -240,7 +244,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
             {primaryText}
           </p>
           {showSecondaryText && (
-            <p className="text-sm font-normal text-subtle truncate leading-[1.4]">
+            <p className="text-sm font-normal text-subtle leading-[1.4]">
               {secondaryText}
             </p>
           )}
@@ -332,7 +336,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
             <Icon name={rIcon2} className="size-6" color={colors.iconPrimary} />
           )}
           {showRSwitch && (
-            <Switch checked={rSwitchChecked} onChange={onRSwitchChange} />
+            <Switch checked={rSwitchChecked} size={rSwitchSize} onChange={onRSwitchChange} />
           )}
         </div>
       )}
