@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { Popover, PopoverPosition } from "./Popover";
 
 export type TooltipSize = "s" | "m" | "l";
 export type TooltipType = "neutral" | "purple";
-export type TooltipPosition = "right" | "top" | "bottom" | "left";
+export type TooltipPosition = PopoverPosition;
 
 export interface TooltipProps {
   /** The content to show in the tooltip */
@@ -32,14 +33,6 @@ const typeConfig: Record<TooltipType, { bg: string; text: string }> = {
   purple: { bg: "bg-primary", text: "text-negative" },
 };
 
-// Position configuration - using CSS classes for absolute positioning
-const positionConfig: Record<TooltipPosition, string> = {
-  right: "left-full top-1/2 -translate-y-1/2 ml-4",
-  left: "right-full top-1/2 -translate-y-1/2 mr-4",
-  top: "bottom-full left-1/2 -translate-x-1/2 mb-4",
-  bottom: "top-full left-1/2 -translate-x-1/2 mt-4",
-};
-
 export const Tooltip: React.FC<TooltipProps> = ({
   content,
   children,
@@ -48,45 +41,33 @@ export const Tooltip: React.FC<TooltipProps> = ({
   disabled = false,
   position = "right",
 }) => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  // Reset visibility when disabled changes
-  useEffect(() => {
-    if (disabled) {
-      setIsVisible(false);
-    }
-  }, [disabled]);
-
-  // When disabled, still render the wrapper div for consistent layout
-  if (disabled) {
-    return <div className="relative inline-flex">{children}</div>;
-  }
-
   const { text: textSize, padding } = sizeConfig[size];
   const { bg, text: textColor } = typeConfig[type];
-  const positionClasses = positionConfig[position];
+
+  const tooltipContent = (
+    <div
+      className={`
+        rounded-lg shadow-card
+        flex items-center whitespace-nowrap
+        ${bg} ${padding}
+      `}
+    >
+      <span className={`${textSize} font-normal ${textColor}`}>{content}</span>
+    </div>
+  );
 
   return (
-    <div
-      className="relative inline-flex"
-      onMouseEnter={() => setIsVisible(true)}
-      onMouseLeave={() => setIsVisible(false)}
+    <Popover
+      content={tooltipContent}
+      position={position}
+      trigger="hover"
+      disabled={disabled}
+      gap={4}
+      animated={true}
+      animationDuration={200}
     >
       {children}
-      {isVisible && (
-        <div
-          className={`
-            absolute z-50 rounded-lg shadow-card
-            flex items-center whitespace-nowrap
-            ${bg} ${padding} ${positionClasses}
-          `}
-        >
-          <span className={`${textSize} font-normal ${textColor}`}>
-            {content}
-          </span>
-        </div>
-      )}
-    </div>
+    </Popover>
   );
 };
 

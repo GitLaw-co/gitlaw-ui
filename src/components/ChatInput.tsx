@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Icon } from "./Icon";
 import { Tooltip } from "./Tooltip";
+import { PopoverPosition } from "./Popover";
 import { colors } from "../specs";
 
 export type ChatInputStatus = "active" | "populated" | "working";
@@ -12,7 +13,7 @@ export interface QuickAction {
   icon: "draft" | "review" | "summarize";
 }
 
-export type SettingsDropdownPosition = "top" | "bottom" | "left" | "right";
+export type SettingsDropdownPosition = PopoverPosition;
 
 export interface ChatInputProps {
   /** Input status */
@@ -100,6 +101,28 @@ const QuickActionIcon: React.FC<{ icon: string }> = ({ icon }) => {
   }
 };
 
+// Position classes for dropdown (matches Popover positioning)
+const dropdownPositionClasses: Record<PopoverPosition, string> = {
+  top: "bottom-full left-1/2 -translate-x-1/2 mb-2",
+  bottom: "top-full left-1/2 -translate-x-1/2 mt-2",
+  left: "right-full top-1/2 -translate-y-1/2 mr-2",
+  right: "left-full top-1/2 -translate-y-1/2 ml-2",
+};
+
+// Icon button component for consistent styling
+const IconButton: React.FC<{
+  icon: string;
+  onClick?: () => void;
+}> = ({ icon, onClick }) => (
+  <button
+    type="button"
+    onClick={onClick}
+    className="p-1 hover:bg-secondary rounded transition-colors"
+  >
+    <Icon name={icon} className="size-6" color={colors.iconPrimary} />
+  </button>
+);
+
 export const ChatInput: React.FC<ChatInputProps> = ({
   status = "active",
   size = "l",
@@ -126,25 +149,25 @@ export const ChatInput: React.FC<ChatInputProps> = ({
   const isPopulated = status === "populated" || value.length > 0;
   const isLarge = size === "l";
 
-  // Ref for dropdown click-outside detection
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  // Ref for settings dropdown click-outside detection
+  const settingsRef = useRef<HTMLDivElement>(null);
 
-  // Track if tooltip should be suppressed (after dropdown closes)
-  const [suppressTooltip, setSuppressTooltip] = useState(false);
+  // Tooltip visibility for settings button (hide when dropdown is open)
+  const [showSettingsTooltip, setShowSettingsTooltip] = useState(false);
 
   // Animated placeholder state
   const [currentPlaceholderIndex, setCurrentPlaceholderIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  // Close dropdown when clicking outside
+  // Click outside detection for settings dropdown
   useEffect(() => {
     if (!showSettingsDropdown) return;
 
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        // Suppress tooltip briefly when closing dropdown
-        setSuppressTooltip(true);
-        setTimeout(() => setSuppressTooltip(false), 150);
+      if (
+        settingsRef.current &&
+        !settingsRef.current.contains(event.target as Node)
+      ) {
         onSettingsDropdownClose?.();
       }
     };
@@ -154,7 +177,8 @@ export const ChatInput: React.FC<ChatInputProps> = ({
   }, [showSettingsDropdown, onSettingsDropdownClose]);
 
   // Use static placeholder if provided, otherwise use animated placeholders
-  const useAnimatedPlaceholders = !placeholder && animatedPlaceholders.length > 0;
+  const useAnimatedPlaceholders =
+    !placeholder && animatedPlaceholders.length > 0;
   const currentPlaceholder = useAnimatedPlaceholders
     ? animatedPlaceholders[currentPlaceholderIndex]
     : placeholder || "Draft a mutual NDA";
@@ -164,20 +188,22 @@ export const ChatInput: React.FC<ChatInputProps> = ({
     if (!useAnimatedPlaceholders || isPopulated) return;
 
     const interval = setInterval(() => {
-      // Start fade out
       setIsAnimating(true);
-
-      // After fade out, change text and fade in
       setTimeout(() => {
         setCurrentPlaceholderIndex(
           (prev) => (prev + 1) % animatedPlaceholders.length
         );
         setIsAnimating(false);
-      }, 200); // Half of the transition duration
+      }, 200);
     }, placeholderInterval);
 
     return () => clearInterval(interval);
-  }, [useAnimatedPlaceholders, isPopulated, animatedPlaceholders.length, placeholderInterval]);
+  }, [
+    useAnimatedPlaceholders,
+    isPopulated,
+    animatedPlaceholders.length,
+    placeholderInterval,
+  ]);
 
   const paddingClass = isLarge ? "p-6" : "p-4";
   const gapClass = isLarge ? "gap-6" : "gap-4";
@@ -225,7 +251,6 @@ export const ChatInput: React.FC<ChatInputProps> = ({
     >
       {/* Input row */}
       <div className="flex items-center gap-2.5 w-full">
-        {/* Text input area with animated placeholder */}
         <div className="flex-1 relative">
           <input
             type="text"
@@ -238,7 +263,6 @@ export const ChatInput: React.FC<ChatInputProps> = ({
               bg-transparent outline-none
             `}
           />
-          {/* Custom animated placeholder */}
           {!value && (
             <span
               className={`
@@ -254,7 +278,6 @@ export const ChatInput: React.FC<ChatInputProps> = ({
           )}
         </div>
 
-        {/* Submit button - only show when populated */}
         {isPopulated && (
           <button
             type="button"
@@ -275,55 +298,64 @@ export const ChatInput: React.FC<ChatInputProps> = ({
 
       {/* Bottom row */}
       <div className="flex items-center justify-between w-full">
-        {/* Left buttons */}
+        {/* Left buttons - using flexbox with items-center for alignment */}
         <div className="flex items-center gap-1">
-          <Tooltip content="Add a file" type="purple" position="bottom" size="s">
-            <button
-              type="button"
-              onClick={onAttachmentClick}
-              className="p-1 hover:bg-secondary rounded transition-colors"
-            >
-              <Icon
-                name="paperclip"
-                className="size-6"
-                color={colors.iconPrimary}
-              />
-            </button>
+          {/* Attachment button */}
+          <Tooltip
+            content="Add a file"
+            type="purple"
+            position="bottom"
+            size="s"
+          >
+            <IconButton icon="paperclip" onClick={onAttachmentClick} />
           </Tooltip>
 
           {/* Settings button with optional dropdown */}
-          <div className="relative" ref={dropdownRef}>
-            {/* Use Tooltip's disabled prop to hide tooltip when dropdown is shown */}
-            <Tooltip
-              content="Jurisdiction and settings"
-              type="purple"
-              position="bottom"
-              size="s"
-              disabled={showSettingsDropdown}
-            >
-              <button
-                type="button"
-                onClick={onSettingsClick}
-                className="p-1 hover:bg-secondary rounded transition-colors"
-              >
-                <Icon
-                  name="settings-2"
-                  className="size-6"
-                  color={colors.iconPrimary}
-                />
-              </button>
-            </Tooltip>
+          <div
+            ref={settingsRef}
+            className="relative inline-flex"
+            onMouseEnter={() => !showSettingsDropdown && setShowSettingsTooltip(true)}
+            onMouseLeave={() => setShowSettingsTooltip(false)}
+          >
+            <IconButton
+              icon="settings-2"
+              onClick={() => {
+                if (settingsDropdownContent) {
+                  if (showSettingsDropdown) {
+                    onSettingsDropdownClose?.();
+                  } else {
+                    onSettingsClick?.();
+                  }
+                } else {
+                  onSettingsClick?.();
+                }
+                setShowSettingsTooltip(false);
+              }}
+            />
 
-            {/* Dropdown positioned relative to button */}
+            {/* Settings tooltip - manual implementation to avoid nesting issues */}
+            {showSettingsTooltip && !showSettingsDropdown && (
+              <div
+                className="
+                  absolute z-50 top-full left-1/2 -translate-x-1/2 mt-4
+                  rounded-lg shadow-card bg-primary px-2 py-2
+                  flex items-center whitespace-nowrap
+                "
+              >
+                <span className="text-xs font-normal text-negative">
+                  Jurisdiction and settings
+                </span>
+              </div>
+            )}
+
+            {/* Settings dropdown */}
             {settingsDropdownContent && (
               <div
                 className={`
-                  absolute z-10 transition-opacity duration-100
+                  absolute z-50
+                  ${dropdownPositionClasses[settingsDropdownPosition]}
+                  transition-opacity duration-100
                   ${showSettingsDropdown ? "opacity-100" : "opacity-0 pointer-events-none"}
-                  ${settingsDropdownPosition === "top" ? "bottom-full mb-2 left-1/2 -translate-x-1/2" : ""}
-                  ${settingsDropdownPosition === "bottom" ? "top-full mt-2 left-1/2 -translate-x-1/2" : ""}
-                  ${settingsDropdownPosition === "left" ? "right-full mr-2 top-1/2 -translate-y-1/2" : ""}
-                  ${settingsDropdownPosition === "right" ? "left-full ml-2 top-1/2 -translate-y-1/2" : ""}
                 `}
               >
                 {settingsDropdownContent}

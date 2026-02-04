@@ -63,6 +63,13 @@ export type {
   TooltipPosition,
 } from "./Tooltip";
 
+export { Popover } from "./Popover";
+export type {
+  PopoverProps,
+  PopoverPosition,
+  PopoverTrigger,
+} from "./Popover";
+
 export { Card } from "./Card";
 export type { CardProps, CardType, CardVisibility, CardFileItem } from "./Card";
 
