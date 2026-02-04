@@ -1,6 +1,7 @@
 {
   "name": "gitlaw-ui",
   "version": "1.0.0",
+  "type": "module",
   "description": "GitLaw UI Component Library",
   "main": "index.js",
   "engines": {
