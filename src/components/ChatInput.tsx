@@ -254,7 +254,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
             </button>
           </Tooltip>
           <Tooltip
-            content="Configure chat"
+            content="Jurisdiction and settings"
             type="purple"
             position="bottom"
             size="s"
