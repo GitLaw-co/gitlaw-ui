@@ -1,3 +1,6 @@
+// Import global styles
+import "../styles/globals.css";
+
 export { Button } from "./Button";
 export type { ButtonProps, ButtonVariant, ButtonSize } from "./Button";
 
@@ -130,3 +133,7 @@ export type { FileDropdownProps, FileItem } from "./FileDropdown";
 
 export { StickyFeaturePromoBar } from "./StickyFeaturePromoBar";
 export type { StickyFeaturePromoBarProps } from "./StickyFeaturePromoBar";
+
+// Templates
+export { ChatPageTemplate } from "../templates/ChatPageTemplate";
+export type { ChatPageTemplateProps } from "../templates/ChatPageTemplate";

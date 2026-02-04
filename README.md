@@ -1,19 +1,65 @@
-# GitLaw UI
+# @gitlaw/ui
 
-An **experimental** React component library built with Tailwind CSS, generated using Claude from the GitLaw Figma design system.
+A modern React component library for legal tech applications, built with TypeScript and Tailwind CSS.
 
+[![npm version](https://img.shields.io/npm/v/@gitlaw/ui)](https://www.npmjs.com/package/@gitlaw/ui)
 [![Storybook](https://img.shields.io/badge/Storybook-FF4785?logo=storybook&logoColor=white)](https://gitlaw-ui.vercel.app)
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 
-> **Note:** This is a proof-of-concept implementation created with AI assistance. It demonstrates how Claude can translate Figma designs into functional React components. Not intended for production use.
-
 [Live Storybook](https://gitlaw-ui.vercel.app) | [Figma Source](https://www.figma.com/design/czek1GvIeHMJnnvc3aqWHK/UI-v3)
 
 ---
 
-## Quick Start
+## Installation
+
+```bash
+npm install @gitlaw/ui
+# or
+yarn add @gitlaw/ui
+# or
+pnpm add @gitlaw/ui
+```
+
+### Setup
+
+1. **Import the styles** in your app's entry point:
+
+```tsx
+import '@gitlaw/ui/styles.css';
+```
+
+2. **Configure Tailwind** (recommended) - add the library to your content paths:
+
+```js
+// tailwind.config.js
+module.exports = {
+  content: [
+    // ... your content paths
+    './node_modules/@gitlaw/ui/dist/**/*.js',
+  ],
+};
+```
+
+## Usage
+
+```tsx
+import { Button, Input, Avatar, Icon } from '@gitlaw/ui';
+
+function App() {
+  return (
+    <>
+      <Button variant="primary" size="m">Get Started</Button>
+      <Input label="Email" placeholder="you@example.com" showLabel />
+      <Avatar type="initials" initials="JD" size="M" />
+      <Icon name="check" className="size-6" color="#5E49D6" />
+    </>
+  );
+}
+```
+
+## Development
 
 ```bash
 # Clone and install
@@ -23,23 +69,12 @@ npm install
 
 # Run Storybook
 npm run storybook
+
+# Build library
+npm run build
 ```
 
 Opens at [http://localhost:6006](http://localhost:6006)
-
-## Usage
-
-```tsx
-import { Button, Input, Avatar, Icon } from './components';
-
-<Button variant="primary" size="m">Get Started</Button>
-
-<Input label="Email" placeholder="you@example.com" showLabel />
-
-<Avatar type="initials" initials="JD" size="M" />
-
-<Icon name="check" className="size-6" color="#5E49D6" />
-```
 
 ## Components
 
