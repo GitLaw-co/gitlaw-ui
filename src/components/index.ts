@@ -127,3 +127,6 @@ export type { TopHeaderProps, BreadcrumbItem } from "./TopHeader";
 
 export { FileDropdown } from "./FileDropdown";
 export type { FileDropdownProps, FileItem } from "./FileDropdown";
+
+export { StickyFeaturePromoBar } from "./StickyFeaturePromoBar";
+export type { StickyFeaturePromoBarProps } from "./StickyFeaturePromoBar";
