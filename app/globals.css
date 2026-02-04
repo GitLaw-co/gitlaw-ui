@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 247 246 255; /* purple/50 */
+    --foreground: 27 27 31; /* obsidian/950 */
+    
+    --card: 255 255 255;
+    --card-foreground: 27 27 31;
+    
+    --primary: 94 73 214; /* purple/700 */
+    --primary-foreground: 247 246 255;
+    
+    --secondary: 235 231 255; /* purple/100 */
+    --secondary-foreground: 94 73 214;
+    
+    --muted: 240 240 245;
+    --muted-foreground: 152 152 152;
+    
+    --destructive: 225 29 72;
+    --destructive-foreground: 255 255 255;
+    
+    --border: 226 221 255; /* purple/200 */
+    --input: 220 227 232; /* bluish/100 */
+    --ring: 94 73 214;
+    
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-page-background text-foreground;
+  }
+}

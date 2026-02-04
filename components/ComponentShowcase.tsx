@@ -1,0 +1,192 @@
+"use client"
+
+import { Button } from "@/src/components/Button"
+import { Input } from "@/src/components/Input"
+import { Badge } from "@/src/components/Badge"
+import { Tag } from "@/src/components/Tag"
+import { Switch } from "@/src/components/Switch"
+import { Avatar } from "@/src/components/Avatar"
+import { Tab, Tabs } from "@/src/components/Tab"
+import { Card } from "@/src/components/Card"
+import { useState } from "react"
+
+export function ComponentShowcase() {
+  const [switchChecked, setSwitchChecked] = useState(false)
+  const [activeTab, setActiveTab] = useState("overview")
+
+  return (
+    <div className="max-w-6xl mx-auto px-8 py-12">
+      {/* Header */}
+      <div className="text-center mb-16">
+        <h1 className="text-4xl font-bold text-foreground mb-4">
+          GitLaw UI Component Library
+        </h1>
+        <p className="text-lg text-subtle max-w-2xl mx-auto">
+          A comprehensive collection of React components designed for legal document editing and management applications.
+        </p>
+      </div>
+
+      {/* Component Sections */}
+      <div className="space-y-16">
+        {/* Buttons Section */}
+        <section>
+          <h2 className="text-2xl font-semibold text-foreground mb-6">Buttons</h2>
+          <div className="bg-card rounded-gitlaw-m p-6 shadow-card">
+            <div className="flex flex-wrap gap-4 items-center">
+              <Button variant="primary">Primary</Button>
+              <Button variant="secondary">Secondary</Button>
+              <Button variant="ghost">Ghost</Button>
+              <Button variant="link">Link</Button>
+              <Button variant="primary" disabled>Disabled</Button>
+            </div>
+            <div className="flex flex-wrap gap-4 items-center mt-4">
+              <Button variant="primary" size="sm">Small</Button>
+              <Button variant="primary" size="md">Medium</Button>
+              <Button variant="primary" size="lg">Large</Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Inputs Section */}
+        <section>
+          <h2 className="text-2xl font-semibold text-foreground mb-6">Inputs</h2>
+          <div className="bg-card rounded-gitlaw-m p-6 shadow-card">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Input 
+                placeholder="Default input" 
+                label="Default"
+              />
+              <Input 
+                placeholder="With value" 
+                label="Filled"
+                value="Sample text"
+                onChange={() => {}}
+              />
+              <Input 
+                placeholder="Disabled input" 
+                label="Disabled"
+                disabled
+              />
+              <Input 
+                placeholder="Error state" 
+                label="Error"
+                status="error"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Badges & Tags Section */}
+        <section>
+          <h2 className="text-2xl font-semibold text-foreground mb-6">Badges & Tags</h2>
+          <div className="bg-card rounded-gitlaw-m p-6 shadow-card">
+            <div className="mb-6">
+              <h3 className="text-sm font-medium text-subtle mb-3">Badges</h3>
+              <div className="flex flex-wrap gap-3">
+                <Badge type="default">Default</Badge>
+                <Badge type="notification">3</Badge>
+              </div>
+            </div>
+            <div>
+              <h3 className="text-sm font-medium text-subtle mb-3">Tags</h3>
+              <div className="flex flex-wrap gap-3">
+                <Tag>Default Tag</Tag>
+                <Tag size="sm">Small Tag</Tag>
+                <Tag weight="semibold">Semibold Tag</Tag>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Switch Section */}
+        <section>
+          <h2 className="text-2xl font-semibold text-foreground mb-6">Switch</h2>
+          <div className="bg-card rounded-gitlaw-m p-6 shadow-card">
+            <div className="flex items-center gap-4">
+              <Switch 
+                checked={switchChecked} 
+                onChange={setSwitchChecked}
+              />
+              <span className="text-foreground">
+                Switch is {switchChecked ? "on" : "off"}
+              </span>
+            </div>
+          </div>
+        </section>
+
+        {/* Avatar Section */}
+        <section>
+          <h2 className="text-2xl font-semibold text-foreground mb-6">Avatars</h2>
+          <div className="bg-card rounded-gitlaw-m p-6 shadow-card">
+            <div className="flex flex-wrap gap-4 items-center">
+              <Avatar size="sm" name="John Doe" />
+              <Avatar size="md" name="Jane Smith" />
+              <Avatar size="lg" name="Bob Wilson" />
+            </div>
+          </div>
+        </section>
+
+        {/* Tabs Section */}
+        <section>
+          <h2 className="text-2xl font-semibold text-foreground mb-6">Tabs</h2>
+          <div className="bg-card rounded-gitlaw-m p-6 shadow-card">
+            <Tabs>
+              <Tab 
+                status={activeTab === "overview" ? "active" : "inactive"}
+                onClick={() => setActiveTab("overview")}
+              >
+                Overview
+              </Tab>
+              <Tab 
+                status={activeTab === "documents" ? "active" : "inactive"}
+                onClick={() => setActiveTab("documents")}
+              >
+                Documents
+              </Tab>
+              <Tab 
+                status={activeTab === "settings" ? "active" : "inactive"}
+                onClick={() => setActiveTab("settings")}
+              >
+                Settings
+              </Tab>
+            </Tabs>
+            <div className="mt-4 p-4 bg-page-background rounded-gitlaw-s">
+              <p className="text-subtle">
+                {activeTab === "overview" && "Overview content goes here"}
+                {activeTab === "documents" && "Documents content goes here"}
+                {activeTab === "settings" && "Settings content goes here"}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Cards Section */}
+        <section>
+          <h2 className="text-2xl font-semibold text-foreground mb-6">Cards</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Card 
+              type="document"
+              title="Contract Agreement"
+              subtitle="Last modified 2 hours ago"
+            />
+            <Card 
+              type="document"
+              title="NDA Template"
+              subtitle="Last modified yesterday"
+            />
+            <Card 
+              type="document"
+              title="Service Agreement"
+              subtitle="Last modified 3 days ago"
+            />
+          </div>
+        </section>
+      </div>
+
+      {/* Footer */}
+      <footer className="mt-20 text-center text-subtle">
+        <p>GitLaw UI Component Library - Built with React and Tailwind CSS</p>
+      </footer>
+    </div>
+  )
+}
