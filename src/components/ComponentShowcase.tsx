@@ -112,9 +112,11 @@ export function ComponentShowcase() {
             <div>
               <h3 className="text-sm font-medium text-subtle mb-3">Tags</h3>
               <div className="flex flex-wrap gap-3">
-                <Tag>Default Tag</Tag>
-                <Tag size="sm">Small Tag</Tag>
-                <Tag weight="semibold">Semibold Tag</Tag>
+                <Tag label="Default Tag" size="m" />
+                <Tag label="Small Tag" size="xs" />
+                <Tag label="Bold Tag" size="m" weight="bold" />
+                <Tag label="With Icon" size="m" showIcon />
+                <Tag label="Closeable" size="m" showClose onClose={() => {}} />
               </div>
             </div>
           </div>

@@ -42,7 +42,7 @@ export const Badge: React.FC<BadgeProps> = ({
   count = 7,
   className = "",
 }) => {
-  const typeConfig = typeClasses[type];
+  const typeConfig = typeClasses[type] || typeClasses.red;
 
   if (!showNumber) {
     return (
