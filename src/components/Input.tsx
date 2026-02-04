@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Icon } from "./Icon";
 import { colors } from "../specs";
 
@@ -132,6 +132,8 @@ export const Input: React.FC<InputProps> = ({
 }) => {
   const [internalValue, setInternalValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);
+  const [inputWidth, setInputWidth] = useState<number | undefined>(undefined);
+  const measureRef = useRef<HTMLSpanElement>(null);
 
   const value = controlledValue !== undefined ? controlledValue : internalValue;
 
@@ -172,6 +174,15 @@ export const Input: React.FC<InputProps> = ({
   const placeholder = placeholderProp ?? defaultPlaceholder;
 
   const iconClass = sizeConfig.icon;
+  const shouldAutoSize = align === "hug" || isDocumentContext;
+
+  // Measure text width for auto-sizing
+  const displayText = value || placeholder;
+  useEffect(() => {
+    if (shouldAutoSize && measureRef.current) {
+      setInputWidth(measureRef.current.offsetWidth);
+    }
+  }, [displayText, shouldAutoSize, size]);
 
   return (
     <div className={`${displayClass} flex-col gap-2 ${widthClass} ${className}`}>
@@ -182,8 +193,8 @@ export const Input: React.FC<InputProps> = ({
       )}
       <div
         className={`
-          ${displayClass} items-center rounded overflow-hidden
-          border transition-colors
+          ${displayClass} items-center rounded
+          border transition-colors relative
           ${contextConfig.bg}
           ${sizeConfig.container}
           ${isActive ? contextConfig.activeBorder : contextConfig.border}
@@ -201,6 +212,19 @@ export const Input: React.FC<InputProps> = ({
             )}
           </span>
         )}
+        {/* Hidden span for measuring text width */}
+        {shouldAutoSize && (
+          <span
+            ref={measureRef}
+            aria-hidden="true"
+            className={`
+              absolute invisible whitespace-pre font-normal
+              ${sizeConfig.input}
+            `}
+          >
+            {displayText}
+          </span>
+        )}
         <input
           type="text"
           value={value}
@@ -214,7 +238,13 @@ export const Input: React.FC<InputProps> = ({
             text-foreground placeholder:text-subtle
             ${sizeConfig.input}
             ${disabled ? "cursor-not-allowed" : ""}
+            ${shouldAutoSize ? "w-auto" : "w-full"}
           `}
+          style={
+            shouldAutoSize && inputWidth !== undefined
+              ? { width: inputWidth }
+              : undefined
+          }
         />
         {showRightIcon && value && (
           <button

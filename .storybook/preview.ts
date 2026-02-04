@@ -64,7 +64,7 @@ const preview: Preview = {
             "Tooltip",
           ],
           "Prototypes",
-          ["DocumentMenuItem"],
+          ["DocumentMenuItem", "JurisdictionDropdown"],
           "Changelog",
         ],
       },

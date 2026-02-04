@@ -1,5 +1,5 @@
 // Auto-generated changelog from git commits
-// Generated: 2026-02-03T17:44:02.503Z
+// Generated: 2026-02-04T15:45:09.770Z
 // Run: node scripts/generate-changelog.js
 
 export interface ChangelogEntry {
@@ -12,8 +12,45 @@ export interface ChangelogEntry {
 
 export const changelog: ChangelogEntry[] = [
   {
+    "date": "2026-02-04",
+    "commits": [
+      {
+        "hash": "17d9dba",
+        "message": "Fix sidebar icon alignment when collapsed"
+      },
+      {
+        "hash": "23c84a1",
+        "message": "Improve sidebar animation with snappier transitions"
+      },
+      {
+        "hash": "1f65337",
+        "message": "Add Popover component and refactor Tooltip to use it"
+      },
+      {
+        "hash": "b823386",
+        "message": "Add settings dropdown to ChatInput with position options"
+      },
+      {
+        "hash": "023f0fd",
+        "message": "Update ChatInput settings tooltip to \"Jurisdiction and settings\""
+      }
+    ]
+  },
+  {
     "date": "2026-02-03",
     "commits": [
+      {
+        "hash": "fc2a3a7",
+        "message": "Add Prototypes section with DocumentMenuItem, fix Sidebar icons, add MenuItem width prop"
+      },
+      {
+        "hash": "16c075b",
+        "message": "Fix TypeScript errors across components and stories"
+      },
+      {
+        "hash": "00cf96c",
+        "message": "Update Introduction docs and fix ChatThread story"
+      },
       {
         "hash": "c47720b",
         "message": "Add ChatThread component with message components and reorganize Storybook"
@@ -182,41 +219,9 @@ export const changelog: ChangelogEntry[] = [
       {
         "hash": "c8e358b",
         "message": "Clean up sidebar sort configuration"
-      },
-      {
-        "hash": "26388a6",
-        "message": "Fix sidebar sort order - move Changelog to bottom"
-      },
-      {
-        "hash": "717a81d",
-        "message": "Move Changelog to bottom of sidebar"
-      },
-      {
-        "hash": "3500fdb",
-        "message": "Update changelog data"
-      },
-      {
-        "hash": "ac3edbf",
-        "message": "Add auto-generated changelog from Git commits"
-      },
-      {
-        "hash": "bc07a3f",
-        "message": "Fix spacing tokens and color consistency"
-      },
-      {
-        "hash": "2643443",
-        "message": "Refactor: Use centralized color tokens across all components"
-      },
-      {
-        "hash": "4ab8a4f",
-        "message": "Restructure Storybook: separate Foundations from Components"
-      },
-      {
-        "hash": "51776ce",
-        "message": "Reorganize Storybook navigation to match README categories"
       }
     ]
   }
 ];
 
-export const lastUpdated = "2026-02-03";
+export const lastUpdated = "2026-02-04";

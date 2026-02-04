@@ -86,3 +86,35 @@ body {
 .shadow-card {
   box-shadow: var(--shadow-card);
 }
+
+/* Custom dashed border utility - dash: 6px, gap: 6px */
+/* Use with border-color utility (e.g., border-border) */
+.border-dashed-custom {
+  border-style: dashed;
+  /* SVG-based border for precise dash/gap control */
+  /* Fallback to regular dashed for older browsers */
+}
+
+/* Bottom dashed border with precise dash pattern */
+.border-b-dashed {
+  position: relative;
+}
+
+.border-b-dashed::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, #E2DDFF 50%, transparent 50%);
+  background-size: 12px 1px;
+  pointer-events: none;
+}
+
+/* Reusable dashed divider line (horizontal) */
+.divider-dashed {
+  height: 1px;
+  background-image: linear-gradient(to right, #E2DDFF 50%, transparent 50%);
+  background-size: 12px 1px;
+}

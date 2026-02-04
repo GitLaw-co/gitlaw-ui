@@ -56,7 +56,7 @@ export const EditorHeader: React.FC<EditorHeaderProps> = ({
   return (
     <div
       className={`
-        bg-card border-b border-dashed border-border
+        bg-card border-b-dashed
         flex h-16 items-center justify-between
         px-gitlaw-xl py-gitlaw-m
         ${className}
@@ -65,22 +65,27 @@ export const EditorHeader: React.FC<EditorHeaderProps> = ({
       {/* Left section: Close button + Title + Ellipsis - 4px gaps */}
       <div className="flex items-center gap-1">
         {/* Close button */}
-        <Button variant="icon" size="m" onClick={onClose} leftIconName="x" />
+        <Tooltip content="Close document" type="purple" position="bottom" size="s">
+          <div>
+            <Button variant="icon" size="m" onClick={onClose} leftIconName="x" />
+          </div>
+        </Tooltip>
 
-        {/* Title/Breadcrumb - 4px gap */}
+        {/* Title - 4px gap */}
         <div className="flex items-center gap-1">
-          <button
-            onClick={onTitleClick}
-            className="text-base font-normal text-primary hover:underline"
-          >
+          <span className="text-base font-normal text-primary">
             {title}
-          </button>
-          <Button
-            variant="icon"
-            size="s"
-            onClick={onMenuClick}
-            leftIconName="ellipsis"
-          />
+          </span>
+          <Tooltip content="Document options" type="purple" position="bottom" size="s">
+            <div>
+              <Button
+                variant="icon"
+                size="s"
+                onClick={onMenuClick}
+                leftIconName="ellipsis"
+              />
+            </div>
+          </Tooltip>
         </div>
       </div>
 

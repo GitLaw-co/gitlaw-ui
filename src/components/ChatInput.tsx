@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { Icon } from "./Icon";
 import { Tooltip } from "./Tooltip";
 import { PopoverPosition } from "./Popover";
@@ -103,8 +104,8 @@ const QuickActionIcon: React.FC<{ icon: string }> = ({ icon }) => {
 
 // Position classes for dropdown (matches Popover positioning)
 const dropdownPositionClasses: Record<PopoverPosition, string> = {
-  top: "bottom-full left-1/2 -translate-x-1/2 mb-2",
-  bottom: "top-full left-1/2 -translate-x-1/2 mt-2",
+  top: "bottom-full left-0 mb-2",
+  bottom: "top-full left-0 mt-2",
   left: "right-full top-1/2 -translate-y-1/2 mr-2",
   right: "left-full top-1/2 -translate-y-1/2 ml-2",
 };
@@ -151,9 +152,13 @@ export const ChatInput: React.FC<ChatInputProps> = ({
 
   // Ref for settings dropdown click-outside detection
   const settingsRef = useRef<HTMLDivElement>(null);
+  const settingsButtonRef = useRef<HTMLDivElement>(null);
 
   // Tooltip visibility for settings button (hide when dropdown is open)
   const [showSettingsTooltip, setShowSettingsTooltip] = useState(false);
+
+  // Dropdown position for fixed positioning
+  const [dropdownPosition, setDropdownPosition] = useState<{ top: number; left: number } | null>(null);
 
   // Animated placeholder state
   const [currentPlaceholderIndex, setCurrentPlaceholderIndex] = useState(0);
@@ -175,6 +180,24 @@ export const ChatInput: React.FC<ChatInputProps> = ({
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [showSettingsDropdown, onSettingsDropdownClose]);
+
+  // Calculate dropdown position when it opens
+  useEffect(() => {
+    if (showSettingsDropdown && settingsButtonRef.current) {
+      const rect = settingsButtonRef.current.getBoundingClientRect();
+      if (settingsDropdownPosition === "top") {
+        setDropdownPosition({
+          top: rect.top - 8, // 8px margin above button
+          left: rect.left,
+        });
+      } else {
+        setDropdownPosition({
+          top: rect.bottom + 8,
+          left: rect.left,
+        });
+      }
+    }
+  }, [showSettingsDropdown, settingsDropdownPosition]);
 
   // Use static placeholder if provided, otherwise use animated placeholders
   const useAnimatedPlaceholders =
@@ -317,21 +340,23 @@ export const ChatInput: React.FC<ChatInputProps> = ({
             onMouseEnter={() => !showSettingsDropdown && setShowSettingsTooltip(true)}
             onMouseLeave={() => setShowSettingsTooltip(false)}
           >
-            <IconButton
-              icon="settings-2"
-              onClick={() => {
-                if (settingsDropdownContent) {
-                  if (showSettingsDropdown) {
-                    onSettingsDropdownClose?.();
+            <div ref={settingsButtonRef}>
+              <IconButton
+                icon="settings-2"
+                onClick={() => {
+                  if (settingsDropdownContent) {
+                    if (showSettingsDropdown) {
+                      onSettingsDropdownClose?.();
+                    } else {
+                      onSettingsClick?.();
+                    }
                   } else {
                     onSettingsClick?.();
                   }
-                } else {
-                  onSettingsClick?.();
-                }
-                setShowSettingsTooltip(false);
-              }}
-            />
+                  setShowSettingsTooltip(false);
+                }}
+              />
+            </div>
 
             {/* Settings tooltip - manual implementation to avoid nesting issues */}
             {showSettingsTooltip && !showSettingsDropdown && (
@@ -348,18 +373,19 @@ export const ChatInput: React.FC<ChatInputProps> = ({
               </div>
             )}
 
-            {/* Settings dropdown */}
-            {settingsDropdownContent && (
+            {/* Settings dropdown - uses portal to escape overflow:hidden containers */}
+            {settingsDropdownContent && showSettingsDropdown && dropdownPosition && createPortal(
               <div
-                className={`
-                  absolute z-50
-                  ${dropdownPositionClasses[settingsDropdownPosition]}
-                  transition-opacity duration-100
-                  ${showSettingsDropdown ? "opacity-100" : "opacity-0 pointer-events-none"}
-                `}
+                className="fixed z-[9999] transition-opacity duration-100"
+                style={{
+                  top: settingsDropdownPosition === "top" ? undefined : dropdownPosition.top,
+                  bottom: settingsDropdownPosition === "top" ? `calc(100vh - ${dropdownPosition.top}px)` : undefined,
+                  left: dropdownPosition.left,
+                }}
               >
                 {settingsDropdownContent}
-              </div>
+              </div>,
+              document.body
             )}
           </div>
         </div>

@@ -91,7 +91,7 @@ export const EditorPaper: React.FC<EditorPaperProps> = ({
         flex flex-col items-center
         w-full
         font-document
-        ${showToolbarArea ? "pt-16" : "pt-6"}
+        pt-6
         pb-6 px-6
         min-h-screen
         ${className}
@@ -110,6 +110,7 @@ export const EditorPaper: React.FC<EditorPaperProps> = ({
             <Input
               size="xs"
               context={getContext(agreementDate)}
+              showLeftIcon
               value={agreementDate}
               onChange={onAgreementDateChange}
               placeholder="Agreement date"
@@ -123,6 +124,7 @@ export const EditorPaper: React.FC<EditorPaperProps> = ({
               <Input
                 size="xs"
                 context={getContext(party1.name)}
+                showLeftIcon
                 value={party1.name || ""}
                 onChange={(v) => onParty1Change?.({ ...party1, name: v })}
                 placeholder="Party 1 full name"
@@ -133,6 +135,7 @@ export const EditorPaper: React.FC<EditorPaperProps> = ({
               <Input
                 size="xs"
                 context={getContext(party2.name)}
+                showLeftIcon
                 value={party2.name || ""}
                 onChange={(v) => onParty2Change?.({ ...party2, name: v })}
                 placeholder="Party 2 full name"
@@ -163,6 +166,7 @@ export const EditorPaper: React.FC<EditorPaperProps> = ({
             <Input
               size="xs"
               context={getContext(effectiveDate)}
+              showLeftIcon
               value={effectiveDate}
               onChange={onEffectiveDateChange}
               placeholder="Agreement date"
@@ -178,6 +182,7 @@ export const EditorPaper: React.FC<EditorPaperProps> = ({
             <Input
               size="xs"
               context={getContext(party1.name)}
+              showLeftIcon
               value={party1.name || ""}
               onChange={(v) => onParty1Change?.({ ...party1, name: v })}
               placeholder="Party 1 full name"
@@ -186,6 +191,7 @@ export const EditorPaper: React.FC<EditorPaperProps> = ({
             <Input
               size="xs"
               context={getContext(party1.address)}
+              showLeftIcon
               value={party1.address || ""}
               onChange={(v) => onParty1Change?.({ ...party1, address: v })}
               placeholder="Party 1 address"
@@ -201,6 +207,7 @@ export const EditorPaper: React.FC<EditorPaperProps> = ({
             <Input
               size="xs"
               context={getContext(party2.name)}
+              showLeftIcon
               value={party2.name || ""}
               onChange={(v) => onParty2Change?.({ ...party2, name: v })}
               placeholder="Party 2 full name"
@@ -209,6 +216,7 @@ export const EditorPaper: React.FC<EditorPaperProps> = ({
             <Input
               size="xs"
               context={getContext(party2.address)}
+              showLeftIcon
               value={party2.address || ""}
               onChange={(v) => onParty2Change?.({ ...party2, address: v })}
               placeholder="Party 2 address"

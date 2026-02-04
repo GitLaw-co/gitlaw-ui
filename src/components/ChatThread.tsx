@@ -17,6 +17,14 @@ export interface ChatThreadProps {
   onSubmit?: () => void;
   onAttachmentClick?: () => void;
   onSettingsClick?: () => void;
+  /** Show settings dropdown */
+  showSettingsDropdown?: boolean;
+  /** Settings dropdown content */
+  settingsDropdownContent?: React.ReactNode;
+  /** Settings dropdown position */
+  settingsDropdownPosition?: "top" | "bottom" | "left" | "right";
+  /** Called when clicking outside the dropdown to close it */
+  onSettingsDropdownClose?: () => void;
   disclaimer?: string;
   className?: string;
 }
@@ -29,6 +37,10 @@ export const ChatThread: React.FC<ChatThreadProps> = ({
   onSubmit,
   onAttachmentClick,
   onSettingsClick,
+  showSettingsDropdown = false,
+  settingsDropdownContent,
+  settingsDropdownPosition = "top",
+  onSettingsDropdownClose,
   disclaimer = "GitLaw isn't a law firm and may make mistakes. Always review and consult a qualified attorney.",
   className = "",
 }) => {
@@ -38,8 +50,8 @@ export const ChatThread: React.FC<ChatThreadProps> = ({
       <div className="flex-1 basis-0 min-h-0 overflow-y-auto flex flex-col items-stretch">
         {/* Inner flex wrapper */}
         <div className="flex-1 flex flex-col items-stretch">
-          {/* Centered content wrapper */}
-          <div className="flex flex-col flex-1 shrink max-w-4xl mx-auto w-full pt-4">
+          {/* Centered content wrapper with horizontal padding */}
+          <div className="flex flex-col flex-1 shrink max-w-4xl mx-auto w-full pt-4 px-6">
             {/* Messages area - flex-1 pushes content to fill space */}
             <div className="shrink-0 flex flex-col space-y-4 flex-1">
               {/* Spacer - pushes messages to bottom */}
@@ -67,6 +79,10 @@ export const ChatThread: React.FC<ChatThreadProps> = ({
                 onSubmit={onSubmit}
                 onAttachmentClick={onAttachmentClick}
                 onSettingsClick={onSettingsClick}
+                showSettingsDropdown={showSettingsDropdown}
+                settingsDropdownContent={settingsDropdownContent}
+                settingsDropdownPosition={settingsDropdownPosition}
+                onSettingsDropdownClose={onSettingsDropdownClose}
                 showQuickActions={false}
                 placeholder={placeholder}
                 fullWidth

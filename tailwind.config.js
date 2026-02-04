@@ -84,6 +84,12 @@ export default {
         page: {
           background: '#F7F6FF',  // purple/50
         },
+        // Landing page background
+        landing: {
+          DEFAULT: '#6F5EEC',  // purple/600
+        },
+        // Link text color
+        link: '#5E49D6',  // purple/700
         // Muted Color
         muted: {
           DEFAULT: '#F0F0F5',     // obsidian/50

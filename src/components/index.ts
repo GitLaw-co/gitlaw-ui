@@ -121,3 +121,9 @@ export type { ChatUserMessageProps } from "./ChatUserMessage";
 
 export { ChatAssistantMessage } from "./ChatAssistantMessage";
 export type { ChatAssistantMessageProps } from "./ChatAssistantMessage";
+
+export { TopHeader } from "./TopHeader";
+export type { TopHeaderProps, BreadcrumbItem } from "./TopHeader";
+
+export { FileDropdown } from "./FileDropdown";
+export type { FileDropdownProps, FileItem } from "./FileDropdown";
