@@ -82,9 +82,31 @@ export function ComponentShowcase() {
           <div className="bg-card rounded-gitlaw-m p-6 shadow-card">
             <div className="mb-6">
               <h3 className="text-sm font-medium text-subtle mb-3">Badges</h3>
-              <div className="flex flex-wrap gap-3">
-                <Badge type="default">Default</Badge>
-                <Badge type="notification">3</Badge>
+              <div className="flex flex-wrap gap-4 items-center">
+                <div className="flex items-center gap-2">
+                  <Badge type="primary" count={5} />
+                  <span className="text-sm text-subtle">Primary</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Badge type="secondary" count={12} />
+                  <span className="text-sm text-subtle">Secondary</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Badge type="red" count={3} />
+                  <span className="text-sm text-subtle">Red</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Badge type="orange" count={8} />
+                  <span className="text-sm text-subtle">Orange</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Badge type="green" count={99} />
+                  <span className="text-sm text-subtle">Green</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Badge type="red" showNumber={false} />
+                  <span className="text-sm text-subtle">Dot only</span>
+                </div>
               </div>
             </div>
             <div>
