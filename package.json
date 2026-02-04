@@ -7,6 +7,9 @@
     "node": ">=18"
   },
   "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "node scripts/generate-changelog.js && storybook build",
     "changelog": "node scripts/generate-changelog.js",
