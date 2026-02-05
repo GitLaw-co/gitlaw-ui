@@ -134,6 +134,9 @@ export type { FileDropdownProps, FileItem } from "./FileDropdown";
 export { StickyFeaturePromoBar } from "./StickyFeaturePromoBar";
 export type { StickyFeaturePromoBarProps } from "./StickyFeaturePromoBar";
 
+export { PageNav } from "./PageNav";
+export type { PageNavProps, PageNavAccount, PageNavItem } from "./PageNav";
+
 // Templates
 export { ChatPageTemplate } from "../templates/ChatPageTemplate";
 export type { ChatPageTemplateProps } from "../templates/ChatPageTemplate";

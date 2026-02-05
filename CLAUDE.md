@@ -198,7 +198,15 @@ import { colors } from '../specs';
 3. Run `node scripts/update-illustration-colors.js` to convert colors to CSS variables
 4. It will appear automatically in the Illustrations story
 
-### Creating a New Component
+### Creating or Amending a Component
+
+**Iterative process (always follow this order):**
+
+1. **Recap understanding** — After reviewing Figma designs or the requested change, write a clear summary of the specs or amendments (structure, states, variants, sizing, behaviour). Share with user for review.
+2. **Agree on specs** — Iterate on the recap with the user until both sides agree on exactly what will be built or changed. Do not start coding until specs are confirmed.
+3. **Build locally** — Only after agreement, implement the component and story files.
+
+**Build steps:**
 
 1. **Get specs from Figma first** - Use Figma MCP to fetch design context and screenshots
 2. Create component file: `src/components/ComponentName.tsx`
