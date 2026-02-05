@@ -12,14 +12,28 @@ const personalAccount: PageNavAccount = {
   initials: "AC",
 };
 
-const orgAccount: PageNavAccount = {
+const orgWhisk: PageNavAccount = {
   id: "whisk",
   name: "Whisk",
   type: "Organization",
   avatar: "https://placehold.co/32x32/2cb67d/ffffff?text=W",
 };
 
-const allAccounts: PageNavAccount[] = [personalAccount, orgAccount];
+const orgAcme: PageNavAccount = {
+  id: "acme",
+  name: "Acme Corp",
+  type: "Organization",
+  avatar: "https://placehold.co/32x32/6366f1/ffffff?text=A",
+};
+
+const orgNova: PageNavAccount = {
+  id: "nova",
+  name: "Nova Labs",
+  type: "Organization",
+  avatar: "https://placehold.co/32x32/f59e0b/ffffff?text=N",
+};
+
+const allAccounts: PageNavAccount[] = [personalAccount, orgWhisk, orgAcme, orgNova];
 
 const personalItems: PageNavItem[] = [
   { id: "profile", label: "Profile" },
@@ -82,7 +96,7 @@ export const PersonalBilling: Story = {
 /** Organization account with Organization selected */
 export const OrganizationDefault: Story = {
   args: {
-    activeAccount: orgAccount,
+    activeAccount: orgWhisk,
     accounts: allAccounts,
     items: orgItems,
     activeItemId: "organization",
@@ -92,7 +106,7 @@ export const OrganizationDefault: Story = {
 /** Organization account with People selected */
 export const OrganizationPeople: Story = {
   args: {
-    activeAccount: orgAccount,
+    activeAccount: orgWhisk,
     accounts: allAccounts,
     items: orgItems,
     activeItemId: "people",
@@ -115,16 +129,13 @@ export const Interactive: Story = {
     const [activeItemId, setActiveItemId] = useState("profile");
     /* eslint-enable react-hooks/rules-of-hooks */
 
-    const currentItems = activeAccount.id === "personal" ? personalItems : orgItems;
+    const isPersonal = activeAccount.id === "personal";
+    const currentItems = isPersonal ? personalItems : orgItems;
 
     const handleAccountSwitch = (account: PageNavAccount) => {
       setActiveAccount(account);
       // Reset to first item when switching context
-      if (account.id === "personal") {
-        setActiveItemId("profile");
-      } else {
-        setActiveItemId("organization");
-      }
+      setActiveItemId(account.id === "personal" ? "profile" : "organization");
     };
 
     return (

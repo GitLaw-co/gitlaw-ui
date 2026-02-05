@@ -98,14 +98,25 @@ export const PageNav: React.FC<PageNavProps> = ({
         {/* Dropdown — overlays on top of the trigger, animated */}
         <div
           className={`
-            absolute -top-2 -left-3 z-50
-            bg-card rounded-lg shadow-card p-2
+            absolute -top-3 -left-3 z-50
+            bg-card rounded-lg shadow-card p-3
             w-[calc(100%+24px)]
             transition-[opacity,transform] duration-fast ease-gitlaw origin-top
             ${isDropdownOpen ? "opacity-100 scale-y-100" : "opacity-0 scale-y-95 pointer-events-none"}
           `}
         >
-          {accounts.map((account) => (
+          {[
+            activeAccount,
+            ...accounts
+              .filter((a) => a.id !== activeAccount.id)
+              .sort((a, b) => {
+                // Personal account always comes first (after active)
+                if (a.type === "Personal Account") return -1;
+                if (b.type === "Personal Account") return 1;
+                // Orgs in A-Z order
+                return a.name.localeCompare(b.name);
+              }),
+          ].map((account) => (
             <MenuItem
               key={account.id}
               primaryText={account.name}
