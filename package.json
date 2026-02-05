@@ -1,6 +1,6 @@
 {
   "name": "@gitlaw/ui",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "GitLaw UI Component Library - A design system for legal tech applications",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -29,8 +29,8 @@
     "storybook": "storybook dev -p 6006",
     "build": "vite build && npm run build:types",
     "build:types": "tsc --project tsconfig.build.json",
-    "build-storybook": "node scripts/generate-changelog.js && storybook build",
-    "changelog": "node scripts/generate-changelog.js",
+    "build-storybook": "node scripts/generate-changelog.cjs && storybook build",
+    "changelog": "node scripts/generate-changelog.cjs",
     "deploy": "npm run build-storybook && gh-pages -d storybook-static",
     "prepublishOnly": "npm run build"
   },
