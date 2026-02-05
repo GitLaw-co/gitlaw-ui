@@ -1,5 +1,5 @@
 // Auto-generated changelog from git commits
-// Generated: 2026-02-04T15:45:09.770Z
+// Generated: 2026-02-05T09:40:12.835Z
 // Run: node scripts/generate-changelog.js
 
 export interface ChangelogEntry {
@@ -12,8 +12,37 @@ export interface ChangelogEntry {
 
 export const changelog: ChangelogEntry[] = [
   {
+    "date": "2026-02-05",
+    "commits": [
+      {
+        "hash": "1edcd31",
+        "message": "Add white tooltip variant story for review with Kirill"
+      },
+      {
+        "hash": "74bed0f",
+        "message": "Fix Storybook build: rename changelog script to .cjs for ESM compat"
+      },
+      {
+        "hash": "d38b7bc",
+        "message": "Standardize animations across all components with Tailwind tokens"
+      }
+    ]
+  },
+  {
     "date": "2026-02-04",
     "commits": [
+      {
+        "hash": "3a5bf48",
+        "message": "Set up npm publishing for @gitlaw/ui design system"
+      },
+      {
+        "hash": "8c3ae8f",
+        "message": "Add StickyFeaturePromoBar component"
+      },
+      {
+        "hash": "29f81f5",
+        "message": "Add ChatPageTemplate with jurisdiction dropdown and Input improvements"
+      },
       {
         "hash": "17d9dba",
         "message": "Fix sidebar icon alignment when collapsed"
@@ -195,33 +224,9 @@ export const changelog: ChangelogEntry[] = [
       {
         "hash": "9761311",
         "message": "Add Claude Code and Figma MCP setup instructions"
-      },
-      {
-        "hash": "188578b",
-        "message": "Add Vercel configuration for Storybook build"
-      },
-      {
-        "hash": "efe75ed",
-        "message": "Fix disabled button icon color"
-      },
-      {
-        "hash": "63074fd",
-        "message": "Replace hardcoded hex colors with design system constants"
-      },
-      {
-        "hash": "d2a6944",
-        "message": "Update illustrations to use CSS custom properties"
-      },
-      {
-        "hash": "4bdd660",
-        "message": "Add signature icon to icon set"
-      },
-      {
-        "hash": "c8e358b",
-        "message": "Clean up sidebar sort configuration"
       }
     ]
   }
 ];
 
-export const lastUpdated = "2026-02-04";
+export const lastUpdated = "2026-02-05";
