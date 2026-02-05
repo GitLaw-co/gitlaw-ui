@@ -82,7 +82,7 @@ export const StickyFeaturePromoBar: React.FC<StickyFeaturePromoBarProps> = ({
               rounded-gitlaw-s
               text-xs font-normal leading-[1.2]
               text-foreground-button-negative
-              transition-colors shrink-0
+              transition-colors duration-fast ease-gitlaw shrink-0
             "
           >
             {actionLabel}
@@ -92,7 +92,7 @@ export const StickyFeaturePromoBar: React.FC<StickyFeaturePromoBarProps> = ({
         <button
           type="button"
           onClick={onClose}
-          className="shrink-0 hover:opacity-70 transition-opacity"
+          className="shrink-0 hover:opacity-70 transition-opacity duration-fast ease-gitlaw"
         >
           <Icon
             name="x"

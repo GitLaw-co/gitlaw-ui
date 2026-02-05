@@ -199,7 +199,7 @@ export const Card: React.FC<CardProps> = ({
               e.stopPropagation();
               onStarClick?.();
             }}
-            className="p-1 hover:bg-secondary rounded transition-colors hidden @[200px]:block"
+            className="p-1 hover:bg-secondary rounded transition-colors duration-fast ease-gitlaw hidden @[200px]:block"
           >
             <Icon
               name="star"
@@ -213,7 +213,7 @@ export const Card: React.FC<CardProps> = ({
               e.stopPropagation();
               onMenuClick?.();
             }}
-            className="p-1 hover:bg-secondary rounded transition-colors"
+            className="p-1 hover:bg-secondary rounded transition-colors duration-fast ease-gitlaw"
           >
             <Icon
               name="ellipsis"
@@ -267,7 +267,7 @@ export const Card: React.FC<CardProps> = ({
               e.stopPropagation();
               onStarClick?.();
             }}
-            className="p-1 hover:bg-secondary rounded transition-colors hidden @[200px]:block"
+            className="p-1 hover:bg-secondary rounded transition-colors duration-fast ease-gitlaw hidden @[200px]:block"
           >
             <Icon
               name="star"
@@ -281,7 +281,7 @@ export const Card: React.FC<CardProps> = ({
               e.stopPropagation();
               onMenuClick?.();
             }}
-            className="p-1 hover:bg-secondary rounded transition-colors"
+            className="p-1 hover:bg-secondary rounded transition-colors duration-fast ease-gitlaw"
           >
             <Icon
               name="ellipsis"
@@ -300,7 +300,7 @@ export const Card: React.FC<CardProps> = ({
         {files.slice(0, 6).map((file) => (
           <div
             key={file.id}
-            className="flex items-center gap-2 min-h-12 p-3 hover:bg-secondary/50 transition-colors cursor-pointer"
+            className="flex items-center gap-2 min-h-12 p-3 hover:bg-secondary/50 transition-colors duration-fast ease-gitlaw cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
               onFileClick?.(file);
@@ -326,7 +326,7 @@ export const Card: React.FC<CardProps> = ({
         @container bg-card rounded-lg shadow-card overflow-hidden relative cursor-pointer
         w-full min-w-[160px]
         p-4 @[200px]:p-6
-        transition-all
+        transition-shadow duration-fast ease-gitlaw
         ${className}
       `}
       style={{

@@ -196,13 +196,19 @@ export const Select: React.FC<SelectProps> = ({
       {labelPosition === "left" && renderLabel()}
       {renderDropdown()}
 
-      {isOpen && options.length > 0 && (
-        <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-input-border rounded shadow-card z-50 max-h-60 overflow-auto">
+      {options.length > 0 && (
+        <div
+          className={`
+            absolute top-full left-0 right-0 mt-1 bg-white border border-input-border rounded shadow-card z-50 max-h-60 overflow-auto
+            transition-[opacity,transform] duration-fast ease-gitlaw origin-top
+            ${isOpen ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-95 pointer-events-none'}
+          `}
+        >
           {options.map((option) => (
             <div
               key={option.value}
               className={`
-                px-3 py-2 cursor-pointer transition-colors
+                px-3 py-2 cursor-pointer transition-colors duration-fast ease-gitlaw
                 ${sizeConfig.text}
                 ${option.value === value ? "bg-secondary text-foreground" : "text-foreground hover:bg-secondary/50"}
               `}

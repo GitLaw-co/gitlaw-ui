@@ -217,7 +217,7 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
               <button
                 type="button"
                 onClick={handleFilesClick}
-                className={`size-10 flex items-center justify-center rounded hover:bg-secondary/30 transition-colors`}
+                className={`size-10 flex items-center justify-center rounded hover:bg-secondary/30 transition-colors duration-fast ease-gitlaw`}
                 aria-label="Files"
               >
                 <Icon name="file-text" className="size-6" color={iconColor} />
@@ -231,8 +231,14 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
           </Tooltip>
 
           {/* File dropdown */}
-          {isFileDropdownOpen && filesWithSelection.length > 0 && (
-            <div className="absolute top-full right-0 mt-2 z-50">
+          {filesWithSelection.length > 0 && (
+            <div
+              className={`
+                absolute top-full right-0 mt-2 z-50
+                transition-[opacity,transform] duration-fast ease-gitlaw origin-top-right
+                ${isFileDropdownOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}
+              `}
+            >
               <FileDropdown
                 files={filesWithSelection}
                 onFileClick={handleFileSelect}
@@ -273,7 +279,7 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
           <button
             type="button"
             onClick={onMenuClick}
-            className="size-10 flex items-center justify-center rounded hover:bg-white/10 transition-colors shrink-0"
+            className="size-10 flex items-center justify-center rounded hover:bg-white/10 transition-colors duration-fast ease-gitlaw shrink-0"
             aria-label="Menu"
           >
             <Icon name="menu" className="size-6" color={colors.iconNegative} />

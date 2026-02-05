@@ -109,7 +109,7 @@ const ToolButtonWithDropdown: React.FC<{
         onClick={onClick}
         className={`
           ${buttonHeight} flex items-center justify-center gap-0 px-1
-          hover:bg-secondary/30 transition-colors rounded-none
+          hover:bg-secondary/30 transition-colors duration-fast ease-gitlaw rounded-none
           ${isFirst ? "" : "border-l border-purple-200"}
         `}
       >

@@ -36,7 +36,7 @@ export const Tab: React.FC<TabProps> = ({
       className={`
         inline-flex items-center justify-center gap-2
         px-2 py-4
-        transition-colors
+        transition-colors duration-fast ease-gitlaw
         ${hasUnderline ? "border-b-2 border-primary" : ""}
         ${className}
       `}

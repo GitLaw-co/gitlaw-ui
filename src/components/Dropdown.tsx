@@ -26,6 +26,8 @@ export interface DropdownProps {
   heading?: string;
   /** Whether to show icons */
   showIcons?: boolean;
+  /** Whether the dropdown is open (enables fade+scale animation) */
+  isOpen?: boolean;
   /** Additional CSS classes */
   className?: string;
 }
@@ -34,14 +36,21 @@ export const Dropdown: React.FC<DropdownProps> = ({
   items,
   heading,
   showIcons = true,
+  isOpen,
   className = "",
 }) => {
+  // When isOpen is provided, use animated visibility; otherwise always visible
+  const animationClasses = isOpen !== undefined
+    ? `transition-[opacity,transform] duration-fast ease-gitlaw origin-top ${isOpen ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-95 pointer-events-none'}`
+    : '';
+
   return (
     <div
       className={`
         w-[220px] max-w-[360px] p-2 rounded-lg
         bg-card shadow-card
         flex flex-col gap-px
+        ${animationClasses}
         ${className}
       `}
       style={{ width: "max-content", minWidth: "220px", maxWidth: "360px" }}
@@ -59,7 +68,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
           className={`
             w-full px-3 py-3 rounded-none
             flex items-center gap-2 text-left
-            transition-colors
+            transition-colors duration-fast ease-gitlaw
             ${item.disabled ? "opacity-50 cursor-not-allowed" : "hover:bg-secondary/30 cursor-pointer"}
             ${item.selected ? "bg-secondary/20" : ""}
           `}

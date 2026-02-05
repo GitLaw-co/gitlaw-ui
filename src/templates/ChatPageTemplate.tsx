@@ -282,7 +282,7 @@ export const ChatPageTemplate: React.FC<ChatPageTemplateProps> = ({
       {/* Sidebar - fixed width */}
       <div
         ref={sidebarRef}
-        className={`h-full shrink-0 transition-[width] duration-150 ease-[cubic-bezier(0,0,0.2,1)] ${sidebarWidth}`}
+        className={`h-full shrink-0 transition-[width] duration-normal ease-gitlaw ${sidebarWidth}`}
       >
         <Sidebar
           variant="inner"
@@ -338,7 +338,7 @@ export const ChatPageTemplate: React.FC<ChatPageTemplateProps> = ({
         </div>
       )}
 
-      {/* Draggable Divider - 1px visible line with 4px hit area (hidden when editor collapsed) */}
+      {/* Draggable Divider - 1px visible line with 4px hit area */}
       {!editorCollapsed && (
         <div
           onMouseDown={handleDragStart}
@@ -348,7 +348,7 @@ export const ChatPageTemplate: React.FC<ChatPageTemplateProps> = ({
           {/* Visible 1px line centered in 4px hit area */}
           <div
             className={`
-              absolute left-1/2 -translate-x-1/2 w-px h-full transition-colors
+              absolute left-1/2 -translate-x-1/2 w-px h-full transition-colors duration-fast ease-gitlaw
               ${isDragging ? 'bg-primary' : 'bg-border group-hover:bg-primary/50'}
             `}
           />
@@ -357,35 +357,34 @@ export const ChatPageTemplate: React.FC<ChatPageTemplateProps> = ({
 
       {/* Editor Section - right side, takes remaining space */}
       {!editorCollapsed && (
-        <div
-          className="flex flex-col flex-1 min-w-0 h-full bg-card shadow-card z-10"
-        >
-          {/* Editor Header */}
-          <EditorHeader title={documentTitle} onClose={handleEditorClose} />
+        <div className="flex flex-col flex-1 min-w-0 h-full bg-card shadow-card z-10">
 
-          {/* Editor Toolbar */}
-          <EditorToolbar />
+        {/* Editor Header */}
+        <EditorHeader title={documentTitle} onClose={handleEditorClose} />
 
-          {/* Editor Paper - scrollable */}
-          <div className="flex-1 min-h-0 overflow-y-auto px-6">
-            <EditorPaper
-              title={documentTitle}
-              subtitle={documentSubtitle}
-              status="default"
-              showToolbar={false}
-              agreementDate={agreementDate}
-              effectiveDate={effectiveDate}
-              party1={party1}
-              party2={party2}
-              preambleText={preambleText}
-              partiesConnector={partiesConnector}
-              party1Role={party1Role}
-              party2Role={party2Role}
-            >
-              {documentContent}
-            </EditorPaper>
-          </div>
+        {/* Editor Toolbar */}
+        <EditorToolbar />
+
+        {/* Editor Paper - scrollable */}
+        <div className="flex-1 min-h-0 overflow-y-auto px-6">
+          <EditorPaper
+            title={documentTitle}
+            subtitle={documentSubtitle}
+            status="default"
+            showToolbar={false}
+            agreementDate={agreementDate}
+            effectiveDate={effectiveDate}
+            party1={party1}
+            party2={party2}
+            preambleText={preambleText}
+            partiesConnector={partiesConnector}
+            party1Role={party1Role}
+            party2Role={party2Role}
+          >
+            {documentContent}
+          </EditorPaper>
         </div>
+      </div>
       )}
     </div>
   );

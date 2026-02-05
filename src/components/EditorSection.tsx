@@ -164,7 +164,7 @@ export const EditorSection: React.FC<EditorSectionProps> = ({
           absolute left-0 top-0 bottom-0
           cursor-ew-resize
           hover:bg-primary/30
-          transition-colors
+          transition-colors duration-fast ease-gitlaw
           z-10
           ${isDragging ? "w-1 bg-primary/40" : "w-px bg-border"}
         `}

@@ -190,6 +190,15 @@ export default {
         '3xl': '1792px',
         '4xl': '2048px',
       },
+      // Animation system - standardized from Sidebar specs
+      transitionTimingFunction: {
+        'gitlaw': 'cubic-bezier(0, 0, 0.2, 1)',
+      },
+      transitionDuration: {
+        'fast': '100ms',   // opacity, color changes
+        'normal': '150ms', // layout shifts, width changes
+        'slow': '200ms',   // content fades, placeholder rotations
+      },
     },
   },
   plugins: [require('@tailwindcss/container-queries')],

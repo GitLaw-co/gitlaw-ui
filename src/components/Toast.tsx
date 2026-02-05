@@ -52,7 +52,7 @@ export const Toast: React.FC<ToastProps> = ({
             bg-primary hover:bg-primary-hover
             flex items-center gap-2 h-10 px-4 py-3 rounded
             text-sm font-normal text-negative leading-[1.4]
-            transition-colors shrink-0
+            transition-colors duration-fast ease-gitlaw shrink-0
           "
         >
           <Icon name="check" className="size-6" color={colors.iconNegative} />

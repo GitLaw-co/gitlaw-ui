@@ -115,7 +115,7 @@ export const Popover: React.FC<PopoverProps> = ({
 
   const showContent = animated ? true : isOpen;
   const animationClasses = animated
-    ? `transition-opacity duration-${animationDuration} ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`
+    ? `transition-opacity duration-fast ease-gitlaw ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`
     : "";
 
   return (

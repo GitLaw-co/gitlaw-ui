@@ -199,7 +199,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   // Text animation classes - fade out before collapse, fade in after expand
   const textOpacity = isCollapsed ? "opacity-0" : "opacity-100";
-  const textTransition = "transition-opacity duration-100";
+  const textTransition = "transition-opacity duration-fast ease-gitlaw";
   // Delay text fade-in when expanding (wait for width to expand first)
   const textDelay = isCollapsed ? "" : "delay-75";
 
@@ -209,7 +209,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         ${themeColors.bg} ${width}
         flex flex-col h-full min-h-[600px]
         px-2 py-3 relative
-        transition-[width] duration-150 ease-[cubic-bezier(0,0,0.2,1)]
+        transition-[width] duration-normal ease-gitlaw
         ${className}
       `}
     >
@@ -224,7 +224,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <button
                 type="button"
                 onClick={onToggle}
-                className={`flex items-center justify-center h-12 p-3 rounded ${themeColors.hoverBg} transition-colors`}
+                className={`flex items-center justify-center h-12 p-3 rounded ${themeColors.hoverBg} transition-colors duration-fast ease-gitlaw`}
                 aria-label="Open sidebar"
               >
                 <img src={getLogo()} alt="GitLaw" className="h-8" />
@@ -244,7 +244,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               >
                 <button
                   type="button"
-                  className={`size-10 flex items-center justify-center rounded ${themeColors.hoverBg} transition-colors`}
+                  className={`size-10 flex items-center justify-center rounded ${themeColors.hoverBg} transition-colors duration-fast ease-gitlaw`}
                   aria-label="Search"
                 >
                   <Icon
@@ -256,7 +256,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <button
                   type="button"
                   onClick={onToggle}
-                  className={`size-10 flex items-center justify-center rounded ${themeColors.hoverBg} transition-colors`}
+                  className={`size-10 flex items-center justify-center rounded ${themeColors.hoverBg} transition-colors duration-fast ease-gitlaw`}
                   aria-label="Collapse sidebar"
                 >
                   <Icon
@@ -348,7 +348,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   onClick={() => onChatHistoryClick?.(chat.id)}
                   className={`
                     flex items-center gap-2 min-h-12 p-3 rounded
-                    ${themeColors.hoverBg} transition-colors text-left whitespace-nowrap
+                    ${themeColors.hoverBg} transition-colors duration-fast ease-gitlaw text-left whitespace-nowrap
                   `}
                 >
                   <Icon
@@ -382,7 +382,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <Tooltip content={userName} size="m" type="neutral">
               <button
                 type="button"
-                className="flex items-center justify-center min-h-12 p-3 rounded transition-colors"
+                className="flex items-center justify-center min-h-12 p-3 rounded transition-colors duration-fast ease-gitlaw"
               >
                 {/* Avatar */}
                 <div className="size-8 rounded bg-primary flex items-center justify-center shrink-0">

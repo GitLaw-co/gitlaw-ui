@@ -102,14 +102,6 @@ const QuickActionIcon: React.FC<{ icon: string }> = ({ icon }) => {
   }
 };
 
-// Position classes for dropdown (matches Popover positioning)
-const dropdownPositionClasses: Record<PopoverPosition, string> = {
-  top: "bottom-full left-0 mb-2",
-  bottom: "top-full left-0 mt-2",
-  left: "right-full top-1/2 -translate-y-1/2 mr-2",
-  right: "left-full top-1/2 -translate-y-1/2 ml-2",
-};
-
 // Icon button component for consistent styling
 const IconButton: React.FC<{
   icon: string;
@@ -118,7 +110,7 @@ const IconButton: React.FC<{
   <button
     type="button"
     onClick={onClick}
-    className="p-1 hover:bg-secondary rounded transition-colors"
+    className="p-1 hover:bg-secondary rounded transition-colors duration-fast ease-gitlaw"
   >
     <Icon name={icon} className="size-6" color={colors.iconPrimary} />
   </button>
@@ -181,23 +173,28 @@ export const ChatInput: React.FC<ChatInputProps> = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [showSettingsDropdown, onSettingsDropdownClose]);
 
-  // Calculate dropdown position when it opens
+  // Calculate dropdown position when it opens (and keep updating while open)
   useEffect(() => {
-    if (showSettingsDropdown && settingsButtonRef.current) {
-      const rect = settingsButtonRef.current.getBoundingClientRect();
-      if (settingsDropdownPosition === "top") {
-        setDropdownPosition({
-          top: rect.top - 8, // 8px margin above button
-          left: rect.left,
-        });
-      } else {
-        setDropdownPosition({
-          top: rect.bottom + 8,
-          left: rect.left,
-        });
-      }
+    if (settingsDropdownContent && settingsButtonRef.current) {
+      const updatePosition = () => {
+        if (settingsButtonRef.current) {
+          const rect = settingsButtonRef.current.getBoundingClientRect();
+          if (settingsDropdownPosition === "top") {
+            setDropdownPosition({
+              top: rect.top - 8, // 8px margin above button
+              left: rect.left,
+            });
+          } else {
+            setDropdownPosition({
+              top: rect.bottom + 8,
+              left: rect.left,
+            });
+          }
+        }
+      };
+      updatePosition();
     }
-  }, [showSettingsDropdown, settingsDropdownPosition]);
+  }, [showSettingsDropdown, settingsDropdownPosition, settingsDropdownContent]);
 
   // Use static placeholder if provided, otherwise use animated placeholders
   const useAnimatedPlaceholders =
@@ -252,7 +249,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
           <button
             type="button"
             onClick={onStopClick}
-            className="ml-auto p-1 hover:bg-secondary rounded transition-colors"
+            className="ml-auto p-1 hover:bg-secondary rounded transition-colors duration-fast ease-gitlaw"
           >
             <Icon name="square" className="size-6" color={colors.iconPrimary} />
           </button>
@@ -292,7 +289,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
                 absolute left-0 top-1/2 -translate-y-1/2
                 ${textSizeClass} font-normal leading-[1.4]
                 text-purple-300 pointer-events-none
-                transition-opacity duration-200 ease-in-out
+                transition-opacity duration-slow ease-gitlaw
                 ${isAnimating ? "opacity-0" : "opacity-100"}
               `}
             >
@@ -307,7 +304,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
             onClick={onSubmit}
             className="
               bg-primary hover:bg-primary-hover
-              p-1 rounded transition-colors shrink-0
+              p-1 rounded transition-colors duration-fast ease-gitlaw shrink-0
             "
           >
             <Icon
@@ -374,9 +371,13 @@ export const ChatInput: React.FC<ChatInputProps> = ({
             )}
 
             {/* Settings dropdown - uses portal to escape overflow:hidden containers */}
-            {settingsDropdownContent && showSettingsDropdown && dropdownPosition && createPortal(
+            {settingsDropdownContent && dropdownPosition && createPortal(
               <div
-                className="fixed z-[9999] transition-opacity duration-100"
+                className={`
+                  fixed z-[9999]
+                  transition-[opacity,transform] duration-fast ease-gitlaw origin-bottom-left
+                  ${showSettingsDropdown ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}
+                `}
                 style={{
                   top: settingsDropdownPosition === "top" ? undefined : dropdownPosition.top,
                   bottom: settingsDropdownPosition === "top" ? `calc(100vh - ${dropdownPosition.top}px)` : undefined,
@@ -408,7 +409,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
                     bg-secondary hover:bg-secondary-hover
                     flex items-center gap-1 h-8 px-3 py-2 rounded
                     text-xs font-normal text-foreground-button leading-[1.4]
-                    transition-colors
+                    transition-colors duration-fast ease-gitlaw
                   "
                 >
                   <QuickActionIcon icon={action.icon} />
