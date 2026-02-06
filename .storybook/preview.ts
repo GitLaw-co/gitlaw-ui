@@ -60,6 +60,7 @@ const preview: Preview = {
             "Radio",
             "Select",
             "Sidebar",
+            "StarIcon",
             "StickyFeaturePromoBar",
             "Switch",
             "Tab",
