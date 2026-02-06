@@ -2,6 +2,7 @@ import React from "react";
 import { Icon } from "./Icon";
 import { Switch } from "./Switch";
 import { Badge } from "./Badge";
+import { Checkbox } from "./Checkbox";
 import { colors } from "../specs";
 
 export type MenuItemLeftElement =
@@ -189,20 +190,10 @@ export const MenuItem: React.FC<MenuItemProps> = ({
 
       case "select":
         return (
-          <div
-            className={`
-              size-4 rounded-sm border shrink-0 flex items-center justify-center
-              ${selected ? "bg-primary border-primary" : "bg-white border-secondary"}
-            `}
-          >
-            {selected && (
-              <Icon
-                name="check"
-                className="size-3"
-                color={colors.iconNegative}
-              />
-            )}
-          </div>
+          <Checkbox
+            status={selected ? "on" : "off"}
+            onChange={() => onClick?.()}
+          />
         );
 
       case "mini-users":

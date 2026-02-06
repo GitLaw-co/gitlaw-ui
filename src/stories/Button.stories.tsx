@@ -37,152 +37,50 @@ const meta: Meta<typeof Button> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Primary Variants
-export const Primary: Story = {
+// Default: Primary with left icon (most common usage)
+export const Default: Story = {
   args: {
     variant: 'primary',
     size: 'm',
-    children: 'Primary Button',
-  },
-};
-
-export const PrimaryWithLeftIcon: Story = {
-  args: {
-    variant: 'primary',
-    size: 'm',
-    children: 'With Icon',
+    children: 'Button',
     showLeftIcon: true,
-  },
-};
-
-export const PrimaryWithRightIcon: Story = {
-  args: {
-    variant: 'primary',
-    size: 'm',
-    children: 'With Icon',
-    showRightIcon: true,
-  },
-};
-
-// Secondary Variants
-export const Secondary: Story = {
-  args: {
-    variant: 'secondary',
-    size: 'm',
-    children: 'Secondary Button',
-  },
-};
-
-// Outline Variants
-export const Outline: Story = {
-  args: {
-    variant: 'outline',
-    size: 'm',
-    children: 'Outline Button',
-  },
-};
-
-// Ghost Variants
-export const Ghost: Story = {
-  args: {
-    variant: 'ghost',
-    size: 'm',
-    children: 'Ghost Button',
-  },
-};
-
-// Destructive Variants
-export const Destructive: Story = {
-  args: {
-    variant: 'destructive',
-    size: 'm',
-    children: 'Delete',
-  },
-};
-
-// Disabled Variants
-export const Disabled: Story = {
-  args: {
-    variant: 'disabled',
-    size: 'm',
-    children: 'Disabled Button',
-  },
-};
-
-// Icon Only Button
-export const IconOnly: Story = {
-  args: {
-    variant: 'icon',
-    size: 'm',
-  },
-};
-
-// Size Variants
-export const ExtraLarge: Story = {
-  args: {
-    variant: 'primary',
-    size: 'xl',
-    children: 'Extra Large',
-  },
-};
-
-export const Large: Story = {
-  args: {
-    variant: 'primary',
-    size: 'l',
-    children: 'Large',
-  },
-};
-
-export const Medium: Story = {
-  args: {
-    variant: 'primary',
-    size: 'm',
-    children: 'Medium',
-  },
-};
-
-export const Small: Story = {
-  args: {
-    variant: 'primary',
-    size: 's',
-    children: 'Small',
-  },
-};
-
-export const ExtraSmall: Story = {
-  args: {
-    variant: 'primary',
-    size: 'xs',
-    children: 'Extra Small',
   },
 };
 
 // All Variants Showcase
 export const AllVariants: Story = {
   render: () => (
-    <div className="flex flex-col gap-4">
-      <div className="flex items-center gap-4">
-        <Button variant="primary" size="m">Primary</Button>
-        <Button variant="secondary" size="m">Secondary</Button>
-        <Button variant="outline" size="m">Outline</Button>
-        <Button variant="ghost" size="m">Ghost</Button>
-        <Button variant="destructive" size="m">Destructive</Button>
-        <Button variant="disabled" size="m">Disabled</Button>
+    <div className="flex flex-col gap-6">
+      <div>
+        <p className="text-text-secondary text-sm mb-2">Variants</p>
+        <div className="flex items-center gap-4">
+          <Button variant="primary" size="m">Primary</Button>
+          <Button variant="secondary" size="m">Secondary</Button>
+          <Button variant="outline" size="m">Outline</Button>
+          <Button variant="ghost" size="m">Ghost</Button>
+          <Button variant="destructive" size="m">Destructive</Button>
+          <Button variant="disabled" size="m">Disabled</Button>
+          <Button variant="icon" size="m" />
+        </div>
       </div>
-    </div>
-  ),
-};
-
-// All Sizes Showcase
-export const AllSizes: Story = {
-  render: () => (
-    <div className="flex items-center gap-4">
-      <Button variant="primary" size="xs">XS</Button>
-      <Button variant="primary" size="s">Small</Button>
-      <Button variant="primary" size="m">Medium</Button>
-      <Button variant="primary" size="l">Large</Button>
-      <Button variant="primary" size="xl">Extra Large</Button>
+      <div>
+        <p className="text-text-secondary text-sm mb-2">Sizes</p>
+        <div className="flex items-center gap-4">
+          <Button variant="primary" size="xs">XS</Button>
+          <Button variant="primary" size="s">Small</Button>
+          <Button variant="primary" size="m">Medium</Button>
+          <Button variant="primary" size="l">Large</Button>
+          <Button variant="primary" size="xl">Extra Large</Button>
+        </div>
+      </div>
+      <div>
+        <p className="text-text-secondary text-sm mb-2">With Icons</p>
+        <div className="flex items-center gap-4">
+          <Button variant="primary" size="m" showLeftIcon>Left Icon</Button>
+          <Button variant="primary" size="m" showRightIcon>Right Icon</Button>
+          <Button variant="primary" size="m" showLeftIcon showRightIcon>Both Icons</Button>
+        </div>
+      </div>
     </div>
   ),
 };

@@ -41,32 +41,6 @@ export const Default: TabStory = {
   },
 };
 
-// Selected Tab
-export const Selected: TabStory = {
-  args: {
-    label: 'Activity',
-    status: 'selected',
-  },
-};
-
-// Selected with Underline
-export const SelectedUnderlined: TabStory = {
-  args: {
-    label: 'Activity',
-    status: 'selected-underlined',
-  },
-};
-
-// With Badge
-export const WithBadge: TabStory = {
-  args: {
-    label: 'Activity',
-    status: 'selected-underlined',
-    showBadge: true,
-    badgeCount: 7,
-  },
-};
-
 // All States
 export const AllStates: TabStory = {
   render: () => (
@@ -91,21 +65,6 @@ export const TabsComponent: TabStory = {
       ]}
       selectedIndex={0}
       showBadges
-    />
-  ),
-};
-
-// Tabs Without Badges
-export const TabsWithoutBadges: TabStory = {
-  render: () => (
-    <Tabs
-      tabs={[
-        { label: 'Overview' },
-        { label: 'Analytics' },
-        { label: 'Reports' },
-        { label: 'Settings' },
-      ]}
-      selectedIndex={1}
     />
   ),
 };

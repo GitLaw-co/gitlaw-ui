@@ -232,6 +232,7 @@ Figma MCP has a known bug where it often reports icon sizes as 24px regardless o
 4. **Existing specs** - refer to established component specs:
    - Input icons: xs=12px, s=16px, m=20px, l=24px, xl=24px
    - Button icons: xs=12px, s=16px, m=16-24px, l=20-48px
+   - TableListItem row icon: 20px (size-5)
 
 **Component Template:**
 
@@ -267,7 +268,18 @@ export const ComponentName: React.FC<ComponentNameProps> = ({
 export default ComponentName;
 ```
 
-**Story Template:**
+**Story Pattern — Keep stories to a minimum:**
+
+Every story file should have **at most 3-4 stories**:
+
+| Story | Purpose | Required? |
+|-------|---------|-----------|
+| **Default** | Single controllable story with args — replaces all individual variant/state stories | ✅ Always |
+| **AllVariants** / **AllStates** | Grid/showcase of all visual states in one view | ✅ Always |
+| **Interactive** | Stateful real-world usage demo (selection, toggles, forms, etc.) | Only if component has interactive behaviour |
+| *(domain-specific)* | E.g. `RadioGroup`, `DocumentInputs` — only if it shows a genuinely different use case | Rare |
+
+**Do NOT create** individual stories for each variant or state (e.g. `Primary`, `Secondary`, `DisabledOn`, `DisabledOff`). Those belong in the AllVariants/AllStates showcase.
 
 ```tsx
 // src/stories/ComponentName.stories.tsx
@@ -290,12 +302,19 @@ const meta: Meta<typeof ComponentName> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+// 1. Default — single controllable story
+export const Default: Story = {
   args: { variant: 'primary' },
 };
 
-export const Secondary: Story = {
-  args: { variant: 'secondary' },
+// 2. AllVariants — visual showcase grid
+export const AllVariants: Story = {
+  render: () => (
+    <div className="flex gap-4">
+      <ComponentName variant="primary" />
+      <ComponentName variant="secondary" />
+    </div>
+  ),
 };
 ```
 

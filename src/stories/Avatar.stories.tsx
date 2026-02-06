@@ -33,8 +33,7 @@ const meta: Meta<typeof Avatar> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Image Avatar
-export const Image: Story = {
+export const Default: Story = {
   args: {
     type: 'image',
     size: 'M',
@@ -43,101 +42,31 @@ export const Image: Story = {
   },
 };
 
-// Initials Avatar
-export const Initials: Story = {
-  args: {
-    type: 'initials',
-    size: 'M',
-    initials: 'AC',
-  },
-};
-
-// Icon Avatar
-export const Icon: Story = {
-  args: {
-    type: 'icon',
-    size: 'M',
-  },
-};
-
-// Empty Avatar
-export const Empty: Story = {
-  args: {
-    type: 'empty',
-    size: 'M',
-  },
-};
-
-// With Edit Button
-export const WithEdit: Story = {
-  args: {
-    type: 'image',
-    size: 'L',
-    src: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face',
-    showEdit: true,
-  },
-};
-
-// Size Small
-export const SizeSmall: Story = {
-  args: {
-    type: 'initials',
-    size: 'S',
-    initials: 'JD',
-  },
-};
-
-// Size Medium
-export const SizeMedium: Story = {
-  args: {
-    type: 'initials',
-    size: 'M',
-    initials: 'JD',
-  },
-};
-
-// Size Large
-export const SizeLarge: Story = {
-  args: {
-    type: 'initials',
-    size: 'L',
-    initials: 'JD',
-  },
-};
-
-// Size Extra Large
-export const SizeExtraLarge: Story = {
-  args: {
-    type: 'initials',
-    size: 'XL',
-    initials: 'JD',
-  },
-};
-
-// All Types Showcase
-export const AllTypes: Story = {
+export const AllVariants: Story = {
   render: () => (
-    <div className="flex items-center gap-4">
-      <Avatar
-        type="image"
-        size="L"
-        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
-      />
-      <Avatar type="initials" size="L" initials="JD" />
-      <Avatar type="icon" size="L" />
-      <Avatar type="empty" size="L" />
-    </div>
-  ),
-};
-
-// All Sizes Showcase
-export const AllSizes: Story = {
-  render: () => (
-    <div className="flex items-end gap-4">
-      <Avatar type="initials" size="S" initials="S" />
-      <Avatar type="initials" size="M" initials="M" />
-      <Avatar type="initials" size="L" initials="L" />
-      <Avatar type="initials" size="XL" initials="XL" />
+    <div className="flex flex-col gap-6">
+      <div>
+        <p className="mb-2 text-sm font-medium text-text-secondary">Types</p>
+        <div className="flex items-center gap-4">
+          <Avatar
+            type="image"
+            size="L"
+            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
+          />
+          <Avatar type="initials" size="L" initials="JD" />
+          <Avatar type="icon" size="L" />
+          <Avatar type="empty" size="L" />
+        </div>
+      </div>
+      <div>
+        <p className="mb-2 text-sm font-medium text-text-secondary">Sizes</p>
+        <div className="flex items-end gap-4">
+          <Avatar type="initials" size="S" initials="S" />
+          <Avatar type="initials" size="M" initials="M" />
+          <Avatar type="initials" size="L" initials="L" />
+          <Avatar type="initials" size="XL" initials="XL" />
+        </div>
+      </div>
     </div>
   ),
 };

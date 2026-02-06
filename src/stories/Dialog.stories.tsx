@@ -58,44 +58,8 @@ export const Default: Story = {
   },
 };
 
-// Delete confirmation
-export const DeleteConfirmation: Story = {
-  args: {
-    title: 'Delete document',
-    message: 'Are you sure you want to delete this document? This action cannot be undone.',
-    primaryLabel: 'Delete',
-    secondaryLabel: 'Cancel',
-    showCloseButton: true,
-    open: true,
-  },
-};
-
-// Share document
-export const ShareDocument: Story = {
-  args: {
-    title: 'Share document',
-    message: 'Share this document with your team members. They will receive an email notification.',
-    primaryLabel: 'Share',
-    secondaryLabel: 'Cancel',
-    showCloseButton: true,
-    open: true,
-  },
-};
-
-// Without close button
-export const WithoutCloseButton: Story = {
-  args: {
-    title: 'Session expired',
-    message: 'Your session has expired. Please log in again to continue.',
-    primaryLabel: 'Log in',
-    secondaryLabel: 'Cancel',
-    showCloseButton: false,
-    open: true,
-  },
-};
-
-// Dialog variants showcase
-export const DialogExamples: Story = {
+// All variants showcase
+export const AllVariants: Story = {
   render: () => (
     <div className="flex flex-col gap-8">
       <Dialog
@@ -103,6 +67,7 @@ export const DialogExamples: Story = {
         message="This document has unsaved changes. Save them now before moving on."
         primaryLabel="Save changes"
         secondaryLabel="Discard changes"
+        showCloseButton={true}
         open={true}
       />
       <Dialog
@@ -110,6 +75,15 @@ export const DialogExamples: Story = {
         message="Are you sure you want to delete this document? This action cannot be undone."
         primaryLabel="Delete"
         secondaryLabel="Cancel"
+        showCloseButton={true}
+        open={true}
+      />
+      <Dialog
+        title="Session expired"
+        message="Your session has expired. Please log in again to continue."
+        primaryLabel="Log in"
+        secondaryLabel="Cancel"
+        showCloseButton={false}
         open={true}
       />
     </div>

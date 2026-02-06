@@ -1,5 +1,6 @@
 import React, { useRef, useCallback } from "react";
 import { Icon } from "./Icon";
+import { StarIcon } from "./StarIcon";
 import { colors } from "../specs";
 
 export type CardType = "file" | "template" | "folder";
@@ -201,11 +202,7 @@ export const Card: React.FC<CardProps> = ({
             }}
             className="p-1 hover:bg-secondary rounded transition-colors duration-fast ease-gitlaw hidden @[200px]:block"
           >
-            <Icon
-              name="star"
-              className={ICON_SIZE}
-              color={starred ? colors.iconPrimary : colors.iconDisabled}
-            />
+            <StarIcon starred={starred} className={ICON_SIZE} />
           </button>
           <button
             type="button"
@@ -269,11 +266,7 @@ export const Card: React.FC<CardProps> = ({
             }}
             className="p-1 hover:bg-secondary rounded transition-colors duration-fast ease-gitlaw hidden @[200px]:block"
           >
-            <Icon
-              name="star"
-              className={ICON_SIZE}
-              color={starred ? colors.iconPrimary : colors.iconDisabled}
-            />
+            <StarIcon starred={starred} className={ICON_SIZE} />
           </button>
           <button
             type="button"

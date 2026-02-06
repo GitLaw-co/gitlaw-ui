@@ -1,3 +1,4 @@
+import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Sidebar } from '../components/Sidebar';
 
@@ -45,69 +46,6 @@ const meta: Meta<typeof Sidebar> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Signed In - Landing - Collapsed
-export const SignedInLandingCollapsed: Story = {
-  args: {
-    variant: 'landing',
-    status: 'collapsed',
-    user: 'signed-in',
-    userName: 'Alex Carter',
-    userInitials: 'AC',
-  },
-};
-
-// Signed In - Landing - Expanded
-export const SignedInLandingExpanded: Story = {
-  args: {
-    variant: 'landing',
-    status: 'expanded',
-    user: 'signed-in',
-    userName: 'Alex Carter',
-    userInitials: 'AC',
-  },
-};
-
-// Signed In - Inner - Collapsed
-export const SignedInInnerCollapsed: Story = {
-  args: {
-    variant: 'inner',
-    status: 'collapsed',
-    user: 'signed-in',
-    userName: 'Alex Carter',
-    userInitials: 'AC',
-  },
-};
-
-// Signed In - Inner - Expanded (Default)
-export const SignedInInnerExpanded: Story = {
-  args: {
-    variant: 'inner',
-    status: 'expanded',
-    user: 'signed-in',
-    userName: 'Alex Carter',
-    userInitials: 'AC',
-  },
-};
-
-// Signed Out - Landing - Expanded
-export const SignedOutLandingExpanded: Story = {
-  args: {
-    variant: 'landing',
-    status: 'expanded',
-    user: 'signed-out',
-  },
-};
-
-// Signed Out - Inner - Expanded (Optional variant)
-export const SignedOutInnerExpanded: Story = {
-  args: {
-    variant: 'inner',
-    status: 'expanded',
-    user: 'signed-out',
-  },
-};
-
-// Default story
 export const Default: Story = {
   args: {
     variant: 'inner',
@@ -118,7 +56,6 @@ export const Default: Story = {
   },
 };
 
-// All variants showcase
 export const AllVariantsShowcase: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '24px', height: '800px' }}>
@@ -145,7 +82,6 @@ export const AllVariantsShowcase: Story = {
   },
 };
 
-// Signed Out variants showcase
 export const SignedOutVariantsShowcase: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '24px', height: '800px' }}>
@@ -164,7 +100,6 @@ export const SignedOutVariantsShowcase: Story = {
   },
 };
 
-// Interactive example with toggle
 export const Interactive: Story = {
   render: function InteractiveSidebar() {
     const [status, setStatus] = React.useState<'collapsed' | 'expanded'>('expanded');
@@ -201,6 +136,3 @@ export const Interactive: Story = {
     );
   },
 };
-
-// We need to import React for the Interactive story
-import React from 'react';

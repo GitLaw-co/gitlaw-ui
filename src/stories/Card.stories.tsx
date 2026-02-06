@@ -70,8 +70,8 @@ const sampleFiles = [
   { id: "6", name: "Employment Contract" },
 ];
 
-// Default File Card
-export const FileCard: Story = {
+// Default story with controllable args (FileCard variant)
+export const Default: Story = {
   args: {
     type: "file",
     title: "Service Contract Template",
@@ -90,133 +90,61 @@ export const FileCard: Story = {
   ),
 };
 
-// Selected File Card
-export const SelectedFileCard: Story = {
-  args: {
-    type: "file",
-    title: "Design Services Agreement",
-    description:
-      "Explains how Mozilla handles minimal personal data for Facebook pages, with no sharing without consent.",
-    ownerName: "Alex Carter",
-    ownerInitials: "AC",
-    visibility: "private",
-    starred: false,
-    selected: true,
-  },
-  render: (args) => (
-    <div style={{ width: "240px" }}>
-      <Card {...args} />
-    </div>
-  ),
-};
-
-// Starred File Card
-export const StarredFileCard: Story = {
-  args: {
-    type: "file",
-    title: "Service Contract Template",
-    description:
-      "Explains how Mozilla handles minimal personal data for Facebook pages, with no sharing without consent.",
-    ownerName: "Whisk",
-    ownerInitials: "WH",
-    visibility: "private",
-    starred: true,
-    selected: false,
-  },
-  render: (args) => (
-    <div style={{ width: "240px" }}>
-      <Card {...args} />
-    </div>
-  ),
-};
-
-// Folder Card
-export const FolderCard: Story = {
-  args: {
-    type: "folder",
-    title: "Service Contract Template",
-    filesCount: 8,
-    files: sampleFiles,
-    starred: false,
-    selected: false,
-  },
-  render: (args) => (
-    <div style={{ width: "240px" }}>
-      <Card {...args} />
-    </div>
-  ),
-};
-
-// Selected Folder Card
-export const SelectedFolderCard: Story = {
-  args: {
-    type: "folder",
-    title: "Service Contract Template",
-    filesCount: 8,
-    files: sampleFiles,
-    starred: false,
-    selected: true,
-  },
-  render: (args) => (
-    <div style={{ width: "240px" }}>
-      <Card {...args} />
-    </div>
-  ),
-};
-
-// All Visibility States
-export const VisibilityStates: Story = {
-  render: () => (
-    <div className="flex gap-2">
-      <div style={{ width: "220px" }}>
-        <Card
-          type="file"
-          title="Private Document"
-          description="Only visible to you."
-          ownerName="Whisk"
-          ownerInitials="WH"
-          visibility="private"
-        />
-      </div>
-      <div style={{ width: "220px" }}>
-        <Card
-          type="file"
-          title="Public Document"
-          description="Accessible to everyone."
-          ownerName="Whisk"
-          ownerInitials="WH"
-          visibility="public"
-        />
-      </div>
-      <div style={{ width: "220px" }}>
-        <Card
-          type="file"
-          title="Shared Document"
-          description="Shared with specific people."
-          ownerName="Whisk"
-          ownerInitials="WH"
-          visibility="shared"
-        />
-      </div>
-      <div style={{ width: "220px" }}>
-        <Card
-          type="file"
-          title="Organization Document"
-          description="Shared with organization."
-          ownerName="Whisk"
-          ownerInitials="WH"
-          visibility="organization"
-          organizationName="Gitlaw"
-        />
-      </div>
-    </div>
-  ),
-};
-
-// Responsive Sizes (under/over 200px breakpoint)
-export const ResponsiveSizes: Story = {
+// All Variants showcase (visibility states + responsive sizes)
+export const AllVariants: Story = {
   render: () => (
     <div className="flex flex-col gap-8">
+      {/* Visibility States */}
+      <div>
+        <h3 className="text-sm font-semibold mb-4 text-subtle">
+          Visibility States
+        </h3>
+        <div className="flex gap-2">
+          <div style={{ width: "220px" }}>
+            <Card
+              type="file"
+              title="Private Document"
+              description="Only visible to you."
+              ownerName="Whisk"
+              ownerInitials="WH"
+              visibility="private"
+            />
+          </div>
+          <div style={{ width: "220px" }}>
+            <Card
+              type="file"
+              title="Public Document"
+              description="Accessible to everyone."
+              ownerName="Whisk"
+              ownerInitials="WH"
+              visibility="public"
+            />
+          </div>
+          <div style={{ width: "220px" }}>
+            <Card
+              type="file"
+              title="Shared Document"
+              description="Shared with specific people."
+              ownerName="Whisk"
+              ownerInitials="WH"
+              visibility="shared"
+            />
+          </div>
+          <div style={{ width: "220px" }}>
+            <Card
+              type="file"
+              title="Organization Document"
+              description="Shared with organization."
+              ownerName="Whisk"
+              ownerInitials="WH"
+              visibility="organization"
+              organizationName="Gitlaw"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Responsive Sizes */}
       <div>
         <h3 className="text-sm font-semibold mb-4 text-subtle">
           Under 200px (compact: no star, no file count, 16px padding)
@@ -499,8 +427,8 @@ const InteractiveDemo = () => {
 
       {/* Content wrapper - fixed width, centered */}
       <div style={{ width: GRID_WIDTH, margin: "0 auto" }}>
-        {/* Header - aligned with grid */}
-        <div className="flex items-center justify-between mb-6">
+        {/* Header - fixed h-8 so content doesn't twitch between states */}
+        <div className="flex items-center justify-between mb-6 h-8">
           <p className="text-lg font-semibold text-primary">
             {selectedIds.size > 0
               ? `${selectedIds.size} file${selectedIds.size > 1 ? "s" : ""} selected`

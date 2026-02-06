@@ -26,6 +26,10 @@ const colorFilters: Record<string, string> = {
   "#CFC8F3":
     "brightness(0) saturate(100%) invert(83%) sepia(12%) saturate(654%) hue-rotate(206deg) brightness(99%) contrast(95%)",
 
+  // Secondary / Star inactive (purple/100) - #EBE7FF
+  "#EBE7FF":
+    "brightness(0) saturate(100%) invert(89%) sepia(10%) saturate(500%) hue-rotate(206deg) brightness(102%) contrast(100%)",
+
   // Positive (green/700) - #15803D
   "#15803D":
     "brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(600%) hue-rotate(100deg) brightness(95%) contrast(90%)",

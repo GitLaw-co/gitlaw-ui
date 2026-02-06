@@ -61,6 +61,11 @@ export const iconColors = {
   dark: colors.iconBlack,
 } as const;
 
+export const starColors = {
+  inactive: colors.secondary,   // #EBE7FF — filled star, light purple
+  active: colors.primary,       // #5E49D6 — filled star, solid purple
+} as const;
+
 export const buttonIconColors = {
   primary: colors.textButtonNegative,  // White icon on primary button
   secondary: colors.textButton,         // Purple icon on secondary button

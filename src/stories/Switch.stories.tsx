@@ -29,124 +29,56 @@ const meta: Meta<typeof Switch> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// On State
-export const On: Story = {
-  args: {
-    checked: true,
-    size: 'm',
-  },
-};
-
-// Off State
-export const Off: Story = {
+export const Default: Story = {
   args: {
     checked: false,
     size: 'm',
+    disabled: false,
   },
 };
 
-// Size Small On
-export const SmallOn: Story = {
-  args: {
-    checked: true,
-    size: 's',
-  },
-};
-
-// Size Small Off
-export const SmallOff: Story = {
-  args: {
-    checked: false,
-    size: 's',
-  },
-};
-
-// Disabled On
-export const DisabledOn: Story = {
-  args: {
-    checked: true,
-    size: 'm',
-    disabled: true,
-  },
-};
-
-// Disabled Off
-export const DisabledOff: Story = {
-  args: {
-    checked: false,
-    size: 'm',
-    disabled: true,
-  },
-};
-
-// All States
 export const AllStates: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-4">
-        <span className="w-24 text-sm">Medium On:</span>
+        <span className="w-32 text-sm">Medium On:</span>
         <Switch checked size="m" />
       </div>
       <div className="flex items-center gap-4">
-        <span className="w-24 text-sm">Medium Off:</span>
+        <span className="w-32 text-sm">Medium Off:</span>
         <Switch checked={false} size="m" />
       </div>
       <div className="flex items-center gap-4">
-        <span className="w-24 text-sm">Small On:</span>
+        <span className="w-32 text-sm">Small On:</span>
         <Switch checked size="s" />
       </div>
       <div className="flex items-center gap-4">
-        <span className="w-24 text-sm">Small Off:</span>
+        <span className="w-32 text-sm">Small Off:</span>
         <Switch checked={false} size="s" />
+      </div>
+      <div className="flex items-center gap-4">
+        <span className="w-32 text-sm">Disabled On:</span>
+        <Switch checked disabled size="m" />
+      </div>
+      <div className="flex items-center gap-4">
+        <span className="w-32 text-sm">Disabled Off:</span>
+        <Switch checked={false} disabled size="m" />
       </div>
     </div>
   ),
 };
 
-// Interactive Example
-const InteractiveSwitch = () => {
+function InteractiveSwitch(): JSX.Element {
   const [checked, setChecked] = useState(false);
 
   return (
     <div className="flex items-center gap-4">
       <Switch checked={checked} onChange={setChecked} size="m" />
-      <span className="text-sm text-subtle">
-        {checked ? 'On' : 'Off'}
-      </span>
+      <span className="text-sm text-subtle">{checked ? 'On' : 'Off'}</span>
     </div>
   );
-};
+}
 
 export const Interactive: Story = {
   render: () => <InteractiveSwitch />,
-};
-
-// Usage Example
-export const UsageExample: Story = {
-  render: () => {
-    const SwitchSettings = () => {
-      const [notifications, setNotifications] = useState(true);
-      const [darkMode, setDarkMode] = useState(false);
-      const [autoSave, setAutoSave] = useState(true);
-
-      return (
-        <div className="flex flex-col gap-4 p-4 bg-white rounded-lg shadow-sm min-w-[300px]">
-          <div className="flex items-center justify-between">
-            <span className="text-sm font-medium">Notifications</span>
-            <Switch checked={notifications} onChange={setNotifications} />
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="text-sm font-medium">Dark Mode</span>
-            <Switch checked={darkMode} onChange={setDarkMode} />
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="text-sm font-medium">Auto-save</span>
-            <Switch checked={autoSave} onChange={setAutoSave} />
-          </div>
-        </div>
-      );
-    };
-
-    return <SwitchSettings />;
-  },
 };

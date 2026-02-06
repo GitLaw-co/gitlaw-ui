@@ -1,5 +1,5 @@
 // Auto-generated changelog from git commits
-// Generated: 2026-02-05T09:40:12.835Z
+// Generated: 2026-02-06T09:49:33.633Z
 // Run: node scripts/generate-changelog.js
 
 export interface ChangelogEntry {
@@ -14,6 +14,22 @@ export const changelog: ChangelogEntry[] = [
   {
     "date": "2026-02-05",
     "commits": [
+      {
+        "hash": "7d578ca",
+        "message": "Fix Storybook sidebar sort: add missing components to storySort"
+      },
+      {
+        "hash": "9e6ca3a",
+        "message": "Refine PageNav: dropdown padding, sort logic, text size, demo data"
+      },
+      {
+        "hash": "fe0e44a",
+        "message": "Add PageNav component with context switcher and animated dropdown"
+      },
+      {
+        "hash": "b22af76",
+        "message": "Remove Review stories folder, update changelog"
+      },
       {
         "hash": "1edcd31",
         "message": "Add white tooltip variant story for review with Kirill"
@@ -208,25 +224,9 @@ export const changelog: ChangelogEntry[] = [
       {
         "hash": "ca340ac",
         "message": "Add component inventory and API patterns to CLAUDE.md"
-      },
-      {
-        "hash": "4d15a60",
-        "message": "Update CLAUDE.md with Vercel auto-deploy info"
-      },
-      {
-        "hash": "05746eb",
-        "message": "Add CLAUDE.md with project-specific instructions for Claude Code"
-      },
-      {
-        "hash": "b5fae93",
-        "message": "Simplify Claude Code setup instructions"
-      },
-      {
-        "hash": "9761311",
-        "message": "Add Claude Code and Figma MCP setup instructions"
       }
     ]
   }
 ];
 
-export const lastUpdated = "2026-02-05";
+export const lastUpdated = "2026-02-06";

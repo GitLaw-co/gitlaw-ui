@@ -47,8 +47,7 @@ const meta: Meta<typeof TopHeader> = {
 export default meta;
 type Story = StoryObj<typeof TopHeader>;
 
-// Basic chat title
-export const ChatTitle: Story = {
+export const Default: Story = {
   args: {
     title: "Influencer Agreement with Blake Logan",
     showStroke: true,
@@ -56,69 +55,7 @@ export const ChatTitle: Story = {
   },
 };
 
-// Chat with 1 file
-export const ChatWithOneFile: Story = {
-  args: {
-    title: "Influencer Agreement with Blake Logan",
-    showStroke: true,
-    showFiles: true,
-    fileCount: 1,
-    isSignedIn: true,
-  },
-};
-
-// Chat with multiple files
-export const ChatWithMultipleFiles: Story = {
-  args: {
-    title: "Influencer Agreement with Blake Logan",
-    showStroke: true,
-    showFiles: true,
-    fileCount: 4,
-    isSignedIn: true,
-  },
-};
-
-// 2-level breadcrumbs
-export const BreadcrumbsTwoLevels: Story = {
-  args: {
-    breadcrumbs: [
-      { id: "1", label: "Level One", onClick: () => console.log("Level 1") },
-      { id: "2", label: "Level Two", onClick: () => console.log("Level 2") },
-    ],
-    showStroke: true,
-    isSignedIn: true,
-  },
-};
-
-// 3-level breadcrumbs
-export const BreadcrumbsThreeLevels: Story = {
-  args: {
-    breadcrumbs: [
-      { id: "1", label: "Level One", onClick: () => console.log("Level 1") },
-      { id: "2", label: "Level Two", onClick: () => console.log("Level 2") },
-      { id: "3", label: "Level Three", onClick: () => console.log("Level 3") },
-    ],
-    showStroke: true,
-    isSignedIn: true,
-  },
-};
-
-// More than 3 levels (collapsed)
-export const BreadcrumbsCollapsed: Story = {
-  args: {
-    breadcrumbs: [
-      { id: "1", label: "Level One", onClick: () => console.log("Level 1") },
-      { id: "2", label: "Level Two", onClick: () => console.log("Level 2") },
-      { id: "3", label: "Level Three", onClick: () => console.log("Level 3") },
-      { id: "4", label: "Level Four", onClick: () => console.log("Level 4") },
-    ],
-    showStroke: true,
-    isSignedIn: true,
-  },
-};
-
-// Logged out - inner page
-export const LoggedOutInnerPage: Story = {
+export const LoggedOut: Story = {
   args: {
     title: "Influencer Agreement with Blake Logan",
     showStroke: true,
@@ -127,7 +64,17 @@ export const LoggedOutInnerPage: Story = {
   },
 };
 
-// All variants showcase
+export const Interactive: Story = {
+  args: {
+    title: "Influencer Agreement with Blake Logan",
+    showStroke: true,
+    showFiles: true,
+    fileCount: 2,
+    isSignedIn: true,
+    isLanding: false,
+  },
+};
+
 export const AllVariants: Story = {
   render: () => (
     <div className="flex flex-col">
@@ -197,16 +144,4 @@ export const AllVariants: Story = {
       />
     </div>
   ),
-};
-
-// Interactive story with controls
-export const Interactive: Story = {
-  args: {
-    title: "Influencer Agreement with Blake Logan",
-    showStroke: true,
-    showFiles: true,
-    fileCount: 2,
-    isSignedIn: true,
-    isLanding: false,
-  },
 };

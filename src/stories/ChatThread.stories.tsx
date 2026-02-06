@@ -83,7 +83,6 @@ const sampleMessages: ChatMessage[] = [
   },
 ];
 
-// Empty State
 export const Empty: Story = {
   args: {
     messages: [],
@@ -98,7 +97,6 @@ export const Empty: Story = {
   ],
 };
 
-// With Messages
 export const WithMessages: Story = {
   args: {
     messages: sampleMessages,
@@ -113,55 +111,6 @@ export const WithMessages: Story = {
   ],
 };
 
-// Single User Message
-export const SingleUserMessage: Story = {
-  args: {
-    messages: [
-      {
-        id: "1",
-        role: "user",
-        content: "What are the key clauses in a service agreement?",
-      },
-    ],
-    placeholder: "Ask anything...",
-  },
-  decorators: [
-    (Story) => (
-      <div style={{ height: "400px", background: "#F7F6FF" }}>
-        <Story />
-      </div>
-    ),
-  ],
-};
-
-// Single Assistant Message
-export const SingleAssistantMessage: Story = {
-  args: {
-    messages: [
-      {
-        id: "1",
-        role: "assistant",
-        content: (
-          <p>
-            Hello! I'm your legal document assistant. I can help you draft,
-            review, and understand legal documents. What would you like to work
-            on today?
-          </p>
-        ),
-      },
-    ],
-    placeholder: "Type your question...",
-  },
-  decorators: [
-    (Story) => (
-      <div style={{ height: "400px", background: "#F7F6FF" }}>
-        <Story />
-      </div>
-    ),
-  ],
-};
-
-// Long Conversation (scroll to see older messages)
 export const LongConversation: Story = {
   args: {
     messages: [
@@ -230,54 +179,6 @@ export const LongConversation: Story = {
       },
     ],
     placeholder: "Continue the conversation...",
-  },
-  decorators: [
-    (Story) => (
-      <div style={{ height: "500px", background: "#F7F6FF" }}>
-        <Story />
-      </div>
-    ),
-  ],
-};
-
-// With Input Value
-export const WithInputValue: Story = {
-  args: {
-    messages: sampleMessages.slice(0, 2),
-    placeholder: "Ask anything...",
-    inputValue: "How long should the NDA last?",
-  },
-  decorators: [
-    (Story) => (
-      <div style={{ height: "500px", background: "#F7F6FF" }}>
-        <Story />
-      </div>
-    ),
-  ],
-};
-
-// Custom Disclaimer
-export const CustomDisclaimer: Story = {
-  args: {
-    messages: sampleMessages.slice(0, 2),
-    placeholder: "Ask anything...",
-    disclaimer: "This is a custom disclaimer message.",
-  },
-  decorators: [
-    (Story) => (
-      <div style={{ height: "500px", background: "#F7F6FF" }}>
-        <Story />
-      </div>
-    ),
-  ],
-};
-
-// No Disclaimer
-export const NoDisclaimer: Story = {
-  args: {
-    messages: sampleMessages.slice(0, 2),
-    placeholder: "Ask anything...",
-    disclaimer: "",
   },
   decorators: [
     (Story) => (

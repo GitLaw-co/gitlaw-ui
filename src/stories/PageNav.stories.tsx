@@ -71,10 +71,10 @@ const meta: Meta<typeof PageNav> = {
 export default meta;
 type Story = StoryObj<typeof PageNav>;
 
-// ─── Static stories ─────────────────────────────────────────────────────────
+// ─── Stories ────────────────────────────────────────────────────────────────
 
-/** Personal account with Profile selected */
-export const PersonalProfile: Story = {
+/** Single controllable story with args */
+export const Default: Story = {
   args: {
     activeAccount: personalAccount,
     accounts: allAccounts,
@@ -83,37 +83,31 @@ export const PersonalProfile: Story = {
   },
 };
 
-/** Personal account with Billing selected */
-export const PersonalBilling: Story = {
-  args: {
-    activeAccount: personalAccount,
-    accounts: allAccounts,
-    items: personalItems,
-    activeItemId: "billing",
-  },
+/** Showcase showing both contexts side by side */
+export const AllVariants: Story = {
+  render: () => (
+    <div className="flex gap-12">
+      <div>
+        <p className="mb-4 text-sm font-medium text-text-secondary">Personal Account</p>
+        <PageNav
+          activeAccount={personalAccount}
+          accounts={allAccounts}
+          items={personalItems}
+          activeItemId="profile"
+        />
+      </div>
+      <div>
+        <p className="mb-4 text-sm font-medium text-text-secondary">Organization Account</p>
+        <PageNav
+          activeAccount={orgWhisk}
+          accounts={allAccounts}
+          items={orgItems}
+          activeItemId="organization"
+        />
+      </div>
+    </div>
+  ),
 };
-
-/** Organization account with Organization selected */
-export const OrganizationDefault: Story = {
-  args: {
-    activeAccount: orgWhisk,
-    accounts: allAccounts,
-    items: orgItems,
-    activeItemId: "organization",
-  },
-};
-
-/** Organization account with People selected */
-export const OrganizationPeople: Story = {
-  args: {
-    activeAccount: orgWhisk,
-    accounts: allAccounts,
-    items: orgItems,
-    activeItemId: "people",
-  },
-};
-
-// ─── Interactive story with context switching ───────────────────────────────
 
 /**
  * Fully interactive PageNav demonstrating:

@@ -33,7 +33,6 @@ const meta: Meta<typeof EditorToolbar> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Default - xs size, editing state
 export const Default: Story = {
   args: {
     size: 'xs',
@@ -41,59 +40,6 @@ export const Default: Story = {
   },
 };
 
-// Mobile size (s) - editing state
-export const MobileEditing: Story = {
-  args: {
-    size: 's',
-    status: 'editing',
-  },
-};
-
-// Desktop - reviewing state
-export const DesktopReviewing: Story = {
-  args: {
-    size: 'xs',
-    status: 'reviewing',
-  },
-};
-
-// Mobile - reviewing state
-export const MobileReviewing: Story = {
-  args: {
-    size: 's',
-    status: 'reviewing',
-  },
-};
-
-// Undo disabled (nothing to undo)
-export const UndoDisabled: Story = {
-  args: {
-    size: 'xs',
-    status: 'editing',
-    undoDisabled: true,
-  },
-};
-
-// Redo disabled (nothing to redo)
-export const RedoDisabled: Story = {
-  args: {
-    size: 'xs',
-    status: 'editing',
-    redoDisabled: true,
-  },
-};
-
-// Both undo and redo disabled (fresh document)
-export const UndoRedoDisabled: Story = {
-  args: {
-    size: 'xs',
-    status: 'editing',
-    undoDisabled: true,
-    redoDisabled: true,
-  },
-};
-
-// Interactive example with console logging
 export const Interactive: Story = {
   args: {
     size: 'xs',
@@ -129,7 +75,6 @@ export const Interactive: Story = {
   ),
 };
 
-// All variants comparison
 export const AllVariants: Story = {
   render: () => (
     <div className="flex flex-col gap-6">

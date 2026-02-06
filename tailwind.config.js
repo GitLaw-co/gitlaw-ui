@@ -70,6 +70,11 @@ export default {
           inactive: '#CFC8F3',     // purple/300
           'active-thumb': '#FFFFFF', // white
         },
+        // Star Colors
+        star: {
+          inactive: '#EBE7FF',   // secondary / purple/100 — filled star, light
+          active: '#5E49D6',     // primary / purple/700 — filled star, solid
+        },
         // Active States
         active: {
           border: '#5E49D6',  // purple/700

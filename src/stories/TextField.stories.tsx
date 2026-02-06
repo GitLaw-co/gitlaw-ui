@@ -45,7 +45,6 @@ const meta: Meta<typeof TextField> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Default TextField
 export const Default: Story = {
   args: {
     size: 'm',
@@ -54,150 +53,48 @@ export const Default: Story = {
   },
 };
 
-// Empty state
-export const Empty: Story = {
-  args: {
-    size: 'm',
-    status: 'empty',
-    placeholder: 'Enter your text here...',
-    showStroke: true,
-  },
-};
-
-// Populated state
-export const Populated: Story = {
-  args: {
-    size: 'm',
-    status: 'populated',
-    value: 'This is some content that has been entered into the text field.',
-    placeholder: 'Placeholder text',
-    showStroke: true,
-  },
-};
-
-// Active state
-export const Active: Story = {
-  args: {
-    size: 'm',
-    status: 'active',
-    value: 'Currently typing...',
-    placeholder: 'Placeholder text',
-    showStroke: true,
-  },
-};
-
-// With icon
-export const WithIcon: Story = {
-  args: {
-    size: 'm',
-    placeholder: 'AI-assisted text field',
-    showStroke: true,
-    showIcon: true,
-  },
-};
-
-// Without stroke
-export const WithoutStroke: Story = {
-  args: {
-    size: 'm',
-    placeholder: 'No border',
-    showStroke: false,
-  },
-};
-
-// Disabled
-export const Disabled: Story = {
-  args: {
-    size: 'm',
-    placeholder: 'Disabled text field',
-    disabled: true,
-    showStroke: true,
-  },
-};
-
-// Size Variants
-export const ExtraLarge: Story = {
-  args: {
-    size: 'xl',
-    placeholder: 'Extra Large text field',
-    showStroke: true,
-  },
-};
-
-export const Large: Story = {
-  args: {
-    size: 'l',
-    placeholder: 'Large text field',
-    showStroke: true,
-  },
-};
-
-export const Medium: Story = {
-  args: {
-    size: 'm',
-    placeholder: 'Medium text field',
-    showStroke: true,
-  },
-};
-
-export const Small: Story = {
-  args: {
-    size: 's',
-    placeholder: 'Small text field',
-    showStroke: true,
-  },
-};
-
-export const ExtraSmall: Story = {
-  args: {
-    size: 'xs',
-    placeholder: 'Extra Small text field',
-    showStroke: true,
-  },
-};
-
-// All Sizes Showcase
-export const AllSizes: Story = {
+export const AllVariants: Story = {
   render: () => (
-    <div className="flex flex-col gap-6">
-      <TextField size="xl" placeholder="Extra Large" showStroke />
-      <TextField size="l" placeholder="Large" showStroke />
-      <TextField size="m" placeholder="Medium" showStroke />
-      <TextField size="s" placeholder="Small" showStroke />
-      <TextField size="xs" placeholder="Extra Small" showStroke />
-    </div>
-  ),
-};
-
-// All States Showcase
-export const AllStates: Story = {
-  render: () => (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-8">
       <div>
-        <p className="text-sm font-semibold mb-2">Empty</p>
-        <TextField size="m" status="empty" placeholder="Placeholder text" showStroke />
+        <p className="text-sm font-semibold mb-4">Sizes</p>
+        <div className="flex flex-col gap-4">
+          <TextField size="xl" placeholder="Extra Large" showStroke />
+          <TextField size="l" placeholder="Large" showStroke />
+          <TextField size="m" placeholder="Medium" showStroke />
+          <TextField size="s" placeholder="Small" showStroke />
+          <TextField size="xs" placeholder="Extra Small" showStroke />
+        </div>
       </div>
       <div>
-        <p className="text-sm font-semibold mb-2">Populated</p>
-        <TextField size="m" status="populated" value="Some content here" placeholder="Placeholder text" showStroke />
+        <p className="text-sm font-semibold mb-4">States</p>
+        <div className="flex flex-col gap-4">
+          <div>
+            <p className="text-xs text-gray-500 mb-1">Empty</p>
+            <TextField size="m" status="empty" placeholder="Placeholder text" showStroke />
+          </div>
+          <div>
+            <p className="text-xs text-gray-500 mb-1">Populated</p>
+            <TextField size="m" status="populated" value="Some content here" placeholder="Placeholder text" showStroke />
+          </div>
+          <div>
+            <p className="text-xs text-gray-500 mb-1">Active</p>
+            <TextField size="m" status="active" value="Typing..." placeholder="Placeholder text" showStroke />
+          </div>
+          <div>
+            <p className="text-xs text-gray-500 mb-1">Disabled</p>
+            <TextField size="m" placeholder="Disabled text field" disabled showStroke />
+          </div>
+          <div>
+            <p className="text-xs text-gray-500 mb-1">Without Stroke</p>
+            <TextField size="m" placeholder="No border" showStroke={false} />
+          </div>
+          <div>
+            <p className="text-xs text-gray-500 mb-1">With Icon</p>
+            <TextField size="m" placeholder="AI-assisted text field" showStroke showIcon />
+          </div>
+        </div>
       </div>
-      <div>
-        <p className="text-sm font-semibold mb-2">Active</p>
-        <TextField size="m" status="active" value="Typing..." placeholder="Placeholder text" showStroke />
-      </div>
-    </div>
-  ),
-};
-
-// With Icon Showcase
-export const WithIconShowcase: Story = {
-  render: () => (
-    <div className="flex flex-col gap-6">
-      <TextField size="xl" placeholder="XL with icon" showStroke showIcon />
-      <TextField size="l" placeholder="L with icon" showStroke showIcon />
-      <TextField size="m" placeholder="M with icon" showStroke showIcon />
-      <TextField size="s" placeholder="S with icon" showStroke showIcon />
-      <TextField size="xs" placeholder="XS with icon" showStroke showIcon />
     </div>
   ),
 };

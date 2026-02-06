@@ -46,124 +46,32 @@ export const Default: Story = {
   },
 };
 
-// Bold Tag
-export const Bold: Story = {
-  args: {
-    label: 'Label',
-    size: 'm',
-    weight: 'bold',
-  },
-};
-
-// With Icon
-export const WithIcon: Story = {
-  args: {
-    label: 'John Doe',
-    size: 'm',
-    weight: 'regular',
-    showIcon: true,
-  },
-};
-
-// With Close Button
-export const WithClose: Story = {
-  args: {
-    label: 'Removable',
-    size: 'm',
-    weight: 'regular',
-    showClose: true,
-  },
-};
-
-// With Icon and Close
-export const WithIconAndClose: Story = {
-  args: {
-    label: 'John Doe',
-    size: 'm',
-    weight: 'regular',
-    showIcon: true,
-    showClose: true,
-  },
-};
-
-// Size Extra Small
-export const SizeXXS: Story = {
-  args: {
-    label: 'Employment Agreement',
-    size: 'xxs',
-    weight: 'bold',
-  },
-};
-
-// Size XS
-export const SizeXS: Story = {
-  args: {
-    label: 'Label',
-    size: 'xs',
-    weight: 'regular',
-  },
-};
-
-// Size Small
-export const SizeSmall: Story = {
-  args: {
-    label: 'Label',
-    size: 's',
-    weight: 'regular',
-  },
-};
-
-// Size Medium
-export const SizeMedium: Story = {
-  args: {
-    label: 'Label',
-    size: 'm',
-    weight: 'regular',
-  },
-};
-
-// Size Large
-export const SizeLarge: Story = {
-  args: {
-    label: 'Label',
-    size: 'l',
-    weight: 'regular',
-  },
-};
-
-// Size Extra Large
-export const SizeXL: Story = {
-  args: {
-    label: 'Label',
-    size: 'xl',
-    weight: 'bold',
-  },
-};
-
-// All Sizes Regular
-export const AllSizesRegular: Story = {
+// All Variants
+export const AllVariants: Story = {
   render: () => (
-    <div className="flex flex-wrap items-center gap-4">
-      <Tag size="xxs" label="XXS" />
-      <Tag size="xs" label="XS" />
-      <Tag size="s" label="Small" />
-      <Tag size="m" label="Medium" />
-      <Tag size="l" label="Large" />
-      <Tag size="xl" label="Extra Large" />
-    </div>
-  ),
-};
-
-// All Sizes Bold
-export const AllSizesBold: Story = {
-  render: () => (
-    <div className="flex flex-wrap items-center gap-4">
-      <Tag size="xxs" weight="bold" label="XXS" />
-      <Tag size="xs" weight="bold" label="XS" />
-      <Tag size="s" weight="bold" label="Small" />
-      <Tag size="m" weight="bold" label="Medium" />
-      <Tag size="l" weight="bold" label="Large" />
-      <Tag size="xl" weight="bold" label="Extra Large" />
+    <div className="flex flex-col gap-6">
+      <div>
+        <p className="mb-2 text-sm font-medium text-text-secondary">Regular</p>
+        <div className="flex flex-wrap items-center gap-4">
+          <Tag size="xxs" label="XXS" />
+          <Tag size="xs" label="XS" />
+          <Tag size="s" label="Small" />
+          <Tag size="m" label="Medium" />
+          <Tag size="l" label="Large" />
+          <Tag size="xl" label="Extra Large" />
+        </div>
+      </div>
+      <div>
+        <p className="mb-2 text-sm font-medium text-text-secondary">Bold</p>
+        <div className="flex flex-wrap items-center gap-4">
+          <Tag size="xxs" weight="bold" label="XXS" />
+          <Tag size="xs" weight="bold" label="XS" />
+          <Tag size="s" weight="bold" label="Small" />
+          <Tag size="m" weight="bold" label="Medium" />
+          <Tag size="l" weight="bold" label="Large" />
+          <Tag size="xl" weight="bold" label="Extra Large" />
+        </div>
+      </div>
     </div>
   ),
 };

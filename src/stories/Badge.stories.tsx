@@ -28,8 +28,7 @@ const meta: Meta<typeof Badge> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Primary Badge
-export const Primary: Story = {
+export const Default: Story = {
   args: {
     type: 'primary',
     showNumber: true,
@@ -37,91 +36,45 @@ export const Primary: Story = {
   },
 };
 
-// Secondary Badge
-export const Secondary: Story = {
-  args: {
-    type: 'secondary',
-    showNumber: true,
-    count: 5,
-  },
-};
-
-// Red Badge
-export const Red: Story = {
-  args: {
-    type: 'red',
-    showNumber: true,
-    count: 3,
-  },
-};
-
-// Orange Badge
-export const Orange: Story = {
-  args: {
-    type: 'orange',
-    showNumber: true,
-    count: 12,
-  },
-};
-
-// Green Badge
-export const Green: Story = {
-  args: {
-    type: 'green',
-    showNumber: true,
-    count: 1,
-  },
-};
-
-// Without Number
-export const DotOnly: Story = {
-  args: {
-    type: 'red',
-    showNumber: false,
-  },
-};
-
-// All Types with Number
-export const AllTypesWithNumber: Story = {
+export const AllVariants: Story = {
   render: () => (
-    <div className="flex items-center gap-4">
-      <Badge type="primary" count={7} />
-      <Badge type="secondary" count={5} />
-      <Badge type="red" count={3} />
-      <Badge type="orange" count={12} />
-      <Badge type="green" count={1} />
-    </div>
-  ),
-};
-
-// All Types Dot Only
-export const AllTypesDotOnly: Story = {
-  render: () => (
-    <div className="flex items-center gap-4">
-      <Badge type="primary" showNumber={false} />
-      <Badge type="secondary" showNumber={false} />
-      <Badge type="red" showNumber={false} />
-      <Badge type="orange" showNumber={false} />
-      <Badge type="green" showNumber={false} />
-    </div>
-  ),
-};
-
-// Usage Example
-export const UsageExample: Story = {
-  render: () => (
-    <div className="flex flex-col gap-4">
-      <div className="relative inline-flex">
-        <button className="px-4 py-2 bg-secondary rounded text-foreground-button">
-          Notifications
-        </button>
-        <Badge type="red" count={3} className="absolute -top-1 -right-1" />
+    <div className="flex flex-col gap-6">
+      <div>
+        <p className="text-text-secondary text-sm mb-2">With Number</p>
+        <div className="flex items-center gap-4">
+          <Badge type="primary" count={7} />
+          <Badge type="secondary" count={5} />
+          <Badge type="red" count={3} />
+          <Badge type="orange" count={12} />
+          <Badge type="green" count={1} />
+        </div>
       </div>
-      <div className="relative inline-flex">
-        <button className="px-4 py-2 bg-secondary rounded text-foreground-button">
-          Messages
-        </button>
-        <Badge type="primary" count={12} className="absolute -top-1 -right-1" />
+      <div>
+        <p className="text-text-secondary text-sm mb-2">Dot Only</p>
+        <div className="flex items-center gap-4">
+          <Badge type="primary" showNumber={false} />
+          <Badge type="secondary" showNumber={false} />
+          <Badge type="red" showNumber={false} />
+          <Badge type="orange" showNumber={false} />
+          <Badge type="green" showNumber={false} />
+        </div>
+      </div>
+      <div>
+        <p className="text-text-secondary text-sm mb-2">Usage Example</p>
+        <div className="flex gap-4">
+          <div className="relative inline-flex">
+            <button className="px-4 py-2 bg-secondary rounded text-foreground-button">
+              Notifications
+            </button>
+            <Badge type="red" count={3} className="absolute -top-1 -right-1" />
+          </div>
+          <div className="relative inline-flex">
+            <button className="px-4 py-2 bg-secondary rounded text-foreground-button">
+              Messages
+            </button>
+            <Badge type="primary" count={12} className="absolute -top-1 -right-1" />
+          </div>
+        </div>
       </div>
     </div>
   ),

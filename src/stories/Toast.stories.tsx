@@ -39,7 +39,6 @@ const meta: Meta<typeof Toast> = {
 export default meta;
 type Story = StoryObj<typeof Toast>;
 
-// Default Toast
 export const Default: Story = {
   args: {
     message: "Reminder added for Service contract. We'll notify you on Sep 21, 2026.",
@@ -48,34 +47,7 @@ export const Default: Story = {
   },
 };
 
-// Toast without action
-export const WithoutAction: Story = {
-  args: {
-    message: 'Your changes have been saved successfully.',
-    showAction: false,
-  },
-};
-
-// Toast with custom action
-export const WithCustomAction: Story = {
-  args: {
-    message: 'Document has been moved to trash.',
-    actionLabel: 'Undo',
-    showAction: true,
-  },
-};
-
-// Long message
-export const LongMessage: Story = {
-  args: {
-    message: 'The document "Employment Agreement - John Smith" has been successfully shared with 5 team members. They will receive an email notification shortly.',
-    actionLabel: 'View',
-    showAction: true,
-  },
-};
-
-// Multiple toasts showcase
-export const ToastExamples: Story = {
+export const AllVariants: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
       <Toast
@@ -88,7 +60,7 @@ export const ToastExamples: Story = {
         showAction={false}
       />
       <Toast
-        message="File uploaded to folder 'Contracts'."
+        message="The document 'Employment Agreement - John Smith' has been successfully shared with 5 team members. They will receive an email notification shortly."
         actionLabel="View"
         showAction={true}
       />

@@ -19,6 +19,9 @@ export type { AvatarProps, AvatarType, AvatarSize } from "./Avatar";
 export { Badge } from "./Badge";
 export type { BadgeProps, BadgeType } from "./Badge";
 
+export { Checkbox } from "./Checkbox";
+export type { CheckboxProps, CheckboxStatus } from "./Checkbox";
+
 export { Tag } from "./Tag";
 export type { TagProps, TagSize, TagWeight } from "./Tag";
 
@@ -93,6 +96,9 @@ export type {
 export { Icon } from "./Icon";
 export type { IconProps } from "./Icon";
 
+export { StarIcon } from "./StarIcon";
+export type { StarIconProps } from "./StarIcon";
+
 export { EditorHeader } from "./EditorHeader";
 export type { EditorHeaderProps } from "./EditorHeader";
 
@@ -136,6 +142,18 @@ export type { StickyFeaturePromoBarProps } from "./StickyFeaturePromoBar";
 
 export { PageNav } from "./PageNav";
 export type { PageNavProps, PageNavAccount, PageNavItem } from "./PageNav";
+
+export { Radio } from "./Radio";
+export type { RadioProps } from "./Radio";
+
+export { TableListItem } from "./TableListItem";
+export type {
+  TableListItemProps,
+  TableListItemType,
+  TableListItemCols,
+  TableListItemVisibility,
+  SortDirection,
+} from "./TableListItem";
 
 // Templates
 export { ChatPageTemplate } from "../templates/ChatPageTemplate";
