@@ -365,7 +365,7 @@ export const Card: React.FC<CardProps> = ({
         <div
           className="absolute inset-0 rounded-lg pointer-events-none"
           style={{
-            boxShadow: "inset 0 0 0 2px #5E49D6",
+            boxShadow: `inset 0 0 0 2px ${colors.primary}`,
           }}
         />
       )}

@@ -60,19 +60,19 @@ export const AllVariantsShowcase: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '24px', height: '800px' }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        <span style={{ fontSize: '12px', color: '#666' }}>Signed In - Landing - Collapsed</span>
+        <span className="text-xs text-text-secondary">Signed In - Landing - Collapsed</span>
         <Sidebar variant="landing" status="collapsed" user="signed-in" userName="Alex Carter" userInitials="AC" />
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        <span style={{ fontSize: '12px', color: '#666' }}>Signed In - Landing - Expanded</span>
+        <span className="text-xs text-text-secondary">Signed In - Landing - Expanded</span>
         <Sidebar variant="landing" status="expanded" user="signed-in" userName="Alex Carter" userInitials="AC" />
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        <span style={{ fontSize: '12px', color: '#666' }}>Signed In - Inner - Collapsed</span>
+        <span className="text-xs text-text-secondary">Signed In - Inner - Collapsed</span>
         <Sidebar variant="inner" status="collapsed" user="signed-in" userName="Alex Carter" userInitials="AC" />
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        <span style={{ fontSize: '12px', color: '#666' }}>Signed In - Inner - Expanded</span>
+        <span className="text-xs text-text-secondary">Signed In - Inner - Expanded</span>
         <Sidebar variant="inner" status="expanded" user="signed-in" userName="Alex Carter" userInitials="AC" />
       </div>
     </div>
@@ -86,11 +86,11 @@ export const SignedOutVariantsShowcase: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '24px', height: '800px' }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        <span style={{ fontSize: '12px', color: '#666' }}>Signed Out - Landing - Expanded</span>
+        <span className="text-xs text-text-secondary">Signed Out - Landing - Expanded</span>
         <Sidebar variant="landing" status="expanded" user="signed-out" />
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        <span style={{ fontSize: '12px', color: '#666' }}>Signed Out - Inner - Expanded</span>
+        <span className="text-xs text-text-secondary">Signed Out - Inner - Expanded</span>
         <Sidebar variant="inner" status="expanded" user="signed-out" />
       </div>
     </div>

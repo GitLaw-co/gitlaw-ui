@@ -138,7 +138,7 @@ const InlineTag: React.FC<{
             <Icon
               name={iconName}
               className="size-4"
-              color={isSpam ? "#E11D48" : colors.iconPrimary}
+              color={isSpam ? colors.destructive : colors.iconPrimary}
             />
           )}
       {label && (

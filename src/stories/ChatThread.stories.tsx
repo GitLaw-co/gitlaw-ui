@@ -90,7 +90,7 @@ export const Empty: Story = {
   },
   decorators: [
     (Story) => (
-      <div style={{ height: "500px", background: "#F7F6FF" }}>
+      <div style={{ height: "500px" }} className="bg-page-background">
         <Story />
       </div>
     ),
@@ -104,7 +104,7 @@ export const WithMessages: Story = {
   },
   decorators: [
     (Story) => (
-      <div style={{ height: "600px", background: "#F7F6FF" }}>
+      <div style={{ height: "600px" }} className="bg-page-background">
         <Story />
       </div>
     ),
@@ -182,7 +182,7 @@ export const LongConversation: Story = {
   },
   decorators: [
     (Story) => (
-      <div style={{ height: "500px", background: "#F7F6FF" }}>
+      <div style={{ height: "500px" }} className="bg-page-background">
         <Story />
       </div>
     ),

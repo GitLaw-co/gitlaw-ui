@@ -30,23 +30,37 @@ Prototypes/        ← 📋 Planned
 
 | Component | Status | Description |
 |-----------|--------|-------------|
-| Button | ✅ Stable | Primary, secondary, outline, ghost, destructive, disabled, icon variants |
-| Input | ✅ Stable | Text input with label, icons, validation states |
-| TextField | ✅ Stable | Multi-line textarea with character count |
-| Select | ✅ Stable | Searchable dropdown with multi-select |
-| Switch | ✅ Stable | Toggle for boolean settings |
 | Avatar | ✅ Stable | Images, initials, icons, or empty states |
 | Badge | ✅ Stable | Notification indicators |
-| Tag | ✅ Stable | Labels with optional icon and close button |
+| Button | ✅ Stable | Primary, secondary, outline, ghost, destructive, disabled, icon variants |
 | Card | ✅ Stable | File, template, and folder cards |
-| Tooltip | ✅ Stable | Contextual hints |
-| Toast | ✅ Stable | Notification messages |
-| Tab | ✅ Stable | Tab navigation with badge support |
-| MenuItem | ✅ Stable | List items with icons, avatars, checkboxes |
-| Sidebar | ✅ Stable | Collapsible navigation |
-| Dialog | ✅ Stable | Modal dialogs |
+| Checkbox | ✅ Stable | Checkbox with indeterminate state |
 | ChatInput | ✅ Stable | AI chat interface |
+| ChatThread | ✅ Stable | Chat conversation thread |
+| Dialog | ✅ Stable | Modal dialogs |
+| Dropdown | ✅ Stable | Adaptive width dropdown menu |
+| EditorHeader | ✅ Stable | Document title bar with actions |
+| EditorPaper | ✅ Stable | Document editing surface |
+| EditorSection | ✅ Stable | Collapsible content sections |
+| EditorToolbar | ✅ Stable | Formatting toolbar |
 | Icon | ✅ Stable | 1,475 icons with color support |
+| Input | ✅ Stable | Text input with label, icons, validation states |
+| MenuItem | ✅ Stable | List items with icons, avatars, checkboxes |
+| PageNav | ✅ Stable | Settings navigation with context switcher |
+| Popover | ✅ Stable | Click/hover triggered popover overlay |
+| Radio | ✅ Stable | Radio button with label |
+| Select | ✅ Stable | Searchable dropdown with multi-select |
+| Sidebar | ✅ Stable | Collapsible navigation |
+| StarIcon | ✅ Stable | Filled star icon (active/inactive) |
+| StickyFeaturePromoBar | ✅ Stable | Feature promotion banner |
+| Switch | ✅ Stable | Toggle for boolean settings |
+| Tab | ✅ Stable | Tab navigation with badge support |
+| TableListItem | ✅ Stable | Sortable table rows with selection, starring, menus |
+| Tag | ✅ Stable | Labels with optional icon and close button |
+| TextField | ✅ Stable | Multi-line textarea with character count |
+| Toast | ✅ Stable | Notification messages |
+| Tooltip | ✅ Stable | Contextual hints |
+| TopHeader | ✅ Stable | Top-level page header with breadcrumbs |
 
 ## Setup
 
