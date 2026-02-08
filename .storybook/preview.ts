@@ -55,7 +55,7 @@ const preview: Preview = {
           "Editor",
           ["EditorHeader", "EditorToolbar", "EditorPaper", "EditorSection"],
           "Pages",
-          ["Chat Page", "Settings", "Patterns"],
+          ["Chat Page", "Settings", "File List", "Patterns"],
           "Changelog",
         ],
       },
