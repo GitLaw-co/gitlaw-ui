@@ -338,7 +338,7 @@ const SampleDocumentContent = () => (
 );
 
 const meta: Meta<typeof ChatPageTemplate> = {
-  title: "Templates/ChatPageTemplate",
+  title: "Pages/Chat Page",
   component: ChatPageTemplate,
   parameters: {
     layout: "fullscreen",

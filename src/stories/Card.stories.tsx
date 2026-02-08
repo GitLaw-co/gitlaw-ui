@@ -6,7 +6,7 @@ import { Button } from "../components/Button";
 import { Icon } from "../components/Icon";
 
 const meta: Meta<typeof Card> = {
-  title: "Components/Card",
+  title: "Components/Data Display/Card",
   component: Card,
   parameters: {
     layout: "centered",

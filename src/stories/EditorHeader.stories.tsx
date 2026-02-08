@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { EditorHeader } from '../components/EditorHeader';
 
 const meta: Meta<typeof EditorHeader> = {
-  title: 'Components/Editor/EditorHeader',
+  title: 'Editor/EditorHeader',
   component: EditorHeader,
   parameters: {
     layout: 'padded',

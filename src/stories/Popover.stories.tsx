@@ -6,7 +6,7 @@ import { MenuItem } from "../components/MenuItem";
 import { Icon } from "../components/Icon";
 
 const meta: Meta<typeof Popover> = {
-  title: "Components/Popover",
+  title: "Components/Overlays/Popover",
   component: Popover,
   parameters: {
     layout: "centered",

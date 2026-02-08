@@ -8,7 +8,7 @@ import type { CheckboxStatus } from "../components/Checkbox";
 import type { SortDirection } from "../components/TableListItem";
 
 const meta: Meta<typeof TableListItem> = {
-  title: "Components/TableListItem",
+  title: "Components/Data Display/TableListItem",
   component: TableListItem,
   parameters: {
     layout: "padded",

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { StickyFeaturePromoBar } from "../components/StickyFeaturePromoBar";
 
 const meta: Meta<typeof StickyFeaturePromoBar> = {
-  title: "Components/StickyFeaturePromoBar",
+  title: "Components/Feedback/StickyFeaturePromoBar",
   component: StickyFeaturePromoBar,
   parameters: { layout: "centered" },
   tags: ["autodocs"],

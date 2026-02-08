@@ -1,5 +1,5 @@
 // Auto-generated changelog from git commits
-// Generated: 2026-02-06T09:49:33.633Z
+// Generated: 2026-02-08T11:16:38.364Z
 // Run: node scripts/generate-changelog.js
 
 export interface ChangelogEntry {
@@ -11,6 +11,36 @@ export interface ChangelogEntry {
 }
 
 export const changelog: ChangelogEntry[] = [
+  {
+    "date": "2026-02-08",
+    "commits": [
+      {
+        "hash": "6fef7be",
+        "message": "Add layout primitives: PageShell, Stack, Section"
+      },
+      {
+        "hash": "e9b373e",
+        "message": "Add COMPONENTS.md API cheat sheet for prompt-based prototyping"
+      }
+    ]
+  },
+  {
+    "date": "2026-02-06",
+    "commits": [
+      {
+        "hash": "bc8dfce",
+        "message": "Add StarIcon story for discoverability in Storybook"
+      },
+      {
+        "hash": "1254b4c",
+        "message": "Tidy up: update docs to 34 components, fix hardcoded hex colors"
+      },
+      {
+        "hash": "0d3c614",
+        "message": "Add Checkbox, Radio, TableListItem, StarIcon components; clean up all stories"
+      }
+    ]
+  },
   {
     "date": "2026-02-05",
     "commits": [
@@ -204,29 +234,9 @@ export const changelog: ChangelogEntry[] = [
       {
         "hash": "f5ad1c3",
         "message": "Add shadow-card CSS utility and apply to all card-like components"
-      },
-      {
-        "hash": "13d297f",
-        "message": "Add tidy up routine to CLAUDE.md"
-      },
-      {
-        "hash": "028c307",
-        "message": "Tidy up: add shadow-card utility and export Dropdown"
-      },
-      {
-        "hash": "9bf4aea",
-        "message": "Fix text-muted color conflict - rename to text-subtle"
-      },
-      {
-        "hash": "1f3bca9",
-        "message": "Add new components and refactor text colors"
-      },
-      {
-        "hash": "ca340ac",
-        "message": "Add component inventory and API patterns to CLAUDE.md"
       }
     ]
   }
 ];
 
-export const lastUpdated = "2026-02-06";
+export const lastUpdated = "2026-02-08";

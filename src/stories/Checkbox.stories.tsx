@@ -4,7 +4,7 @@ import { Checkbox } from '../components/Checkbox';
 import type { CheckboxStatus } from '../components/Checkbox';
 
 const meta: Meta<typeof Checkbox> = {
-  title: 'Components/Checkbox',
+  title: 'Components/Form/Checkbox',
   component: Checkbox,
   parameters: {
     layout: 'centered',

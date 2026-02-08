@@ -6,7 +6,7 @@ import { Icon } from '../components/Icon';
 import ukFlag from '../../Assets/flags/uk-uk.svg';
 
 const meta: Meta<typeof ChatInput> = {
-  title: 'Components/Chat/ChatInput',
+  title: 'Chat/ChatInput',
   component: ChatInput,
   parameters: {
     layout: 'centered',
