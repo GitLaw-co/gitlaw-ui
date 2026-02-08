@@ -143,6 +143,15 @@ export type { StickyFeaturePromoBarProps } from "./StickyFeaturePromoBar";
 export { PageNav } from "./PageNav";
 export type { PageNavProps, PageNavAccount, PageNavItem } from "./PageNav";
 
+export { PageShell } from "./PageShell";
+export type { PageShellProps } from "./PageShell";
+
+export { Stack } from "./Stack";
+export type { StackProps, StackGap, StackDirection } from "./Stack";
+
+export { Section } from "./Section";
+export type { SectionProps, SectionVariant } from "./Section";
+
 export { Radio } from "./Radio";
 export type { RadioProps } from "./Radio";
 

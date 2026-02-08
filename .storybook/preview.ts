@@ -40,6 +40,8 @@ const preview: Preview = {
             "Spacing",
             "Breakpoints",
           ],
+          "Layout",
+          ["PageShell", "Stack", "Section"],
           "Components",
           [
             "Avatar",

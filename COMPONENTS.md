@@ -10,6 +10,119 @@ import { colors } from '../specs';
 
 ---
 
+## Layout Primitives
+
+### PageShell
+
+App chrome for settings/files pages: Sidebar + TopHeader + scrollable content area.
+
+```tsx
+<PageShell
+  title="Settings"                             // TopHeader title
+  breadcrumbs={[{ id: "1", label: "Settings" }]} // overrides title
+  isSignedIn={true}
+  sidebarVariant="inner"                       // "landing" | "inner"
+  initialSidebarCollapsed={true}
+  showHeaderStroke={true}                      // bottom dashed border (default: true)
+  userName="Alex Carter"
+  userInitials="AC"
+  onSidebarToggle={(collapsed) => {}}
+>
+  {/* Content area: px-[84px] pt-8 pb-16, scrollable */}
+  <div className="flex gap-4">
+    <PageNav ... />
+    <div className="flex-1 max-w-[1040px]">
+      <Stack gap="none">
+        <MenuItem ... />
+      </Stack>
+    </div>
+  </div>
+</PageShell>
+```
+
+| Prop | Type | Default |
+|------|------|---------|
+| `title` | `string` | `"Settings"` |
+| `breadcrumbs` | `BreadcrumbItem[]` | — |
+| `isSignedIn` | `boolean` | `true` |
+| `sidebarVariant` | `"landing" \| "inner"` | `"inner"` |
+| `initialSidebarCollapsed` | `boolean` | `true` |
+| `menuItems` | `SidebarMenuItem[]` | — |
+| `chatHistory` | `SidebarChatHistoryItem[]` | — |
+| `userName` | `string` | `"Alex Carter"` |
+| `userInitials` | `string` | `"AC"` |
+| `userAvatar` | `string` | — |
+| `showHeaderStroke` | `boolean` | `true` |
+| `children` | `ReactNode` | **required** |
+| `onSidebarToggle` | `(collapsed: boolean) => void` | — |
+
+---
+
+### Stack
+
+Vertical or horizontal list of children with consistent spacing.
+
+```tsx
+<Stack gap="s" direction="vertical" padding="none" dividers={false}>
+  <MenuItem ... />
+  <MenuItem ... />
+  <MenuItem ... />
+</Stack>
+```
+
+| Prop | Type | Default |
+|------|------|---------|
+| `gap` | `"none" \| "xs" \| "s" \| "m" \| "l" \| "xl"` | `"s"` |
+| `direction` | `"vertical" \| "horizontal"` | `"vertical"` |
+| `padding` | `"none" \| "xs" \| "s" \| "m" \| "l" \| "xl"` | `"none"` |
+| `dividers` | `boolean` | `false` |
+| `children` | `ReactNode` | **required** |
+
+**Gap values:** none=0, xs=4px, s=8px, m=12px, l=16px, xl=24px
+
+---
+
+### Section
+
+Labeled group within a page. Use inside a Stack to group related rows.
+
+```tsx
+// Default — no background
+<Section title="Danger zone" showBorder={true}>
+  <Stack gap="none"><MenuItem ... /></Stack>
+</Section>
+
+// Card variant — white card background (matches Figma settings list groups)
+<Section variant="card">
+  <Stack gap="none"><MenuItem ... /></Stack>
+</Section>
+
+// Clickable card with three-dot menu (use MenuItem's rIcon1 for the ellipsis)
+<Section variant="card" onClick={() => navigate("/org/whisk")}>
+  <Stack gap="none">
+    <MenuItem primaryText="Whisk" showLeftElement leftElement="avatar" avatarInitials="WH" width="fill"
+      showRIcon1 rIcon1="ellipsis" />
+    <MenuItem primaryText="Description text..." showLeftElement={false} width="fill" />
+  </Stack>
+</Section>
+
+// With action slot
+<Section title="Team members" action={<Button size="s">Invite</Button>}>
+  <Stack gap="none"><MenuItem ... /></Stack>
+</Section>
+```
+
+| Prop | Type | Default |
+|------|------|---------|
+| `title` | `string` | — |
+| `action` | `ReactNode` | — |
+| `variant` | `"default" \| "card"` | `"default"` |
+| `showBorder` | `boolean` | `false` |
+| `onClick` | `() => void` | — |
+| `children` | `ReactNode` | **required** |
+
+---
+
 ## Layout & Navigation
 
 ### TopHeader
