@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { StarIcon } from "../components/StarIcon";
 
 const meta: Meta<typeof StarIcon> = {
-  title: "Components/StarIcon",
+  title: "Components/Data Display/StarIcon",
   component: StarIcon,
   parameters: { layout: "centered" },
   tags: ["autodocs"],

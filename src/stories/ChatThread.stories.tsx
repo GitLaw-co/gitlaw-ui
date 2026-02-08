@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { ChatThread, ChatMessage } from "../components/ChatThread";
 
 const meta: Meta<typeof ChatThread> = {
-  title: "Components/Chat/ChatThread",
+  title: "Chat/ChatThread",
   component: ChatThread,
   parameters: {
     layout: "fullscreen",

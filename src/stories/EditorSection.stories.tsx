@@ -4,7 +4,7 @@ import { EditorSection } from '../components/EditorSection';
 import { EditorPaper } from '../components/EditorPaper';
 
 const meta: Meta<typeof EditorSection> = {
-  title: 'Components/Editor/EditorSection',
+  title: 'Editor/EditorSection',
   component: EditorSection,
   parameters: {
     layout: 'fullscreen',

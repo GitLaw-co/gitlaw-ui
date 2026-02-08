@@ -9,7 +9,7 @@ import { Icon } from "../../components/Icon";
  * a document attachment row with file info and actions.
  */
 const meta: Meta<typeof MenuItem> = {
-  title: "Prototypes/DocumentMenuItem",
+  title: "Pages/Patterns/Document Menu Item",
   component: MenuItem,
   parameters: {
     layout: "centered",

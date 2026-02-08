@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { EditorPaper } from '../components/EditorPaper';
 
 const meta: Meta<typeof EditorPaper> = {
-  title: 'Components/Editor/EditorPaper',
+  title: 'Editor/EditorPaper',
   component: EditorPaper,
   parameters: {
     layout: 'fullscreen',

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { TopHeader } from "../components/TopHeader";
 
 const meta: Meta<typeof TopHeader> = {
-  title: "Components/TopHeader",
+  title: "Components/Navigation/TopHeader",
   component: TopHeader,
   parameters: {
     layout: "fullscreen",

@@ -56,7 +56,7 @@ const orgItems: PageNavItem[] = [
 // ─── Meta ───────────────────────────────────────────────────────────────────
 
 const meta: Meta<typeof PageNav> = {
-  title: "Components/PageNav",
+  title: "Components/Navigation/PageNav",
   component: PageNav,
   parameters: {
     layout: "centered",

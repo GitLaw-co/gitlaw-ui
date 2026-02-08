@@ -10,7 +10,7 @@ import ukFlag from "../../../Assets/flags/uk-uk.svg";
  * using MenuItem components within a card container.
  */
 const meta: Meta<typeof MenuItem> = {
-  title: "Prototypes/JurisdictionDropdown",
+  title: "Pages/Patterns/Jurisdiction Dropdown",
   component: MenuItem,
   parameters: {
     layout: "centered",
