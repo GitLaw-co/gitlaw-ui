@@ -5,10 +5,10 @@ import {
   PageNav,
   TableListItem,
   Card,
-  Icon,
   Button,
+  ListHeader,
+  useContainerCols,
 } from "../../components";
-import { colors } from "../../specs";
 
 const meta: Meta<typeof PageShell> = {
   title: "Pages/File List",
@@ -58,7 +58,7 @@ const fileRows = [
     subtitle: "Template for client service contracts",
     visibility: "public" as const,
     starCount: "17K",
-    metaValues: ["Folder", "1 minute ago", "10 minutes a...", "3 days ago"],
+    metaValues: ["Folder", "1 minute ago", "10 minutes ago", "3 days ago"],
   },
   {
     iconName: "file-text",
@@ -67,7 +67,7 @@ const fileRows = [
     visibility: "public" as const,
     starCount: "17K",
     spam: true,
-    metaValues: ["Folder", "1 minute ago", "10 minutes a...", "3 days ago"],
+    metaValues: ["Folder", "1 minute ago", "10 minutes ago", "3 days ago"],
   },
   {
     iconName: "file-text",
@@ -104,6 +104,49 @@ const fileRows = [
     title: "Wedding Photography Contract",
     subtitle: "Contract for wedding photography services...",
     metaValues: ["Folder", "1 minute ago", "3 days ago", "3 days ago"],
+  },
+  {
+    iconName: "folder",
+    title: "Real Estate Documents",
+    subtitle: "12 files in folder",
+    metaValues: ["Folder", "2 minutes ago", "1 hour ago", "5 days ago"],
+    starred: true,
+  },
+  {
+    iconName: "file-text",
+    title: "Freelance Retainer Agreement",
+    subtitle: "Ongoing retainer terms for freelancers",
+    visibility: "private" as const,
+    metaValues: ["Document", "5 minutes ago", "2 hours ago", "1 week ago"],
+  },
+  {
+    iconName: "file-text",
+    title: "Intellectual Property Assignment",
+    subtitle: "Transfer of IP rights between parties",
+    visibility: "public" as const,
+    starCount: "4.2K",
+    metaValues: ["Document", "10 minutes ago", "5 hours ago", "2 weeks ago"],
+  },
+  {
+    iconName: "file-text",
+    title: "Data Processing Agreement",
+    subtitle: "GDPR-compliant data processing terms",
+    visibility: "public" as const,
+    starCount: "8.9K",
+    metaValues: ["Document", "15 minutes ago", "1 day ago", "3 weeks ago"],
+  },
+  {
+    iconName: "folder",
+    title: "Tax Filings 2025",
+    subtitle: "4 files in folder",
+    metaValues: ["Folder", "30 minutes ago", "2 days ago", "1 month ago"],
+  },
+  {
+    iconName: "file-text",
+    title: "Software Licence Agreement",
+    subtitle: "End-user licence for SaaS products",
+    visibility: "shared" as const,
+    metaValues: ["Document", "1 hour ago", "3 days ago", "2 months ago"],
   },
 ];
 
@@ -184,61 +227,73 @@ const cardData = [
     ownerInitials: "AC",
     visibility: "private" as const,
   },
+  {
+    type: "folder" as const,
+    title: "Real Estate Documents",
+    filesCount: 12,
+    files: [
+      { id: "r1", name: "Lease Agreement" },
+      { id: "r2", name: "Property Inspection Report" },
+      { id: "r3", name: "Title Deed Transfer" },
+      { id: "r4", name: "Mortgage Application" },
+      { id: "r5", name: "Tenant Screening Form" },
+    ],
+  },
+  {
+    type: "file" as const,
+    title: "Freelance Retainer Agreement",
+    description:
+      "Standard retainer terms for ongoing freelance engagements with monthly billing cycles.",
+    ownerName: "Sam Rivera",
+    ownerInitials: "SR",
+    visibility: "private" as const,
+  },
+  {
+    type: "file" as const,
+    title: "IP Assignment Agreement",
+    description:
+      "Transfers intellectual property rights from contractor to company upon project completion.",
+    ownerName: "Alex Carter",
+    ownerInitials: "AC",
+    visibility: "public" as const,
+  },
+  {
+    type: "file" as const,
+    title: "Data Processing Agreement",
+    description:
+      "GDPR-compliant terms for processing personal data on behalf of data controllers.",
+    ownerName: "Open Legal Library",
+    ownerInitials: "OL",
+    visibility: "public" as const,
+  },
+  {
+    type: "file" as const,
+    title: "Software Licence Agreement",
+    description:
+      "End-user licence for SaaS products covering usage rights, limitations, and support terms.",
+    ownerName: "Blake Logan",
+    ownerInitials: "BL",
+    visibility: "shared" as const,
+  },
 ];
 
 /* ------------------------------------------------------------------ */
-/*  Toolbar (shared between views)                                     */
+/*  Shared action buttons                                              */
 /* ------------------------------------------------------------------ */
 
-const FileListToolbar = ({
-  view,
-  onViewChange,
-}: {
-  view: "list" | "grid";
-  onViewChange: (v: "list" | "grid") => void;
-}) => (
-  <div className="flex items-center justify-between mb-4">
-    <h2 className="text-lg font-semibold text-primary">234 files</h2>
-    <div className="flex items-center gap-2">
-      <button
-        className="p-2 rounded-gitlaw-m hover:bg-secondary transition-colors duration-fast"
-        onClick={() => {}}
-      >
-        <Icon name="search" className="size-5" color={colors.iconSecondary} />
-      </button>
-      <button
-        className="p-2 rounded-gitlaw-m hover:bg-secondary transition-colors duration-fast"
-        onClick={() => {}}
-      >
-        <Icon
-          name="arrow-down"
-          className="size-5"
-          color={colors.iconSecondary}
-        />
-      </button>
-      <button
-        className={`p-2 rounded-gitlaw-m transition-colors duration-fast ${
-          view === "grid"
-            ? "bg-secondary"
-            : "hover:bg-secondary"
-        }`}
-        onClick={() => onViewChange(view === "list" ? "grid" : "list")}
-      >
-        <Icon
-          name="grid"
-          className="size-5"
-          color={view === "grid" ? colors.iconPrimary : colors.iconSecondary}
-        />
-      </button>
-      <button
-        className="p-2 rounded-gitlaw-m bg-primary hover:bg-primary/90 transition-colors duration-fast"
-        onClick={() => {}}
-      >
-        <Icon name="plus" className="size-5" color={colors.iconNegative} />
-      </button>
-    </div>
-  </div>
-);
+const listHeaderActions = (
+  view: "list" | "grid",
+  setView: (v: "list" | "grid") => void
+) => [
+  { icon: "search" },
+  { icon: "arrow-down-wide-narrow" },
+  {
+    icon: "layout-grid",
+    active: view === "grid",
+    onClick: () => setView(view === "list" ? "grid" : "list"),
+  },
+  { icon: "plus" },
+];
 
 /* ------------------------------------------------------------------ */
 /*  Browse templates FAB                                               */
@@ -262,42 +317,53 @@ const BrowseTemplatesFab = () => (
 /* ------------------------------------------------------------------ */
 
 /**
- * File list page — list/table view with sortable columns.
- * Matches the Figma "Files" page with table rows.
+ * File list page — list/table view with responsive columns.
+ * Columns adapt to container width via useContainerCols hook:
+ * - < 672px: name only (no header row)
+ * - 672–896px: Name + Updated
+ * - 896–1024px: Name + 3 meta columns
+ * - ≥ 1024px: all 6 columns
  */
 export const ListView: Story = {
   render: () => {
     const [view, setView] = useState<"list" | "grid">("list");
+    const { cols, containerRef } = useContainerCols();
     return (
-      <PageShell title="Files" initialSidebarCollapsed showHeaderStroke={false}>
-        <div className="flex gap-6">
+      <PageShell title="Files" initialSidebarCollapsed showHeaderStroke>
+        <div className="flex gap-6 @container/page">
           <PageNav
             activeAccount={accounts[0]}
             accounts={accounts}
             items={navItems}
             activeItemId="recent"
+            className="hidden @3xl/page:flex"
           />
-          <div className="flex-1 min-w-0">
-            <FileListToolbar view={view} onViewChange={setView} />
-            <div>
-              <TableListItem
-                type="header"
-                cols={6}
-                headerLabels={[
-                  "Name",
-                  "Type",
-                  "Last viewed",
-                  "Updated",
-                  "Created",
-                ]}
-                sortColumn="Updated"
-                sortDirection="desc"
-              />
+          <div className="flex-1 min-w-0 @container" ref={containerRef}>
+            <ListHeader
+              label="234 files"
+              actions={listHeaderActions(view, setView)}
+            />
+            <div className="mt-4 flex flex-col gap-2">
+              {cols > 0 && (
+                <TableListItem
+                  type="header"
+                  cols={cols}
+                  headerLabels={[
+                    "Name",
+                    "Type",
+                    "Last viewed",
+                    "Updated",
+                    "Created",
+                  ]}
+                  sortColumn="Updated"
+                  sortDirection="desc"
+                />
+              )}
               {fileRows.map((row, i) => (
                 <TableListItem
                   key={i}
                   type="item"
-                  cols={6}
+                  cols={cols}
                   iconName={row.iconName}
                   title={row.title}
                   subtitle={row.subtitle}
@@ -322,24 +388,33 @@ export const ListView: Story = {
 /* ------------------------------------------------------------------ */
 
 /**
- * File list page — card grid view with folder and file cards.
- * Matches the Figma "Files" page in grid/card mode.
+ * File list page — card grid view with responsive columns.
+ * Grid adapts to container width via @container queries:
+ * - Default: 1 column, gap 8px
+ * - @lg (512px): 2 columns, gap 8px
+ * - @2xl (672px): 2 columns, gap 12px
+ * - @4xl (896px): 3 columns, gap 12px
+ * - @5xl (1024px): 4 columns, gap 12px
  */
 export const CardGridView: Story = {
   render: () => {
     const [view, setView] = useState<"list" | "grid">("grid");
     return (
-      <PageShell title="Files" initialSidebarCollapsed showHeaderStroke={false}>
-        <div className="flex gap-6">
+      <PageShell title="Files" initialSidebarCollapsed showHeaderStroke>
+        <div className="flex gap-6 @container/page">
           <PageNav
             activeAccount={accounts[0]}
             accounts={accounts}
             items={navItems}
             activeItemId="recent"
+            className="hidden @3xl/page:flex"
           />
-          <div className="flex-1 min-w-0">
-            <FileListToolbar view={view} onViewChange={setView} />
-            <div className="grid grid-cols-4 gap-4">
+          <div className="flex-1 min-w-0 @container">
+            <ListHeader
+              label="234 files"
+              actions={listHeaderActions(view, setView)}
+            />
+            <div className="mt-4 grid grid-cols-1 gap-2 @lg:grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] @2xl:gap-3">
               {cardData.map((card, i) => (
                 <Card
                   key={i}

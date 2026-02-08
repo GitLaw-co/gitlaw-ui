@@ -1,5 +1,5 @@
 // Auto-generated changelog from git commits
-// Generated: 2026-02-08T11:16:38.364Z
+// Generated: 2026-02-08T12:26:13.425Z
 // Run: node scripts/generate-changelog.js
 
 export interface ChangelogEntry {
@@ -14,6 +14,18 @@ export const changelog: ChangelogEntry[] = [
   {
     "date": "2026-02-08",
     "commits": [
+      {
+        "hash": "ced7baa",
+        "message": "Add File List page prototype with list and card grid views"
+      },
+      {
+        "hash": "1951ae3",
+        "message": "Update auto-generated changelog data"
+      },
+      {
+        "hash": "03b61b4",
+        "message": "Restructure Storybook tree: group components, promote Chat/Editor, add Pages"
+      },
       {
         "hash": "6fef7be",
         "message": "Add layout primitives: PageShell, Stack, Section"
@@ -213,27 +225,6 @@ export const changelog: ChangelogEntry[] = [
       {
         "hash": "1d15c98",
         "message": "Remove custom icons, fix Card selection ring, add ChatInput tooltips"
-      },
-      {
-        "hash": "94ef3f6",
-        "message": "Disable Vercel deployments for gh-pages branch"
-      }
-    ]
-  },
-  {
-    "date": "2026-02-02",
-    "commits": [
-      {
-        "hash": "d77c6ea",
-        "message": "Enable MDX tables with @storybook/addon-mdx-gfm"
-      },
-      {
-        "hash": "4f64d11",
-        "message": "Update Introduction.mdx with complete design tokens"
-      },
-      {
-        "hash": "f5ad1c3",
-        "message": "Add shadow-card CSS utility and apply to all card-like components"
       }
     ]
   }

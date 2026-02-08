@@ -45,6 +45,7 @@ Prototypes/        ← 📋 Planned
 | EditorToolbar | ✅ Stable | Formatting toolbar |
 | Icon | ✅ Stable | 1,475 icons with color support |
 | Input | ✅ Stable | Text input with label, icons, validation states |
+| ListHeader | ✅ Stable | Toolbar above file lists with icon actions and edit mode |
 | MenuItem | ✅ Stable | List items with icons, avatars, checkboxes |
 | PageNav | ✅ Stable | Settings navigation with context switcher |
 | Popover | ✅ Stable | Click/hover triggered popover overlay |
@@ -157,6 +158,56 @@ Use GitLaw spacing scale:
 - `gitlaw-2xl` = 24px
 - `gitlaw-3xl` = 32px
 - `gitlaw-4xl` = 48px
+
+### Responsive Layouts with @container Queries
+
+This project uses `@tailwindcss/container-queries` for component-level responsive design. Container queries adapt to the **container width** (not viewport), making layouts work correctly inside sidebars, split views, and varying page shells.
+
+**Setup:** Add `@container` class to the parent element, then use `@`-prefixed breakpoints on children.
+
+**Container breakpoints** (defined in `src/constants/breakpoints.ts`):
+
+| Prefix | Width | Typical use |
+|--------|-------|-------------|
+| `@xs:` | 320px | — |
+| `@sm:` | 384px | — |
+| `@md:` | 448px | — |
+| `@lg:` | 512px | 2-col card grid |
+| `@xl:` | 576px | — |
+| `@2xl:` | 672px | 2-col table (Name + Updated) |
+| `@3xl:` | 768px | — |
+| `@4xl:` | 896px | 3-col card grid, 4-col table |
+| `@5xl:` | 1024px | 4-col card grid, 6-col table |
+| `@6xl:` | 1152px | — |
+| `@7xl:` | 1280px | — |
+
+**CSS-only pattern** (card grids):
+
+```tsx
+<div className="@container">
+  <div className="grid grid-cols-1 gap-2 @lg:grid-cols-2 @2xl:gap-3 @4xl:grid-cols-3 @5xl:grid-cols-4">
+    {cards.map(card => <Card key={card.id} {...card} />)}
+  </div>
+</div>
+```
+
+**JS + ResizeObserver pattern** (when a component needs a JS prop, e.g. `TableListItem cols`):
+
+```tsx
+import { useContainerCols } from '../hooks/useContainerCols';
+
+const { cols, containerRef } = useContainerCols();
+// cols: 0 (<672px) | 2 (672–896) | 4 (896–1024) | 6 (≥1024)
+
+<div className="@container" ref={containerRef}>
+  {cols > 0 && <TableListItem type="header" cols={cols} ... />}
+  {rows.map(row => <TableListItem cols={cols} ... />)}
+</div>
+```
+
+**When to use which:**
+- Pure CSS `@container` classes — when layout is entirely CSS-driven (grid columns, gaps, visibility)
+- `useContainerCols` hook — when a React component needs a JS value derived from container width (e.g. `TableListItem cols` prop)
 
 ## Component API Patterns
 
@@ -328,6 +379,70 @@ export const AllVariants: Story = {
       <ComponentName variant="primary" />
       <ComponentName variant="secondary" />
     </div>
+  ),
+};
+```
+
+### Page Stories (`Pages/` directory)
+
+Page stories live in `src/stories/Pages/` and demonstrate full-page layouts using templates and layout primitives (PageShell, etc.). They follow a different pattern from component stories:
+
+**Structure rules:**
+- Title: `"Pages/Page Name"`
+- Layout: `fullscreen` (no centering)
+- Use `render:` functions (not `args:`)
+- Extract shared data (files, messages, users) as top-level constants
+- Use section divider comments between logical blocks
+- Keep to 2-3 stories max: **Default** + key alternate states (e.g. `EmptyChat`, `CardGridView`)
+
+```tsx
+// src/stories/Pages/ExamplePage.stories.tsx
+import type { Meta, StoryObj } from "@storybook/react";
+import { ExamplePageTemplate } from "../../templates/ExamplePageTemplate";
+
+const meta: Meta<typeof ExamplePageTemplate> = {
+  title: "Pages/Example Page",
+  component: ExamplePageTemplate,
+  parameters: {
+    layout: "fullscreen",
+    backgrounds: { default: "light" },
+  },
+};
+
+export default meta;
+type Story = StoryObj<typeof ExamplePageTemplate>;
+
+/* ------------------------------------------------------------------ */
+/*  Shared data                                                        */
+/* ------------------------------------------------------------------ */
+
+const files = [
+  { id: "1", name: "Document A" },
+  { id: "2", name: "Document B" },
+];
+
+const sharedProps = {
+  title: "Example Page",
+  files,
+  userName: "Ava Campbell",
+  userInitials: "AC",
+};
+
+/* ------------------------------------------------------------------ */
+/*  Story: Default                                                     */
+/* ------------------------------------------------------------------ */
+
+export const Default: Story = {
+  render: () => <ExamplePageTemplate {...sharedProps} />,
+};
+
+/* ------------------------------------------------------------------ */
+/*  Story: Empty State                                                 */
+/* ------------------------------------------------------------------ */
+
+export const EmptyState: Story = {
+  render: () => (
+    <ExamplePageTemplate {...sharedProps} files={[]} />
   ),
 };
 ```

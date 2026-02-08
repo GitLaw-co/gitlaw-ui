@@ -164,6 +164,17 @@ export type {
   SortDirection,
 } from "./TableListItem";
 
+export { ListHeader } from "./ListHeader";
+export type {
+  ListHeaderProps,
+  ListHeaderMode,
+  ListHeaderIconAction,
+  ListHeaderEditAction,
+} from "./ListHeader";
+
+// Hooks
+export { useContainerCols } from "../hooks/useContainerCols";
+
 // Templates
 export { ChatPageTemplate } from "../templates/ChatPageTemplate";
 export type { ChatPageTemplateProps } from "../templates/ChatPageTemplate";

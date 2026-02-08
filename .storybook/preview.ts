@@ -44,7 +44,7 @@ const preview: Preview = {
             "Data Display",
             ["Avatar", "Badge", "Card", "StarIcon", "TableListItem", "Tag"],
             "Navigation",
-            ["Sidebar", "TopHeader", "PageNav", "Tab"],
+            ["Sidebar", "TopHeader", "PageNav", "ListHeader", "Tab"],
             "Overlays",
             ["Dialog", "Popover", "Tooltip"],
             "Feedback",

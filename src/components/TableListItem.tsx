@@ -327,9 +327,9 @@ const RowShell: React.FC<{
       {nameContent}
     </div>
 
-    {/* Meta columns — flex-1 for 6 cols (equal split with name), shrink-0 for 4/2 */}
+    {/* Meta columns — max 50% for 6 cols (name gets the rest), shrink-0 for 4/2 */}
     <div
-      className={`flex items-center gap-gitlaw-m ${cols === 6 ? "flex-1 min-w-0" : "shrink-0"}`}
+      className={`flex items-center gap-gitlaw-m ${cols === 6 ? "w-1/2 shrink-0 min-w-0" : "shrink-0"}`}
     >
       <MetaCols cols={cols} values={metaValues} {...metaProps} />
       {rightSlot}
@@ -494,8 +494,8 @@ const ItemRow: React.FC<TableListItemProps> = ({
             color={colors.iconPrimary}
           />
           <div className="flex flex-col flex-1 justify-center min-w-0">
-            <div className="flex items-center gap-gitlaw-s w-full">
-              <p className="text-base font-semibold text-foreground leading-[1.4] shrink-0">
+            <div className="flex items-center gap-gitlaw-s min-w-0">
+              <p className="text-base font-semibold text-foreground leading-[1.4] truncate min-w-0">
                 {title}
               </p>
               {hasTags && (

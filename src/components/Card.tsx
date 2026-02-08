@@ -317,7 +317,7 @@ export const Card: React.FC<CardProps> = ({
     <div
       className={`
         @container bg-card rounded-lg shadow-card overflow-hidden relative cursor-pointer
-        w-full min-w-[160px]
+        w-full min-w-48 max-w-64
         p-4 @[200px]:p-6
         transition-shadow duration-fast ease-gitlaw
         ${className}
