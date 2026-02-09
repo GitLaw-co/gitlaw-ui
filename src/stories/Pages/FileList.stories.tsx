@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import { PageShell } from "../../components/PageShell";
 import {
   PageNav,
@@ -9,6 +9,8 @@ import {
   ListHeader,
   useContainerCols,
 } from "../../components";
+import type { CheckboxStatus } from "../../components/Checkbox";
+import type { SortDirection } from "../../components/TableListItem";
 
 const meta: Meta<typeof PageShell> = {
   title: "Pages/File List",
@@ -21,6 +23,17 @@ const meta: Meta<typeof PageShell> = {
 
 export default meta;
 type Story = StoryObj<typeof PageShell>;
+
+/* ------------------------------------------------------------------ */
+/*  Types                                                              */
+/* ------------------------------------------------------------------ */
+
+interface SelectionBox {
+  startX: number;
+  startY: number;
+  endX: number;
+  endY: number;
+}
 
 /* ------------------------------------------------------------------ */
 /*  Shared data                                                        */
@@ -286,24 +299,6 @@ const cardData = [
 ];
 
 /* ------------------------------------------------------------------ */
-/*  Shared action buttons                                              */
-/* ------------------------------------------------------------------ */
-
-const listHeaderActions = (
-  view: "list" | "grid",
-  setView: (v: "list" | "grid") => void
-) => [
-  { icon: "search" },
-  { icon: "arrow-down-wide-narrow" },
-  {
-    icon: "layout-grid",
-    active: view === "grid",
-    onClick: () => setView(view === "list" ? "grid" : "list"),
-  },
-  { icon: "plus" },
-];
-
-/* ------------------------------------------------------------------ */
 /*  Browse templates FAB                                               */
 /* ------------------------------------------------------------------ */
 
@@ -321,105 +316,335 @@ const BrowseTemplatesFab = () => (
 );
 
 /* ------------------------------------------------------------------ */
-/*  Story: List View                                                   */
+/*  Selection rectangle style helper                                   */
 /* ------------------------------------------------------------------ */
 
 /**
- * File list page — list/table view with responsive columns.
- * Columns adapt to container width via useContainerCols hook:
- * - < 672px: name only (no header row)
- * - 672–896px: Name + Updated
- * - 896–1024px: Name + 3 meta columns
- * - ≥ 1024px: all 6 columns
+ * Renders the rubber band rectangle using `position: fixed` so it works
+ * correctly regardless of scroll position. The selection box coordinates
+ * are stored as raw viewport values (clientX / clientY), which map 1-to-1
+ * with `position: fixed` and `getBoundingClientRect()` — no scroll offset
+ * math required.
  */
-export const ListView: Story = {
-  render: () => {
-    const [view, setView] = useState<"list" | "grid">("list");
-    const { cols, containerRef } = useContainerCols();
-    return (
-      <PageShell
-        title="Files"
-        initialSidebarCollapsed
-        showHeaderStroke
-        mobileNavItems={mobileNavItems("recent")}
-        mobileNavActiveLabel="Recent"
-      >
-        <div className="flex gap-6">
-          <PageNav
-            activeAccount={accounts[0]}
-            accounts={accounts}
-            items={navItems}
-            activeItemId="recent"
-            className="hidden md:flex"
-          />
-          <div className="flex-1 min-w-0 @container" ref={containerRef}>
-            <ListHeader
-              label="234 files"
-              actions={listHeaderActions(view, setView)}
-            />
-            <div className="mt-4 flex flex-col gap-2">
-              {cols > 0 && (
-                <TableListItem
-                  type="header"
-                  cols={cols}
-                  headerLabels={[
-                    "Name",
-                    "Type",
-                    "Last viewed",
-                    "Updated",
-                    "Created",
-                  ]}
-                  sortColumn="Updated"
-                  sortDirection="desc"
-                />
-              )}
-              {fileRows.map((row, i) => (
-                <TableListItem
-                  key={i}
-                  type="item"
-                  cols={cols}
-                  iconName={row.iconName}
-                  title={row.title}
-                  subtitle={row.subtitle}
-                  visibility={row.visibility}
-                  starCount={row.starCount}
-                  spam={row.spam}
-                  metaValues={row.metaValues}
-                  starred={row.starred || false}
-                />
-              ))}
-            </div>
-            <BrowseTemplatesFab />
-          </div>
-        </div>
-      </PageShell>
-    );
-  },
+const getSelectionBoxStyle = (
+  box: SelectionBox | null
+): React.CSSProperties | undefined => {
+  if (!box) return undefined;
+  return {
+    position: "fixed",
+    left: Math.min(box.startX, box.endX),
+    top: Math.min(box.startY, box.endY),
+    width: Math.abs(box.endX - box.startX),
+    height: Math.abs(box.endY - box.startY),
+    backgroundColor: "rgba(94, 73, 214, 0.1)",
+    border: "2px solid rgba(94, 73, 214, 0.5)",
+    borderRadius: "4px",
+    pointerEvents: "none" as const,
+    zIndex: 50,
+  };
 };
 
 /* ------------------------------------------------------------------ */
-/*  Story: Card Grid View                                              */
+/*  Edit mode actions for ListHeader                                   */
 /* ------------------------------------------------------------------ */
 
-/**
- * File list page — card grid view with responsive columns.
- * Grid adapts to container width via @container queries:
- * - Default: 1 column, gap 8px
- * - @lg (512px): 2 columns, gap 8px
- * - @2xl (672px): 2 columns, gap 12px
- * - @4xl (896px): 3 columns, gap 12px
- * - @5xl (1024px): 4 columns, gap 12px
- */
-export const CardGridView: Story = {
-  render: () => {
-    const [view, setView] = useState<"list" | "grid">("grid");
-    return (
-      <PageShell
-        title="Files"
-        initialSidebarCollapsed
-        showHeaderStroke
-        mobileNavItems={mobileNavItems("recent")}
-        mobileNavActiveLabel="Recent"
+const editActions = [
+  { icon: "trash-2", label: "Delete" },
+  { icon: "arrow-down-to-line", label: "Download" },
+  { icon: "folder-input", label: "Move" },
+];
+
+/* ------------------------------------------------------------------ */
+/*  Interactive File List component                                    */
+/* ------------------------------------------------------------------ */
+
+const DOUBLE_CLICK_THRESHOLD = 250;
+
+const InteractiveFileList = () => {
+  const editLayout = "inline" as const;
+  // ── View state ──
+  const [view, setView] = useState<"list" | "grid">("list");
+
+  // ── Selection state ──
+  const [selectedItems, setSelectedItems] = useState<Set<number>>(new Set());
+  const [starredItems, setStarredItems] = useState<Set<number>>(
+    new Set(
+      fileRows
+        .map((r, i) => (r.starred ? i : -1))
+        .filter((i) => i >= 0)
+    )
+  );
+
+  // ── Sort state (visual only) ──
+  const [sortColumn, setSortColumn] = useState<string>("Updated");
+  const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
+  const sortLabel = `Sort by: ${sortColumn} ${sortDirection === "desc" ? "↓" : "↑"}`;
+
+  // ── Rubber band state ──
+  const [selectionBox, setSelectionBox] = useState<SelectionBox | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const rowRefs = useRef<Map<number, HTMLDivElement>>(new Map());
+  const cardRefs = useRef<Map<number, HTMLDivElement>>(new Map());
+
+  // Drag threshold — only commit to rubber band after moving ≥5px from origin.
+  // This separates clicks (mousedown → mouseup with minimal movement) from
+  // drags (mousedown → significant movement → mouseup).
+  const DRAG_THRESHOLD = 5;
+  const dragOrigin = useRef<{ x: number; y: number } | null>(null);
+  const dragCommitted = useRef(false);
+
+  // ── Double-click debounce for TableListItem (Card has built-in) ──
+  const lastClickTime = useRef<number>(0);
+  const clickTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // ── Responsive cols ──
+  // Pass our containerRef directly so useContainerCols observes the same element.
+  const { cols } = useContainerCols(containerRef);
+
+  // ── Compact cards flag — true when container < 592px (1–2 card cols) ──
+  const [compactCards, setCompactCards] = useState(false);
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver((entries) => {
+      const width = entries[0]?.contentRect.width ?? 0;
+      setCompactCards(width < 592);
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // ── Derived state ──
+  const itemCount = view === "list" ? fileRows.length : cardData.length;
+  const someSelected = selectedItems.size > 0;
+  const allSelected = selectedItems.size === itemCount;
+  const selectAllStatus: CheckboxStatus = allSelected
+    ? "on"
+    : someSelected
+      ? "semi"
+      : "off";
+
+  // ── Clear selection on view switch ──
+  const handleViewToggle = useCallback(() => {
+    setView((prev) => (prev === "list" ? "grid" : "list"));
+    setSelectedItems(new Set());
+  }, []);
+
+  const listHeaderActions = [
+    { icon: "search" },
+    {
+      icon: view === "list" ? "layout-grid" : "layout-list",
+      onClick: handleViewToggle,
+    },
+    { icon: "plus" },
+  ];
+
+  // ── ESC to exit edit mode ──
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedItems(new Set());
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  // ── Selection helpers ──
+  const toggleSelect = useCallback((index: number) => {
+    setSelectedItems((prev) => {
+      const next = new Set(prev);
+      if (next.has(index)) next.delete(index);
+      else next.add(index);
+      return next;
+    });
+  }, []);
+
+  const toggleSelectAll = useCallback(() => {
+    if (allSelected) {
+      setSelectedItems(new Set());
+    } else {
+      setSelectedItems(new Set(Array.from({ length: itemCount }, (_, i) => i)));
+    }
+  }, [allSelected, itemCount]);
+
+  const toggleStar = useCallback((index: number) => {
+    setStarredItems((prev) => {
+      const next = new Set(prev);
+      if (next.has(index)) next.delete(index);
+      else next.add(index);
+      return next;
+    });
+  }, []);
+
+  // ── Table row click with 250ms debounce (mirrors Card.tsx pattern) ──
+  const handleRowClick = useCallback(
+    (index: number) => {
+      const now = Date.now();
+      const timeSince = now - lastClickTime.current;
+
+      if (timeSince < DOUBLE_CLICK_THRESHOLD && timeSince > 0) {
+        // Double click — cancel pending single click
+        if (clickTimeout.current) {
+          clearTimeout(clickTimeout.current);
+          clickTimeout.current = null;
+        }
+        lastClickTime.current = 0;
+        alert(`Opening: ${fileRows[index].title}`);
+      } else {
+        // Single click — delay to allow double-click detection
+        lastClickTime.current = now;
+        if (clickTimeout.current) clearTimeout(clickTimeout.current);
+        clickTimeout.current = setTimeout(() => {
+          toggleSelect(index);
+          clickTimeout.current = null;
+        }, DOUBLE_CLICK_THRESHOLD);
+      }
+    },
+    [toggleSelect]
+  );
+
+  // Card click/double-click handlers (Card has built-in 250ms debounce)
+  const handleCardClick = useCallback(
+    (index: number) => toggleSelect(index),
+    [toggleSelect]
+  );
+
+  const handleCardDoubleClick = useCallback((index: number) => {
+    alert(`Opening: ${cardData[index].title}`);
+  }, []);
+
+  const handleSortChange = useCallback(
+    (column: string, direction: SortDirection) => {
+      setSortColumn(column);
+      setSortDirection(direction);
+    },
+    []
+  );
+
+  // ── Rubber band selection ──
+  //
+  // All coordinates are in **viewport space** (clientX / clientY).
+  // The selection rectangle uses `position: fixed`, and item rects come
+  // from `getBoundingClientRect()` — both return viewport coords, so
+  // everything is in the same coordinate space with zero scroll math.
+
+  const getItemsInSelection = useCallback(
+    (box: SelectionBox): Set<number> => {
+      const left = Math.min(box.startX, box.endX);
+      const right = Math.max(box.startX, box.endX);
+      const top = Math.min(box.startY, box.endY);
+      const bottom = Math.max(box.startY, box.endY);
+
+      const refs = view === "list" ? rowRefs : cardRefs;
+      const selected = new Set<number>();
+
+      refs.current.forEach((element, index) => {
+        if (!element) return;
+        const r = element.getBoundingClientRect();
+        const intersects = !(
+          r.right < left || r.left > right || r.bottom < top || r.top > bottom
+        );
+        if (intersects) selected.add(index);
+      });
+
+      return selected;
+    },
+    [view]
+  );
+
+  const handlePointerDown = useCallback((e: React.PointerEvent) => {
+    // Skip rubber band on touch — taps handle selection via onClick
+    if (e.pointerType === "touch") return;
+
+    // Only block interactive elements — allow drag from any empty space
+    const target = e.target as HTMLElement;
+    if (
+      target.closest("button") ||
+      target.closest("a") ||
+      target.closest("input") ||
+      target.closest("[role='checkbox']")
+    ) {
+      return;
+    }
+
+    // Store origin but do NOT start dragging yet — wait until mouse
+    // moves beyond DRAG_THRESHOLD so single-clicks work normally.
+    dragOrigin.current = { x: e.clientX, y: e.clientY };
+    dragCommitted.current = false;
+  }, []);
+
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
+      // Nothing to do if no mousedown origin
+      if (!dragOrigin.current) return;
+
+      const { x: ox, y: oy } = dragOrigin.current;
+
+      // Before committing: check if we've moved beyond the threshold
+      if (!dragCommitted.current) {
+        const dx = e.clientX - ox;
+        const dy = e.clientY - oy;
+        if (Math.abs(dx) < DRAG_THRESHOLD && Math.abs(dy) < DRAG_THRESHOLD) {
+          return; // Not far enough yet — keep waiting
+        }
+        // Commit to rubber band drag
+        dragCommitted.current = true;
+        setSelectedItems(new Set()); // Clear selection only when drag actually starts
+        setSelectionBox({
+          startX: ox,
+          startY: oy,
+          endX: e.clientX,
+          endY: e.clientY,
+        });
+        return;
+      }
+
+      // Already dragging — update selection box
+      const newBox: SelectionBox = {
+        startX: ox,
+        startY: oy,
+        endX: e.clientX,
+        endY: e.clientY,
+      };
+      setSelectionBox(newBox);
+      setSelectedItems(getItemsInSelection(newBox));
+    },
+    [getItemsInSelection]
+  );
+
+  const handleMouseUp = useCallback(() => {
+    dragOrigin.current = null;
+    dragCommitted.current = false;
+    setSelectionBox(null);
+  }, []);
+
+  // Attach mousemove/mouseup at document level whenever a mousedown origin exists.
+  // We need these listeners even before drag commits (to detect the threshold).
+  useEffect(() => {
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [handleMouseMove, handleMouseUp]);
+
+  // ── Render ──
+
+  return (
+    <PageShell
+      title="Files"
+      initialSidebarCollapsed
+      showHeaderStroke
+      mobileNavItems={mobileNavItems("recent")}
+      mobileNavActiveLabel="Recent"
+    >
+      {/* Outer drag target — captures mousedown from padding/empty areas too.
+          Uses negative margins + matching padding to fill the parent padding
+          (px-6 md:px-[84px] pt-8 pb-16 from PageShell) so drags can start
+          from anywhere on the visible page. */}
+      <div
+        className={`-mx-6 md:-mx-[84px] -mt-8 -mb-16 px-6 md:px-[84px] pt-8 pb-16 min-h-full ${selectionBox ? "select-none" : ""}`}
+        onPointerDown={handlePointerDown}
       >
         <div className="flex gap-6">
           <PageNav
@@ -429,30 +654,142 @@ export const CardGridView: Story = {
             activeItemId="recent"
             className="hidden md:flex"
           />
-          <div className="flex-1 min-w-0 @container">
-            <ListHeader
-              label="234 files"
-              actions={listHeaderActions(view, setView)}
-            />
-            <div className="mt-4 grid grid-cols-1 gap-2 @lg:grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] @2xl:gap-3">
-              {cardData.map((card, i) => (
-                <Card
+          <div
+            ref={containerRef}
+            className="relative flex-1 min-w-0 @container"
+          >
+          {/* Rubber band rectangle — fixed position, viewport coords */}
+          {selectionBox && <div style={getSelectionBoxStyle(selectionBox)} />}
+
+          {/* ListHeader — switches between default and edit mode */}
+          <ListHeader
+            mode={someSelected ? "edit" : "default"}
+            editLayout={editLayout}
+            label="234 files"
+            actions={
+              someSelected && (editLayout === "inline" || editLayout === "merged")
+                ? listHeaderActions.filter((a) => a.icon !== "plus")
+                : listHeaderActions
+            }
+            editActions={editActions}
+          />
+
+          {/* List view */}
+          {view === "list" && (
+            <div className="flex flex-col gap-gitlaw-m">
+              <TableListItem
+                type="header"
+                cols={cols}
+                headerLabels={[
+                  "Name",
+                  "Type",
+                  "Last viewed",
+                  "Updated",
+                  "Created",
+                ]}
+                sortColumn={sortColumn}
+                sortDirection={sortDirection}
+                onSortChange={handleSortChange}
+                sortLabel={sortLabel}
+                selectMode={someSelected}
+                selectStatus={selectAllStatus}
+                selectedCount={selectedItems.size}
+                onSelectAllClick={toggleSelectAll}
+              />
+              {fileRows.map((row, i) => (
+                <div
                   key={i}
-                  type={card.type}
-                  title={card.title}
-                  description={card.description}
-                  ownerName={card.ownerName}
-                  ownerInitials={card.ownerInitials}
-                  visibility={card.visibility}
-                  filesCount={card.filesCount}
-                  files={card.files}
-                />
+                  ref={(el) => {
+                    if (el) rowRefs.current.set(i, el);
+                  }}
+                  data-row="true"
+                >
+                  <TableListItem
+                    type="item"
+                    cols={cols}
+                    iconName={row.iconName}
+                    title={row.title}
+                    subtitle={row.subtitle}
+                    visibility={row.visibility}
+                    starCount={row.starCount}
+                    spam={row.spam}
+                    metaValues={row.metaValues}
+                    starred={starredItems.has(i)}
+                    selected={selectedItems.has(i)}
+                    onClick={() => handleRowClick(i)}
+                    onStarClick={() => toggleStar(i)}
+                  />
+                </div>
               ))}
             </div>
-            <BrowseTemplatesFab />
+          )}
+
+          {/* Grid view */}
+          {view === "grid" && (
+            <div className="flex flex-col gap-gitlaw-m">
+              <div className={someSelected ? "" : "invisible"}>
+                <TableListItem
+                  type="header"
+                  cols={0}
+                  selectMode
+                  selectStatus={selectAllStatus}
+                  selectedCount={selectedItems.size}
+                  onSelectAllClick={toggleSelectAll}
+                  sortLabel={sortLabel}
+                />
+              </div>
+              <div className="grid grid-cols-1 gap-2 @sm:grid-cols-2 @[592px]:grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] @2xl:gap-3">
+              {cardData.map((card, i) => (
+                <div
+                  key={i}
+                  ref={(el) => {
+                    if (el) cardRefs.current.set(i, el);
+                  }}
+                  data-card="true"
+                >
+                  <Card
+                    type={card.type}
+                    title={card.title}
+                    description={card.description}
+                    ownerName={card.ownerName}
+                    ownerInitials={card.ownerInitials}
+                    visibility={card.visibility}
+                    filesCount={card.filesCount}
+                    files={card.files}
+                    compact={compactCards}
+                    selected={selectedItems.has(i)}
+                    onClick={() => handleCardClick(i)}
+                    onDoubleClick={() => handleCardDoubleClick(i)}
+                  />
+                </div>
+              ))}
+              </div>
+            </div>
+          )}
+
+          {!someSelected && <BrowseTemplatesFab />}
           </div>
         </div>
-      </PageShell>
-    );
-  },
+      </div>
+    </PageShell>
+  );
+};
+
+/* ------------------------------------------------------------------ */
+/*  Story: Default (interactive)                                       */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Interactive file list page with view switching and selection.
+ *
+ * **View switching:** Click the grid icon to toggle between list and card views.
+ *
+ * **Selection:** Single-click a row/card to select (250ms debounce).
+ * Double-click to open. Rubber band drag to multi-select.
+ *
+ * **Edit mode:** When items are selected, ListHeader shows edit action
+ * buttons inline on the left. Table header checkbox shows selection count.
+ */
+export const Default: Story = {
+  render: () => <InteractiveFileList />,
 };

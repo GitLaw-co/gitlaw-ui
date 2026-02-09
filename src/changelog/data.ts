@@ -1,5 +1,5 @@
 // Auto-generated changelog from git commits
-// Generated: 2026-02-09T10:40:59.391Z
+// Generated: 2026-02-09T17:20:29.469Z
 // Run: node scripts/generate-changelog.js
 
 export interface ChangelogEntry {
@@ -14,6 +14,38 @@ export const changelog: ChangelogEntry[] = [
   {
     "date": "2026-02-09",
     "commits": [
+      {
+        "hash": "a6fc7e1",
+        "message": "Fix icon paths for GitHub Pages using STORYBOOK_BASE env var"
+      },
+      {
+        "hash": "b456461",
+        "message": "Fix icon paths for GitHub Pages subdirectory deploy"
+      },
+      {
+        "hash": "d5bb368",
+        "message": "Add ESC key support to exit edit mode in FileList"
+      },
+      {
+        "hash": "6430ae9",
+        "message": "Simplify edit mode: inline-only layout, 50/50 column fix, selection count in header"
+      },
+      {
+        "hash": "1f469a8",
+        "message": "Update inline edit mode: replace Done with X button and selection count"
+      },
+      {
+        "hash": "d47711f",
+        "message": "Tidy up: update docs, component count, mobile touch fixes"
+      },
+      {
+        "hash": "bd6bb3b",
+        "message": "Add interactive file list page with view switching, selection, and responsive cards"
+      },
+      {
+        "hash": "de3140a",
+        "message": "Regenerate changelog with latest commit"
+      },
       {
         "hash": "7add01c",
         "message": "Add mobile responsive PageShell, nav dropdown, and MenuItem Button reuse"
@@ -198,38 +230,6 @@ export const changelog: ChangelogEntry[] = [
       {
         "hash": "20830b8",
         "message": "Fix Input hug alignment to actually hug contents"
-      },
-      {
-        "hash": "84ddabd",
-        "message": "Fix text color swatches using inline style for color"
-      },
-      {
-        "hash": "045a6ce",
-        "message": "Fix text color swatches to show actual text samples"
-      },
-      {
-        "hash": "37087b0",
-        "message": "Fix typography font demo overflow in cards"
-      },
-      {
-        "hash": "2581317",
-        "message": "Update changelog with latest commits"
-      },
-      {
-        "hash": "350a7cf",
-        "message": "Various component updates and new EditorPaper/EditorSection components"
-      },
-      {
-        "hash": "d890500",
-        "message": "Add Node.js version constraints"
-      },
-      {
-        "hash": "43ef064",
-        "message": "Document MDX table support addon requirement in CLAUDE.md"
-      },
-      {
-        "hash": "4adc218",
-        "message": "Add setup section with npm install to CLAUDE.md"
       }
     ]
   }

@@ -19,11 +19,11 @@ Foundations/       ← 🔄 Evolving (changes frequently as design system mature
 Components/        ← 🔄 In progress (current focus)
   Button, Card, Input, etc.
 
-Templates/         ← 📋 Planned
+Templates/         ← 🔄 In progress (ChatPageTemplate + PageShell)
   Page layouts, shells
 
 Prototypes/        ← 📋 Planned
-  Full interactive flows
+  Full interactive flows (File List page demo in Pages/)
 ```
 
 ## Existing Components
@@ -33,7 +33,7 @@ Prototypes/        ← 📋 Planned
 | Avatar | ✅ Stable | Images, initials, icons, or empty states |
 | Badge | ✅ Stable | Notification indicators |
 | Button | ✅ Stable | Primary, secondary, outline, ghost, destructive, disabled, icon variants |
-| Card | ✅ Stable | File, template, and folder cards |
+| Card | ✅ Stable | File, template, and folder cards with compact mobile variant |
 | Checkbox | ✅ Stable | Checkbox with indeterminate state |
 | ChatInput | ✅ Stable | AI chat interface |
 | ChatThread | ✅ Stable | Chat conversation thread |
@@ -43,15 +43,20 @@ Prototypes/        ← 📋 Planned
 | EditorPaper | ✅ Stable | Document editing surface |
 | EditorSection | ✅ Stable | Collapsible content sections |
 | EditorToolbar | ✅ Stable | Formatting toolbar |
+| FileDropdown | ✅ Stable | File picker dropdown |
 | Icon | ✅ Stable | 1,475 icons with color support |
 | Input | ✅ Stable | Text input with label, icons, validation states |
-| ListHeader | ✅ Stable | Toolbar above file lists with icon actions and edit mode |
+| ListHeader | ✅ Stable | Toolbar above file lists with three edit layout variants (replace, inline, merged) |
 | MenuItem | ✅ Stable | List items with icons, avatars, checkboxes |
+| Overlay | ✅ Stable | Full-screen overlay backdrop |
 | PageNav | ✅ Stable | Settings navigation with context switcher |
+| PageShell | ✅ Stable | Responsive page shell with sidebar, header, and content area |
 | Popover | ✅ Stable | Click/hover triggered popover overlay |
 | Radio | ✅ Stable | Radio button with label |
+| Section | ✅ Stable | Content section with optional header |
 | Select | ✅ Stable | Searchable dropdown with multi-select |
 | Sidebar | ✅ Stable | Collapsible navigation |
+| Stack | ✅ Stable | Flexbox layout primitive for spacing |
 | StarIcon | ✅ Stable | Filled star icon (active/inactive) |
 | StickyFeaturePromoBar | ✅ Stable | Feature promotion banner |
 | Switch | ✅ Stable | Toggle for boolean settings |
@@ -242,6 +247,42 @@ children   // Content
 | CSS classes | Tailwind (kebab-case) | `bg-primary` |
 | Props | camelCase | `showLeftIcon` |
 | Color tokens | camelCase | `colors.iconPrimary` |
+
+## Interaction Patterns
+
+### File Selection & Edit Mode
+
+Both `TableListItem` and `Card` component Interactive stories implement the same selection pattern:
+
+| Action | Behaviour |
+|--------|-----------|
+| **Single click** | Select / deselect an item (enters edit mode on first selection) |
+| **Double click** | Open the item |
+| **Rubber band drag** | Multi-select via drag rectangle |
+| **Select All** (table only) | Checkbox in header row toggles all items (`selectMode`, `selectStatus`, `onSelectAllClick` props) |
+
+**Edit mode header** (appears when ≥1 item selected):
+- **Left:** `"N files selected"` — `text-lg font-semibold text-primary`
+- **Right:** Action buttons — `Delete` (trash-2), `Download` (arrow-down-to-line), `Move` (folder-input) as `Button variant="secondary" size="s"`, plus `Done` (check) as `Button variant="primary" size="s"`
+- Done button clears selection and exits edit mode
+
+**Key props:**
+- `TableListItem`: `selected`, `selectMode`, `selectStatus`, `onSelectAllClick`, `onClick`, `onDoubleClick`
+- `Card`: `selected`, `onClick`, `onDoubleClick`
+
+**Double-click timing (⚠️ not yet implemented in component demos):**
+- Single click toggles selection; double click opens the item
+- Current demos pass raw `onClick` + `onDoubleClick` with no debounce — a double-click fires both handlers, causing a select/deselect flicker
+- **Fix:** use a timeout-based approach: on single click, delay the select toggle; if a second click arrives within the window, cancel the toggle and fire the double-click handler instead
+- Use the browser's default double-click threshold (~250ms on most OS) — do not hardcode a custom value; detect via `event.detail === 2` or use `setTimeout` with `250ms` to match native feel
+- `Card` component already implements this internally via `doubleClickThreshold` prop (default `250ms`) using `setTimeout` + `useRef` — see `Card.tsx` lines 80–107
+- `TableListItem` does NOT have this yet — the page story should implement the same timeout pattern at the story level when wiring up `onClick`/`onDoubleClick` for table rows
+
+**Rubber band selection:**
+- Uses `ref` maps (`rowRefs` / `cardRefs`) to track element positions
+- `mousedown` → `mousemove` → `mouseup` on a container div
+- Selection rectangle styled with `rgba(94, 73, 214, 0.1)` bg + `rgba(94, 73, 214, 0.5)` border
+- Both stories use identical tree structure: `bg-page-background p-8 → outer relative → selection rect → inner fixed-width → header bar → content → footer`
 
 ## Adding Components
 

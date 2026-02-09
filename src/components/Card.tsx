@@ -48,6 +48,8 @@ export interface CardProps {
   onFileClick?: (file: CardFileItem) => void;
   /** Double click threshold in ms (default: 250ms) */
   doubleClickThreshold?: number;
+  /** Compact mode — square (1:1), full-width, no min/max-w constraints. Use for mobile / narrow grids. */
+  compact?: boolean;
   /** Additional CSS classes */
   className?: string;
 }
@@ -74,6 +76,7 @@ export const Card: React.FC<CardProps> = ({
   onMenuClick,
   onFileClick,
   doubleClickThreshold = 250,
+  compact = false,
   className = "",
 }) => {
   const isFolder = type === "folder";
@@ -317,13 +320,13 @@ export const Card: React.FC<CardProps> = ({
     <div
       className={`
         @container bg-card rounded-lg shadow-card overflow-hidden relative cursor-pointer
-        w-full min-w-48 max-w-64
+        w-full ${compact ? "" : "min-w-48 max-w-64"}
         p-4 @[200px]:p-6
         transition-shadow duration-fast ease-gitlaw
         ${className}
       `}
       style={{
-        aspectRatio: "3/4",
+        aspectRatio: compact ? "1/1" : "3/4",
       }}
       onClick={handleClick}
       data-card="true"
