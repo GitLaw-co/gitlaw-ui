@@ -439,6 +439,15 @@ const InteractiveFileList = () => {
     { icon: "plus" },
   ];
 
+  // ── ESC to exit edit mode ──
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedItems(new Set());
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   // ── Selection helpers ──
   const toggleSelect = useCallback((index: number) => {
     setSelectedItems((prev) => {
