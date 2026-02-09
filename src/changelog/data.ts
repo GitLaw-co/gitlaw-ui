@@ -1,5 +1,5 @@
 // Auto-generated changelog from git commits
-// Generated: 2026-02-09T14:11:32.527Z
+// Generated: 2026-02-09T15:52:54.066Z
 // Run: node scripts/generate-changelog.js
 
 export interface ChangelogEntry {
@@ -14,6 +14,10 @@ export const changelog: ChangelogEntry[] = [
   {
     "date": "2026-02-09",
     "commits": [
+      {
+        "hash": "e9d8128",
+        "message": "Storybook cleanup: add autodocs tags and consolidate stories"
+      },
       {
         "hash": "de3140a",
         "message": "Regenerate changelog with latest commit"
@@ -226,10 +230,6 @@ export const changelog: ChangelogEntry[] = [
       {
         "hash": "d890500",
         "message": "Add Node.js version constraints"
-      },
-      {
-        "hash": "43ef064",
-        "message": "Document MDX table support addon requirement in CLAUDE.md"
       }
     ]
   }

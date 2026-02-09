@@ -23,6 +23,10 @@ export interface ListHeaderProps {
   mode?: ListHeaderMode;
   editLayout?: ListHeaderEditLayout;
   label: string;
+  /** Number of selected items (shown in inline edit mode) */
+  selectedCount?: number;
+  /** Close/exit edit mode handler (X button in inline edit mode) */
+  onClose?: () => void;
   actions?: ListHeaderIconAction[];
   editActions?: ListHeaderEditAction[];
   className?: string;
@@ -37,6 +41,8 @@ export const ListHeader: React.FC<ListHeaderProps> = ({
   mode = "default",
   editLayout = "replace",
   label,
+  selectedCount = 0,
+  onClose,
   actions = [],
   editActions = [],
   className = "",
@@ -92,13 +98,19 @@ export const ListHeader: React.FC<ListHeaderProps> = ({
     );
   }
 
-  /* ── inline: edit actions on the left, icon actions stay right ── */
+  /* ── inline: [X] [N selected] [edit actions] ———— [icon actions] ── */
   if (editLayout === "inline") {
     return (
       <div className={root}>
         <div className="flex-1 flex items-center gap-2">
           {isEdit ? (
             <>
+              <button type="button" className={iconBtnClass} onClick={onClose}>
+                <Icon name="x" className="size-4" color={colors.iconPrimary} />
+              </button>
+              <span className="text-sm font-medium text-text-primary whitespace-nowrap">
+                {selectedCount} selected
+              </span>
               <div className="hidden @3xl:flex items-center gap-1">{labelledEditButtons}</div>
               <div className="flex @3xl:hidden items-center gap-1">{iconOnlyEditButtons}</div>
             </>

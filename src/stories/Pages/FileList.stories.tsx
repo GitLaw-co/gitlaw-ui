@@ -349,11 +349,10 @@ const getSelectionBoxStyle = (
 /*  Edit mode actions for ListHeader                                   */
 /* ------------------------------------------------------------------ */
 
-const editActions = (onDone: () => void) => [
+const editActions = [
   { icon: "trash-2", label: "Delete" },
   { icon: "arrow-down-to-line", label: "Download" },
   { icon: "folder-input", label: "Move" },
-  { icon: "check", label: "Done", onClick: onDone },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -668,12 +667,14 @@ const InteractiveFileList = ({
                 ? `${selectedItems.size} file${selectedItems.size > 1 ? "s" : ""} selected`
                 : "234 files"
             }
+            selectedCount={selectedItems.size}
+            onClose={clearSelection}
             actions={
               someSelected && (editLayout === "inline" || editLayout === "merged")
                 ? listHeaderActions.filter((a) => a.icon !== "plus")
                 : listHeaderActions
             }
-            editActions={editActions(clearSelection)}
+            editActions={editActions}
           />
 
           {/* List view */}
