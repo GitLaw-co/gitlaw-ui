@@ -243,6 +243,42 @@ children   // Content
 | Props | camelCase | `showLeftIcon` |
 | Color tokens | camelCase | `colors.iconPrimary` |
 
+## Interaction Patterns
+
+### File Selection & Edit Mode
+
+Both `TableListItem` and `Card` component Interactive stories implement the same selection pattern:
+
+| Action | Behaviour |
+|--------|-----------|
+| **Single click** | Select / deselect an item (enters edit mode on first selection) |
+| **Double click** | Open the item |
+| **Rubber band drag** | Multi-select via drag rectangle |
+| **Select All** (table only) | Checkbox in header row toggles all items (`selectMode`, `selectStatus`, `onSelectAllClick` props) |
+
+**Edit mode header** (appears when ≥1 item selected):
+- **Left:** `"N files selected"` — `text-lg font-semibold text-primary`
+- **Right:** Action buttons — `Delete` (trash-2), `Download` (arrow-down-to-line), `Move` (folder-input) as `Button variant="secondary" size="s"`, plus `Done` (check) as `Button variant="primary" size="s"`
+- Done button clears selection and exits edit mode
+
+**Key props:**
+- `TableListItem`: `selected`, `selectMode`, `selectStatus`, `onSelectAllClick`, `onClick`, `onDoubleClick`
+- `Card`: `selected`, `onClick`, `onDoubleClick`
+
+**Double-click timing (⚠️ not yet implemented in component demos):**
+- Single click toggles selection; double click opens the item
+- Current demos pass raw `onClick` + `onDoubleClick` with no debounce — a double-click fires both handlers, causing a select/deselect flicker
+- **Fix:** use a timeout-based approach: on single click, delay the select toggle; if a second click arrives within the window, cancel the toggle and fire the double-click handler instead
+- Use the browser's default double-click threshold (~250ms on most OS) — do not hardcode a custom value; detect via `event.detail === 2` or use `setTimeout` with `250ms` to match native feel
+- `Card` component already implements this internally via `doubleClickThreshold` prop (default `250ms`) using `setTimeout` + `useRef` — see `Card.tsx` lines 80–107
+- `TableListItem` does NOT have this yet — the page story should implement the same timeout pattern at the story level when wiring up `onClick`/`onDoubleClick` for table rows
+
+**Rubber band selection:**
+- Uses `ref` maps (`rowRefs` / `cardRefs`) to track element positions
+- `mousedown` → `mousemove` → `mouseup` on a container div
+- Selection rectangle styled with `rgba(94, 73, 214, 0.1)` bg + `rgba(94, 73, 214, 0.5)` border
+- Both stories use identical tree structure: `bg-page-background p-8 → outer relative → selection rect → inner fixed-width → header bar → content → footer`
+
 ## Adding Components
 
 ### Adding an Icon

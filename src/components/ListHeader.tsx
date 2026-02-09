@@ -70,7 +70,7 @@ export const ListHeader: React.FC<ListHeaderProps> = ({
             <button
               key={i}
               type="button"
-              className="inline-flex items-center justify-center size-8 rounded bg-secondary hover:bg-secondary-dark transition-colors duration-fast ease-gitlaw"
+              className="inline-flex items-center justify-center size-8 rounded bg-secondary hover:bg-secondary-hover transition-colors duration-fast ease-gitlaw"
               onClick={action.onClick}
             >
               <Icon

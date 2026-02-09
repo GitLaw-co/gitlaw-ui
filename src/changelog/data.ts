@@ -1,5 +1,5 @@
 // Auto-generated changelog from git commits
-// Generated: 2026-02-09T10:40:59.391Z
+// Generated: 2026-02-09T14:11:32.527Z
 // Run: node scripts/generate-changelog.js
 
 export interface ChangelogEntry {
@@ -14,6 +14,10 @@ export const changelog: ChangelogEntry[] = [
   {
     "date": "2026-02-09",
     "commits": [
+      {
+        "hash": "de3140a",
+        "message": "Regenerate changelog with latest commit"
+      },
       {
         "hash": "7add01c",
         "message": "Add mobile responsive PageShell, nav dropdown, and MenuItem Button reuse"
@@ -226,10 +230,6 @@ export const changelog: ChangelogEntry[] = [
       {
         "hash": "43ef064",
         "message": "Document MDX table support addon requirement in CLAUDE.md"
-      },
-      {
-        "hash": "4adc218",
-        "message": "Add setup section with npm install to CLAUDE.md"
       }
     ]
   }
