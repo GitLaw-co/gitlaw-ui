@@ -49,6 +49,8 @@ export interface TableListItemProps {
   selectStatus?: CheckboxStatus;
   /** Select-all checkbox handler */
   onSelectAllClick?: () => void;
+  /** Number of selected items (shown in header when selectMode is true) */
+  selectedCount?: number;
   /** Currently sorted column key (matches label text, e.g. "Name", "Type") */
   sortColumn?: string;
   /** Sort direction */
@@ -232,7 +234,7 @@ const MetaCols: React.FC<{
     return (
       <>
         {values.map((v, i) => (
-          <div key={i} className="flex items-center min-h-[48px] w-[144px] shrink-0">
+          <div key={i} className="flex flex-1 items-center min-h-[48px] min-w-0">
             {isHeader ? (
               <SortableLabel
                 label={v}
@@ -322,14 +324,14 @@ const RowShell: React.FC<{
     onClick={onClick}
     onDoubleClick={onDoubleClick}
   >
-    {/* Name column — always flex-1 */}
-    <div className="flex flex-1 items-center gap-2 min-h-[48px] min-w-0">
+    {/* Name column — equal half for 4+6 cols, flex-1 for 0/2 */}
+    <div className={`flex items-center gap-2 min-h-[48px] min-w-0 ${cols >= 4 ? "flex-1 basis-0" : "flex-1"}`}>
       {nameContent}
     </div>
 
-    {/* Meta columns — max 50% for 6 cols (name gets the rest), shrink-0 for 4/2 */}
+    {/* Meta columns — equal half for 4+6 cols, shrink-0 for 0/2 */}
     <div
-      className={`flex items-center gap-gitlaw-m ${cols === 6 ? "w-1/2 shrink-0 min-w-0" : "shrink-0"}`}
+      className={`flex items-center gap-gitlaw-m ${cols >= 4 ? "flex-1 basis-0 min-w-0" : "shrink-0"}`}
     >
       <MetaCols cols={cols} values={metaValues} {...metaProps} />
       {rightSlot}
@@ -350,13 +352,16 @@ const HeaderRow: React.FC<TableListItemProps> = ({
   selectMode = false,
   selectStatus = "off",
   onSelectAllClick,
+  selectedCount = 0,
   sortColumn,
   sortDirection,
   onSortChange,
   className = "",
 }) => {
   const labels = headerLabels || defaultHeaderLabels[cols] || defaultHeaderLabels[6];
-  const nameLabel = selectMode ? "Select all" : labels[0];
+  const nameLabel = selectMode
+    ? `${selectedCount} selected`
+    : labels[0];
   const metaLabels = labels.slice(1);
 
   const handleNameSort = () => {

@@ -11,7 +11,6 @@ import {
 } from "../../components";
 import type { CheckboxStatus } from "../../components/Checkbox";
 import type { SortDirection } from "../../components/TableListItem";
-import type { ListHeaderEditLayout } from "../../components/ListHeader";
 
 const meta: Meta<typeof PageShell> = {
   title: "Pages/File List",
@@ -361,11 +360,8 @@ const editActions = [
 
 const DOUBLE_CLICK_THRESHOLD = 250;
 
-const InteractiveFileList = ({
-  editLayout = "replace",
-}: {
-  editLayout?: ListHeaderEditLayout;
-}) => {
+const InteractiveFileList = () => {
+  const editLayout = "inline" as const;
   // ── View state ──
   const [view, setView] = useState<"list" | "grid">("list");
 
@@ -444,8 +440,6 @@ const InteractiveFileList = ({
   ];
 
   // ── Selection helpers ──
-  const clearSelection = useCallback(() => setSelectedItems(new Set()), []);
-
   const toggleSelect = useCallback((index: number) => {
     setSelectedItems((prev) => {
       const next = new Set(prev);
@@ -662,13 +656,7 @@ const InteractiveFileList = ({
           <ListHeader
             mode={someSelected ? "edit" : "default"}
             editLayout={editLayout}
-            label={
-              someSelected
-                ? `${selectedItems.size} file${selectedItems.size > 1 ? "s" : ""} selected`
-                : "234 files"
-            }
-            selectedCount={selectedItems.size}
-            onClose={clearSelection}
+            label="234 files"
             actions={
               someSelected && (editLayout === "inline" || editLayout === "merged")
                 ? listHeaderActions.filter((a) => a.icon !== "plus")
@@ -696,6 +684,7 @@ const InteractiveFileList = ({
                   onSortChange={handleSortChange}
                   selectMode={someSelected}
                   selectStatus={selectAllStatus}
+                  selectedCount={selectedItems.size}
                   onSelectAllClick={toggleSelectAll}
                 />
               )}
@@ -777,33 +766,9 @@ const InteractiveFileList = ({
  * **Selection:** Single-click a row/card to select (250ms debounce).
  * Double-click to open. Rubber band drag to multi-select.
  *
- * **Edit mode:** When items are selected, ListHeader shows count + action
- * buttons (Delete, Download, Move, Done). Table header shows select-all checkbox.
+ * **Edit mode:** When items are selected, ListHeader shows edit action
+ * buttons inline on the left. Table header checkbox shows selection count.
  */
 export const Default: Story = {
   render: () => <InteractiveFileList />,
-};
-
-/* ------------------------------------------------------------------ */
-/*  Story: Variant B — inline edit actions on the left                  */
-/* ------------------------------------------------------------------ */
-
-/**
- * Edit actions appear next to the label on the left (icon-only on narrow
- * screens, labelled on wide). Original right-side actions stay put.
- */
-export const VariantB: Story = {
-  render: () => <InteractiveFileList editLayout="inline" />,
-};
-
-/* ------------------------------------------------------------------ */
-/*  Story: Variant C — all icon buttons merged on the right             */
-/* ------------------------------------------------------------------ */
-
-/**
- * All buttons on the right as icon-only: original actions (secondary bg)
- * followed by edit actions (primary bg) with tooltips. Label stays visible.
- */
-export const VariantC: Story = {
-  render: () => <InteractiveFileList editLayout="merged" />,
 };
