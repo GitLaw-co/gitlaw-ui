@@ -8,6 +8,7 @@ const meta: Meta<typeof PageShell> = {
     layout: "fullscreen",
     backgrounds: { default: "light" },
   },
+  tags: ["autodocs"],
   argTypes: {
     title: { control: "text" },
     isSignedIn: { control: "boolean" },

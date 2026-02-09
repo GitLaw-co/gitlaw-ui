@@ -8,6 +8,7 @@ const meta: Meta<typeof Section> = {
   parameters: {
     layout: "padded",
   },
+  tags: ["autodocs"],
   argTypes: {
     title: { control: "text" },
     variant: { control: "select", options: ["default", "card"] },
@@ -54,260 +55,247 @@ export const Default: Story = {
 };
 
 /**
- * Section with a top border — used when stacking multiple sections.
+ * All visual variants — default with border, with action button, card variant.
  */
-export const WithBorder: Story = {
+export const AllVariants: Story = {
   render: () => (
-    <div className="max-w-[1040px]">
-      <Stack gap="l">
-        <Section title="Preferences">
+    <div className="flex flex-col gap-8 max-w-[1040px]">
+      {/* Default with border */}
+      <div>
+        <p className="text-xs font-semibold text-secondary mb-2 uppercase">
+          With border
+        </p>
+        <Stack gap="l">
+          <Section title="Preferences">
+            <Stack gap="none">
+              <MenuItem
+                primaryText="Dark mode"
+                showLeftElement={false}
+                width="fill"
+                showRSwitch
+                rSwitchChecked={false}
+              />
+              <MenuItem
+                primaryText="Notifications"
+                showSecondaryText
+                secondaryText="Enabled"
+                showLeftElement={false}
+                width="fill"
+                showRIcon1
+                rIcon1="chevron-right"
+              />
+            </Stack>
+          </Section>
+          <Section title="Danger zone" showBorder>
+            <Stack gap="none">
+              <MenuItem
+                primaryText="Delete your Account"
+                showSecondaryText
+                secondaryText="Once deleted, it cannot be recovered."
+                showLeftElement={false}
+                width="fill"
+                showRButton
+                rButtonLabel="Delete Account"
+              />
+            </Stack>
+          </Section>
+        </Stack>
+      </div>
+
+      {/* With action button */}
+      <div>
+        <p className="text-xs font-semibold text-secondary mb-2 uppercase">
+          With action button
+        </p>
+        <Section
+          title="Team members"
+          action={<Button variant="outline" size="s">Invite</Button>}
+        >
           <Stack gap="none">
             <MenuItem
-              primaryText="Dark mode"
-              showLeftElement={false}
+              primaryText="John Allen"
+              showSecondaryText
+              secondaryText="jallen@domain.com"
+              showLeftElement
+              leftElement="avatar"
+              avatarInitials="JA"
               width="fill"
-              showRSwitch
-              rSwitchChecked={false}
             />
             <MenuItem
-              primaryText="Notifications"
+              primaryText="Michael Cameron"
               showSecondaryText
-              secondaryText="Enabled"
-              showLeftElement={false}
+              secondaryText="cameron@mailservice.com"
+              showLeftElement
+              leftElement="avatar"
+              avatarInitials="MC"
               width="fill"
-              showRIcon1
-              rIcon1="chevron-right"
             />
           </Stack>
         </Section>
-        <Section title="Danger zone" showBorder>
-          <Stack gap="none">
+      </div>
+
+      {/* Card variant */}
+      <div>
+        <p className="text-xs font-semibold text-secondary mb-2 uppercase">
+          Card variant
+        </p>
+        <div className="bg-page-background p-6 rounded-lg">
+          <Section variant="card">
+            <Stack gap="none">
+              <MenuItem
+                primaryText="Profile picture"
+                showLeftElement={false}
+                width="fill"
+                showRLargeAvatar
+              />
+              <MenuItem
+                primaryText="Username"
+                showSecondaryText
+                secondaryText="alexcarter"
+                showLeftElement={false}
+                width="fill"
+                showRIcon1
+                rIcon1="chevron-right"
+              />
+              <MenuItem
+                primaryText="Hide email address"
+                showLeftElement={false}
+                width="fill"
+                showRSwitch
+                rSwitchChecked={true}
+              />
+            </Stack>
+          </Section>
+        </div>
+      </div>
+    </div>
+  ),
+};
+
+/**
+ * Real-world layout — multiple stacked sections (default + card variants).
+ */
+export const AllLayouts: Story = {
+  render: () => (
+    <div className="flex flex-col gap-12 max-w-[1040px]">
+      {/* Default sections stacked */}
+      <div>
+        <p className="text-xs font-semibold text-secondary mb-2 uppercase">
+          Multiple default sections
+        </p>
+        <Stack gap="l">
+          <Section title="General">
+            <Stack gap="none">
+              <MenuItem
+                primaryText="Organization name"
+                showSecondaryText
+                secondaryText="Whisk"
+                showLeftElement={false}
+                width="fill"
+                showRIcon1
+                rIcon1="chevron-right"
+              />
+              <MenuItem
+                primaryText="Organization ID"
+                showSecondaryText
+                secondaryText="whisk"
+                showLeftElement={false}
+                width="fill"
+                showRIcon1
+                rIcon1="chevron-right"
+              />
+            </Stack>
+          </Section>
+          <Section title="Legal details" showBorder>
+            <Stack gap="none">
+              <MenuItem
+                primaryText="Registered name"
+                showSecondaryText
+                secondaryText="Foodient Ltd."
+                showLeftElement={false}
+                width="fill"
+                showRIcon1
+                rIcon1="chevron-right"
+              />
+              <MenuItem
+                primaryText="Jurisdiction"
+                showSecondaryText
+                secondaryText="England and Wales"
+                showLeftElement={false}
+                width="fill"
+                showRIcon1
+                rIcon1="chevron-right"
+              />
+            </Stack>
+          </Section>
+          <Section title="Danger zone" showBorder>
             <MenuItem
-              primaryText="Delete your Account"
+              primaryText="Delete organization"
               showSecondaryText
-              secondaryText="Once deleted, it cannot be recovered."
+              secondaryText="Once deleted, it will be gone forever. Please be certain."
               showLeftElement={false}
               width="fill"
               showRButton
-              rButtonLabel="Delete Account"
+              rButtonLabel="Delete organization"
             />
-          </Stack>
-        </Section>
-      </Stack>
-    </div>
-  ),
-  args: {},
-};
-
-/**
- * Section with a title and action button.
- */
-export const WithAction: Story = {
-  render: () => (
-    <div className="max-w-[1040px]">
-      <Section
-        title="Team members"
-        action={<Button variant="outline" size="s">Invite</Button>}
-      >
-        <Stack gap="none">
-          <MenuItem
-            primaryText="John Allen"
-            showSecondaryText
-            secondaryText="jallen@domain.com"
-            showLeftElement
-            leftElement="avatar"
-            avatarInitials="JA"
-            width="fill"
-          />
-          <MenuItem
-            primaryText="Michael Cameron"
-            showSecondaryText
-            secondaryText="cameron@mailservice.com"
-            showLeftElement
-            leftElement="avatar"
-            avatarInitials="MC"
-            width="fill"
-          />
+          </Section>
         </Stack>
-      </Section>
-    </div>
-  ),
-  args: {},
-};
+      </div>
 
-/**
- * Card variant — white background with rounded corners, matching Figma settings list groups.
- */
-export const CardVariant: Story = {
-  render: (args) => (
-    <div className="max-w-[1040px] bg-page-background p-6">
-      <Section {...args}>
-        <Stack gap="none">
-          <MenuItem
-            primaryText="Profile picture"
-            showLeftElement={false}
-            width="fill"
-            showRLargeAvatar
-          />
-          <MenuItem
-            primaryText="Username"
-            showSecondaryText
-            secondaryText="alexcarter"
-            showLeftElement={false}
-            width="fill"
-            showRIcon1
-            rIcon1="chevron-right"
-          />
-          <MenuItem
-            primaryText="Full name"
-            showSecondaryText
-            secondaryText="Alex Carter"
-            showLeftElement={false}
-            width="fill"
-            showRIcon1
-            rIcon1="chevron-right"
-          />
-          <MenuItem
-            primaryText="Hide email address"
-            showLeftElement={false}
-            width="fill"
-            showRSwitch
-            rSwitchChecked={true}
-          />
-        </Stack>
-      </Section>
-    </div>
-  ),
-  args: {
-    variant: "card",
-  },
-};
-
-/**
- * Multiple card sections stacked — typical Organization settings page.
- */
-export const MultipleCardSections: Story = {
-  render: () => (
-    <div className="max-w-[1040px] bg-page-background p-6">
-      <Stack gap="l">
-        <Section
-          variant="card"
-          onClick={() => alert("Navigate to Whisk settings")}
-        >
-          <Stack gap="none">
-            <MenuItem
-              primaryText="Whisk"
-              showLeftElement
-              leftElement="avatar"
-              avatarInitials="WH"
-              width="fill"
-              showRIcon1
-              rIcon1="ellipsis"
-            />
-            <MenuItem
-              primaryText="The Whisk Product Team is dedicated to creating a seamless app experience..."
-              showLeftElement={false}
-              width="fill"
-            />
+      {/* Card sections stacked */}
+      <div>
+        <p className="text-xs font-semibold text-secondary mb-2 uppercase">
+          Multiple card sections
+        </p>
+        <div className="bg-page-background p-6 rounded-lg">
+          <Stack gap="l">
+            <Section variant="card">
+              <Stack gap="none">
+                <MenuItem
+                  primaryText="Whisk"
+                  showLeftElement
+                  leftElement="avatar"
+                  avatarInitials="WH"
+                  width="fill"
+                  showRIcon1
+                  rIcon1="ellipsis"
+                />
+                <MenuItem
+                  primaryText="The Whisk Product Team is dedicated to creating a seamless app experience..."
+                  showLeftElement={false}
+                  width="fill"
+                />
+              </Stack>
+            </Section>
+            <Section variant="card">
+              <Stack gap="none">
+                <MenuItem
+                  primaryText="GitLaw"
+                  showLeftElement
+                  leftElement="avatar"
+                  avatarInitials="GL"
+                  width="fill"
+                  showRIcon1
+                  rIcon1="ellipsis"
+                />
+                <MenuItem
+                  primaryText="An innovative platform designed to simplify legal processes..."
+                  showLeftElement={false}
+                  width="fill"
+                />
+              </Stack>
+            </Section>
+            <Section variant="card">
+              <MenuItem
+                primaryText="Add new Organization"
+                showLeftElement
+                leftIcon={<span className="text-secondary">+</span>}
+                width="fill"
+              />
+            </Section>
           </Stack>
-        </Section>
-        <Section
-          variant="card"
-          onClick={() => alert("Navigate to GitLaw settings")}
-        >
-          <Stack gap="none">
-            <MenuItem
-              primaryText="GitLaw"
-              showLeftElement
-              leftElement="avatar"
-              avatarInitials="GL"
-              width="fill"
-              showRIcon1
-              rIcon1="ellipsis"
-            />
-            <MenuItem
-              primaryText="An innovative platform designed to simplify legal processes..."
-              showLeftElement={false}
-              width="fill"
-            />
-          </Stack>
-        </Section>
-        <Section variant="card">
-          <MenuItem
-            primaryText="Add new Organization"
-            showLeftElement
-            leftIcon={<span className="text-secondary">+</span>}
-            width="fill"
-          />
-        </Section>
-      </Stack>
-    </div>
-  ),
-};
-
-/**
- * Multiple sections stacked (default variant) — headings without card background.
- */
-export const MultipleSections: Story = {
-  render: () => (
-    <div className="max-w-[1040px]">
-      <Stack gap="l">
-        <Section title="General">
-          <Stack gap="none">
-            <MenuItem
-              primaryText="Organization name"
-              showSecondaryText
-              secondaryText="Whisk"
-              showLeftElement={false}
-              width="fill"
-              showRIcon1
-              rIcon1="chevron-right"
-            />
-            <MenuItem
-              primaryText="Organization ID"
-              showSecondaryText
-              secondaryText="whisk"
-              showLeftElement={false}
-              width="fill"
-              showRIcon1
-              rIcon1="chevron-right"
-            />
-          </Stack>
-        </Section>
-        <Section title="Legal details" showBorder>
-          <Stack gap="none">
-            <MenuItem
-              primaryText="Registered name"
-              showSecondaryText
-              secondaryText="Foodient Ltd."
-              showLeftElement={false}
-              width="fill"
-              showRIcon1
-              rIcon1="chevron-right"
-            />
-            <MenuItem
-              primaryText="Jurisdiction"
-              showSecondaryText
-              secondaryText="England and Wales"
-              showLeftElement={false}
-              width="fill"
-              showRIcon1
-              rIcon1="chevron-right"
-            />
-          </Stack>
-        </Section>
-        <Section title="Danger zone" showBorder>
-          <MenuItem
-            primaryText="Delete organization"
-            showSecondaryText
-            secondaryText="Once deleted, it will be gone forever. Please be certain."
-            showLeftElement={false}
-            width="fill"
-            showRButton
-            rButtonLabel="Delete organization"
-          />
-        </Section>
-      </Stack>
+        </div>
+      </div>
     </div>
   ),
 };

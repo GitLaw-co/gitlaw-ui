@@ -8,6 +8,7 @@ const meta: Meta<typeof Stack> = {
   parameters: {
     layout: "padded",
   },
+  tags: ["autodocs"],
   argTypes: {
     gap: {
       control: "select",
@@ -54,84 +55,70 @@ export const Default: Story = {
 };
 
 /**
- * Stack with dividers between items.
+ * All layout variants — vertical, horizontal, with dividers, and real-world settings rows.
  */
-export const WithDividers: Story = {
-  render: (args) => (
-    <div className="max-w-[600px]">
-      <Stack {...args}>
-        <DemoBox label="Profile" />
-        <DemoBox label="Account" />
-        <DemoBox label="Billing" />
-      </Stack>
-    </div>
-  ),
-  args: {
-    gap: "s",
-    dividers: true,
-    direction: "vertical",
-  },
-};
-
-/**
- * Horizontal stack — useful for card grids or button groups.
- */
-export const Horizontal: Story = {
-  render: (args) => (
-    <Stack {...args}>
-      <DemoBox label="A" />
-      <DemoBox label="B" />
-      <DemoBox label="C" />
-    </Stack>
-  ),
-  args: {
-    gap: "m",
-    direction: "horizontal",
-  },
-};
-
-/**
- * Settings rows — real-world usage with MenuItems.
- */
-export const SettingsRows: Story = {
+export const AllVariants: Story = {
   render: () => (
-    <div className="max-w-[1040px]">
-      <Stack gap="none">
-        <MenuItem
-          primaryText="Username"
-          showSecondaryText
-          secondaryText="alexcarter"
-          showLeftElement={false}
-          width="fill"
-          showRIcon1
-          rIcon1="chevron-right"
-        />
-        <MenuItem
-          primaryText="Full name"
-          showSecondaryText
-          secondaryText="Alex Carter"
-          showLeftElement={false}
-          width="fill"
-          showRIcon1
-          rIcon1="chevron-right"
-        />
-        <MenuItem
-          primaryText="Email"
-          showSecondaryText
-          secondaryText="alex@example.com"
-          showLeftElement={false}
-          width="fill"
-          showRIcon1
-          rIcon1="chevron-right"
-        />
-        <MenuItem
-          primaryText="Dark mode"
-          showLeftElement={false}
-          width="fill"
-          showRSwitch
-          rSwitchChecked={false}
-        />
-      </Stack>
+    <div className="flex flex-col gap-8 max-w-[1040px]">
+      {/* Vertical with dividers */}
+      <div>
+        <p className="text-xs font-semibold text-secondary mb-2 uppercase">
+          With dividers
+        </p>
+        <div className="max-w-[600px]">
+          <Stack gap="s" dividers>
+            <DemoBox label="Profile" />
+            <DemoBox label="Account" />
+            <DemoBox label="Billing" />
+          </Stack>
+        </div>
+      </div>
+
+      {/* Horizontal */}
+      <div>
+        <p className="text-xs font-semibold text-secondary mb-2 uppercase">
+          Horizontal
+        </p>
+        <Stack gap="m" direction="horizontal">
+          <DemoBox label="A" />
+          <DemoBox label="B" />
+          <DemoBox label="C" />
+        </Stack>
+      </div>
+
+      {/* Settings rows (real-world usage) */}
+      <div>
+        <p className="text-xs font-semibold text-secondary mb-2 uppercase">
+          Settings rows
+        </p>
+        <Stack gap="none">
+          <MenuItem
+            primaryText="Username"
+            showSecondaryText
+            secondaryText="alexcarter"
+            showLeftElement={false}
+            width="fill"
+            showRIcon1
+            rIcon1="chevron-right"
+          />
+          <MenuItem
+            primaryText="Full name"
+            showSecondaryText
+            secondaryText="Alex Carter"
+            showLeftElement={false}
+            width="fill"
+            showRIcon1
+            rIcon1="chevron-right"
+          />
+          <MenuItem
+            primaryText="Dark mode"
+            showLeftElement={false}
+            width="fill"
+            showRSwitch
+            rSwitchChecked={false}
+          />
+        </Stack>
+      </div>
     </div>
   ),
 };
@@ -139,7 +126,7 @@ export const SettingsRows: Story = {
 /**
  * All gap sizes for comparison.
  */
-export const GapSizes: Story = {
+export const AllGapSizes: Story = {
   render: () => (
     <div className="flex gap-8">
       {(["none", "xs", "s", "m", "l", "xl"] as const).map((gap) => (
