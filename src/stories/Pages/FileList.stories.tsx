@@ -676,7 +676,7 @@ const InteractiveFileList = () => {
 
           {/* List view */}
           {view === "list" && (
-            <div className="mt-4 flex flex-col gap-gitlaw-m">
+            <div className="flex flex-col gap-gitlaw-m">
               <TableListItem
                 type="header"
                 cols={cols}
@@ -725,7 +725,7 @@ const InteractiveFileList = () => {
 
           {/* Grid view */}
           {view === "grid" && (
-            <div className="mt-4 flex flex-col gap-gitlaw-m">
+            <div className="flex flex-col gap-gitlaw-m">
               <div className={someSelected ? "" : "invisible"}>
                 <TableListItem
                   type="header"
