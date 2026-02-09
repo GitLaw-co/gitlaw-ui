@@ -407,15 +407,6 @@ const HeaderRow: React.FC<TableListItemProps> = ({
                 : " \u2191"
               : ""}
           </button>
-          {selectMode && (
-            <button
-              type="button"
-              onClick={() => onSelectAllClick?.()}
-              className="text-sm font-normal text-primary leading-[1.4] shrink-0 whitespace-nowrap cursor-pointer hover:underline"
-            >
-              {selectStatus === "on" ? "Deselect all" : "Select all"}
-            </button>
-          )}
         </div>
       }
       rightSlot={
