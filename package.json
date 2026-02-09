@@ -31,7 +31,7 @@
     "build:types": "tsc --project tsconfig.build.json",
     "build-storybook": "node scripts/generate-changelog.cjs && storybook build",
     "changelog": "node scripts/generate-changelog.cjs",
-    "deploy": "npm run build-storybook && gh-pages -d storybook-static",
+    "deploy": "STORYBOOK_BASE=/gitlaw-ui/ npm run build-storybook && gh-pages -d storybook-static",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
