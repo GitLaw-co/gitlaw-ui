@@ -676,27 +676,25 @@ const InteractiveFileList = () => {
 
           {/* List view */}
           {view === "list" && (
-            <div className="mt-4 flex flex-col gap-2">
-              {cols > 0 && (
-                <TableListItem
-                  type="header"
-                  cols={cols}
-                  headerLabels={[
-                    "Name",
-                    "Type",
-                    "Last viewed",
-                    "Updated",
-                    "Created",
-                  ]}
-                  sortColumn={sortColumn}
-                  sortDirection={sortDirection}
-                  onSortChange={handleSortChange}
-                  selectMode={someSelected}
-                  selectStatus={selectAllStatus}
-                  selectedCount={selectedItems.size}
-                  onSelectAllClick={toggleSelectAll}
-                />
-              )}
+            <div className="mt-4 flex flex-col gap-gitlaw-m">
+              <TableListItem
+                type="header"
+                cols={cols}
+                headerLabels={[
+                  "Name",
+                  "Type",
+                  "Last viewed",
+                  "Updated",
+                  "Created",
+                ]}
+                sortColumn={sortColumn}
+                sortDirection={sortDirection}
+                onSortChange={handleSortChange}
+                selectMode={someSelected}
+                selectStatus={selectAllStatus}
+                selectedCount={selectedItems.size}
+                onSelectAllClick={toggleSelectAll}
+              />
               {fileRows.map((row, i) => (
                 <div
                   key={i}
@@ -727,7 +725,18 @@ const InteractiveFileList = () => {
 
           {/* Grid view */}
           {view === "grid" && (
-            <div className="mt-4 grid grid-cols-1 gap-2 @sm:grid-cols-2 @[592px]:grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] @2xl:gap-3">
+            <div className="mt-4 flex flex-col gap-gitlaw-m">
+              <div className={someSelected ? "" : "invisible"}>
+                <TableListItem
+                  type="header"
+                  cols={0}
+                  selectMode
+                  selectStatus={selectAllStatus}
+                  selectedCount={selectedItems.size}
+                  onSelectAllClick={toggleSelectAll}
+                />
+              </div>
+              <div className="grid grid-cols-1 gap-2 @sm:grid-cols-2 @[592px]:grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] @2xl:gap-3">
               {cardData.map((card, i) => (
                 <div
                   key={i}
@@ -752,6 +761,7 @@ const InteractiveFileList = () => {
                   />
                 </div>
               ))}
+              </div>
             </div>
           )}
 
