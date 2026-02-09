@@ -13,6 +13,8 @@ export interface DropdownItem {
   icon?: string;
   /** Whether the item is selected/checked */
   selected?: boolean;
+  /** Custom icon name for the selected indicator (replaces default check icon) */
+  selectedIcon?: string;
   /** Whether the item is disabled */
   disabled?: boolean;
   /** Click handler */
@@ -87,7 +89,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
             )}
           </div>
           {item.selected && (
-            <Icon name="check" className="size-5" color={colors.iconBlack} />
+            <Icon name={item.selectedIcon || "check"} className="size-5" color={colors.iconBlack} />
           )}
         </button>
       ))}

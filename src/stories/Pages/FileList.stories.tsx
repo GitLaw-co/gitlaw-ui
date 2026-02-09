@@ -7,6 +7,8 @@ import {
   Card,
   Button,
   ListHeader,
+  Dropdown,
+  Popover,
   useContainerCols,
 } from "../../components";
 import type { CheckboxStatus } from "../../components/Checkbox";
@@ -378,6 +380,7 @@ const InteractiveFileList = () => {
   // ── Sort state (visual only) ──
   const [sortColumn, setSortColumn] = useState<string>("Updated");
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
+  const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
 
   // ── Rubber band state ──
   const [selectionBox, setSelectionBox] = useState<SelectionBox | null>(null);
@@ -726,7 +729,7 @@ const InteractiveFileList = () => {
           {/* Grid view */}
           {view === "grid" && (
             <div className="flex flex-col gap-gitlaw-m">
-              <div className={someSelected ? "" : "invisible"}>
+              {someSelected ? (
                 <TableListItem
                   type="header"
                   cols={0}
@@ -734,9 +737,51 @@ const InteractiveFileList = () => {
                   selectStatus={selectAllStatus}
                   selectedCount={selectedItems.size}
                   onSelectAllClick={toggleSelectAll}
-  
                 />
-              </div>
+              ) : (
+                <div className="flex items-center min-h-[48px] px-gitlaw-xl">
+                  <Popover
+                    content={
+                      <Dropdown
+                        showIcons={false}
+                        items={["Name", "Type", "Last viewed", "Updated", "Created"].map(
+                          (col) => ({
+                            id: col,
+                            label: col,
+                            selected: sortColumn === col,
+                            selectedIcon: sortDirection === "desc"
+                              ? "arrow-down"
+                              : "arrow-up",
+                            onClick: () => {
+                              const newDir: SortDirection =
+                                sortColumn === col && sortDirection === "desc"
+                                  ? "asc"
+                                  : "desc";
+                              setSortColumn(col);
+                              setSortDirection(newDir);
+                              setTimeout(() => setSortDropdownOpen(false), 300);
+                            },
+                          })
+                        )}
+                        heading="Sort by"
+                      />
+                    }
+                    position="bottom"
+                    trigger="click"
+                    isOpen={sortDropdownOpen}
+                    onOpenChange={setSortDropdownOpen}
+                    contentClassName="z-50"
+                    gap={1}
+                  >
+                    <button
+                      type="button"
+                      className="flex items-center gap-1 text-sm font-normal text-subtle leading-[1.4] cursor-pointer hover:text-foreground transition-colors duration-fast ease-gitlaw"
+                    >
+                      Sort by: {sortColumn} {sortDirection === "desc" ? "↓" : "↑"}
+                    </button>
+                  </Popover>
+                </div>
+              )}
               <div className="grid grid-cols-1 gap-2 @sm:grid-cols-2 @[592px]:grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] @2xl:gap-3">
               {cardData.map((card, i) => (
                 <div
