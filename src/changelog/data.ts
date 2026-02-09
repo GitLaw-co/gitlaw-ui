@@ -1,5 +1,5 @@
 // Auto-generated changelog from git commits
-// Generated: 2026-02-09T10:01:48.748Z
+// Generated: 2026-02-09T10:40:59.391Z
 // Run: node scripts/generate-changelog.js
 
 export interface ChangelogEntry {
@@ -11,6 +11,15 @@ export interface ChangelogEntry {
 }
 
 export const changelog: ChangelogEntry[] = [
+  {
+    "date": "2026-02-09",
+    "commits": [
+      {
+        "hash": "7add01c",
+        "message": "Add mobile responsive PageShell, nav dropdown, and MenuItem Button reuse"
+      }
+    ]
+  },
   {
     "date": "2026-02-08",
     "commits": [
@@ -221,10 +230,6 @@ export const changelog: ChangelogEntry[] = [
       {
         "hash": "4adc218",
         "message": "Add setup section with npm install to CLAUDE.md"
-      },
-      {
-        "hash": "1271446",
-        "message": "Clarify Figma MCP 403 error handling in CLAUDE.md"
       }
     ]
   }
