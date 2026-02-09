@@ -16,7 +16,7 @@ import type {
   FileItem,
   PartyInfo,
 } from "../components";
-import ukFlag from "../../Assets/flags/uk-uk.svg";
+import ukFlag from "../assets/flags/uk-uk.svg";
 
 export interface ChatPageTemplateProps {
   /** Document/chat title */

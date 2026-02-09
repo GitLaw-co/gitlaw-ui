@@ -51,30 +51,15 @@ export const Default: Story = {
   args: {
     title: "Influencer Agreement with Blake Logan",
     showStroke: true,
-    isSignedIn: true,
-  },
-};
-
-export const LoggedOut: Story = {
-  args: {
-    title: "Influencer Agreement with Blake Logan",
-    showStroke: true,
-    isSignedIn: false,
-    isLanding: false,
-  },
-};
-
-export const Interactive: Story = {
-  args: {
-    title: "Influencer Agreement with Blake Logan",
-    showStroke: true,
     showFiles: true,
     fileCount: 2,
     isSignedIn: true,
-    isLanding: false,
   },
 };
 
+/**
+ * All variants — signed in, with files, breadcrumbs (2/3/4+ levels), and logged out.
+ */
 export const AllVariants: Story = {
   render: () => (
     <div className="flex flex-col">

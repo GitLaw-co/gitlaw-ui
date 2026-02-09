@@ -7,6 +7,7 @@ const meta: Meta<typeof ListHeader> = {
   parameters: {
     layout: "padded",
   },
+  tags: ["autodocs"],
   argTypes: {
     mode: { control: "select", options: ["default", "edit"] },
     label: { control: "text" },

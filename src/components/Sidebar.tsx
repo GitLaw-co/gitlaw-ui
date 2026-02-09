@@ -6,10 +6,10 @@ import { colors as dsColors } from "../specs";
 // Import logo SVGs as URLs
 // Note: File names are swapped - "inner" files have white logos, "landing" files have purple logos
 // So we swap them here to use the correct colors for each variant
-import innerLogoCollapsed from "../../Assets/landing-logo-collapsed.svg"; // purple logo for light bg
-import innerLogoExpanded from "../../Assets/landing-logo-expanded.svg"; // purple logo for light bg
-import landingLogoCollapsed from "../../Assets/inner-logo-collapsed.svg"; // white logo for dark bg
-import landingLogoExpanded from "../../Assets/inner-logo-expanded.svg"; // white logo for dark bg
+import innerLogoCollapsed from "../assets/logos/landing-logo-collapsed.svg"; // purple logo for light bg
+import innerLogoExpanded from "../assets/logos/landing-logo-expanded.svg"; // purple logo for light bg
+import landingLogoCollapsed from "../assets/logos/inner-logo-collapsed.svg"; // white logo for dark bg
+import landingLogoExpanded from "../assets/logos/inner-logo-expanded.svg"; // white logo for dark bg
 
 export type SidebarVariant = "landing" | "inner";
 export type SidebarStatus = "collapsed" | "expanded";

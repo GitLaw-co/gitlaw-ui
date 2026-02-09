@@ -102,13 +102,30 @@ const MNDABody = () => (
   </>
 );
 
-// Default - Empty inputs (yellow backgrounds) - New MNDA
+const sharedProps = {
+  title: 'Mutual Non-Disclosure Agreement',
+  subtitle: 'MUTUAL CONFIDENTIALITY AGREEMENT\n(Standard Form)',
+};
+
+const filledParties = {
+  agreementDate: '15 January 2026',
+  effectiveDate: '15 January 2026',
+  party1: {
+    name: 'GitLaw Limited',
+    address: '71-75 Shelton Street, Covent Garden, London, WC2H 9JQ',
+  },
+  party2: {
+    name: 'Acme Corporation Ltd',
+    address: '100 Innovation Drive, Cambridge, CB1 2AB',
+  },
+};
+
+// Default - Editable with empty inputs (yellow backgrounds)
 export const Default: Story = {
   args: {
     status: 'default',
     showToolbar: true,
-    title: 'Mutual Non-Disclosure Agreement',
-    subtitle: 'MUTUAL CONFIDENTIALITY AGREEMENT\n(Standard Form)',
+    ...sharedProps,
   },
   render: (args) => (
     <div className="bg-page-background min-h-screen">
@@ -119,99 +136,58 @@ export const Default: Story = {
   ),
 };
 
-// Filled - With populated inputs (purple backgrounds)
-export const Filled: Story = {
-  args: {
-    status: 'default',
-    showToolbar: true,
-    title: 'Mutual Non-Disclosure Agreement',
-    subtitle: 'MUTUAL CONFIDENTIALITY AGREEMENT\n(Standard Form)',
-    agreementDate: '15 January 2026',
-    effectiveDate: '15 January 2026',
-    party1: {
-      name: 'GitLaw Limited',
-      address: '71-75 Shelton Street, Covent Garden, London, WC2H 9JQ',
-    },
-    party2: {
-      name: 'Acme Corporation Ltd',
-      address: '100 Innovation Drive, Cambridge, CB1 2AB',
-    },
-  },
-  render: (args) => (
-    <div className="bg-page-background min-h-screen">
-      <EditorPaper {...args}>
-        <MNDABody />
-      </EditorPaper>
-    </div>
-  ),
-};
+/**
+ * All document states — empty, partially filled, fully filled, and view mode.
+ */
+export const AllStates: Story = {
+  render: () => (
+    <div className="bg-page-background min-h-screen space-y-12 p-8">
+      {/* Filled */}
+      <div>
+        <p className="text-xs font-semibold text-secondary mb-4 uppercase">
+          Filled (all party info populated)
+        </p>
+        <EditorPaper status="default" showToolbar {...sharedProps} {...filledParties}>
+          <MNDABody />
+        </EditorPaper>
+      </div>
 
-// Partial - Some inputs filled (mixed yellow/purple)
-export const PartiallyFilled: Story = {
-  args: {
-    status: 'default',
-    showToolbar: true,
-    title: 'Mutual Non-Disclosure Agreement',
-    subtitle: 'MUTUAL CONFIDENTIALITY AGREEMENT\n(Standard Form)',
-    agreementDate: '',
-    effectiveDate: '15 January 2026',
-    party1: {
-      name: 'GitLaw Limited',
-      address: '',
-    },
-    party2: {
-      name: '',
-      address: '',
-    },
-  },
-  render: (args) => (
-    <div className="bg-page-background min-h-screen">
-      <EditorPaper {...args}>
-        <MNDABody />
-      </EditorPaper>
-    </div>
-  ),
-};
+      {/* Partially filled */}
+      <div>
+        <p className="text-xs font-semibold text-secondary mb-4 uppercase">
+          Partially filled (mixed empty/populated)
+        </p>
+        <EditorPaper
+          status="default"
+          showToolbar
+          {...sharedProps}
+          effectiveDate="15 January 2026"
+          party1={{ name: 'GitLaw Limited', address: '' }}
+          party2={{ name: '', address: '' }}
+        >
+          <MNDABody />
+        </EditorPaper>
+      </div>
 
-// View mode (read-only)
-export const ViewMode: Story = {
-  args: {
-    status: 'view',
-    title: 'Mutual Non-Disclosure Agreement',
-    subtitle: 'MUTUAL CONFIDENTIALITY AGREEMENT\n(Standard Form)',
-    agreementDate: '15 January 2026',
-    effectiveDate: '15 January 2026',
-    party1: {
-      name: 'GitLaw Limited',
-      address: '71-75 Shelton Street, Covent Garden, London, WC2H 9JQ',
-    },
-    party2: {
-      name: 'Acme Corporation Ltd',
-      address: '100 Innovation Drive, Cambridge, CB1 2AB',
-    },
-  },
-  render: (args) => (
-    <div className="bg-page-background min-h-screen">
-      <EditorPaper {...args}>
-        <MNDABody />
-      </EditorPaper>
-    </div>
-  ),
-};
+      {/* View mode */}
+      <div>
+        <p className="text-xs font-semibold text-secondary mb-4 uppercase">
+          View mode (read-only)
+        </p>
+        <EditorPaper status="view" {...sharedProps} {...filledParties}>
+          <MNDABody />
+        </EditorPaper>
+      </div>
 
-// Empty paper - starting a new document
-export const Empty: Story = {
-  args: {
-    status: 'default',
-    showToolbar: true,
-    title: 'Untitled document',
-    subtitle: '',
-  },
-  render: (args) => (
-    <div className="bg-page-background min-h-screen">
-      <EditorPaper {...args}>
-        <p className="text-subtle italic text-sm">Start typing your document...</p>
-      </EditorPaper>
+      {/* Empty */}
+      <div>
+        <p className="text-xs font-semibold text-secondary mb-4 uppercase">
+          Empty (new document)
+        </p>
+        <EditorPaper status="default" showToolbar title="Untitled document" subtitle="">
+          <p className="text-subtle italic text-sm">Start typing your document...</p>
+        </EditorPaper>
+      </div>
     </div>
   ),
 };
