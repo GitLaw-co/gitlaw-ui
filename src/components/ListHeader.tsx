@@ -1,52 +1,41 @@
 import React from "react";
 import { Button } from "./Button";
 import { Icon } from "./Icon";
+import { Tooltip } from "./Tooltip";
 import { colors } from "../specs";
 
 export type ListHeaderMode = "default" | "edit";
+export type ListHeaderEditLayout = "replace" | "inline" | "merged";
 
 export interface ListHeaderIconAction {
-  /** Icon name (lucide) */
   icon: string;
-  /** Click handler */
   onClick?: () => void;
-  /** Whether this action is visually active/highlighted */
   active?: boolean;
 }
 
 export interface ListHeaderEditAction {
-  /** Icon name (lucide) */
   icon: string;
-  /** Button label text */
   label: string;
-  /** Click handler */
   onClick?: () => void;
 }
 
 export interface ListHeaderProps {
-  /** Display mode */
   mode?: ListHeaderMode;
-  /** Label text — e.g. "234 files" or "3 files selected" */
+  editLayout?: ListHeaderEditLayout;
   label: string;
-  /** Icon buttons shown in default mode (search, sort, grid, add) */
   actions?: ListHeaderIconAction[];
-  /** Text buttons shown in edit mode (Delete, Download, Move, Done) */
   editActions?: ListHeaderEditAction[];
-  /** Additional CSS classes */
   className?: string;
 }
 
-/**
- * ListHeader — Toolbar above file lists / card grids.
- *
- * Two modes:
- * - **default**: count label + icon-only action buttons (size-8 / 32px, secondary bg)
- * - **edit**: selected count label + labelled Button[s] actions (Delete, Download, Move, Done)
- *
- * Height: 68px. Padding: 12px horizontal, 16px vertical.
- */
+const iconBtnClass =
+  "inline-flex items-center justify-center size-8 rounded bg-secondary hover:bg-secondary-hover transition-colors duration-fast ease-gitlaw";
+const editIconBtnClass =
+  "inline-flex items-center justify-center size-8 rounded bg-primary hover:bg-primary-hover transition-colors duration-fast ease-gitlaw";
+
 export const ListHeader: React.FC<ListHeaderProps> = ({
   mode = "default",
+  editLayout = "replace",
   label,
   actions = [],
   editActions = [],
@@ -54,54 +43,85 @@ export const ListHeader: React.FC<ListHeaderProps> = ({
 }) => {
   const isEdit = mode === "edit";
 
+  const renderIconBtn = (action: ListHeaderIconAction, i: number) => (
+    <button key={i} type="button" className={iconBtnClass} onClick={action.onClick}>
+      <Icon name={action.icon} className="size-4" color={colors.iconPrimary} />
+    </button>
+  );
+
+  const renderEditIconBtn = (action: ListHeaderEditAction, i: number) => (
+    <Tooltip key={i} content={action.label} size="s" position="top">
+      <button type="button" className={editIconBtnClass} onClick={action.onClick}>
+        <Icon name={action.icon} className="size-4" color={colors.iconNegative} />
+      </button>
+    </Tooltip>
+  );
+
+  const iconButtons = <div className="flex items-center gap-1">{actions.map(renderIconBtn)}</div>;
+
+  const labelledEditButtons = (
+    <div className="flex items-center gap-1">
+      {editActions.map((action, i) => (
+        <Button
+          key={i}
+          variant={i === editActions.length - 1 ? "primary" : "secondary"}
+          size="s"
+          showLeftIcon
+          leftIconName={action.icon}
+          onClick={action.onClick}
+        >
+          {action.label}
+        </Button>
+      ))}
+    </div>
+  );
+
+  const iconOnlyEditButtons = (
+    <div className="flex items-center gap-1">{editActions.map(renderEditIconBtn)}</div>
+  );
+
+  const root = `@container flex items-center px-3 py-4 h-[68px] ${className}`;
+
+  /* ── replace: edit actions replace right-side actions ── */
+  if (editLayout === "replace") {
+    return (
+      <div className={root}>
+        <h2 className="flex-1 text-lg font-semibold text-primary leading-[1.4]">{label}</h2>
+        {isEdit ? labelledEditButtons : iconButtons}
+      </div>
+    );
+  }
+
+  /* ── inline: edit actions on the left, icon actions stay right ── */
+  if (editLayout === "inline") {
+    return (
+      <div className={root}>
+        <div className="flex-1 flex items-center gap-2">
+          {isEdit ? (
+            <>
+              <div className="hidden @3xl:flex items-center gap-1">{labelledEditButtons}</div>
+              <div className="flex @3xl:hidden items-center gap-1">{iconOnlyEditButtons}</div>
+            </>
+          ) : (
+            <h2 className="text-lg font-semibold text-primary leading-[1.4]">{label}</h2>
+          )}
+        </div>
+        {iconButtons}
+      </div>
+    );
+  }
+
+  /* ── merged: all icon buttons on the right (secondary + primary) ── */
   return (
-    <div
-      className={`flex items-center justify-between px-3 py-4 h-[68px] ${className}`}
-    >
-      {/* Left: label */}
-      <h2 className="text-lg font-semibold text-primary leading-[1.4]">
-        {label}
-      </h2>
-
-      {/* Right: default mode — icon-only buttons with secondary bg */}
-      {!isEdit && (
+    <div className={root}>
+      <h2 className="flex-1 text-lg font-semibold text-primary leading-[1.4]">{label}</h2>
+      {isEdit ? (
         <div className="flex items-center gap-1">
-          {actions.map((action, i) => (
-            <button
-              key={i}
-              type="button"
-              className="inline-flex items-center justify-center size-8 rounded bg-secondary hover:bg-secondary-hover transition-colors duration-fast ease-gitlaw"
-              onClick={action.onClick}
-            >
-              <Icon
-                name={action.icon}
-                className="size-4"
-                color={colors.iconPrimary}
-              />
-            </button>
-          ))}
+          {actions.map(renderIconBtn)}
+          {editActions.map(renderEditIconBtn)}
         </div>
-      )}
-
-      {/* Right: edit mode — labelled buttons */}
-      {isEdit && (
-        <div className="flex items-center gap-1">
-          {editActions.map((action, i) => {
-            const isLast = i === editActions.length - 1;
-            return (
-              <Button
-                key={i}
-                variant={isLast ? "primary" : "secondary"}
-                size="s"
-                showLeftIcon
-                leftIconName={action.icon}
-                onClick={action.onClick}
-              >
-                {action.label}
-              </Button>
-            );
-          })}
-        </div>
+      ) : (
+        iconButtons
       )}
     </div>
   );

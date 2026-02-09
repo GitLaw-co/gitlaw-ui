@@ -171,6 +171,7 @@ export { ListHeader } from "./ListHeader";
 export type {
   ListHeaderProps,
   ListHeaderMode,
+  ListHeaderEditLayout,
   ListHeaderIconAction,
   ListHeaderEditAction,
 } from "./ListHeader";

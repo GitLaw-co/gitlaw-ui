@@ -11,6 +11,7 @@ import {
 } from "../../components";
 import type { CheckboxStatus } from "../../components/Checkbox";
 import type { SortDirection } from "../../components/TableListItem";
+import type { ListHeaderEditLayout } from "../../components/ListHeader";
 
 const meta: Meta<typeof PageShell> = {
   title: "Pages/File List",
@@ -361,7 +362,11 @@ const editActions = (onDone: () => void) => [
 
 const DOUBLE_CLICK_THRESHOLD = 250;
 
-const InteractiveFileList = () => {
+const InteractiveFileList = ({
+  editLayout = "replace",
+}: {
+  editLayout?: ListHeaderEditLayout;
+}) => {
   // ── View state ──
   const [view, setView] = useState<"list" | "grid">("list");
 
@@ -654,12 +659,17 @@ const InteractiveFileList = () => {
           {/* ListHeader — switches between default and edit mode */}
           <ListHeader
             mode={someSelected ? "edit" : "default"}
+            editLayout={editLayout}
             label={
               someSelected
                 ? `${selectedItems.size} file${selectedItems.size > 1 ? "s" : ""} selected`
                 : "234 files"
             }
-            actions={listHeaderActions}
+            actions={
+              someSelected && (editLayout === "inline" || editLayout === "merged")
+                ? listHeaderActions.filter((a) => a.icon !== "plus")
+                : listHeaderActions
+            }
             editActions={editActions(clearSelection)}
           />
 
@@ -768,4 +778,28 @@ const InteractiveFileList = () => {
  */
 export const Default: Story = {
   render: () => <InteractiveFileList />,
+};
+
+/* ------------------------------------------------------------------ */
+/*  Story: Variant B — inline edit actions on the left                  */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Edit actions appear next to the label on the left (icon-only on narrow
+ * screens, labelled on wide). Original right-side actions stay put.
+ */
+export const VariantB: Story = {
+  render: () => <InteractiveFileList editLayout="inline" />,
+};
+
+/* ------------------------------------------------------------------ */
+/*  Story: Variant C — all icon buttons merged on the right             */
+/* ------------------------------------------------------------------ */
+
+/**
+ * All buttons on the right as icon-only: original actions (secondary bg)
+ * followed by edit actions (primary bg) with tooltips. Label stays visible.
+ */
+export const VariantC: Story = {
+  render: () => <InteractiveFileList editLayout="merged" />,
 };
