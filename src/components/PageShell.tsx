@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Sidebar } from "./Sidebar";
 import { TopHeader } from "./TopHeader";
+import { Overlay } from "./Overlay";
 import type { SidebarMenuItem, SidebarChatHistoryItem } from "./Sidebar";
 import type { BreadcrumbItem } from "./TopHeader";
+import type { DropdownItem } from "./Dropdown";
 
 export interface PageShellProps {
   /** Page title displayed in TopHeader */
@@ -31,6 +33,10 @@ export interface PageShellProps {
   children: React.ReactNode;
   /** Additional CSS classes on the outer wrapper */
   className?: string;
+  /** Page-nav items for mobile dropdown in TopHeader */
+  mobileNavItems?: DropdownItem[];
+  /** Active page-nav label shown as last breadcrumb on mobile (e.g. "Profile") */
+  mobileNavActiveLabel?: string;
   /** Callback when sidebar is toggled */
   onSidebarToggle?: (collapsed: boolean) => void;
 }
@@ -38,8 +44,8 @@ export interface PageShellProps {
 /**
  * PageShell — App chrome for settings / files pages.
  *
- * Layout: Sidebar (64px collapsed / 288px expanded) | TopHeader + scrollable content area.
- * Content area starts at 84px from left (sidebar 64px + 20px gap) and 96px from top (header 64px + 32px gap).
+ * Desktop: Sidebar (64px collapsed / 288px expanded) in document flow | TopHeader + scrollable content.
+ * Mobile (<768px): Sidebar hidden; hamburger in TopHeader opens sidebar as a sliding overlay.
  */
 export const PageShell: React.FC<PageShellProps> = ({
   title = "Settings",
@@ -53,13 +59,19 @@ export const PageShell: React.FC<PageShellProps> = ({
   userInitials = "AC",
   userAvatar,
   showHeaderStroke = true,
+  mobileNavItems,
+  mobileNavActiveLabel,
   children,
   className = "",
   onSidebarToggle,
 }) => {
+  /* Desktop sidebar collapse state */
   const [sidebarCollapsed, setSidebarCollapsed] = useState(
     initialSidebarCollapsed
   );
+
+  /* Mobile sidebar overlay state */
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   const handleSidebarToggle = () => {
     const next = !sidebarCollapsed;
@@ -67,28 +79,62 @@ export const PageShell: React.FC<PageShellProps> = ({
     onSidebarToggle?.(next);
   };
 
+  const handleMobileSidebarToggle = () => {
+    setMobileSidebarOpen((prev) => !prev);
+  };
+
+  const handleMobileSidebarClose = () => {
+    setMobileSidebarOpen(false);
+  };
+
   const sidebarWidth = sidebarCollapsed ? "w-16" : "w-72";
+
+  /** Shared sidebar props */
+  const sidebarProps = {
+    variant: sidebarVariant as "landing" | "inner",
+    user: (isSignedIn ? "signed-in" : "signed-out") as "signed-in" | "signed-out",
+    userName,
+    userInitials,
+    userAvatar,
+    menuItems,
+    chatHistory,
+  };
 
   return (
     <div
       className={`flex h-screen max-h-screen w-screen max-w-full overflow-hidden bg-page-background ${className}`}
     >
-      {/* Sidebar */}
+      {/* Desktop sidebar — in document flow, hidden on mobile */}
       <div
-        className={`h-full shrink-0 transition-[width] duration-normal ease-gitlaw ${sidebarWidth}`}
+        className={`hidden md:block h-full shrink-0 transition-[width] duration-normal ease-gitlaw ${sidebarWidth}`}
       >
         <Sidebar
-          variant={sidebarVariant}
+          {...sidebarProps}
           status={sidebarCollapsed ? "collapsed" : "expanded"}
-          user={isSignedIn ? "signed-in" : "signed-out"}
-          userName={userName}
-          userInitials={userInitials}
-          userAvatar={userAvatar}
-          menuItems={menuItems}
-          chatHistory={chatHistory}
           onToggle={handleSidebarToggle}
         />
       </div>
+
+      {/* Mobile sidebar overlay — visible only below md */}
+      <Overlay
+        open={mobileSidebarOpen}
+        onClose={handleMobileSidebarClose}
+        className="md:hidden"
+      >
+        <div
+          className={`
+            fixed top-0 left-0 h-full w-72 z-40
+            transition-transform duration-normal ease-gitlaw
+            ${mobileSidebarOpen ? "translate-x-0" : "-translate-x-full"}
+          `}
+        >
+          <Sidebar
+            {...sidebarProps}
+            status="expanded"
+            onToggle={handleMobileSidebarClose}
+          />
+        </div>
+      </Overlay>
 
       {/* Main area: header + scrollable content */}
       <div className="flex flex-col flex-1 min-w-0 h-full">
@@ -97,10 +143,14 @@ export const PageShell: React.FC<PageShellProps> = ({
           breadcrumbs={breadcrumbs}
           showStroke={showHeaderStroke}
           isSignedIn={isSignedIn}
+          showMenu={isSignedIn}
+          onMenuClick={handleMobileSidebarToggle}
+          mobileNavItems={mobileNavItems}
+          mobileNavActiveLabel={mobileNavActiveLabel}
         />
 
         <div className="flex-1 min-h-0 overflow-y-auto">
-          <div className="px-[84px] pt-8 pb-16">{children}</div>
+          <div className="px-6 md:px-[84px] pt-8 pb-16">{children}</div>
         </div>
       </div>
     </div>

@@ -37,19 +37,33 @@ const accounts = [
   { id: "2", name: "Whisk", type: "Organization", initials: "WH" },
 ];
 
+/** Mobile nav dropdown items — mirrors settingsNavItems with selected state */
+const mobileNavItems = (activeId: string) =>
+  settingsNavItems.map((item) => ({
+    id: item.id,
+    label: item.label,
+    selected: item.id === activeId,
+  }));
+
 /**
  * Settings Profile page — card variant wrapping list items.
  * Matches the Figma pattern: white bg, 8px padding, 8px rounded.
  */
 export const Profile: Story = {
   render: () => (
-    <PageShell title="Settings" initialSidebarCollapsed>
+    <PageShell
+      title="Settings"
+      initialSidebarCollapsed
+      mobileNavItems={mobileNavItems("profile")}
+      mobileNavActiveLabel="Profile"
+    >
       <div className="flex gap-4">
         <PageNav
           activeAccount={accounts[0]}
           accounts={accounts}
           items={settingsNavItems}
           activeItemId="profile"
+          className="hidden md:flex"
         />
         <div className="flex-1 max-w-[1040px]">
           <Section variant="card">
@@ -68,6 +82,7 @@ export const Profile: Story = {
                 width="fill"
                 showRButton
                 rButtonLabel="View"
+                rButtonIcon="arrow-right"
               />
               <MenuItem
                 primaryText="Username"
@@ -144,13 +159,19 @@ export const Profile: Story = {
  */
 export const Organizations: Story = {
   render: () => (
-    <PageShell title="Settings" initialSidebarCollapsed>
+    <PageShell
+      title="Settings"
+      initialSidebarCollapsed
+      mobileNavItems={mobileNavItems("organizations")}
+      mobileNavActiveLabel="Organizations"
+    >
       <div className="flex gap-4">
         <PageNav
           activeAccount={accounts[0]}
           accounts={accounts}
           items={settingsNavItems}
           activeItemId="organizations"
+          className="hidden md:flex"
         />
         <div className="flex-1 max-w-[1040px]">
           <Stack gap="l">

@@ -1,5 +1,6 @@
 import React from "react";
 import { Icon } from "./Icon";
+import { Button } from "./Button";
 import { Switch } from "./Switch";
 import { Badge } from "./Badge";
 import { Checkbox } from "./Checkbox";
@@ -63,6 +64,8 @@ export interface MenuItemProps {
   showRButton?: boolean;
   /** Button label for R element */
   rButtonLabel?: string;
+  /** Button icon name for R element (default "check") */
+  rButtonIcon?: string;
   /** Show button set (x and check) in R element */
   showRButtonSet?: boolean;
   /** Button set cancel handler */
@@ -120,6 +123,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
   rIcon2 = "check",
   showRButton = false,
   rButtonLabel = "Action",
+  rButtonIcon = "check",
   showRButtonSet = false,
   onRButtonSetCancel,
   onRButtonSetConfirm,
@@ -249,14 +253,14 @@ export const MenuItem: React.FC<MenuItemProps> = ({
             <span className="text-sm text-subtle min-w-6">{rLabel}</span>
           )}
           {showRButton && (
-            <button className="flex items-center gap-1 px-3 py-2 h-8 rounded bg-secondary text-xs text-foreground-button">
-              <Icon
-                name="check"
-                className="size-6"
-                color={colors.iconPrimary}
-              />
-              <span>{rButtonLabel}</span>
-            </button>
+            <Button
+              variant="secondary"
+              size="s"
+              showLeftIcon
+              leftIconName={rButtonIcon}
+            >
+              {rButtonLabel}
+            </Button>
           )}
           {showRButtonSet && (
             <div className="flex items-center gap-2">

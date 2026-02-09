@@ -150,6 +150,14 @@ const fileRows = [
   },
 ];
 
+/** Mobile nav dropdown items — mirrors navItems with selected state */
+const mobileNavItems = (activeId: string) =>
+  navItems.map((item) => ({
+    id: item.id,
+    label: item.label,
+    selected: item.id === activeId,
+  }));
+
 const cardData = [
   {
     type: "folder" as const,
@@ -329,14 +337,20 @@ export const ListView: Story = {
     const [view, setView] = useState<"list" | "grid">("list");
     const { cols, containerRef } = useContainerCols();
     return (
-      <PageShell title="Files" initialSidebarCollapsed showHeaderStroke>
-        <div className="flex gap-6 @container/page">
+      <PageShell
+        title="Files"
+        initialSidebarCollapsed
+        showHeaderStroke
+        mobileNavItems={mobileNavItems("recent")}
+        mobileNavActiveLabel="Recent"
+      >
+        <div className="flex gap-6">
           <PageNav
             activeAccount={accounts[0]}
             accounts={accounts}
             items={navItems}
             activeItemId="recent"
-            className="hidden @3xl/page:flex"
+            className="hidden md:flex"
           />
           <div className="flex-1 min-w-0 @container" ref={containerRef}>
             <ListHeader
@@ -400,14 +414,20 @@ export const CardGridView: Story = {
   render: () => {
     const [view, setView] = useState<"list" | "grid">("grid");
     return (
-      <PageShell title="Files" initialSidebarCollapsed showHeaderStroke>
-        <div className="flex gap-6 @container/page">
+      <PageShell
+        title="Files"
+        initialSidebarCollapsed
+        showHeaderStroke
+        mobileNavItems={mobileNavItems("recent")}
+        mobileNavActiveLabel="Recent"
+      >
+        <div className="flex gap-6">
           <PageNav
             activeAccount={accounts[0]}
             accounts={accounts}
             items={navItems}
             activeItemId="recent"
-            className="hidden @3xl/page:flex"
+            className="hidden md:flex"
           />
           <div className="flex-1 min-w-0 @container">
             <ListHeader

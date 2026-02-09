@@ -143,6 +143,9 @@ export type { StickyFeaturePromoBarProps } from "./StickyFeaturePromoBar";
 export { PageNav } from "./PageNav";
 export type { PageNavProps, PageNavAccount, PageNavItem } from "./PageNav";
 
+export { Overlay } from "./Overlay";
+export type { OverlayProps } from "./Overlay";
+
 export { PageShell } from "./PageShell";
 export type { PageShellProps } from "./PageShell";
 

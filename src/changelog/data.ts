@@ -1,5 +1,5 @@
 // Auto-generated changelog from git commits
-// Generated: 2026-02-08T12:26:13.425Z
+// Generated: 2026-02-09T10:01:48.748Z
 // Run: node scripts/generate-changelog.js
 
 export interface ChangelogEntry {
@@ -14,6 +14,18 @@ export const changelog: ChangelogEntry[] = [
   {
     "date": "2026-02-08",
     "commits": [
+      {
+        "hash": "0cd7fbe",
+        "message": "Add Escape and Return icon SVGs"
+      },
+      {
+        "hash": "13f1692",
+        "message": "Add number icon SVGs (0-9)"
+      },
+      {
+        "hash": "9d22ea6",
+        "message": "Add responsive file list, ListHeader component, and clean up page stories"
+      },
       {
         "hash": "ced7baa",
         "message": "Add File List page prototype with list and card grid views"
@@ -213,21 +225,9 @@ export const changelog: ChangelogEntry[] = [
       {
         "hash": "1271446",
         "message": "Clarify Figma MCP 403 error handling in CLAUDE.md"
-      },
-      {
-        "hash": "96ff739",
-        "message": "Add Figma MCP 403 auth timeout note to CLAUDE.md"
-      },
-      {
-        "hash": "bbce3bb",
-        "message": "Add animated rotating placeholders to ChatInput"
-      },
-      {
-        "hash": "1d15c98",
-        "message": "Remove custom icons, fix Card selection ring, add ChatInput tooltips"
       }
     ]
   }
 ];
 
-export const lastUpdated = "2026-02-08";
+export const lastUpdated = "2026-02-09";

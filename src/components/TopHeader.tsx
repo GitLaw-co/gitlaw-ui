@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { Icon } from "./Icon";
 import { Badge } from "./Badge";
 import { Button } from "./Button";
+import { Dropdown } from "./Dropdown";
+import type { DropdownItem } from "./Dropdown";
 import { colors } from "../specs";
 import { Tooltip } from "./Tooltip";
 import { FileDropdown, FileItem } from "./FileDropdown";
@@ -48,6 +50,10 @@ export interface TopHeaderProps {
   onLoginClick?: () => void;
   /** Click handler for sign up button */
   onSignUpClick?: () => void;
+  /** Page-nav items for mobile dropdown (shown below last breadcrumb on mobile) */
+  mobileNavItems?: DropdownItem[];
+  /** Active page-nav item label (e.g. "Profile") — appended as last breadcrumb on mobile */
+  mobileNavActiveLabel?: string;
   /** Additional CSS classes */
   className?: string;
 }
@@ -79,10 +85,14 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
   onMenuClick,
   onLoginClick,
   onSignUpClick,
+  mobileNavItems,
+  mobileNavActiveLabel,
   className = "",
 }) => {
   const [isFileDropdownOpen, setIsFileDropdownOpen] = useState(false);
   const fileDropdownRef = useRef<HTMLDivElement>(null);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const mobileNavRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -97,6 +107,20 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isFileDropdownOpen]);
+
+  // Close mobile nav dropdown when clicking outside
+  useEffect(() => {
+    if (!isMobileNavOpen) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (mobileNavRef.current && !mobileNavRef.current.contains(event.target as Node)) {
+        setIsMobileNavOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isMobileNavOpen]);
 
   const handleFilesClick = () => {
     if (files.length > 0) {
@@ -118,16 +142,44 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
   const iconColor = isLanding ? colors.iconNegative : colors.iconPrimary;
   const separatorColor = isLanding ? "text-negative/60" : "text-secondary";
 
+  const hasMobileNav = mobileNavItems && mobileNavItems.length > 0 && mobileNavActiveLabel;
+  const chevronColor = isLanding ? colors.iconNegative : colors.iconPrimary;
+
+  // Mobile nav breadcrumb segment: "> Profile ∨"
+  const renderMobileNavSegment = () => {
+    if (!hasMobileNav) return null;
+    return (
+      <div className="flex items-center gap-0.5 md:hidden">
+        <Icon name="chevron-right" className="size-5" color={chevronColor} />
+        <button
+          type="button"
+          onClick={() => setIsMobileNavOpen((prev) => !prev)}
+          className={`flex items-center gap-0.5 text-base font-normal ${textColor}`}
+        >
+          {mobileNavActiveLabel}
+          <Icon
+            name={isMobileNavOpen ? "chevron-up" : "chevron-down"}
+            className="size-5"
+            color={chevronColor}
+          />
+        </button>
+      </div>
+    );
+  };
+
   // Render breadcrumb navigation
   const renderBreadcrumbs = () => {
     // If we have a simple title, render it
     if (title && breadcrumbs.length === 0) {
       return (
-        <span
-          className={`text-base font-normal ${isLanding ? "text-negative" : "text-primary"} text-left truncate`}
-        >
-          {title}
-        </span>
+        <div className="flex items-center gap-0.5 min-w-0">
+          <span
+            className={`text-base font-normal ${isLanding ? "text-negative" : "text-primary"} text-left truncate`}
+          >
+            {title}
+          </span>
+          {renderMobileNavSegment()}
+        </div>
       );
     }
 
@@ -151,11 +203,12 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
                 <Icon
                   name="chevron-right"
                   className="size-5"
-                  color={isLanding ? colors.iconNegative : colors.iconSecondary}
+                  color={chevronColor}
                 />
               )}
             </React.Fragment>
           ))}
+          {renderMobileNavSegment()}
         </div>
       );
     }
@@ -175,7 +228,7 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
         <Icon
           name="chevron-right"
           className="size-5"
-          color={isLanding ? colors.iconNegative : colors.iconSecondary}
+          color={chevronColor}
         />
         {/* Last two items */}
         {lastTwo.map((item, index) => (
@@ -191,11 +244,12 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
               <Icon
                 name="chevron-right"
                 className="size-5"
-                color={isLanding ? colors.iconNegative : colors.iconSecondary}
+                color={chevronColor}
               />
             )}
           </React.Fragment>
         ))}
+        {renderMobileNavSegment()}
       </div>
     );
   };
@@ -273,21 +327,43 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
       `}
     >
       {/* Left section */}
-      <div className="flex-1 flex items-center justify-start gap-1 min-w-0 relative">
-        {/* Menu button (logged out landing only) */}
-        {showMenu && !isSignedIn && isLanding && (
+      <div ref={mobileNavRef} className="flex-1 flex items-center justify-start gap-1 min-w-0 relative">
+        {/* Menu button — landing (always visible) or inner signed-in (mobile only via md:hidden) */}
+        {showMenu && (
           <button
             type="button"
             onClick={onMenuClick}
-            className="size-10 flex items-center justify-center rounded hover:bg-white/10 transition-colors duration-fast ease-gitlaw shrink-0"
+            className={`
+              size-10 flex items-center justify-center rounded
+              transition-colors duration-fast ease-gitlaw shrink-0
+              ${isLanding
+                ? "hover:bg-white/10"
+                : "hover:bg-secondary/30 md:hidden"
+              }
+            `}
             aria-label="Menu"
           >
-            <Icon name="menu" className="size-6" color={colors.iconNegative} />
+            <Icon
+              name="menu"
+              className="size-6"
+              color={isLanding ? colors.iconNegative : iconColor}
+            />
           </button>
         )}
 
         {/* Breadcrumbs / Title */}
         {renderBreadcrumbs()}
+
+        {/* Mobile page-nav dropdown */}
+        {hasMobileNav && (
+          <div className="absolute top-full left-0 pt-3 z-50 md:hidden">
+            <Dropdown
+              items={mobileNavItems!}
+              showIcons={false}
+              isOpen={isMobileNavOpen}
+            />
+          </div>
+        )}
       </div>
 
       {/* Right section */}
