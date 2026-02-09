@@ -91,139 +91,127 @@ export const Default: Story = {
   ),
 };
 
-// All Variants showcase (visibility states + responsive sizes)
+// All Variants showcase
 export const AllVariants: Story = {
   render: () => (
     <div className="flex flex-col gap-8">
-      {/* Visibility States */}
+      {/* File cards — standard (3:4) vs compact (1:1) */}
       <div>
-        <h3 className="text-sm font-semibold mb-4 text-subtle">
-          Visibility States
-        </h3>
-        <div className="flex gap-2">
-          <div style={{ width: "220px" }}>
-            <Card
-              type="file"
-              title="Private Document"
-              description="Only visible to you."
-              ownerName="Whisk"
-              ownerInitials="WH"
-              visibility="private"
-            />
-          </div>
-          <div style={{ width: "220px" }}>
-            <Card
-              type="file"
-              title="Public Document"
-              description="Accessible to everyone."
-              ownerName="Whisk"
-              ownerInitials="WH"
-              visibility="public"
-            />
-          </div>
-          <div style={{ width: "220px" }}>
-            <Card
-              type="file"
-              title="Shared Document"
-              description="Shared with specific people."
-              ownerName="Whisk"
-              ownerInitials="WH"
-              visibility="shared"
-            />
-          </div>
-          <div style={{ width: "220px" }}>
-            <Card
-              type="file"
-              title="Organization Document"
-              description="Shared with organization."
-              ownerName="Whisk"
-              ownerInitials="WH"
-              visibility="organization"
-              organizationName="Gitlaw"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Responsive Sizes */}
-      <div>
-        <h3 className="text-sm font-semibold mb-4 text-subtle">
-          Under 200px (compact: no star, no file count, 16px padding)
-        </h3>
-        <div className="flex gap-2">
-          <div style={{ width: "180px" }}>
-            <Card
-              type="file"
-              title="Compact File"
-              description="Smaller card variant."
-              ownerName="Whisk"
-              ownerInitials="WH"
-              visibility="private"
-              starred={true}
-            />
-          </div>
-          <div style={{ width: "180px" }}>
-            <Card
-              type="folder"
-              title="Compact Folder"
-              filesCount={5}
-              files={sampleFiles}
-              starred={true}
-            />
-          </div>
-        </div>
-      </div>
-      <div>
-        <h3 className="text-sm font-semibold mb-4 text-subtle">
-          200px+ (full: star visible, file count visible, 24px padding)
-        </h3>
-        <div className="flex gap-2">
+        <h3 className="text-sm font-semibold mb-4 text-subtle">File cards</h3>
+        <div className="flex gap-3 items-start">
           <div style={{ width: "240px" }}>
             <Card
               type="file"
-              title="Standard File"
-              description="Standard card variant."
+              title="Service Contract Template"
+              description="Explains how Mozilla handles minimal personal data."
               ownerName="Whisk"
               ownerInitials="WH"
               visibility="private"
-              starred={true}
+              starred
             />
           </div>
-          <div style={{ width: "240px" }}>
-            <Card
-              type="folder"
-              title="Standard Folder"
-              filesCount={5}
-              files={sampleFiles}
-              starred={true}
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Compact Mode (mobile) */}
-      <div>
-        <h3 className="text-sm font-semibold mb-4 text-subtle">
-          Compact mode — square (1:1), full-width
-        </h3>
-        <div className="flex gap-2">
           <div style={{ width: "192px" }}>
             <Card
               type="file"
-              title="Compact File"
-              description="Square card for mobile grids."
+              title="Service Contract Template"
+              description="This description is hidden in compact mode."
               ownerName="Whisk"
               ownerInitials="WH"
               visibility="private"
+              starred
               compact
             />
           </div>
+        </div>
+      </div>
+
+      {/* Folder cards — standard vs compact */}
+      <div>
+        <h3 className="text-sm font-semibold mb-4 text-subtle">
+          Folder cards
+        </h3>
+        <div className="flex gap-3 items-start">
+          <div style={{ width: "240px" }}>
+            <Card
+              type="folder"
+              title="Client Contracts"
+              filesCount={6}
+              files={sampleFiles}
+            />
+          </div>
           <div style={{ width: "192px" }}>
             <Card
               type="folder"
-              title="Compact Folder"
-              filesCount={5}
+              title="Client Contracts"
+              filesCount={6}
               files={sampleFiles}
+              compact
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Visibility states */}
+      <div>
+        <h3 className="text-sm font-semibold mb-4 text-subtle">Visibility</h3>
+        <div className="flex gap-3">
+          {(
+            [
+              ["private", "Private Doc", undefined],
+              ["public", "Public Doc", undefined],
+              ["shared", "Shared Doc", undefined],
+              ["organization", "Org Doc", "Gitlaw"],
+            ] as const
+          ).map(([vis, title, org]) => (
+            <div key={vis} style={{ width: "200px" }}>
+              <Card
+                type="file"
+                title={title}
+                description="Short description."
+                ownerName="Whisk"
+                ownerInitials="WH"
+                visibility={vis}
+                organizationName={org}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* States — selected, starred */}
+      <div>
+        <h3 className="text-sm font-semibold mb-4 text-subtle">States</h3>
+        <div className="flex gap-3 items-start">
+          <div style={{ width: "220px" }}>
+            <Card
+              type="file"
+              title="Selected Card"
+              description="Shows a 2px primary border."
+              ownerName="Whisk"
+              ownerInitials="WH"
+              visibility="private"
+              selected
+            />
+          </div>
+          <div style={{ width: "220px" }}>
+            <Card
+              type="file"
+              title="Starred Card"
+              description="Star icon is filled."
+              ownerName="Whisk"
+              ownerInitials="WH"
+              visibility="private"
+              starred
+            />
+          </div>
+          <div style={{ width: "192px" }}>
+            <Card
+              type="file"
+              title="Selected Compact"
+              ownerName="Whisk"
+              ownerInitials="WH"
+              visibility="shared"
+              selected
               compact
             />
           </div>

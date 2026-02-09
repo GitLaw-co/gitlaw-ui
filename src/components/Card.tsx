@@ -195,7 +195,7 @@ export const Card: React.FC<CardProps> = ({
           </div>
         )}
 
-        {/* Actions (star + menu) - star hidden under 200px */}
+        {/* Actions (star + menu) */}
         <div className="flex items-center gap-2">
           <button
             type="button"
@@ -203,7 +203,7 @@ export const Card: React.FC<CardProps> = ({
               e.stopPropagation();
               onStarClick?.();
             }}
-            className="p-1 hover:bg-secondary rounded transition-colors duration-fast ease-gitlaw hidden @[200px]:block"
+            className="p-1 hover:bg-secondary rounded transition-colors duration-fast ease-gitlaw"
           >
             <StarIcon starred={starred} className={ICON_SIZE} />
           </button>
@@ -224,13 +224,15 @@ export const Card: React.FC<CardProps> = ({
         </div>
       </div>
 
-      {/* Title - DM Serif Text, 24px, primary-text */}
-      <h3 className="font-serif text-2xl font-normal text-foreground leading-[1.4]">
+      {/* Title - DM Serif Text, 24px, primary-text. Clamped to 2 lines in compact mode. */}
+      <h3
+        className={`font-serif text-2xl font-normal text-foreground leading-[1.4] ${compact ? "line-clamp-2" : ""}`}
+      >
         {title}
       </h3>
 
-      {/* Description - sm (14px), secondary-text */}
-      {description && (
+      {/* Description - sm (14px), secondary-text. Hidden in compact mode. */}
+      {description && !compact && (
         <p className="text-sm font-normal text-subtle leading-[1.4]">
           {description}
         </p>
@@ -259,18 +261,8 @@ export const Card: React.FC<CardProps> = ({
           </div>
         </div>
 
-        {/* Actions - star hidden under 200px */}
+        {/* Actions (menu only — folders have no star) */}
         <div className="flex items-center gap-2 shrink-0">
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              onStarClick?.();
-            }}
-            className="p-1 hover:bg-secondary rounded transition-colors duration-fast ease-gitlaw hidden @[200px]:block"
-          >
-            <StarIcon starred={starred} className={ICON_SIZE} />
-          </button>
           <button
             type="button"
             onClick={(e) => {
@@ -291,9 +283,9 @@ export const Card: React.FC<CardProps> = ({
       {/* Divider */}
       <div className="w-full h-px bg-border" />
 
-      {/* Files list - each file clickable to open in editor */}
+      {/* Files list - each file clickable to open in editor. Show fewer in compact mode. */}
       <div className="flex flex-col w-full flex-1 overflow-hidden">
-        {files.slice(0, 6).map((file) => (
+        {files.slice(0, compact ? 3 : 6).map((file) => (
           <div
             key={file.id}
             className="flex items-center gap-2 min-h-12 p-3 hover:bg-secondary/50 transition-colors duration-fast ease-gitlaw cursor-pointer"
