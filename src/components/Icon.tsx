@@ -64,7 +64,7 @@ export const Icon: React.FC<IconProps> = ({
 
   return (
     <img
-      src={`${import.meta.env.BASE_URL}icons/${name}.svg`}
+      src={`${import.meta.env.STORYBOOK_BASE || '/'}icons/${name}.svg`}
       alt={name}
       className={className}
       style={{ filter }}

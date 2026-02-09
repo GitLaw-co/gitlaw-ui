@@ -16,13 +16,6 @@ const config: StorybookConfig = {
     autodocs: 'tag',
   },
   staticDirs: ['../public'],
-  viteFinal: async (config) => {
-    // GitHub Pages serves from /gitlaw-ui/, Vercel/localhost from /
-    if (process.env.STORYBOOK_BASE) {
-      config.base = process.env.STORYBOOK_BASE;
-    }
-    return config;
-  },
 };
 
 export default config;
