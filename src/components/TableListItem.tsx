@@ -57,6 +57,8 @@ export interface TableListItemProps {
   sortDirection?: SortDirection;
   /** Sort change handler — called when a header label is clicked */
   onSortChange?: (column: string, direction: SortDirection) => void;
+  /** Sort label shown in the header right slot (e.g. "Sort by: Name ↓") */
+  sortLabel?: string;
   /** Additional CSS classes */
   className?: string;
 }
@@ -356,6 +358,7 @@ const HeaderRow: React.FC<TableListItemProps> = ({
   sortColumn,
   sortDirection,
   onSortChange,
+  sortLabel,
   className = "",
 }) => {
   const labels = headerLabels || defaultHeaderLabels[cols] || defaultHeaderLabels[6];
@@ -407,10 +410,16 @@ const HeaderRow: React.FC<TableListItemProps> = ({
         </div>
       }
       rightSlot={
-        <>
-          <div className="size-8 shrink-0" />
-          <div className="size-8 shrink-0" />
-        </>
+        sortLabel ? (
+          <span className="text-sm font-normal text-subtle leading-[1.4] whitespace-nowrap shrink-0">
+            {sortLabel}
+          </span>
+        ) : (
+          <>
+            <div className="size-8 shrink-0" />
+            <div className="size-8 shrink-0" />
+          </>
+        )
       }
     />
   );
