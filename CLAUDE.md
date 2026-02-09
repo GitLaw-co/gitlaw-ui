@@ -19,11 +19,11 @@ Foundations/       ← 🔄 Evolving (changes frequently as design system mature
 Components/        ← 🔄 In progress (current focus)
   Button, Card, Input, etc.
 
-Templates/         ← 📋 Planned
+Templates/         ← 🔄 In progress (ChatPageTemplate + PageShell)
   Page layouts, shells
 
 Prototypes/        ← 📋 Planned
-  Full interactive flows
+  Full interactive flows (File List page demo in Pages/)
 ```
 
 ## Existing Components
@@ -33,7 +33,7 @@ Prototypes/        ← 📋 Planned
 | Avatar | ✅ Stable | Images, initials, icons, or empty states |
 | Badge | ✅ Stable | Notification indicators |
 | Button | ✅ Stable | Primary, secondary, outline, ghost, destructive, disabled, icon variants |
-| Card | ✅ Stable | File, template, and folder cards |
+| Card | ✅ Stable | File, template, and folder cards with compact mobile variant |
 | Checkbox | ✅ Stable | Checkbox with indeterminate state |
 | ChatInput | ✅ Stable | AI chat interface |
 | ChatThread | ✅ Stable | Chat conversation thread |
@@ -43,15 +43,20 @@ Prototypes/        ← 📋 Planned
 | EditorPaper | ✅ Stable | Document editing surface |
 | EditorSection | ✅ Stable | Collapsible content sections |
 | EditorToolbar | ✅ Stable | Formatting toolbar |
+| FileDropdown | ✅ Stable | File picker dropdown |
 | Icon | ✅ Stable | 1,475 icons with color support |
 | Input | ✅ Stable | Text input with label, icons, validation states |
-| ListHeader | ✅ Stable | Toolbar above file lists with icon actions and edit mode |
+| ListHeader | ✅ Stable | Toolbar above file lists with three edit layout variants (replace, inline, merged) |
 | MenuItem | ✅ Stable | List items with icons, avatars, checkboxes |
+| Overlay | ✅ Stable | Full-screen overlay backdrop |
 | PageNav | ✅ Stable | Settings navigation with context switcher |
+| PageShell | ✅ Stable | Responsive page shell with sidebar, header, and content area |
 | Popover | ✅ Stable | Click/hover triggered popover overlay |
 | Radio | ✅ Stable | Radio button with label |
+| Section | ✅ Stable | Content section with optional header |
 | Select | ✅ Stable | Searchable dropdown with multi-select |
 | Sidebar | ✅ Stable | Collapsible navigation |
+| Stack | ✅ Stable | Flexbox layout primitive for spacing |
 | StarIcon | ✅ Stable | Filled star icon (active/inactive) |
 | StickyFeaturePromoBar | ✅ Stable | Feature promotion banner |
 | Switch | ✅ Stable | Toggle for boolean settings |

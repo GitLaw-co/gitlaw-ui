@@ -549,7 +549,10 @@ const InteractiveFileList = ({
     [view]
   );
 
-  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+  const handlePointerDown = useCallback((e: React.PointerEvent) => {
+    // Skip rubber band on touch — taps handle selection via onClick
+    if (e.pointerType === "touch") return;
+
     // Only block interactive elements — allow drag from any empty space
     const target = e.target as HTMLElement;
     if (
@@ -638,8 +641,8 @@ const InteractiveFileList = ({
           (px-6 md:px-[84px] pt-8 pb-16 from PageShell) so drags can start
           from anywhere on the visible page. */}
       <div
-        className="select-none -mx-6 md:-mx-[84px] -mt-8 -mb-16 px-6 md:px-[84px] pt-8 pb-16 min-h-full"
-        onMouseDown={handleMouseDown}
+        className={`-mx-6 md:-mx-[84px] -mt-8 -mb-16 px-6 md:px-[84px] pt-8 pb-16 min-h-full ${selectionBox ? "select-none" : ""}`}
+        onPointerDown={handlePointerDown}
       >
         <div className="flex gap-6">
           <PageNav
@@ -753,7 +756,7 @@ const InteractiveFileList = ({
             </div>
           )}
 
-          <BrowseTemplatesFab />
+          {!someSelected && <BrowseTemplatesFab />}
           </div>
         </div>
       </div>
