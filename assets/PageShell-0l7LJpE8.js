@@ -1,4 +1,4 @@
-import{j as e}from"./jsx-runtime-DiklIkkE.js";import{r as u}from"./index-DRjF_FHU.js";import{S as c}from"./Sidebar-DIpisecJ.js";import{T as I}from"./TopHeader-Cb2FF6HH.js";const f=({open:t,onClose:s,children:a,className:i=""})=>e.jsxs("div",{className:i,children:[e.jsx("div",{className:`
+import{j as e}from"./jsx-runtime-DiklIkkE.js";import{r as u}from"./index-DRjF_FHU.js";import{S as c}from"./Sidebar-D3SvkWVn.js";import{T as I}from"./TopHeader-Cb2FF6HH.js";const f=({open:t,onClose:s,children:a,className:i=""})=>e.jsxs("div",{className:i,children:[e.jsx("div",{className:`
           fixed inset-0 bg-black/30 z-40
           transition-opacity duration-normal ease-gitlaw
           ${t?"opacity-100":"opacity-0 pointer-events-none"}
