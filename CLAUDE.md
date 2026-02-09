@@ -319,7 +319,23 @@ import { colors } from '../specs';
 3. Create story file: `src/stories/ComponentName.stories.tsx`
 4. Export from `src/components/index.ts`
 5. Use design tokens from `src/specs/`
-6. **Review against Figma before finalising** - Always verify component matches Figma specs
+6. **Categorize the story** — Set the story `title` to `"Components/<Category>/ComponentName"` using the correct category (see table below)
+7. **Review against Figma before finalising** - Always verify component matches Figma specs
+
+**⚠️ Story Categorization (Required):**
+
+Every component story **must** be placed in one of these Storybook categories:
+
+| Category | What belongs here | Examples |
+|----------|-------------------|----------|
+| **Actions** | Buttons, clickable triggers | Button |
+| **Form** | Inputs, selects, toggles, checkboxes | Input, Select, Checkbox, Switch, Radio, TextField |
+| **Data Display** | Tables, lists, cards, badges, tags | TableListItem, Card, SettingsTableRow, Tag, Badge, Avatar |
+| **Navigation** | Menus, tabs, sidebars, headers | Sidebar, Tab, PageNav, TopHeader, ListHeader |
+| **Overlays** | Modals, popovers, tooltips, dropdowns | Dialog, Popover, Tooltip, Dropdown, Overlay |
+| **Feedback** | Toasts, status indicators | Toast |
+
+Use `title: "Components/<Category>/ComponentName"` in the story meta. **Never** place a component story at the top-level `"Components/ComponentName"` without a category.
 
 **Figma Workflow (Required):**
 - Always use `get_design_context` and `get_screenshot` from Figma MCP to extract exact specs
@@ -393,7 +409,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ComponentName } from '../components/ComponentName';
 
 const meta: Meta<typeof ComponentName> = {
-  title: 'Components/ComponentName',
+  title: 'Components/<Category>/ComponentName',  // e.g. 'Components/Form/ComponentName'
   component: ComponentName,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

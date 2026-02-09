@@ -158,6 +158,9 @@ export type { SectionProps, SectionVariant } from "./Section";
 export { Radio } from "./Radio";
 export type { RadioProps } from "./Radio";
 
+export { SettingsTableRow } from "./SettingsTableRow";
+export type { SettingsTableRowProps } from "./SettingsTableRow";
+
 export { TableListItem } from "./TableListItem";
 export type {
   TableListItemProps,
