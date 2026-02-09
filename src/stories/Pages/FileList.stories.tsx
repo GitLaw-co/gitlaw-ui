@@ -378,7 +378,6 @@ const InteractiveFileList = () => {
   // ── Sort state (visual only) ──
   const [sortColumn, setSortColumn] = useState<string>("Updated");
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
-  const sortLabel = `Sort by: ${sortColumn} ${sortDirection === "desc" ? "↓" : "↑"}`;
 
   // ── Rubber band state ──
   const [selectionBox, setSelectionBox] = useState<SelectionBox | null>(null);
@@ -690,7 +689,7 @@ const InteractiveFileList = () => {
                 sortColumn={sortColumn}
                 sortDirection={sortDirection}
                 onSortChange={handleSortChange}
-                sortLabel={sortLabel}
+
                 selectMode={someSelected}
                 selectStatus={selectAllStatus}
                 selectedCount={selectedItems.size}
@@ -735,7 +734,7 @@ const InteractiveFileList = () => {
                   selectStatus={selectAllStatus}
                   selectedCount={selectedItems.size}
                   onSelectAllClick={toggleSelectAll}
-                  sortLabel={sortLabel}
+  
                 />
               </div>
               <div className="grid grid-cols-1 gap-2 @sm:grid-cols-2 @[592px]:grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] @2xl:gap-3">
