@@ -550,33 +550,83 @@ npm run deploy
 ## Git Workflow
 
 - Commit messages should be clear and descriptive
-- Always include `Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>` in commits
+- Always include `Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>` in commits
 - Push to `main` branch for immediate deployment
 
 ## Tidy Up Routine
 
-When asked to "tidy up" the repo, perform these checks:
+When asked to "tidy up" the repo, run through these checks in order. Each step has a specific command or search to run — no guessing.
 
-### 1. Update Documentation
-- Update `src/stories/Introduction.mdx` with correct component count
-- Ensure all new components are listed in the component navigation sections
-- Update the existing components table in this file if needed
+### 1. Exports & Count
 
-### 2. Verify Exports
-- Check `src/components/index.ts` exports all components
-- Ensure both named exports and types are exported
+```bash
+# Count component files
+ls src/components/*.tsx | wc -l
 
-### 3. Design Token Consistency
-- Verify all components use `colors.` constants from `src/specs/colors.ts`
-- Check for hardcoded hex colors and replace with tokens
-- Verify Tailwind classes use semantic names (e.g., `text-foreground`, `bg-card`)
+# Count exports in index.ts
+grep -c "^export {" src/components/index.ts
+```
 
-### 4. Consolidate Repeated Patterns
-- Look for repeated inline styles (e.g., shadows, transitions)
-- Add utilities to `tailwind.config.js` if pattern appears 3+ times
-- Example: `shadow-card` for the standard card shadow
+- Compare counts — every `.tsx` in `src/components/` must have a matching export in `index.ts` (both component and types)
+- Update `src/stories/Introduction.mdx` component count if it changed
+- Update the "Existing Components" table in this file if components were added/removed
 
-### 5. Build & Deploy
-- Run `npm run build-storybook` to verify no errors
-- Commit changes with descriptive message
-- Run `npm run deploy` to publish
+### 2. Story Categories
+
+```bash
+# List all story titles
+grep "title:" src/stories/*.stories.tsx src/stories/**/*.stories.tsx
+```
+
+- Verify every component story uses `Components/<Category>/Name` format (see category table above)
+- Verify Chat stories use `Chat/`, Editor stories use `Editor/`, Layout stories use `Layout/`
+- Fix any miscategorized stories
+- Update story links in `Introduction.mdx` if titles changed (links are kebab-case of title: `Components/Data Display/Card` → `?path=/docs/components-data-display-card--docs`)
+
+### 3. Story Consolidation
+
+```bash
+# Find stories with too many exports
+for f in src/stories/*.stories.tsx; do echo "$(grep -c 'export const' "$f") $f"; done | sort -rn
+```
+
+- Max 3-4 stories per file: Default + AllVariants + Interactive (optional) + 1 domain-specific (rare)
+- Merge individual variant stories (e.g. `Primary`, `Secondary`, `Disabled`) into a single `AllVariants` grid
+- Remove redundant stories that duplicate what Default + controls already provide
+
+### 4. Design Token Consistency
+
+```bash
+# Find hardcoded hex colors in components (exclude specs, config, CSS)
+grep -rn '"#[0-9A-Fa-f]' src/components/ src/templates/
+```
+
+- Every hex color in components should come from `colors.*` tokens in `src/specs/colors.ts`
+- Exception: `Icon.tsx` uses hex keys in its `colorFilters` lookup table (intentional)
+- Check Tailwind classes use semantic names (`bg-primary`, `text-text-secondary`) not raw colors
+
+### 5. Repeated Patterns
+
+```bash
+# Find repeated Tailwind patterns across components
+grep -roh 'transition-[a-z]* duration-fast ease-gitlaw' src/components/ | sort | uniq -c | sort -rn
+```
+
+- If a Tailwind class combo appears 3+ times, extract to `src/styles/globals.css` as a `@layer utilities` class
+- Existing utilities: `transition-interactive`, `transition-fade`, `shadow-card`
+- When adding a new utility, do a bulk replace across all files, then verify with grep that no old pattern remains
+
+### 6. Build & Verify
+
+```bash
+npm run build-storybook
+```
+
+- Must complete with zero errors (chunk size warnings are expected and OK)
+- Spot-check a few stories in the browser if Storybook is running
+
+### 7. Commit & Push
+
+- Stage all changed files explicitly (not `git add -A`)
+- Write a descriptive commit message summarizing what was tidied
+- Push to `main` for auto-deploy to Vercel
