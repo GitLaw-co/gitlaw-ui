@@ -29,9 +29,9 @@ export interface ListHeaderProps {
 }
 
 const iconBtnClass =
-  "inline-flex items-center justify-center size-8 rounded bg-secondary hover:bg-secondary-hover transition-colors duration-fast ease-gitlaw";
+  "inline-flex items-center justify-center size-8 rounded bg-secondary hover:bg-secondary-hover transition-interactive";
 const editIconBtnClass =
-  "inline-flex items-center justify-center size-8 rounded bg-primary hover:bg-primary-hover transition-colors duration-fast ease-gitlaw";
+  "inline-flex items-center justify-center size-8 rounded bg-primary hover:bg-primary-hover transition-interactive";
 
 export const ListHeader: React.FC<ListHeaderProps> = ({
   mode = "default",

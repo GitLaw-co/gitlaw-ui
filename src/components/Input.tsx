@@ -194,7 +194,7 @@ export const Input: React.FC<InputProps> = ({
       <div
         className={`
           ${displayClass} items-center rounded
-          border transition-colors duration-fast ease-gitlaw relative
+          border transition-interactive relative
           ${contextConfig.bg}
           ${sizeConfig.container}
           ${isActive ? contextConfig.activeBorder : contextConfig.border}
@@ -250,7 +250,7 @@ export const Input: React.FC<InputProps> = ({
           <button
             type="button"
             onClick={handleClear}
-            className="shrink-0 text-foreground hover:text-subtle transition-colors duration-fast ease-gitlaw"
+            className="shrink-0 text-foreground hover:text-subtle transition-interactive"
           >
             {rightIcon || (
               <Icon name="x" className={iconClass} color={colors.textPrimary} />

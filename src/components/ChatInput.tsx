@@ -110,7 +110,7 @@ const IconButton: React.FC<{
   <button
     type="button"
     onClick={onClick}
-    className="p-1 hover:bg-secondary rounded transition-colors duration-fast ease-gitlaw"
+    className="p-1 hover:bg-secondary rounded transition-interactive"
   >
     <Icon name={icon} className="size-6" color={colors.iconPrimary} />
   </button>
@@ -249,7 +249,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
           <button
             type="button"
             onClick={onStopClick}
-            className="ml-auto p-1 hover:bg-secondary rounded transition-colors duration-fast ease-gitlaw"
+            className="ml-auto p-1 hover:bg-secondary rounded transition-interactive"
           >
             <Icon name="square" className="size-6" color={colors.iconPrimary} />
           </button>
@@ -304,7 +304,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
             onClick={onSubmit}
             className="
               bg-primary hover:bg-primary-hover
-              p-1 rounded transition-colors duration-fast ease-gitlaw shrink-0
+              p-1 rounded transition-interactive shrink-0
             "
           >
             <Icon
@@ -409,7 +409,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
                     bg-secondary hover:bg-secondary-hover
                     flex items-center gap-1 h-8 px-3 py-2 rounded
                     text-xs font-normal text-foreground-button leading-[1.4]
-                    transition-colors duration-fast ease-gitlaw
+                    transition-interactive
                   "
                 >
                   <QuickActionIcon icon={action.icon} />

@@ -143,7 +143,7 @@ export const PageNav: React.FC<PageNavProps> = ({
               className={`
                 relative flex items-center w-full min-h-[48px] px-3 py-3 text-left
                 text-sm font-normal leading-[1.4] text-primary
-                transition-colors duration-fast ease-gitlaw
+                transition-interactive
                 cursor-pointer
                 ${isActive ? "bg-secondary rounded" : "hover:bg-secondary/30 rounded"}
               `}

@@ -203,7 +203,7 @@ export const Card: React.FC<CardProps> = ({
               e.stopPropagation();
               onStarClick?.();
             }}
-            className="p-1 hover:bg-secondary rounded transition-colors duration-fast ease-gitlaw"
+            className="p-1 hover:bg-secondary rounded transition-interactive"
           >
             <StarIcon starred={starred} className={ICON_SIZE} />
           </button>
@@ -213,7 +213,7 @@ export const Card: React.FC<CardProps> = ({
               e.stopPropagation();
               onMenuClick?.();
             }}
-            className="p-1 hover:bg-secondary rounded transition-colors duration-fast ease-gitlaw"
+            className="p-1 hover:bg-secondary rounded transition-interactive"
           >
             <Icon
               name="ellipsis"
@@ -269,7 +269,7 @@ export const Card: React.FC<CardProps> = ({
               e.stopPropagation();
               onMenuClick?.();
             }}
-            className="p-1 hover:bg-secondary rounded transition-colors duration-fast ease-gitlaw"
+            className="p-1 hover:bg-secondary rounded transition-interactive"
           >
             <Icon
               name="ellipsis"
@@ -288,7 +288,7 @@ export const Card: React.FC<CardProps> = ({
         {files.slice(0, compact ? 3 : 6).map((file) => (
           <div
             key={file.id}
-            className="flex items-center gap-2 min-h-12 p-3 hover:bg-secondary/50 transition-colors duration-fast ease-gitlaw cursor-pointer"
+            className="flex items-center gap-2 min-h-12 p-3 hover:bg-secondary/50 transition-interactive cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
               onFileClick?.(file);

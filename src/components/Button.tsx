@@ -85,7 +85,7 @@ export const Button: React.FC<ButtonProps> = ({
   const iconColor = getIconColor();
 
   const baseClasses =
-    "inline-flex items-center justify-center rounded font-normal transition-colors duration-fast ease-gitlaw focus:outline-none focus:ring-2 focus:ring-primary/50";
+    "inline-flex items-center justify-center rounded font-normal transition-interactive focus:outline-none focus:ring-2 focus:ring-primary/50";
   const sizeClass = isIcon ? iconSizeClasses[size] : sizeClasses[size];
   const variantClass = variantClasses[variant];
 

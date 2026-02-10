@@ -99,7 +99,7 @@ const StarButton: React.FC<{
       e.stopPropagation();
       onClick?.();
     }}
-    className="flex items-center justify-center size-8 rounded-gitlaw-s shrink-0 transition-colors duration-fast ease-gitlaw"
+    className="flex items-center justify-center size-8 rounded-gitlaw-s shrink-0 transition-interactive"
   >
     <StarIcon starred={starred} className="size-5" />
   </button>
@@ -113,7 +113,7 @@ const MenuButton: React.FC<{ onClick?: () => void }> = ({ onClick }) => (
       e.stopPropagation();
       onClick?.();
     }}
-    className="flex items-center justify-center size-8 rounded-gitlaw-s shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-fast ease-gitlaw hover:bg-secondary"
+    className="flex items-center justify-center size-8 rounded-gitlaw-s shrink-0 opacity-0 group-hover:opacity-100 transition-fade hover:bg-secondary"
   >
     <Icon name="ellipsis" className="size-5" color={colors.iconSecondary} />
   </button>
@@ -180,7 +180,7 @@ const SortableLabel: React.FC<{
     <button
       type="button"
       onClick={onClick}
-      className={`${textStyle} leading-[1.4] cursor-pointer hover:text-foreground transition-colors duration-fast ease-gitlaw shrink-0 whitespace-nowrap`}
+      className={`${textStyle} leading-[1.4] cursor-pointer hover:text-foreground transition-interactive shrink-0 whitespace-nowrap`}
     >
       {label}{arrow}
     </button>

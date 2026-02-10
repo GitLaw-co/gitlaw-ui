@@ -51,7 +51,7 @@ export const Switch: React.FC<SwitchProps> = ({
       className={`
         relative inline-flex items-center
         rounded-sm py-0.5
-        transition-colors duration-fast ease-gitlaw
+        transition-interactive
         ${sizeConfig.track}
         ${checked ? "bg-primary justify-end pr-0.5" : "bg-secondary justify-start pl-0.5"}
         ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
@@ -60,7 +60,7 @@ export const Switch: React.FC<SwitchProps> = ({
     >
       <span
         className={`
-          rounded-sm transition-colors duration-fast ease-gitlaw
+          rounded-sm transition-interactive
           ${sizeConfig.thumb}
           bg-white
         `}

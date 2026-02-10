@@ -112,7 +112,7 @@ export const Avatar: React.FC<AvatarProps> = ({
             size-6 rounded-full
             bg-text-primary
             flex items-center justify-center
-            hover:bg-obsidian-800 transition-colors duration-fast ease-gitlaw
+            hover:bg-obsidian-800 transition-interactive
           "
         >
           <Icon name="pencil" className="size-4" color={colors.iconNegative} />

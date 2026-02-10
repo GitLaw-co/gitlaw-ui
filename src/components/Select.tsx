@@ -208,7 +208,7 @@ export const Select: React.FC<SelectProps> = ({
             <div
               key={option.value}
               className={`
-                px-3 py-2 cursor-pointer transition-colors duration-fast ease-gitlaw
+                px-3 py-2 cursor-pointer transition-interactive
                 ${sizeConfig.text}
                 ${option.value === value ? "bg-secondary text-foreground" : "text-foreground hover:bg-secondary/50"}
               `}

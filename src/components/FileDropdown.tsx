@@ -47,7 +47,7 @@ export const FileDropdown: React.FC<FileDropdownProps> = ({
           onClick={() => onFileClick?.(file)}
           className="
             flex items-center gap-2 p-3 min-h-[48px]
-            hover:bg-secondary/30 rounded transition-colors duration-fast ease-gitlaw
+            hover:bg-secondary/30 rounded transition-interactive
             w-full text-left
           "
         >

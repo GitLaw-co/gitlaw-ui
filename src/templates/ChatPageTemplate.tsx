@@ -348,7 +348,7 @@ export const ChatPageTemplate: React.FC<ChatPageTemplateProps> = ({
           {/* Visible 1px line centered in 4px hit area */}
           <div
             className={`
-              absolute left-1/2 -translate-x-1/2 w-px h-full transition-colors duration-fast ease-gitlaw
+              absolute left-1/2 -translate-x-1/2 w-px h-full transition-interactive
               ${isDragging ? 'bg-primary' : 'bg-border group-hover:bg-primary/50'}
             `}
           />

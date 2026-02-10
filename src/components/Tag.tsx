@@ -102,7 +102,7 @@ export const Tag: React.FC<TagProps> = ({
         <button
           type="button"
           onClick={onClose}
-          className="shrink-0 text-foreground-tag hover:opacity-70 transition-opacity duration-fast ease-gitlaw"
+          className="shrink-0 text-foreground-tag hover:opacity-70 transition-fade"
         >
           <Icon
             name="x"

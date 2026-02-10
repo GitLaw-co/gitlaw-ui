@@ -10,7 +10,7 @@ An **experimental** React component library built with Tailwind CSS, generated u
 
 ## About This Project
 
-This Storybook showcases 39 components, 1,475 icons, and 100 illustrations — all generated through an experimental workflow using Claude to interpret Figma designs. Use the sidebar to explore components interactively.
+This Storybook showcases 38 components, 1,475 icons, and 100+ illustrations — all generated through an experimental workflow using Claude to interpret Figma designs. Use the sidebar to explore components interactively.
 
 ### How to Navigate
 
@@ -28,6 +28,7 @@ This Storybook showcases 39 components, 1,475 icons, and 100 illustrations — a
 
 ```tsx
 import { Button, Input, Avatar, Icon } from './components';
+import { colors } from './specs';
 
 // Primary button
 <Button variant="primary" size="m">Get Started</Button>
@@ -39,65 +40,68 @@ import { Button, Input, Avatar, Icon } from './components';
 <Avatar type="initials" initials="JD" size="M" />
 
 // Icon
-<Icon name="check" className="size-6" color="#5E49D6" />
+<Icon name="check" className="size-6" color={colors.iconPrimary} />
 ```
 
 ---
 
 ## Component Overview
 
-### Form Controls
-- [**Button**](?path=/docs/components-button--docs) — Primary, secondary, outline, ghost, destructive variants
-- [**Input**](?path=/docs/components-input--docs) — Text input with labels, icons, validation
-- [**TextField**](?path=/docs/components-textfield--docs) — Multi-line textarea
-- [**Select**](?path=/docs/components-select--docs) — Searchable dropdown with multi-select
-- [**Switch**](?path=/docs/components-switch--docs) — Boolean toggle
-- [**Checkbox**](?path=/docs/components-checkbox--docs) — Checkbox with indeterminate state
-- [**Radio**](?path=/docs/components-radio--docs) — Radio button with label
+### Actions
+- [**Button**](?path=/docs/components-actions-button--docs) — Primary, secondary, outline, ghost, destructive variants
+- [**MenuItem**](?path=/docs/components-actions-menuitem--docs) — List items with icons, avatars, checkboxes
+- [**Dropdown**](?path=/docs/components-actions-dropdown--docs) — Adaptive width dropdown menu
+
+### Form
+- [**Input**](?path=/docs/components-form-input--docs) — Text input with labels, icons, validation
+- [**TextField**](?path=/docs/components-form-textfield--docs) — Multi-line textarea
+- [**Select**](?path=/docs/components-form-select--docs) — Searchable dropdown with multi-select
+- [**Switch**](?path=/docs/components-form-switch--docs) — Boolean toggle
+- [**Checkbox**](?path=/docs/components-form-checkbox--docs) — Checkbox with indeterminate state
+- [**Radio**](?path=/docs/components-form-radio--docs) — Radio button with label
 
 ### Data Display
-- [**Avatar**](?path=/docs/components-avatar--docs) — User avatars with multiple display modes
-- [**Badge**](?path=/docs/components-badge--docs) — Notification indicators
-- [**Tag**](?path=/docs/components-tag--docs) — Labels with icons and close buttons
-- [**Card**](?path=/docs/components-card--docs) — File, template, and folder cards
-- [**Tooltip**](?path=/docs/components-tooltip--docs) — Contextual information hints
-- [**Icon**](?path=/docs/foundations-icons--docs) — 1,475 icons with color support
-- [**StarIcon**](?path=/docs/components-staricon--docs) — Filled star icon with active/inactive states
-- [**FileDropdown**](?path=/docs/components-filedropdown--docs) — File picker dropdown
-- [**StickyFeaturePromoBar**](?path=/docs/components-stickyfeaturepromobar--docs) — Feature promotion banner
+- [**Avatar**](?path=/docs/components-data-display-avatar--docs) — User avatars with multiple display modes
+- [**Badge**](?path=/docs/components-data-display-badge--docs) — Notification indicators
+- [**Tag**](?path=/docs/components-data-display-tag--docs) — Labels with icons and close buttons
+- [**Card**](?path=/docs/components-data-display-card--docs) — File, template, and folder cards
+- [**StarIcon**](?path=/docs/components-data-display-staricon--docs) — Filled star icon
+- [**TableListItem**](?path=/docs/components-data-display-tablelistitem--docs) — Sortable table rows with selection, starring, menus
+- [**SettingsTableRow**](?path=/docs/components-data-display-settingstablerow--docs) — Settings key-value rows
 
 ### Navigation
-- [**Tab**](?path=/docs/components-tab--docs) — Tab navigation with badges
-- [**MenuItem**](?path=/docs/components-menuitem--docs) — List items with R element options
-- [**Dropdown**](?path=/docs/components-dropdown--docs) — Adaptive width dropdown menu
-- [**Sidebar**](?path=/docs/components-sidebar--docs) — Collapsible navigation sidebar
-- [**PageNav**](?path=/docs/components-pagenav--docs) — Settings page navigation with context switcher
-- [**TopHeader**](?path=/docs/components-topheader--docs) — Top-level page header with breadcrumbs
+- [**Tab**](?path=/docs/components-navigation-tab--docs) — Tab navigation with badges
+- [**Sidebar**](?path=/docs/components-navigation-sidebar--docs) — Collapsible navigation sidebar
+- [**PageNav**](?path=/docs/components-navigation-pagenav--docs) — Settings page navigation with context switcher
+- [**TopHeader**](?path=/docs/components-navigation-topheader--docs) — Top-level page header with breadcrumbs
+- [**ListHeader**](?path=/docs/components-navigation-listheader--docs) — Toolbar above file lists with edit mode variants
 
-### Tables & Lists
-- [**TableListItem**](?path=/docs/components-tablelistitem--docs) — Sortable table rows with selection, starring, menus
-- [**ListHeader**](?path=/docs/components-listheader--docs) — Toolbar above file lists with icon actions and edit mode variants
-- [**Popover**](?path=/docs/components-popover--docs) — Click/hover triggered popover overlay
-
-### Chat
-- [**ChatInput**](?path=/docs/components-chat-chatinput--docs) — AI chat input with quick actions
-- [**ChatThread**](?path=/docs/components-chat-chatthread--docs) — Chat conversation thread
-
-### Editor
-- [**EditorHeader**](?path=/docs/components-editor-editorheader--docs) — Document title bar with actions
-- [**EditorToolbar**](?path=/docs/components-editor-editortoolbar--docs) — Formatting toolbar
-- [**EditorPaper**](?path=/docs/components-editor-editorpaper--docs) — Document editing surface
-- [**EditorSection**](?path=/docs/components-editor-editorsection--docs) — Collapsible content sections
-
-### Layout
-- [**PageShell**](?path=/docs/components-pageshell--docs) — Responsive page shell with sidebar, header, and content area
-- [**Stack**](?path=/docs/components-stack--docs) — Flexbox layout primitive for spacing
-- [**Section**](?path=/docs/components-section--docs) — Content section with optional header
-- [**Overlay**](?path=/docs/components-overlay--docs) — Full-screen overlay backdrop
+### Overlays
+- [**Dialog**](?path=/docs/components-overlays-dialog--docs) — Modal dialogs
+- [**Popover**](?path=/docs/components-overlays-popover--docs) — Click/hover triggered popover overlay
+- [**Tooltip**](?path=/docs/components-overlays-tooltip--docs) — Contextual information hints
 
 ### Feedback
-- [**Dialog**](?path=/docs/components-dialog--docs) — Modal dialogs
-- [**Toast**](?path=/docs/components-toast--docs) — Notification messages
+- [**Toast**](?path=/docs/components-feedback-toast--docs) — Notification messages
+- [**StickyFeaturePromoBar**](?path=/docs/components-feedback-stickyfeaturepromobar--docs) — Feature promotion banner
+
+### Chat
+- [**ChatInput**](?path=/docs/chat-chatinput--docs) — AI chat input with quick actions
+- [**ChatThread**](?path=/docs/chat-chatthread--docs) — Chat conversation thread
+
+### Editor
+- [**EditorHeader**](?path=/docs/editor-editorheader--docs) — Document title bar with actions
+- [**EditorToolbar**](?path=/docs/editor-editortoolbar--docs) — Responsive formatting toolbar with overflow
+- [**EditorPaper**](?path=/docs/editor-editorpaper--docs) — Document editing surface
+- [**EditorSection**](?path=/docs/editor-editorsection--docs) — Collapsible content sections
+
+### Layout
+- [**PageShell**](?path=/docs/layout-pageshell--docs) — Responsive page shell with sidebar, header, and content area
+- [**Stack**](?path=/docs/layout-stack--docs) — Flexbox layout primitive for spacing
+- [**Section**](?path=/docs/layout-section--docs) — Content section with optional header
+- [**Icon**](?path=/docs/foundations-icons--docs) — 1,475 icons with color support
+- **Overlay** — Full-screen overlay backdrop (used by Dialog, PageShell)
+- **FileDropdown** — File picker dropdown (used by EditorHeader)
 
 ---
 

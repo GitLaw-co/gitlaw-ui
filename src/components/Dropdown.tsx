@@ -70,7 +70,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
           className={`
             w-full px-3 py-3 rounded-none
             flex items-center gap-2 text-left
-            transition-colors duration-fast ease-gitlaw
+            transition-interactive
             ${item.disabled ? "opacity-50 cursor-not-allowed" : "hover:bg-secondary/30 cursor-pointer"}
             ${item.selected ? "bg-secondary/20" : ""}
           `}

@@ -271,7 +271,7 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
               <button
                 type="button"
                 onClick={handleFilesClick}
-                className={`size-10 flex items-center justify-center rounded hover:bg-secondary/30 transition-colors duration-fast ease-gitlaw`}
+                className={`size-10 flex items-center justify-center rounded hover:bg-secondary/30 transition-interactive`}
                 aria-label="Files"
               >
                 <Icon name="file-text" className="size-6" color={iconColor} />
@@ -335,7 +335,7 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
             onClick={onMenuClick}
             className={`
               size-10 flex items-center justify-center rounded
-              transition-colors duration-fast ease-gitlaw shrink-0
+              transition-interactive shrink-0
               ${isLanding
                 ? "hover:bg-white/10"
                 : "hover:bg-secondary/30 md:hidden"

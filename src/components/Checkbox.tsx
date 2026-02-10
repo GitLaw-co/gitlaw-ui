@@ -39,7 +39,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
       disabled={disabled}
       className={`
         size-4 rounded-sm border bg-card shrink-0 relative
-        transition-colors duration-fast ease-gitlaw
+        transition-interactive
         ${borderClasses[status]}
         ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
         ${className}

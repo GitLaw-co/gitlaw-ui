@@ -219,7 +219,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
     <div
       className={`
         relative flex items-center gap-2 min-h-12 p-3 ${widthClass} cursor-pointer
-        hover:bg-secondary rounded transition-colors duration-fast ease-gitlaw
+        hover:bg-secondary rounded transition-interactive
         ${className}
       `}
       onClick={onClick}

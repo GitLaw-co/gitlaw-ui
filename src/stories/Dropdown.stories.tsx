@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Dropdown } from '../components/Dropdown';
 
 const meta: Meta<typeof Dropdown> = {
-  title: 'Components/Actions/Dropdown',
+  title: 'Components/Overlays/Dropdown',
   component: Dropdown,
   parameters: {
     layout: 'centered',
@@ -17,14 +17,8 @@ const meta: Meta<typeof Dropdown> = {
   ],
   tags: ['autodocs'],
   argTypes: {
-    showIcons: {
-      control: 'boolean',
-      description: 'Whether to show icons in menu items',
-    },
-    heading: {
-      control: 'text',
-      description: 'Optional heading text',
-    },
+    showIcons: { control: 'boolean' },
+    heading: { control: 'text' },
   },
 };
 
@@ -43,38 +37,40 @@ export const Default: Story = {
   },
 };
 
-export const Interactive: Story = {
-  args: {
-    showIcons: true,
-    items: [
-      { id: '1', label: 'Primary', icon: 'star', onClick: () => console.log('Primary clicked') },
-      { id: '2', label: 'Restore', icon: 'rotate-ccw', onClick: () => console.log('Restore clicked') },
-      { id: '3', label: 'Duplicate', icon: 'copy', onClick: () => console.log('Duplicate clicked') },
-      { id: '4', label: 'Get link', icon: 'link', onClick: () => console.log('Get link clicked') },
-    ],
-  },
-};
-
 export const AllVariants: Story = {
-  args: {
-    showIcons: true,
-    heading: 'All Features',
-    items: [
-      { id: '1', label: 'Selected item', secondaryLabel: 'With secondary label', icon: 'check-circle', selected: true },
-      { id: '2', label: 'Normal item', secondaryLabel: 'Also has secondary', icon: 'circle' },
-      { id: '3', label: 'Disabled item', icon: 'x-circle', disabled: true },
-      { id: '4', label: 'Another option', icon: 'star' },
-    ],
-  },
-};
+  render: () => (
+    <div className="flex gap-8 items-start">
+      {/* With heading, selected, disabled */}
+      <Dropdown
+        showIcons
+        heading="All Features"
+        items={[
+          { id: '1', label: 'Selected item', secondaryLabel: 'With secondary label', icon: 'check-circle', selected: true },
+          { id: '2', label: 'Normal item', secondaryLabel: 'Also has secondary', icon: 'circle' },
+          { id: '3', label: 'Disabled item', icon: 'x-circle', disabled: true },
+          { id: '4', label: 'Another option', icon: 'star' },
+        ]}
+      />
 
-export const LongLabels: Story = {
-  args: {
-    showIcons: true,
-    items: [
-      { id: '1', label: 'This is a very long label that should expand the dropdown', icon: 'info' },
-      { id: '2', label: 'Another lengthy option to demonstrate width behavior', icon: 'info' },
-      { id: '3', label: 'Short', icon: 'info' },
-    ],
-  },
+      {/* Without icons */}
+      <Dropdown
+        showIcons={false}
+        items={[
+          { id: '1', label: 'No icons variant' },
+          { id: '2', label: 'Plain text items' },
+          { id: '3', label: 'Minimal style' },
+        ]}
+      />
+
+      {/* Long labels (adaptive width) */}
+      <Dropdown
+        showIcons
+        items={[
+          { id: '1', label: 'This is a very long label that should expand the dropdown', icon: 'info' },
+          { id: '2', label: 'Another lengthy option to demonstrate width behavior', icon: 'info' },
+          { id: '3', label: 'Short', icon: 'info' },
+        ]}
+      />
+    </div>
+  ),
 };

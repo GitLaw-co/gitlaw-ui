@@ -776,7 +776,7 @@ const InteractiveFileList = () => {
                   >
                     <button
                       type="button"
-                      className="flex items-center gap-1 text-sm font-normal text-subtle leading-[1.4] cursor-pointer hover:text-foreground transition-colors duration-fast ease-gitlaw"
+                      className="flex items-center gap-1 text-sm font-normal text-subtle leading-[1.4] cursor-pointer hover:text-foreground transition-interactive"
                     >
                       Sort by: {sortColumn} {sortDirection === "desc" ? "↓" : "↑"}
                     </button>

@@ -35,29 +35,34 @@ export const Default: Story = {
   },
 };
 
-export const WithoutAction: Story = {
-  args: {
-    title: "New feature available",
-    subtitle: "Check out the latest updates",
-    avatarSrc: "/illustrations/word-icon.png",
-    showAction: false,
-  },
-};
-
-export const WithoutSubtitle: Story = {
-  args: {
-    title: "Your document has been saved",
-    avatarSrc: "/illustrations/word-icon.png",
-    actionLabel: "View",
-    showAction: true,
-  },
-};
-
-export const WithoutAvatar: Story = {
-  args: {
-    title: "Export complete",
-    subtitle: "Your file is ready for download",
-    actionLabel: "Download",
-    showAction: true,
-  },
+export const AllVariants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4 w-[600px]">
+      <StickyFeaturePromoBar
+        title="Word export is now live"
+        subtitle="Try downloading your contract in .docx"
+        avatarSrc="/illustrations/word-icon.png"
+        actionLabel="Create contract"
+        showAction
+      />
+      <StickyFeaturePromoBar
+        title="New feature available"
+        subtitle="Check out the latest updates"
+        avatarSrc="/illustrations/word-icon.png"
+        showAction={false}
+      />
+      <StickyFeaturePromoBar
+        title="Your document has been saved"
+        avatarSrc="/illustrations/word-icon.png"
+        actionLabel="View"
+        showAction
+      />
+      <StickyFeaturePromoBar
+        title="Export complete"
+        subtitle="Your file is ready for download"
+        actionLabel="Download"
+        showAction
+      />
+    </div>
+  ),
 };

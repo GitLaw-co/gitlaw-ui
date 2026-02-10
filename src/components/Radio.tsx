@@ -29,7 +29,7 @@ export const Radio: React.FC<RadioProps> = ({
       disabled={disabled}
       className={`
         size-4 rounded-full border bg-card shrink-0 relative
-        transition-colors duration-fast ease-gitlaw
+        transition-interactive
         ${status ? "border-primary" : "border-border"}
         ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
         ${className}

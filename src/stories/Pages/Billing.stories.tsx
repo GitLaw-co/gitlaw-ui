@@ -307,7 +307,7 @@ const BillingPage: React.FC = () => {
                       action={
                         <button
                           type="button"
-                          className="p-1 hover:bg-secondary rounded transition-colors duration-fast ease-gitlaw"
+                          className="p-1 hover:bg-secondary rounded transition-interactive"
                           title={`Download ${inv.id}`}
                         >
                           <Icon
@@ -366,7 +366,7 @@ const BillingPage: React.FC = () => {
                         <div className="flex items-center gap-1">
                           <button
                             type="button"
-                            className="p-1 hover:bg-secondary rounded transition-colors duration-fast ease-gitlaw"
+                            className="p-1 hover:bg-secondary rounded transition-interactive"
                             title={`Edit ${pm.brand} ${pm.last4}`}
                           >
                             <Icon
@@ -377,7 +377,7 @@ const BillingPage: React.FC = () => {
                           </button>
                           <button
                             type="button"
-                            className="p-1 hover:bg-destructive/10 rounded transition-colors duration-fast ease-gitlaw"
+                            className="p-1 hover:bg-destructive/10 rounded transition-interactive"
                             title={`Remove ${pm.brand} ${pm.last4}`}
                           >
                             <Icon

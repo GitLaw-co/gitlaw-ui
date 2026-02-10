@@ -42,7 +42,7 @@ Prototypes/        ← 📋 Planned
 | EditorHeader | ✅ Stable | Document title bar with actions |
 | EditorPaper | ✅ Stable | Document editing surface |
 | EditorSection | ✅ Stable | Collapsible content sections |
-| EditorToolbar | ✅ Stable | Formatting toolbar |
+| EditorToolbar | ✅ Stable | Responsive formatting toolbar with progressive overflow |
 | FileDropdown | ✅ Stable | File picker dropdown |
 | Icon | ✅ Stable | 1,475 icons with color support |
 | Input | ✅ Stable | Text input with label, icons, validation states |
@@ -55,6 +55,7 @@ Prototypes/        ← 📋 Planned
 | Radio | ✅ Stable | Radio button with label |
 | Section | ✅ Stable | Content section with optional header |
 | Select | ✅ Stable | Searchable dropdown with multi-select |
+| SettingsTableRow | ✅ Stable | Settings key-value row for settings pages |
 | Sidebar | ✅ Stable | Collapsible navigation |
 | Stack | ✅ Stable | Flexbox layout primitive for spacing |
 | StarIcon | ✅ Stable | Filled star icon (active/inactive) |
@@ -92,12 +93,15 @@ Requires Node.js 18+.
 ```
 src/
 ├── components/       # React components (Button, Input, etc.)
+├── constants/        # Shared constants (breakpoints, etc.)
+├── hooks/            # Custom React hooks (useContainerCols, useToolbarOverflow)
 ├── stories/          # Storybook stories
 ├── specs/            # Design tokens and constants
 │   ├── colors.ts     # Color constants - USE THESE, not hex codes
 │   └── index.ts      # Exports all specs
+├── templates/        # Page-level templates (ChatPageTemplate)
 └── styles/
-    └── globals.css   # CSS variables and Tailwind config
+    └── globals.css   # CSS variables, Tailwind config, utility classes
 
 public/
 ├── icons/            # 1,475 SVG icons (kebab-case names)
@@ -149,6 +153,18 @@ text-text-primary, text-text-secondary, text-text-negative, text-text-button
 
 // Borders
 border-primary, border-border, border-input-border
+```
+
+### Transition Utilities
+
+Use the reusable transition classes defined in `globals.css`:
+
+```tsx
+// Interactive color transitions (hover states, focus states)
+transition-interactive    // → transition-colors duration-fast ease-gitlaw
+
+// Fade in/out transitions (opacity changes)
+transition-fade           // → transition-opacity duration-fast ease-gitlaw
 ```
 
 ### Spacing Tokens

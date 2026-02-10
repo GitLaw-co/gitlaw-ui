@@ -87,6 +87,16 @@ body {
   box-shadow: var(--shadow-card);
 }
 
+/* Reusable transition utilities */
+@layer utilities {
+  .transition-interactive {
+    @apply transition-colors duration-fast ease-gitlaw;
+  }
+  .transition-fade {
+    @apply transition-opacity duration-fast ease-gitlaw;
+  }
+}
+
 /* Custom dashed border utility - dash: 6px, gap: 6px */
 /* Use with border-color utility (e.g., border-border) */
 .border-dashed-custom {
