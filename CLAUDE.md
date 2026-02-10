@@ -250,6 +250,16 @@ children   // Content
 
 ## Interaction Patterns
 
+### Dropdown Menus
+
+Always use the `Dropdown` component (with `Popover` for positioning) for any popup menu or list:
+- Toolbar overflow menus
+- Context menus
+- Action menus
+- Sort/filter dropdowns
+
+Do NOT build custom popup lists — use `Dropdown` with its `DropdownItem[]` API.
+
 ### File Selection & Edit Mode
 
 Both `TableListItem` and `Card` component Interactive stories implement the same selection pattern:

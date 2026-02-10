@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import { Icon } from "./Icon";
 import { Button } from "./Button";
 import { Tooltip } from "./Tooltip";
+import { Dropdown } from "./Dropdown";
+import { Popover } from "./Popover";
 import { colors } from "../specs";
+import {
+  useToolbarOverflow,
+  type ToolbarItemDef,
+} from "../hooks/useToolbarOverflow";
+import type { DropdownItem } from "./Dropdown";
 
 export type EditorToolbarSize = "xs" | "s";
 export type EditorToolbarStatus = "editing" | "reviewing";
@@ -44,10 +51,10 @@ export interface EditorToolbarProps {
   onHorizontalRule?: () => void;
   /** Callback when quote is clicked */
   onQuote?: () => void;
-  /** Callback when code is clicked */
-  onCode?: () => void;
-  /** Callback when highlight dropdown is clicked */
-  onHighlight?: () => void;
+  /** Callback when mark as smart field is clicked */
+  onMarkAsSmartField?: () => void;
+  /** Callback when clauses is clicked */
+  onClauses?: () => void;
   /** Callback when suggest edits is clicked */
   onSuggestEdits?: () => void;
   /** Callback when back to edit is clicked */
@@ -56,24 +63,27 @@ export interface EditorToolbarProps {
   className?: string;
 }
 
+/* ------------------------------------------------------------------ */
+/*  Sub-components                                                     */
+/* ------------------------------------------------------------------ */
+
 /** Tool button with tooltip - uses Button component with icon variant */
 const ToolButton: React.FC<{
   icon: string;
   label: string;
+  shortcut?: string;
   onClick?: () => void;
   size: EditorToolbarSize;
   isFirst?: boolean;
   disabled?: boolean;
-}> = ({ icon, label, onClick, size, isFirst = false, disabled = false }) => {
-  // Map toolbar size to button size: xs -> xs, s -> s
+}> = ({ icon, label, shortcut, onClick, size, isFirst = false, disabled = false }) => {
   const buttonSize = size === "xs" ? "xs" : "s";
-  // Icon size matches button.specs: xs=12px, s=16px (iconOnlyIconSize)
   const iconSize = size === "xs" ? "size-3" : "size-4";
-  // Icon color: black when enabled, secondary (grey) when disabled
   const iconColor = disabled ? colors.iconSecondary : colors.iconBlack;
+  const tooltipText = shortcut ? `${label}  ${shortcut}` : label;
 
   return (
-    <Tooltip content={label} type="purple" position="bottom" size="s">
+    <Tooltip content={tooltipText} type="neutral" position="top" size="s">
       <div className={isFirst ? "" : "border-l border-purple-200"}>
         <Button
           variant="icon"
@@ -88,50 +98,12 @@ const ToolButton: React.FC<{
   );
 };
 
-/** Tool button with dropdown chevron - uses Button with both icons */
-const ToolButtonWithDropdown: React.FC<{
-  icon: string;
-  label: string;
-  onClick?: () => void;
-  size: EditorToolbarSize;
-  isFirst?: boolean;
-}> = ({ icon, label, onClick, size, isFirst = false }) => {
-  // Container height: xs=24px, s=32px
-  const buttonHeight = size === "xs" ? "h-6" : "h-8";
-  // Icon size matches button.specs: xs=12px, s=16px
-  const iconSize = size === "xs" ? "size-3" : "size-4";
-  // Chevron: xs=10px, s=12px (slightly smaller than main icon)
-  const chevronSize = size === "xs" ? "size-2.5" : "size-3";
-
-  return (
-    <Tooltip content={label} type="purple" position="bottom" size="s">
-      <button
-        onClick={onClick}
-        className={`
-          ${buttonHeight} flex items-center justify-center gap-0 px-1
-          hover:bg-secondary/30 transition-colors duration-fast ease-gitlaw rounded-none
-          ${isFirst ? "" : "border-l border-purple-200"}
-        `}
-      >
-        <Icon name={icon} className={iconSize} color={colors.iconBlack} />
-        <Icon
-          name="chevron-down"
-          className={chevronSize}
-          color={colors.iconBlack}
-        />
-      </button>
-    </Tooltip>
-  );
-};
-
 /** Text style dropdown button - uses Button with right icon */
 const TextStyleButton: React.FC<{
   onClick?: () => void;
   size: EditorToolbarSize;
 }> = ({ onClick, size }) => {
-  // Map toolbar size to button size
   const buttonSize = size === "xs" ? "xs" : "s";
-  // Chevron size matches button.specs iconSize: xs=12px, s=16px
   const chevronSize = size === "xs" ? "size-3" : "size-4";
 
   return (
@@ -158,10 +130,38 @@ const TextStyleButton: React.FC<{
 const ToolGroup: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => (
-  <div className="flex items-start flex-wrap gap-0 border border-purple-300 rounded overflow-clip">
+  <div className="flex items-start flex-wrap gap-0 border border-purple-300 rounded">
     {children}
   </div>
 );
+
+/* ------------------------------------------------------------------ */
+/*  Item definitions                                                   */
+/* ------------------------------------------------------------------ */
+
+/** All toolbar items in display order. Callbacks are wired at render time. */
+const TOOLBAR_ITEMS: ToolbarItemDef[] = [
+  { id: "undo", icon: "undo-2", label: "Undo", group: "undo", type: "button" },
+  { id: "redo", icon: "redo-2", label: "Redo", group: "undo", type: "button" },
+  { id: "textStyle", icon: "", label: "Normal text", group: "textStyle", type: "textStyle" },
+  { id: "bold", icon: "bold", label: "Bold", group: "format", type: "button" },
+  { id: "italic", icon: "italic", label: "Italic", group: "format", type: "button" },
+  { id: "underline", icon: "underline", label: "Underline", group: "format", type: "button" },
+  { id: "strikethrough", icon: "strikethrough", label: "Strikethrough", group: "format", type: "button" },
+  { id: "list", icon: "list", label: "Bullet list", group: "list", type: "button" },
+  { id: "orderedList", icon: "list-ordered", label: "Numbered list", group: "list", type: "button" },
+  { id: "link", icon: "link-2", label: "Insert link", group: "insert", type: "button" },
+  { id: "image", icon: "image", label: "Insert image", group: "insert", type: "button" },
+  { id: "table", icon: "table", label: "Insert table", group: "insert", type: "button" },
+  { id: "horizontalRule", icon: "minus", label: "Horizontal line", group: "insert", type: "button" },
+  { id: "quote", icon: "quote", label: "Quote", group: "insert", type: "button" },
+  { id: "markAsSmartField", icon: "text-cursor-input", label: "Mark as smart field", shortcut: "⌘ + Shift + X", group: "extra", type: "button" },
+  { id: "clauses", icon: "gavel", label: "Clauses", group: "extra", type: "button" },
+];
+
+/* ------------------------------------------------------------------ */
+/*  Main component                                                     */
+/* ------------------------------------------------------------------ */
 
 export const EditorToolbar: React.FC<EditorToolbarProps> = ({
   size = "xs",
@@ -182,21 +182,91 @@ export const EditorToolbar: React.FC<EditorToolbarProps> = ({
   onTable,
   onHorizontalRule,
   onQuote,
-  onCode,
-  onHighlight,
+  onMarkAsSmartField,
+  onClauses,
   onSuggestEdits,
   onBackToEdit,
   className = "",
 }) => {
-  // Button sizes based on Figma: xs=24px height, s=32px height
   const buttonSize = size === "xs" ? "xs" : "s";
 
+  // Map item IDs to their callbacks and disabled states
+  const callbackMap: Record<string, (() => void) | undefined> = useMemo(
+    () => ({
+      undo: onUndo,
+      redo: onRedo,
+      textStyle: onTextStyle,
+      bold: onBold,
+      italic: onItalic,
+      underline: onUnderline,
+      strikethrough: onStrikethrough,
+      list: onList,
+      orderedList: onOrderedList,
+      link: onLink,
+      image: onImage,
+      table: onTable,
+      horizontalRule: onHorizontalRule,
+      quote: onQuote,
+      markAsSmartField: onMarkAsSmartField,
+      clauses: onClauses,
+    }),
+    [
+      onUndo, onRedo, onTextStyle, onBold, onItalic, onUnderline,
+      onStrikethrough, onList, onOrderedList, onLink, onImage,
+      onTable, onHorizontalRule, onQuote, onMarkAsSmartField, onClauses,
+    ]
+  );
+
+  const disabledMap: Record<string, boolean> = useMemo(
+    () => ({
+      undo: undoDisabled,
+      redo: redoDisabled,
+    }),
+    [undoDisabled, redoDisabled]
+  );
+
+  // Measure the right button width
+  const rightButtonRef = useRef<HTMLDivElement>(null);
+  const [rightButtonWidth, setRightButtonWidth] = useState(120);
+  useEffect(() => {
+    const el = rightButtonRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver((entries) => {
+      setRightButtonWidth(entries[0]?.contentRect.width ?? 120);
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // Overflow calculation
+  const { containerRef, visibleGroups, overflowItems, hasOverflow } =
+    useToolbarOverflow(TOOLBAR_ITEMS, size, rightButtonWidth);
+
+  // Overflow menu state
+  const [overflowOpen, setOverflowOpen] = useState(false);
+
+  // Build dropdown items for overflow menu
+  const dropdownItems: DropdownItem[] = useMemo(
+    () =>
+      overflowItems
+        .filter((item) => item.type !== "textStyle")
+        .map((item) => ({
+          id: item.id,
+          label: item.label,
+          icon: item.icon,
+          onClick: () => {
+            callbackMap[item.id]?.();
+            setOverflowOpen(false);
+          },
+          disabled: disabledMap[item.id] ?? false,
+        })),
+    [overflowItems, callbackMap, disabledMap]
+  );
+
+  /* ---- Reviewing state ---- */
   if (status === "reviewing") {
-    // Match height to editing variant: xs=40px (h-10), s=48px (h-12)
     const containerHeight = size === "xs" ? "h-10" : "h-12";
-    // Text size: xs=12px (text-xs), s=14px (text-sm)
     const reviewingTextSize = size === "xs" ? "text-xs" : "text-sm";
-    // Icon size: xs=16px, s=24px
     const reviewingIconSize = size === "xs" ? "size-4" : "size-6";
 
     return (
@@ -208,7 +278,6 @@ export const EditorToolbar: React.FC<EditorToolbarProps> = ({
           ${className}
         `}
       >
-        {/* Left: Reviewing message - matches menu item styling from Figma */}
         <div className="flex items-center gap-2">
           <Icon
             name="history"
@@ -219,8 +288,6 @@ export const EditorToolbar: React.FC<EditorToolbarProps> = ({
             Reviewing version history
           </span>
         </div>
-
-        {/* Right: Back to edit button - secondary with X icon on LEFT */}
         <Button
           variant="secondary"
           size={buttonSize}
@@ -234,8 +301,40 @@ export const EditorToolbar: React.FC<EditorToolbarProps> = ({
     );
   }
 
+  /* ---- Editing state ---- */
+
+  /** Renders a single ToolGroup from an array of item defs */
+  const renderGroup = (group: ToolbarItemDef[], groupIndex: number) => (
+    <ToolGroup key={group[0]?.group ?? groupIndex}>
+      {group.map((item, i) => {
+        if (item.type === "textStyle") {
+          return (
+            <TextStyleButton
+              key={item.id}
+              onClick={callbackMap[item.id]}
+              size={size}
+            />
+          );
+        }
+        return (
+          <ToolButton
+            key={item.id}
+            icon={item.icon}
+            label={item.label}
+            shortcut={item.shortcut}
+            onClick={callbackMap[item.id]}
+            size={size}
+            isFirst={i === 0}
+            disabled={disabledMap[item.id] ?? false}
+          />
+        );
+      })}
+    </ToolGroup>
+  );
+
   return (
     <div
+      ref={containerRef}
       className={`
         p-2 rounded-lg
         flex items-center justify-between
@@ -244,139 +343,48 @@ export const EditorToolbar: React.FC<EditorToolbarProps> = ({
     >
       {/* Left: Formatting tools - 4px gap between groups */}
       <div className="flex items-center gap-1">
-        {/* Undo/Redo group */}
-        <ToolGroup>
-          <ToolButton
-            icon="undo-2"
-            label="Undo"
-            onClick={onUndo}
-            size={size}
-            isFirst
-            disabled={undoDisabled}
-          />
-          <ToolButton
-            icon="redo-2"
-            label="Redo"
-            onClick={onRedo}
-            size={size}
-            disabled={redoDisabled}
-          />
-        </ToolGroup>
+        {visibleGroups.map(renderGroup)}
 
-        {/* Text style dropdown */}
-        <ToolGroup>
-          <TextStyleButton onClick={onTextStyle} size={size} />
-        </ToolGroup>
-
-        {/* Text formatting group: B I U S */}
-        <ToolGroup>
-          <ToolButton
-            icon="bold"
-            label="Bold"
-            onClick={onBold}
-            size={size}
-            isFirst
-          />
-          <ToolButton
-            icon="italic"
-            label="Italic"
-            onClick={onItalic}
-            size={size}
-          />
-          <ToolButton
-            icon="underline"
-            label="Underline"
-            onClick={onUnderline}
-            size={size}
-          />
-          <ToolButton
-            icon="strikethrough"
-            label="Strikethrough"
-            onClick={onStrikethrough}
-            size={size}
-          />
-        </ToolGroup>
-
-        {/* Lists group */}
-        <ToolGroup>
-          <ToolButton
-            icon="list"
-            label="Bullet list"
-            onClick={onList}
-            size={size}
-            isFirst
-          />
-          <ToolButton
-            icon="list-ordered"
-            label="Numbered list"
-            onClick={onOrderedList}
-            size={size}
-          />
-        </ToolGroup>
-
-        {/* Insert group: link, image, table, hr, quote */}
-        <ToolGroup>
-          <ToolButton
-            icon="link-2"
-            label="Insert link"
-            onClick={onLink}
-            size={size}
-            isFirst
-          />
-          <ToolButton
-            icon="image"
-            label="Insert image"
-            onClick={onImage}
-            size={size}
-          />
-          <ToolButton
-            icon="table"
-            label="Insert table"
-            onClick={onTable}
-            size={size}
-          />
-          <ToolButton
-            icon="minus"
-            label="Horizontal rule"
-            onClick={onHorizontalRule}
-            size={size}
-          />
-          <ToolButton
-            icon="quote"
-            label="Block quote"
-            onClick={onQuote}
-            size={size}
-          />
-        </ToolGroup>
-
-        {/* Code & highlight group */}
-        <ToolGroup>
-          <ToolButton
-            icon="code"
-            label="Code"
-            onClick={onCode}
-            size={size}
-            isFirst
-          />
-          <ToolButtonWithDropdown
-            icon="highlighter"
-            label="Highlight"
-            onClick={onHighlight}
-            size={size}
-          />
-        </ToolGroup>
+        {/* Overflow "..." button */}
+        {hasOverflow && (
+          <Popover
+            content={
+              <Dropdown
+                items={dropdownItems}
+                showIcons
+                isOpen={overflowOpen}
+              />
+            }
+            position="bottom"
+            trigger="click"
+            isOpen={overflowOpen}
+            onOpenChange={setOverflowOpen}
+            gap={2}
+          >
+            <ToolGroup>
+              <ToolButton
+                icon="ellipsis"
+                label="More tools"
+                size={size}
+                isFirst
+              />
+            </ToolGroup>
+          </Popover>
+        )}
       </div>
 
-      {/* Right: Suggest edits button - outline with pencil-line icon */}
-      <Button
-        variant="outline"
-        size={buttonSize}
-        showLeftIcon
-        leftIconName="pencil-line"
-        onClick={onSuggestEdits}
-      >
-        Suggest edits
-      </Button>
+      {/* Right: Suggest edits button */}
+      <div ref={rightButtonRef} className="shrink-0 ml-1">
+        <Button
+          variant="outline"
+          size={buttonSize}
+          showLeftIcon
+          leftIconName="pencil-line"
+          onClick={onSuggestEdits}
+        >
+          Suggest edits
+        </Button>
+      </div>
     </div>
   );
 };

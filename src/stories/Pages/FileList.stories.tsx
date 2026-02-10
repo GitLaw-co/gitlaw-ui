@@ -13,6 +13,7 @@ import {
 } from "../../components";
 import type { CheckboxStatus } from "../../components/Checkbox";
 import type { SortDirection } from "../../components/TableListItem";
+import { containerBreakpoints } from "../../constants/breakpoints";
 
 const meta: Meta<typeof PageShell> = {
   title: "Pages/File List",
@@ -403,14 +404,14 @@ const InteractiveFileList = () => {
   // Pass our containerRef directly so useContainerCols observes the same element.
   const { cols } = useContainerCols(containerRef);
 
-  // ── Compact cards flag — true when container < 592px (1–2 card cols) ──
+  // ── Compact cards flag — true when container < @xl (576px, 1–2 card cols) ──
   const [compactCards, setCompactCards] = useState(false);
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
     const observer = new ResizeObserver((entries) => {
       const width = entries[0]?.contentRect.width ?? 0;
-      setCompactCards(width < 592);
+      setCompactCards(width < containerBreakpoints["@xl"]);
     });
     observer.observe(el);
     return () => observer.disconnect();
@@ -782,7 +783,7 @@ const InteractiveFileList = () => {
                   </Popover>
                 </div>
               )}
-              <div className="grid grid-cols-1 gap-2 @sm:grid-cols-2 @[592px]:grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] @2xl:gap-3">
+              <div className="grid grid-cols-1 gap-2 @sm:grid-cols-2 @xl:grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] @2xl:gap-3">
               {cardData.map((card, i) => (
                 <div
                   key={i}
