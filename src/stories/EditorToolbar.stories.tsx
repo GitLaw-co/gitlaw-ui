@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { EditorToolbar } from "../components/EditorToolbar";
 
 const meta: Meta<typeof EditorToolbar> = {
-  title: "Components/Navigation/EditorToolbar",
+  title: "Editor/EditorToolbar",
   component: EditorToolbar,
   parameters: {
     layout: "padded",
