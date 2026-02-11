@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { Icon } from "./Icon";
 import { buttonTailwindClasses, colors, type ButtonSize } from "../specs";
 
@@ -12,7 +12,13 @@ export type ButtonVariant =
   | "icon";
 export type { ButtonSize };
 
-export interface ButtonProps {
+/** Native button attributes minus props we control */
+type NativeButtonProps = Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "onClick" | "disabled" | "className" | "type" | "children"
+>;
+
+export interface ButtonProps extends NativeButtonProps {
   /** The content to display in the button */
   children?: React.ReactNode;
   /** The visual style variant */
@@ -58,7 +64,7 @@ const variantClasses: Record<ButtonVariant, string> = {
   icon: "bg-transparent text-foreground-button hover:bg-secondary/30",
 };
 
-export const Button: React.FC<ButtonProps> = ({
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
   children = "Button",
   variant = "primary",
   size = "m",
@@ -71,7 +77,8 @@ export const Button: React.FC<ButtonProps> = ({
   onClick,
   className = "",
   disabled = false,
-}) => {
+  ...nativeProps
+}, ref) => {
   const isIcon = variant === "icon";
   const isDisabled = variant === "disabled" || disabled;
 
@@ -131,16 +138,20 @@ export const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
+      ref={ref}
       className={`${baseClasses} ${sizeClass} ${variantClass} ${className}`}
       onClick={onClick}
       disabled={isDisabled}
       type="button"
+      {...nativeProps}
     >
       {showLeftIcon && !isIcon && renderLeftIcon()}
       {isIcon ? renderLeftIcon() : <span>{children}</span>}
       {showRightIcon && !isIcon && renderRightIcon()}
     </button>
   );
-};
+});
+
+Button.displayName = "Button";
 
 export default Button;

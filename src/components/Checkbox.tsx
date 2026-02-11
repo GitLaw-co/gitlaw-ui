@@ -1,8 +1,14 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
 export type CheckboxStatus = "off" | "on" | "semi";
 
-export interface CheckboxProps {
+/** Native button attributes minus props we control */
+type NativeButtonProps = Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "onChange" | "disabled" | "className" | "onClick" | "type"
+>;
+
+export interface CheckboxProps extends NativeButtonProps {
   /** Checkbox state */
   status?: CheckboxStatus;
   /** Disabled state */
@@ -19,12 +25,13 @@ const borderClasses: Record<CheckboxStatus, string> = {
   semi: "border-primary",
 };
 
-export const Checkbox: React.FC<CheckboxProps> = ({
+export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(({
   status = "off",
   disabled = false,
   onChange,
   className = "",
-}) => {
+  ...nativeProps
+}, ref) => {
   const handleClick = () => {
     if (disabled) return;
     // off → on, on → off, semi → on
@@ -34,6 +41,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
 
   return (
     <button
+      ref={ref}
       type="button"
       onClick={handleClick}
       disabled={disabled}
@@ -46,6 +54,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
       `}
       aria-checked={status === "on" ? true : status === "semi" ? "mixed" : false}
       role="checkbox"
+      {...nativeProps}
     >
       {/* On: solid purple square, inset 3px */}
       {status === "on" && (
@@ -57,6 +66,8 @@ export const Checkbox: React.FC<CheckboxProps> = ({
       )}
     </button>
   );
-};
+});
+
+Checkbox.displayName = "Checkbox";
 
 export default Checkbox;

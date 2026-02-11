@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useId } from "react";
+import React, { useState, useRef, useEffect, useId, forwardRef } from "react";
 import { Icon } from "./Icon";
 import { colors } from "../specs";
 
@@ -8,7 +8,13 @@ export type InputAlign = "fill" | "hug";
 /** Context for styling - 'default' for standard inputs, 'document-empty' for yellow bg, 'document-filled' for purple bg */
 export type InputContext = "default" | "document-empty" | "document-filled";
 
-export interface InputProps {
+/** Native input attributes minus props we control */
+type NativeInputProps = Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  "size" | "onChange" | "value" | "placeholder" | "disabled" | "className"
+>;
+
+export interface InputProps extends NativeInputProps {
   /** The size of the input */
   size?: InputSize;
   /** The current status */
@@ -113,7 +119,7 @@ const getDocumentDefaults = (context: InputContext) => {
   };
 };
 
-export const Input: React.FC<InputProps> = ({
+export const Input = forwardRef<HTMLInputElement, InputProps>(({
   size = "m",
   status: controlledStatus,
   align = "fill",
@@ -129,7 +135,8 @@ export const Input: React.FC<InputProps> = ({
   rightIcon,
   className = "",
   disabled = false,
-}) => {
+  ...nativeProps
+}, ref) => {
   const [internalValue, setInternalValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [inputWidth, setInputWidth] = useState<number | undefined>(undefined);
@@ -228,6 +235,7 @@ export const Input: React.FC<InputProps> = ({
           </span>
         )}
         <input
+          ref={ref}
           id={inputId}
           type="text"
           value={value}
@@ -248,6 +256,7 @@ export const Input: React.FC<InputProps> = ({
               ? { width: inputWidth }
               : undefined
           }
+          {...nativeProps}
         />
         {showRightIcon && value && (
           <button
@@ -263,6 +272,8 @@ export const Input: React.FC<InputProps> = ({
       </div>
     </div>
   );
-};
+});
+
+Input.displayName = "Input";
 
 export default Input;

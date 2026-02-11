@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef } from "react";
 import { Icon } from "./Icon";
 import { colors } from "../specs";
 
 export type TextFieldSize = "xs" | "s" | "m" | "l" | "xl";
 export type TextFieldStatus = "empty" | "populated" | "active";
 
-export interface TextFieldProps {
+/** Native textarea attributes minus props we control */
+type NativeTextareaProps = Omit<
+  React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+  "onChange" | "value" | "placeholder" | "disabled" | "className" | "rows"
+>;
+
+export interface TextFieldProps extends NativeTextareaProps {
   /** The size of the text field */
   size?: TextFieldSize;
   /** The current status */
@@ -69,7 +75,7 @@ const iconPositions: Record<TextFieldSize, string> = {
   xs: "top-1 right-2",
 };
 
-export const TextField: React.FC<TextFieldProps> = ({
+export const TextField = forwardRef<HTMLTextAreaElement, TextFieldProps>(({
   size = "m",
   status: controlledStatus,
   placeholder = "Placeholder text",
@@ -81,7 +87,8 @@ export const TextField: React.FC<TextFieldProps> = ({
   className = "",
   disabled = false,
   rows = 3,
-}) => {
+  ...nativeProps
+}, ref) => {
   const [internalValue, setInternalValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);
 
@@ -130,6 +137,7 @@ export const TextField: React.FC<TextFieldProps> = ({
         ) : (
           <>
             <textarea
+              ref={ref}
               value={value}
               onChange={handleChange}
               onFocus={() => setIsFocused(true)}
@@ -143,6 +151,7 @@ export const TextField: React.FC<TextFieldProps> = ({
                 ${sizeConfig.text}
                 ${disabled ? "cursor-not-allowed" : ""}
               `}
+              {...nativeProps}
             />
             {status === "populated" && (
               <p
@@ -168,6 +177,8 @@ export const TextField: React.FC<TextFieldProps> = ({
       )}
     </div>
   );
-};
+});
+
+TextField.displayName = "TextField";
 
 export default TextField;
