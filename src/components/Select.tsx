@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useId, useCallback } from "react";
 import { Icon } from "./Icon";
 import { colors } from "../specs";
 
@@ -100,7 +100,11 @@ export const Select: React.FC<SelectProps> = ({
 }) => {
   const [internalValue, setInternalValue] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const selectRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const autoId = useId();
+  const listboxId = `${autoId}-listbox`;
 
   const value = controlledValue !== undefined ? controlledValue : internalValue;
   const status = controlledStatus || (value ? "default" : "empty");
@@ -120,13 +124,65 @@ export const Select: React.FC<SelectProps> = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Reset highlight when opening
+  useEffect(() => {
+    if (isOpen) {
+      const idx = options.findIndex((opt) => opt.value === value);
+      setHighlightedIndex(idx >= 0 ? idx : 0);
+    }
+  }, [isOpen]);
+
   const handleSelect = (optionValue: string) => {
     if (controlledValue === undefined) {
       setInternalValue(optionValue);
     }
     onChange?.(optionValue);
     setIsOpen(false);
+    triggerRef.current?.focus();
   };
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (disabled) return;
+
+      switch (e.key) {
+        case "Enter":
+        case " ":
+          e.preventDefault();
+          if (isOpen && highlightedIndex >= 0 && highlightedIndex < options.length) {
+            handleSelect(options[highlightedIndex].value);
+          } else {
+            setIsOpen(!isOpen);
+          }
+          break;
+        case "ArrowDown":
+          e.preventDefault();
+          if (!isOpen) {
+            setIsOpen(true);
+          } else {
+            setHighlightedIndex((prev) =>
+              prev < options.length - 1 ? prev + 1 : prev
+            );
+          }
+          break;
+        case "ArrowUp":
+          e.preventDefault();
+          if (isOpen) {
+            setHighlightedIndex((prev) => (prev > 0 ? prev - 1 : prev));
+          }
+          break;
+        case "Escape":
+          e.preventDefault();
+          setIsOpen(false);
+          triggerRef.current?.focus();
+          break;
+        case "Tab":
+          setIsOpen(false);
+          break;
+      }
+    },
+    [disabled, isOpen, highlightedIndex, options, value]
+  );
 
   const sizeConfig = sizeClasses[size];
   const widthClass = align === "fill" ? "w-full" : "w-auto";
@@ -134,10 +190,13 @@ export const Select: React.FC<SelectProps> = ({
 
   const textColorClass = status === "empty" ? "text-subtle" : "text-foreground";
 
+  const triggerId = `${autoId}-trigger`;
+
   const renderLabel = () => {
     if (!showLabel) return null;
     return (
       <label
+        htmlFor={triggerId}
         className={`font-semibold text-foreground ${sizeConfig.label} ${isHorizontal ? "shrink-0" : ""}`}
       >
         {label}
@@ -146,15 +205,24 @@ export const Select: React.FC<SelectProps> = ({
   };
 
   const renderDropdown = () => (
-    <div
+    <button
+      ref={triggerRef}
+      id={triggerId}
+      type="button"
+      role="combobox"
+      aria-expanded={isOpen}
+      aria-haspopup="listbox"
+      aria-controls={isOpen ? listboxId : undefined}
+      aria-disabled={disabled}
       className={`
-        flex items-center bg-white rounded overflow-hidden
+        flex items-center bg-white rounded overflow-hidden text-left
         border border-input-border
         ${sizeConfig.container}
         ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
         ${align === "fill" && isHorizontal ? "flex-1" : widthClass}
       `}
       onClick={() => !disabled && setIsOpen(!isOpen)}
+      onKeyDown={handleKeyDown}
     >
       <div className={`flex items-center flex-1 min-w-0 ${sizeConfig.gap}`}>
         {showLeftIcon && (
@@ -179,7 +247,7 @@ export const Select: React.FC<SelectProps> = ({
           />
         )}
       </span>
-    </div>
+    </button>
   );
 
   return (
@@ -198,21 +266,27 @@ export const Select: React.FC<SelectProps> = ({
 
       {options.length > 0 && (
         <div
+          id={listboxId}
+          role="listbox"
+          aria-label={label}
           className={`
             absolute top-full left-0 right-0 mt-1 bg-white border border-input-border rounded shadow-card z-50 max-h-60 overflow-auto
             transition-[opacity,transform] duration-fast ease-gitlaw origin-top
             ${isOpen ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-95 pointer-events-none'}
           `}
         >
-          {options.map((option) => (
+          {options.map((option, index) => (
             <div
               key={option.value}
+              role="option"
+              aria-selected={option.value === value}
               className={`
                 px-3 py-2 cursor-pointer transition-interactive
                 ${sizeConfig.text}
-                ${option.value === value ? "bg-secondary text-foreground" : "text-foreground hover:bg-secondary/50"}
+                ${option.value === value ? "bg-secondary text-foreground" : index === highlightedIndex ? "bg-secondary/50 text-foreground" : "text-foreground hover:bg-secondary/50"}
               `}
               onClick={() => handleSelect(option.value)}
+              onMouseEnter={() => setHighlightedIndex(index)}
             >
               {option.label}
             </div>

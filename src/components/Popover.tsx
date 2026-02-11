@@ -28,17 +28,24 @@ export interface PopoverProps {
   animationDuration?: number;
 }
 
-// Position configuration - using CSS classes for absolute positioning
-const getPositionClasses = (position: PopoverPosition, gap: number): string => {
-  const positionConfig: Record<PopoverPosition, string> = {
-    top: `bottom-full left-1/2 -translate-x-1/2 mb-${gap}`,
-    bottom: `top-full left-1/2 -translate-x-1/2 mt-${gap}`,
-    left: `right-full top-1/2 -translate-y-1/2 mr-${gap}`,
-    right: `left-full top-1/2 -translate-y-1/2 ml-${gap}`,
-  };
-
-  return positionConfig[position];
+// Gap classes mapped explicitly so Tailwind can see them at build time
+const gapClasses: Record<number, Record<PopoverPosition, string>> = {
+  1: { top: "mb-1", bottom: "mt-1", left: "mr-1", right: "ml-1" },
+  2: { top: "mb-2", bottom: "mt-2", left: "mr-2", right: "ml-2" },
+  3: { top: "mb-3", bottom: "mt-3", left: "mr-3", right: "ml-3" },
+  4: { top: "mb-4", bottom: "mt-4", left: "mr-4", right: "ml-4" },
 };
+
+// Position configuration - using CSS classes for absolute positioning
+const basePositionClasses: Record<PopoverPosition, string> = {
+  top: "bottom-full left-1/2 -translate-x-1/2",
+  bottom: "top-full left-1/2 -translate-x-1/2",
+  left: "right-full top-1/2 -translate-y-1/2",
+  right: "left-full top-1/2 -translate-y-1/2",
+};
+
+const getPositionClasses = (position: PopoverPosition, gap: number): string =>
+  `${basePositionClasses[position]} ${gapClasses[gap]?.[position] ?? ""}`;
 
 export const Popover: React.FC<PopoverProps> = ({
   children,

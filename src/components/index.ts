@@ -1,5 +1,6 @@
-// Import global styles
-import "../styles/globals.css";
+// NOTE: Global styles are NOT auto-imported here to avoid side effects.
+// Consumers should import styles explicitly: import '@gitlaw/ui/styles.css';
+// Storybook loads styles via .storybook/preview.ts instead.
 
 export { Button } from "./Button";
 export type { ButtonProps, ButtonVariant, ButtonSize } from "./Button";

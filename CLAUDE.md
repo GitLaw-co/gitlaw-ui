@@ -549,9 +549,11 @@ npm run deploy
 
 ## Git Workflow
 
+- **Always create a new branch** when starting a new task (e.g. `feature/`, `fix/`, `chore/`)
+- Never commit directly to `main` — use PRs to merge
 - Commit messages should be clear and descriptive
 - Always include `Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>` in commits
-- Push to `main` branch for immediate deployment
+- Push branch and create PR for review; merge to `main` triggers auto-deploy to Vercel
 
 ## Tidy Up Routine
 
