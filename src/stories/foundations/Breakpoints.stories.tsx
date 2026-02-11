@@ -1,19 +1,11 @@
 import React, { useState, useEffect } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Story, StoryDefault } from "@ladle/react";
 import {
   containerBreakpoints,
   viewportBreakpoints,
 } from "../../constants/breakpoints";
 
-const meta: Meta = {
-  title: "Foundations/Breakpoints",
-  parameters: {
-    layout: "fullscreen",
-  },
-};
-
-export default meta;
-type Story = StoryObj;
+export default { title: "Foundations/Breakpoints", meta: { layout: "fullscreen" } } satisfies StoryDefault;
 
 interface BreakpointSampleProps {
   name: string;
@@ -382,6 +374,4 @@ const BreakpointsPage = () => {
   );
 };
 
-export const AllBreakpoints: Story = {
-  render: () => <BreakpointsPage />,
-};
+export const AllBreakpoints: Story = () => <BreakpointsPage />;

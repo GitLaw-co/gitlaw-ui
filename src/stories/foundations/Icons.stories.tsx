@@ -1,16 +1,8 @@
 import React, { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Story, StoryDefault } from "@ladle/react";
 import { icons, iconsByCategory, categories } from '../../icons-manifest';
 
-const meta: Meta = {
-  title: 'Foundations/Icons',
-  parameters: {
-    layout: 'fullscreen',
-  },
-};
-
-export default meta;
-type Story = StoryObj;
+export default { title: "Foundations/Icons", meta: { layout: "fullscreen" } } satisfies StoryDefault;
 
 // Base URL for icons
 const ICONS_BASE_URL = '/icons';
@@ -249,6 +241,4 @@ const IconsPage = () => {
   );
 };
 
-export const Gallery: Story = {
-  render: () => <IconsPage />,
-};
+export const Gallery: Story = () => <IconsPage />;

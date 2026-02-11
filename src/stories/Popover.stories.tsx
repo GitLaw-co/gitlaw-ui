@@ -1,45 +1,38 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Story, StoryDefault } from "@ladle/react";
 import { useState } from "react";
 import { Popover } from "../components/Popover";
 import { Button } from "../components/Button";
 import { MenuItem } from "../components/MenuItem";
 import { Icon } from "../components/Icon";
 
-const meta: Meta<typeof Popover> = {
-  title: "Components/Overlays/Popover",
-  component: Popover,
-  parameters: {
-    layout: "centered",
-  },
-  tags: ["autodocs"],
+export default {
+  title: "Components / Overlays / Popover",
+  meta: { layout: "centered" },
   argTypes: {
     trigger: {
-      control: "select",
+      control: { type: "select" },
       options: ["click", "hover"],
       description: "How the popover is triggered",
     },
     position: {
-      control: "select",
+      control: { type: "select" },
       options: ["top", "bottom", "left", "right"],
       description: "Position of the popover relative to trigger",
     },
     animated: {
-      control: "boolean",
+      control: { type: "boolean" },
       description: "Enable/disable animation",
     },
     animationDuration: {
-      control: "number",
+      control: { type: "number" },
       description: "Animation duration in milliseconds",
     },
     gap: {
-      control: "number",
+      control: { type: "number" },
       description: "Gap between trigger and popover",
     },
   },
-};
-
-export default meta;
-type Story = StoryObj<typeof Popover>;
+} satisfies StoryDefault;
 
 // Simple popover content
 const SimpleContent = () => (
@@ -72,94 +65,88 @@ const MenuContent = () => (
   </div>
 );
 
-export const Default: Story = {
-  args: {
-    trigger: "click",
-    position: "bottom",
-    animated: true,
-    animationDuration: 100,
-    gap: 2,
-  },
-  render: ({ trigger, content: _content, ...rest }) => (
-    <Popover content={<SimpleContent />} trigger={trigger} {...rest}>
-      <Button variant="secondary" size="m">
-        {trigger === "hover" ? "Hover me" : "Click me"}
-      </Button>
-    </Popover>
-  ),
+export const Default: Story = ({ trigger, content: _content, ...rest }) => (
+  <Popover content={<SimpleContent />} trigger={trigger} {...rest}>
+    <Button variant="secondary" size="m">
+      {trigger === "hover" ? "Hover me" : "Click me"}
+    </Button>
+  </Popover>
+);
+Default.args = {
+  trigger: "click",
+  position: "bottom",
+  animated: true,
+  animationDuration: 100,
+  gap: 2,
 };
 
-export const AllVariants: Story = {
-  render: () => (
-    <div className="flex flex-col gap-12">
-      {/* Positions */}
-      <div>
-        <h3 className="text-sm font-medium text-subtle mb-6">Positions</h3>
-        <div className="flex flex-col items-center gap-16 p-8">
-          <Popover content={<SimpleContent />} trigger="click" position="bottom">
-            <Button variant="secondary" size="m">Bottom</Button>
+export const AllVariants: Story = () => (
+  <div className="flex flex-col gap-12">
+    {/* Positions */}
+    <div>
+      <h3 className="text-sm font-medium text-subtle mb-6">Positions</h3>
+      <div className="flex flex-col items-center gap-16 p-8">
+        <Popover content={<SimpleContent />} trigger="click" position="bottom">
+          <Button variant="secondary" size="m">Bottom</Button>
+        </Popover>
+
+        <div className="flex gap-32">
+          <Popover content={<SimpleContent />} trigger="click" position="right">
+            <Button variant="secondary" size="m">Right</Button>
           </Popover>
-
-          <div className="flex gap-32">
-            <Popover content={<SimpleContent />} trigger="click" position="right">
-              <Button variant="secondary" size="m">Right</Button>
-            </Popover>
-            <Popover content={<SimpleContent />} trigger="click" position="left">
-              <Button variant="secondary" size="m">Left</Button>
-            </Popover>
-          </div>
-
-          <Popover content={<SimpleContent />} trigger="click" position="top">
-            <Button variant="secondary" size="m">Top</Button>
+          <Popover content={<SimpleContent />} trigger="click" position="left">
+            <Button variant="secondary" size="m">Left</Button>
           </Popover>
         </div>
-      </div>
 
-      {/* Triggers */}
-      <div>
-        <h3 className="text-sm font-medium text-subtle mb-6">Triggers</h3>
-        <div className="flex gap-8">
-          <Popover content={<SimpleContent />} trigger="click" position="bottom">
-            <Button variant="secondary" size="m">Click trigger</Button>
-          </Popover>
-          <Popover content={<SimpleContent />} trigger="hover" position="bottom">
-            <Button variant="secondary" size="m">Hover trigger</Button>
-          </Popover>
-        </div>
-      </div>
-
-      {/* Menu content example */}
-      <div>
-        <h3 className="text-sm font-medium text-subtle mb-6">Menu Content</h3>
-        <Popover content={<MenuContent />} trigger="click" position="bottom">
-          <Button variant="secondary" size="m">Options menu</Button>
+        <Popover content={<SimpleContent />} trigger="click" position="top">
+          <Button variant="secondary" size="m">Top</Button>
         </Popover>
       </div>
     </div>
-  ),
-};
 
-export const Interactive: Story = {
-  render: () => {
-    const [isOpen, setIsOpen] = useState(false);
-
-    return (
-      <div className="flex flex-col items-center gap-4">
-        <Popover
-          content={<SimpleContent />}
-          trigger="click"
-          position="bottom"
-          isOpen={isOpen}
-          onOpenChange={setIsOpen}
-        >
-          <Button variant="secondary" size="m">
-            {isOpen ? "Close" : "Open"}
-          </Button>
+    {/* Triggers */}
+    <div>
+      <h3 className="text-sm font-medium text-subtle mb-6">Triggers</h3>
+      <div className="flex gap-8">
+        <Popover content={<SimpleContent />} trigger="click" position="bottom">
+          <Button variant="secondary" size="m">Click trigger</Button>
         </Popover>
-        <p className="text-sm text-subtle">
-          Popover is {isOpen ? "open" : "closed"}
-        </p>
+        <Popover content={<SimpleContent />} trigger="hover" position="bottom">
+          <Button variant="secondary" size="m">Hover trigger</Button>
+        </Popover>
       </div>
-    );
-  },
+    </div>
+
+    {/* Menu content example */}
+    <div>
+      <h3 className="text-sm font-medium text-subtle mb-6">Menu Content</h3>
+      <Popover content={<MenuContent />} trigger="click" position="bottom">
+        <Button variant="secondary" size="m">Options menu</Button>
+      </Popover>
+    </div>
+  </div>
+);
+
+export const Interactive: Story = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="flex flex-col items-center gap-4">
+      <Popover
+        content={<SimpleContent />}
+        trigger="click"
+        position="bottom"
+        isOpen={isOpen}
+        onOpenChange={setIsOpen}
+      >
+        <Button variant="secondary" size="m">
+          {isOpen ? "Close" : "Open"}
+        </Button>
+      </Popover>
+      <p className="text-sm text-subtle">
+        Popover is {isOpen ? "open" : "closed"}
+      </p>
+    </div>
+  );
 };

@@ -1,18 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Story, StoryDefault } from "@ladle/react";
 import { changelog, lastUpdated } from '../changelog/data';
 import { Icon } from '../components/Icon';
 import { colors } from '../specs';
 
-const meta: Meta = {
-  title: 'Changelog',
-  parameters: {
-    layout: 'fullscreen',
-  },
-  tags: ['autodocs'],
-};
-
-export default meta;
-type Story = StoryObj;
+export default {
+  title: "Changelog",
+  meta: { layout: "fullscreen" },
+} satisfies StoryDefault;
 
 const formatDate = (dateStr: string) => {
   const date = new Date(dateStr);
@@ -145,6 +139,4 @@ const ChangelogPage = () => {
   );
 };
 
-export const AllChanges: Story = {
-  render: () => <ChangelogPage />,
-};
+export const AllChanges: Story = () => <ChangelogPage />;

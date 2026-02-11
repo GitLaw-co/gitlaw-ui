@@ -1,37 +1,29 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Story, StoryDefault } from "@ladle/react";
 import { EditorPaper } from '../components/EditorPaper';
 
-const meta: Meta<typeof EditorPaper> = {
-  title: 'Editor/EditorPaper',
-  component: EditorPaper,
-  parameters: {
-    layout: 'fullscreen',
-    backgrounds: { default: 'light' },
-  },
-  tags: ['autodocs'],
+export default {
+  title: "Editor / EditorPaper",
+  meta: { layout: "fullscreen" },
   argTypes: {
     status: {
-      control: 'select',
+      control: { type: "select" },
       options: ['default', 'view', 'diff'],
       description: 'Status mode of the editor paper',
     },
     showToolbar: {
-      control: 'boolean',
+      control: { type: "boolean" },
       description: 'Whether to show toolbar space (default status only)',
     },
     title: {
-      control: 'text',
+      control: { type: "text" },
       description: 'Document title',
     },
     subtitle: {
-      control: 'text',
+      control: { type: "text" },
       description: 'Document subtitle',
     },
   },
-};
-
-export default meta;
-type Story = StoryObj<typeof meta>;
+} satisfies StoryDefault;
 
 // Mutual NDA body content
 const MNDABody = () => (
@@ -121,73 +113,69 @@ const filledParties = {
 };
 
 // Default - Editable with empty inputs (yellow backgrounds)
-export const Default: Story = {
-  args: {
-    status: 'default',
-    showToolbar: true,
-    ...sharedProps,
-  },
-  render: (args) => (
-    <div className="bg-page-background min-h-screen">
-      <EditorPaper {...args}>
-        <MNDABody />
-      </EditorPaper>
-    </div>
-  ),
+export const Default: Story = (args) => (
+  <div className="bg-page-background min-h-screen">
+    <EditorPaper {...args}>
+      <MNDABody />
+    </EditorPaper>
+  </div>
+);
+Default.args = {
+  status: 'default',
+  showToolbar: true,
+  ...sharedProps,
 };
 
 /**
  * All document states — empty, partially filled, fully filled, and view mode.
  */
-export const AllStates: Story = {
-  render: () => (
-    <div className="bg-page-background min-h-screen space-y-12 p-8">
-      {/* Filled */}
-      <div>
-        <p className="text-xs font-semibold text-secondary mb-4 uppercase">
-          Filled (all party info populated)
-        </p>
-        <EditorPaper status="default" showToolbar {...sharedProps} {...filledParties}>
-          <MNDABody />
-        </EditorPaper>
-      </div>
-
-      {/* Partially filled */}
-      <div>
-        <p className="text-xs font-semibold text-secondary mb-4 uppercase">
-          Partially filled (mixed empty/populated)
-        </p>
-        <EditorPaper
-          status="default"
-          showToolbar
-          {...sharedProps}
-          effectiveDate="15 January 2026"
-          party1={{ name: 'GitLaw Limited', address: '' }}
-          party2={{ name: '', address: '' }}
-        >
-          <MNDABody />
-        </EditorPaper>
-      </div>
-
-      {/* View mode */}
-      <div>
-        <p className="text-xs font-semibold text-secondary mb-4 uppercase">
-          View mode (read-only)
-        </p>
-        <EditorPaper status="view" {...sharedProps} {...filledParties}>
-          <MNDABody />
-        </EditorPaper>
-      </div>
-
-      {/* Empty */}
-      <div>
-        <p className="text-xs font-semibold text-secondary mb-4 uppercase">
-          Empty (new document)
-        </p>
-        <EditorPaper status="default" showToolbar title="Untitled document" subtitle="">
-          <p className="text-subtle italic text-sm">Start typing your document...</p>
-        </EditorPaper>
-      </div>
+export const AllStates: Story = () => (
+  <div className="bg-page-background min-h-screen space-y-12 p-8">
+    {/* Filled */}
+    <div>
+      <p className="text-xs font-semibold text-secondary mb-4 uppercase">
+        Filled (all party info populated)
+      </p>
+      <EditorPaper status="default" showToolbar {...sharedProps} {...filledParties}>
+        <MNDABody />
+      </EditorPaper>
     </div>
-  ),
-};
+
+    {/* Partially filled */}
+    <div>
+      <p className="text-xs font-semibold text-secondary mb-4 uppercase">
+        Partially filled (mixed empty/populated)
+      </p>
+      <EditorPaper
+        status="default"
+        showToolbar
+        {...sharedProps}
+        effectiveDate="15 January 2026"
+        party1={{ name: 'GitLaw Limited', address: '' }}
+        party2={{ name: '', address: '' }}
+      >
+        <MNDABody />
+      </EditorPaper>
+    </div>
+
+    {/* View mode */}
+    <div>
+      <p className="text-xs font-semibold text-secondary mb-4 uppercase">
+        View mode (read-only)
+      </p>
+      <EditorPaper status="view" {...sharedProps} {...filledParties}>
+        <MNDABody />
+      </EditorPaper>
+    </div>
+
+    {/* Empty */}
+    <div>
+      <p className="text-xs font-semibold text-secondary mb-4 uppercase">
+        Empty (new document)
+      </p>
+      <EditorPaper status="default" showToolbar title="Untitled document" subtitle="">
+        <p className="text-subtle italic text-sm">Start typing your document...</p>
+      </EditorPaper>
+    </div>
+  </div>
+);

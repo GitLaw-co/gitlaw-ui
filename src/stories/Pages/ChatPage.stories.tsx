@@ -1,18 +1,11 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Story, StoryDefault } from "@ladle/react";
 import { ChatPageTemplate } from "../../templates/ChatPageTemplate";
 import type { ChatMessage, FileItem } from "../../components";
 
-const meta: Meta<typeof ChatPageTemplate> = {
-  title: "Pages/Chat Page",
-  component: ChatPageTemplate,
-  parameters: {
-    layout: "fullscreen",
-    backgrounds: { default: "light" },
-  },
-};
-
-export default meta;
-type Story = StoryObj<typeof ChatPageTemplate>;
+export default {
+  title: "Pages / Chat Page",
+  meta: { layout: "fullscreen" },
+} satisfies StoryDefault;
 
 /* ------------------------------------------------------------------ */
 /*  Shared data                                                        */
@@ -287,9 +280,7 @@ const sharedProps = {
  * Chat page — 3-panel layout: sidebar | chat thread | document editor.
  * Chat panel is resizable (280–600px, default 400px) via a draggable divider.
  */
-export const Default: Story = {
-  render: () => <ChatPageTemplate {...sharedProps} />,
-};
+export const Default: Story = () => <ChatPageTemplate {...sharedProps} />;
 
 /* ------------------------------------------------------------------ */
 /*  Story: Empty Chat                                                  */
@@ -298,13 +289,11 @@ export const Default: Story = {
 /**
  * New conversation state — no messages or files yet.
  */
-export const EmptyChat: Story = {
-  render: () => (
-    <ChatPageTemplate
-      {...sharedProps}
-      title="New chat"
-      messages={[]}
-      files={[]}
-    />
-  ),
-};
+export const EmptyChat: Story = () => (
+  <ChatPageTemplate
+    {...sharedProps}
+    title="New chat"
+    messages={[]}
+    files={[]}
+  />
+);

@@ -1,40 +1,33 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Story, StoryDefault } from "@ladle/react";
 import { EditorToolbar } from "../components/EditorToolbar";
 
-const meta: Meta<typeof EditorToolbar> = {
-  title: "Editor/EditorToolbar",
-  component: EditorToolbar,
-  parameters: {
-    layout: "padded",
-  },
-  tags: ["autodocs"],
+export default {
+  title: "Editor / EditorToolbar",
+  meta: { layout: "padded" },
   argTypes: {
     size: {
-      control: "select",
+      control: { type: "select" },
       options: ["xs", "s"],
       description:
         "Toolbar size - xs for desktop, s for mobile (easier to tap)",
     },
     status: {
-      control: "select",
+      control: { type: "select" },
       options: ["editing", "reviewing"],
       description:
         "Toolbar state - editing shows formatting tools, reviewing shows version info",
     },
     undoDisabled: {
-      control: "boolean",
+      control: { type: "boolean" },
       description: "Whether undo button is disabled",
     },
     redoDisabled: {
-      control: "boolean",
+      control: { type: "boolean" },
       description: "Whether redo button is disabled",
     },
   },
-};
-
-export default meta;
-type Story = StoryObj<typeof meta>;
+} satisfies StoryDefault;
 
 /* ------------------------------------------------------------------ */
 /*  Shared callback factory                                            */
@@ -67,11 +60,10 @@ const allCallbacks = {
 /*  Story: Default                                                     */
 /* ------------------------------------------------------------------ */
 
-export const Default: Story = {
-  args: {
-    size: "xs",
-    status: "editing",
-  },
+export const Default: Story = (args) => <EditorToolbar {...args} />;
+Default.args = {
+  size: "xs",
+  status: "editing",
 };
 
 /* ------------------------------------------------------------------ */
@@ -147,98 +139,94 @@ const ResizableToolbar: React.FC<{
   );
 };
 
-export const Interactive: Story = {
-  render: () => (
-    <div className="flex flex-col gap-8">
-      <div>
-        <p className="text-sm text-subtle mb-4">
-          Drag the right edge to resize. Tool groups progressively overflow into
-          the &ldquo;...&rdquo; menu. Click any button to see console logs.
-        </p>
-        <ResizableToolbar initialWidth={800} size="xs" />
-      </div>
-      <div>
-        <p className="text-sm text-subtle mb-2">Mobile (s) — resizable</p>
-        <ResizableToolbar initialWidth={500} size="s" />
-      </div>
+export const Interactive: Story = () => (
+  <div className="flex flex-col gap-8">
+    <div>
+      <p className="text-sm text-subtle mb-4">
+        Drag the right edge to resize. Tool groups progressively overflow into
+        the &ldquo;...&rdquo; menu. Click any button to see console logs.
+      </p>
+      <ResizableToolbar initialWidth={800} size="xs" />
     </div>
-  ),
-};
+    <div>
+      <p className="text-sm text-subtle mb-2">Mobile (s) — resizable</p>
+      <ResizableToolbar initialWidth={500} size="s" />
+    </div>
+  </div>
+);
 
 /* ------------------------------------------------------------------ */
 /*  Story: AllVariants                                                 */
 /* ------------------------------------------------------------------ */
 
-export const AllVariants: Story = {
-  render: () => (
-    <div className="flex flex-col gap-6">
-      <div>
-        <p className="text-sm text-subtle mb-2">
-          Full width — Desktop (xs) — all tools visible
-        </p>
+export const AllVariants: Story = () => (
+  <div className="flex flex-col gap-6">
+    <div>
+      <p className="text-sm text-subtle mb-2">
+        Full width — Desktop (xs) — all tools visible
+      </p>
+      <EditorToolbar size="xs" status="editing" {...allCallbacks} />
+    </div>
+
+    <div>
+      <p className="text-sm text-subtle mb-2">
+        ~560px — insert group overflows
+      </p>
+      <div style={{ width: 560 }}>
         <EditorToolbar size="xs" status="editing" {...allCallbacks} />
       </div>
+    </div>
 
-      <div>
-        <p className="text-sm text-subtle mb-2">
-          ~560px — insert group overflows
-        </p>
-        <div style={{ width: 560 }}>
-          <EditorToolbar size="xs" status="editing" {...allCallbacks} />
-        </div>
-      </div>
-
-      <div>
-        <p className="text-sm text-subtle mb-2">
-          ~400px — format + list + insert + extra overflow
-        </p>
-        <div style={{ width: 400 }}>
-          <EditorToolbar size="xs" status="editing" {...allCallbacks} />
-        </div>
-      </div>
-
-      <div>
-        <p className="text-sm text-subtle mb-2">
-          ~240px — minimal: undo/redo + overflow
-        </p>
-        <div style={{ width: 240 }}>
-          <EditorToolbar size="xs" status="editing" {...allCallbacks} />
-        </div>
-      </div>
-
-      <div>
-        <p className="text-sm text-subtle mb-2">
-          Mobile (s) — full width
-        </p>
-        <EditorToolbar size="s" status="editing" {...allCallbacks} />
-      </div>
-
-      <div>
-        <p className="text-sm text-subtle mb-2">
-          Desktop (xs) — Undo/Redo disabled
-        </p>
-        <EditorToolbar
-          size="xs"
-          status="editing"
-          undoDisabled
-          redoDisabled
-          {...allCallbacks}
-        />
-      </div>
-
-      <div>
-        <p className="text-sm text-subtle mb-2">
-          Desktop (xs) — Reviewing
-        </p>
-        <EditorToolbar size="xs" status="reviewing" {...allCallbacks} />
-      </div>
-
-      <div>
-        <p className="text-sm text-subtle mb-2">
-          Mobile (s) — Reviewing
-        </p>
-        <EditorToolbar size="s" status="reviewing" {...allCallbacks} />
+    <div>
+      <p className="text-sm text-subtle mb-2">
+        ~400px — format + list + insert + extra overflow
+      </p>
+      <div style={{ width: 400 }}>
+        <EditorToolbar size="xs" status="editing" {...allCallbacks} />
       </div>
     </div>
-  ),
-};
+
+    <div>
+      <p className="text-sm text-subtle mb-2">
+        ~240px — minimal: undo/redo + overflow
+      </p>
+      <div style={{ width: 240 }}>
+        <EditorToolbar size="xs" status="editing" {...allCallbacks} />
+      </div>
+    </div>
+
+    <div>
+      <p className="text-sm text-subtle mb-2">
+        Mobile (s) — full width
+      </p>
+      <EditorToolbar size="s" status="editing" {...allCallbacks} />
+    </div>
+
+    <div>
+      <p className="text-sm text-subtle mb-2">
+        Desktop (xs) — Undo/Redo disabled
+      </p>
+      <EditorToolbar
+        size="xs"
+        status="editing"
+        undoDisabled
+        redoDisabled
+        {...allCallbacks}
+      />
+    </div>
+
+    <div>
+      <p className="text-sm text-subtle mb-2">
+        Desktop (xs) — Reviewing
+      </p>
+      <EditorToolbar size="xs" status="reviewing" {...allCallbacks} />
+    </div>
+
+    <div>
+      <p className="text-sm text-subtle mb-2">
+        Mobile (s) — Reviewing
+      </p>
+      <EditorToolbar size="s" status="reviewing" {...allCallbacks} />
+    </div>
+  </div>
+);

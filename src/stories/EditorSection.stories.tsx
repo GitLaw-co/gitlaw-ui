@@ -1,18 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Story, StoryDefault } from "@ladle/react";
 import { useState } from 'react';
 import { EditorSection } from '../components/EditorSection';
 import { EditorPaper } from '../components/EditorPaper';
 
-const meta: Meta<typeof EditorSection> = {
-  title: 'Editor/EditorSection',
-  component: EditorSection,
-  parameters: {
-    layout: 'fullscreen',
-  },
-  tags: ['autodocs'],
+export default {
+  title: "Editor / EditorSection",
+  meta: { layout: "fullscreen" },
   argTypes: {
     isOpen: {
-      control: 'boolean',
+      control: { type: "boolean" },
       description: 'Whether the section is visible',
     },
     initialWidth: {
@@ -24,10 +20,7 @@ const meta: Meta<typeof EditorSection> = {
       description: 'Minimum width in pixels',
     },
   },
-};
-
-export default meta;
-type Story = StoryObj<typeof meta>;
+} satisfies StoryDefault;
 
 // Sample MNDA content
 const MNDAContent = () => (
@@ -64,85 +57,79 @@ const MNDAContent = () => (
 );
 
 // Default story with interactive open/close
-export const Default: Story = {
-  render: () => {
-    const [isOpen, setIsOpen] = useState(true);
-    const [editorWidth, setEditorWidth] = useState<number | undefined>(undefined);
+export const Default: Story = () => {
+  const [isOpen, setIsOpen] = useState(true);
+  const [editorWidth, setEditorWidth] = useState<number | undefined>(undefined);
 
-    return (
-      <div className="min-h-screen bg-page-background">
-        {/* Left side content - responsive to editor width */}
-        <div
-          className="p-8 transition-[margin] duration-0"
-          style={{ marginRight: isOpen ? (editorWidth ? `${editorWidth}px` : '50%') : 0 }}
-        >
-          <h1 className="text-2xl font-bold text-foreground mb-4">Main Content Area</h1>
-          <p className="text-subtle mb-4">
-            This area would contain the chat or other content.
-            The editor section is on the right.
-          </p>
-          {!isOpen && (
-            <button
-              onClick={() => setIsOpen(true)}
-              className="px-4 py-2 bg-primary text-white rounded"
-            >
-              Open Editor
-            </button>
-          )}
-        </div>
-
-        {/* Editor Section */}
-        <EditorSection
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-          onWidthChange={setEditorWidth}
-          headerProps={{
-            title: 'Mutual NDA',
-            showShare: true,
-          }}
-        >
-          <MNDAContent />
-        </EditorSection>
+  return (
+    <div className="min-h-screen bg-page-background">
+      {/* Left side content - responsive to editor width */}
+      <div
+        className="p-8 transition-[margin] duration-0"
+        style={{ marginRight: isOpen ? (editorWidth ? `${editorWidth}px` : '50%') : 0 }}
+      >
+        <h1 className="text-2xl font-bold text-foreground mb-4">Main Content Area</h1>
+        <p className="text-subtle mb-4">
+          This area would contain the chat or other content.
+          The editor section is on the right.
+        </p>
+        {!isOpen && (
+          <button
+            onClick={() => setIsOpen(true)}
+            className="px-4 py-2 bg-primary text-white rounded"
+          >
+            Open Editor
+          </button>
+        )}
       </div>
-    );
-  },
+
+      {/* Editor Section */}
+      <EditorSection
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        onWidthChange={setEditorWidth}
+        headerProps={{
+          title: 'Mutual NDA',
+          showShare: true,
+        }}
+      >
+        <MNDAContent />
+      </EditorSection>
+    </div>
+  );
 };
 
 // Wide initial width
-export const WideWidth: Story = {
-  args: {
-    isOpen: true,
-    initialWidth: 800,
-    headerProps: {
-      title: 'Influencer Agreement',
-      showShare: true,
-    },
+export const WideWidth: Story = (args) => (
+  <div className="min-h-screen bg-page-background">
+    <EditorSection {...args}>
+      <MNDAContent />
+    </EditorSection>
+  </div>
+);
+WideWidth.args = {
+  isOpen: true,
+  initialWidth: 800,
+  headerProps: {
+    title: 'Influencer Agreement',
+    showShare: true,
   },
-  render: (args) => (
-    <div className="min-h-screen bg-page-background">
-      <EditorSection {...args}>
-        <MNDAContent />
-      </EditorSection>
-    </div>
-  ),
 };
 
 // Narrow width
-export const NarrowWidth: Story = {
-  args: {
-    isOpen: true,
-    initialWidth: 450,
-    minWidth: 400,
-    headerProps: {
-      title: 'Short Document',
-      showShare: false,
-    },
+export const NarrowWidth: Story = (args) => (
+  <div className="min-h-screen bg-page-background">
+    <EditorSection {...args}>
+      <MNDAContent />
+    </EditorSection>
+  </div>
+);
+NarrowWidth.args = {
+  isOpen: true,
+  initialWidth: 450,
+  minWidth: 400,
+  headerProps: {
+    title: 'Short Document',
+    showShare: false,
   },
-  render: (args) => (
-    <div className="min-h-screen bg-page-background">
-      <EditorSection {...args}>
-        <MNDAContent />
-      </EditorSection>
-    </div>
-  ),
 };

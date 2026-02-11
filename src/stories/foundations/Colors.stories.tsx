@@ -1,15 +1,7 @@
 import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Story, StoryDefault } from "@ladle/react";
 
-const meta: Meta = {
-  title: 'Foundations/Colors',
-  parameters: {
-    layout: 'fullscreen',
-  },
-};
-
-export default meta;
-type Story = StoryObj;
+export default { title: "Foundations/Colors", meta: { layout: "fullscreen" } } satisfies StoryDefault;
 
 interface ColorSwatchProps {
   name: string;
@@ -244,6 +236,4 @@ const ColorsPage = () => {
   );
 };
 
-export const AllColors: Story = {
-  render: () => <ColorsPage />,
-};
+export const AllColors: Story = () => <ColorsPage />;
