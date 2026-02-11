@@ -1,55 +1,58 @@
 /**
  * Color Constants
  *
- * Source: Figma UI-v3 design system / Tailwind config
- * Last verified: 2025-02-02
+ * Re-exports semantic color tokens from the single source of truth
+ * (colors.tokens.js) with TypeScript types.
  *
  * Use these constants when passing color props to components (e.g., Icon color).
  * For className-based styling, use the Tailwind color classes instead.
+ *
+ * ⚠️  To change colors, edit `colors.tokens.js` — not this file.
  */
 
-// Primary brand colors
+import { semantic } from './colors.tokens.js';
+
 export const colors = {
   // Primary
-  primary: '#5E49D6',
-  primaryLight: '#EBE7FF',
-  primaryHover: '#6F5EEC',
+  primary: semantic.primary,
+  primaryLight: semantic.primaryLight,
+  primaryHover: semantic.primaryHover,
 
   // Secondary
-  secondary: '#EBE7FF',
-  secondaryHover: '#E2DDFF',
+  secondary: semantic.secondary,
+  secondaryHover: semantic.secondaryHover,
 
   // Status colors
-  destructive: '#E11D48',
-  alert: '#F97316',
-  positive: '#15803D',
+  destructive: semantic.destructive,
+  alert: semantic.alert,
+  positive: semantic.positive,
 
   // Text colors
-  textPrimary: '#1B1B1F',
-  textSecondary: '#989898',
-  textNegative: '#F7F6FF',
-  textButton: '#5E49D6',
-  textButtonNegative: '#F7F6FF',
-  textButtonDisabled: '#CFC8F3',
+  textPrimary: semantic.textPrimary,
+  textSecondary: semantic.textSecondary,
+  textNegative: semantic.textNegative,
+  textButton: semantic.textButton,
+  textButtonNegative: semantic.textButtonNegative,
+  textButtonDisabled: semantic.textButtonDisabled,
 
   // Icon colors
-  iconPrimary: '#5E49D6',
-  iconSecondary: '#989898',
-  iconDisabled: '#CFC8F3',
-  iconNegative: '#F7F6FF',
-  iconBlack: '#1B1B1F',
+  iconPrimary: semantic.iconPrimary,
+  iconSecondary: semantic.iconSecondary,
+  iconDisabled: semantic.iconDisabled,
+  iconNegative: semantic.iconNegative,
+  iconBlack: semantic.iconBlack,
 
   // Background colors
-  white: '#FFFFFF',
-  card: '#FFFFFF',
-  pageBackground: '#F7F6FF',
+  white: semantic.white,
+  card: semantic.card,
+  pageBackground: semantic.pageBackground,
 
-  // Purple palette
-  purple50: '#F7F6FF',
-  purple100: '#EBE7FF',
-  purple200: '#E2DDFF',
-  purple300: '#CFC8F3',
-  purple700: '#5E49D6',
+  // Purple palette (convenience aliases)
+  purple50: semantic.textNegative,     // #F7F6FF
+  purple100: semantic.secondary,       // #EBE7FF
+  purple200: semantic.secondaryHover,  // #E2DDFF
+  purple300: semantic.textButtonDisabled, // #CFC8F3
+  purple700: semantic.primary,         // #5E49D6
 } as const;
 
 // Semantic aliases for common use cases
