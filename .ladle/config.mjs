@@ -3,6 +3,7 @@ export default {
   stories: "src/**/*.stories.{js,jsx,ts,tsx}",
   port: 6006,
   outDir: "build",
+  base: "/ladle/",
   addons: {
     control: { enabled: true },
     width: {
