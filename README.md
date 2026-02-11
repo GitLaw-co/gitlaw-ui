@@ -1,6 +1,6 @@
 # @gitlaw/ui
 
-A modern React component library for legal tech applications, designed by **Dario Codi Pietro** and built with TypeScript, Tailwind CSS, and Claude.
+A modern React component library for legal tech applications, designed by **Dario Codipietro** and built with TypeScript, Tailwind CSS, and Claude.
 
 [![npm version](https://img.shields.io/npm/v/@gitlaw/ui)](https://www.npmjs.com/package/@gitlaw/ui)
 [![Storybook](https://img.shields.io/badge/Storybook-FF4785?logo=storybook&logoColor=white)](https://gitlaw-ui.vercel.app)
