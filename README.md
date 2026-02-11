@@ -223,7 +223,7 @@ Once set up, you can ask Claude to:
 
 "Add this button variant from Figma"
 
-"I've added an illustration to Assets/Zest Illustration Set/new-illustration.svg - please add it to the Storybook"
+"I've added an illustration to assets/Zest Illustration Set/new-illustration.svg - please add it to the Storybook"
 
 "Update the colors to match Figma"
 ```

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { ChatInput } from '../components/ChatInput';
 import { MenuItem } from '../components/MenuItem';
 import { Icon } from '../components/Icon';
-import ukFlag from '../../Assets/flags/uk-uk.svg';
+import ukFlag from '../../assets/flags/uk-uk.svg';
 
 const meta: Meta<typeof ChatInput> = {
   title: 'Chat/ChatInput',

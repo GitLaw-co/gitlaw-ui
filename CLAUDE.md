@@ -31,8 +31,9 @@ src/
 public/icons/         # 1,475 SVG icons (kebab-case)
 public/illustrations/ # 100+ Zest illustrations
 
-Assets/               # Source files (not deployed)
+assets/               # Source files (not deployed)
 ├── Icons/            # Icon source files
+├── services/         # Service integration logos (Google, Dropbox, etc.)
 └── Zest Illustration Set/  # Illustration source files
 ```
 
@@ -266,7 +267,7 @@ export const Default: Story = { render: () => <MyTemplate {...sharedProps} /> };
 <Icon name="check" className="size-5" color={colors.iconPrimary} />
 ```
 
-**Illustrations** — copy SVG to `Assets/Zest Illustration Set/` and `public/illustrations/`, then run `node scripts/update-illustration-colors.js`.
+**Illustrations** — copy SVG to `assets/Zest Illustration Set/` and `public/illustrations/`, then run `node scripts/update-illustration-colors.js`.
 
 ## Responsive Layouts
 
