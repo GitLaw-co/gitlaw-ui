@@ -32,6 +32,51 @@ public/icons/         # 1,475 SVG icons (kebab-case)
 public/illustrations/ # 100+ Zest illustrations
 ```
 
+## Existing Components
+
+| Component | Description |
+|-----------|-------------|
+| Avatar | Images, initials, icons, or empty states |
+| Badge | Notification indicators |
+| Button | Primary, secondary, outline, ghost, destructive, disabled, icon variants |
+| Card | File, template, and folder cards with compact mobile variant |
+| ChatAssistantMessage | AI assistant chat bubble |
+| ChatInput | AI chat input interface |
+| ChatThread | Chat conversation thread |
+| ChatUserMessage | User chat bubble |
+| Checkbox | Checkbox with indeterminate state |
+| Dialog | Modal dialogs |
+| Dropdown | Adaptive width dropdown menu |
+| EditorHeader | Document title bar with actions |
+| EditorPaper | Document editing surface |
+| EditorSection | Collapsible content sections |
+| EditorToolbar | Responsive formatting toolbar with progressive overflow |
+| FileDropdown | File picker dropdown |
+| Icon | 1,475 icons with color support |
+| Input | Text input with label, icons, validation states |
+| ListHeader | Toolbar above file lists with edit layout variants |
+| MenuItem | List items with icons, avatars, checkboxes |
+| Overlay | Full-screen overlay backdrop |
+| PageNav | Settings navigation with context switcher |
+| PageShell | Responsive page shell with sidebar, header, content area |
+| Popover | Click/hover triggered popover overlay |
+| Radio | Radio button with label |
+| Section | Content section with optional header |
+| Select | Searchable dropdown with multi-select |
+| SettingsTableRow | Settings key-value row |
+| Sidebar | Collapsible navigation |
+| Stack | Flexbox layout primitive for spacing |
+| StarIcon | Filled star icon (active/inactive) |
+| StickyFeaturePromoBar | Feature promotion banner |
+| Switch | Toggle for boolean settings |
+| Tab | Tab navigation with badge support |
+| TableListItem | Sortable table rows with selection, starring, menus |
+| Tag | Labels with optional icon and close button |
+| TextField | Multi-line textarea with character count |
+| Toast | Notification messages |
+| Tooltip | Contextual hints |
+| TopHeader | Top-level page header with breadcrumbs |
+
 ## Rules
 
 ### Colors
@@ -41,6 +86,16 @@ public/illustrations/ # 100+ Zest illustrations
 - **In component JS/TS** — `import { colors } from '../specs'` (goes through `specs/index.ts`), never hardcoded hex
 - **In Tailwind classes** — use semantic names: `bg-primary`, `text-foreground`, `border-border`
 - **To change a color** — edit only `colors.tokens.js`; everything else inherits
+
+Key color tokens:
+- `colors.primary` — Main brand purple
+- `colors.iconPrimary` — Purple icons
+- `colors.iconSecondary` — Grey icons
+- `colors.iconDisabled` — Disabled state
+- `colors.iconNegative` — Light/white icons
+- `colors.textPrimary` — Dark text
+- `colors.textSecondary` — Grey text
+- `colors.textButtonNegative` — Light text on dark buttons
 
 ### Spacing & Radius
 
@@ -83,6 +138,17 @@ MyComponent.displayName = 'MyComponent';
 - Use `transition-interactive` (color changes) or `transition-fade` (opacity) — not raw `transition-colors duration-fast ease-gitlaw`
 - Use `Dropdown` + `Popover` for any popup menu. Never build custom popup lists.
 
+### Naming Conventions
+
+| Type | Convention | Example |
+|------|------------|---------|
+| Component files | PascalCase | `Button.tsx` |
+| Story files | PascalCase + .stories | `Button.stories.tsx` |
+| Spec files | camelCase | `colors.ts` |
+| CSS classes | Tailwind (kebab-case) | `bg-primary` |
+| Props | camelCase | `showLeftIcon` |
+| Color tokens | camelCase | `colors.iconPrimary` |
+
 ### Don't
 
 - Don't import directly from `colors.tokens.js` or `colors.ts` in components — use `'../specs'`
@@ -93,13 +159,15 @@ MyComponent.displayName = 'MyComponent';
 
 ### Stories
 
-Max **3–4 stories** per file:
+Max **3-4 stories** per file:
 
 | Story | Purpose | Required |
 |-------|---------|----------|
 | Default | Controllable with args panel | Always |
 | AllVariants | Grid of all visual states | Always |
 | Interactive | Stateful demo (selection, forms) | If needed |
+
+**Do NOT create** individual stories for each variant or state (e.g. `Primary`, `Secondary`, `DisabledOn`). Those belong in AllVariants.
 
 Story meta boilerplate:
 
@@ -131,6 +199,17 @@ Category is required — use `title: "Components/<Category>/Name"`:
 
 Other title prefixes: `Chat/`, `Editor/`, `Layout/`, `Pages/`.
 
+### Page Stories
+
+Page stories live in `src/stories/Pages/` and follow a different pattern:
+
+- Title: `"Pages/Page Name"`
+- Layout: `fullscreen` (no centering)
+- Use `render:` functions (not `args:`)
+- Extract shared data as top-level constants
+- Use section divider comments between logical blocks
+- Keep to 2-3 stories max: **Default** + key alternate states
+
 ### Git
 
 - **Always branch** — `feature/`, `fix/`, `chore/`. Never commit to `main` directly.
@@ -150,6 +229,11 @@ Other title prefixes: `Chat/`, `Editor/`, `Layout/`, `Pages/`.
 - Icon sizes from Figma MCP are often wrong (reports 24px for everything) — deduce from container size or ask user
 - Any MCP tool returning connection errors → ask user to restart Claude
 
+**Icon size reference** (since Figma MCP can't be trusted on this):
+- Input icons: xs=12px, s=16px, m=20px, l=24px, xl=24px
+- Button icons: xs=12px, s=16px, m=16-24px, l=20-48px
+- TableListItem row icon: 20px (size-5)
+
 ## Adding Icons / Illustrations
 
 **Icons** — already in `public/icons/`. Just use the Icon component:
@@ -163,8 +247,52 @@ Other title prefixes: `Chat/`, `Editor/`, `Layout/`, `Pages/`.
 
 Uses `@tailwindcss/container-queries`. Breakpoints in `src/constants/breakpoints.ts`.
 
+| Prefix | Width | Typical use |
+|--------|-------|-------------|
+| `@xs:` | 320px | — |
+| `@sm:` | 384px | — |
+| `@md:` | 448px | — |
+| `@lg:` | 512px | 2-col card grid |
+| `@xl:` | 576px | — |
+| `@2xl:` | 672px | 2-col table (Name + Updated) |
+| `@3xl:` | 768px | — |
+| `@4xl:` | 896px | 3-col card grid, 4-col table |
+| `@5xl:` | 1024px | 4-col card grid, 6-col table |
+| `@6xl:` | 1152px | — |
+| `@7xl:` | 1280px | — |
+
 - **CSS-only** (`@container` classes) — for grid columns, gaps, visibility
 - **JS** (`useContainerCols` hook) — when a component needs a width-derived prop (e.g. `TableListItem cols`)
+  - Returns: `cols: 0 (<672px) | 2 (672-896) | 4 (896-1024) | 6 (>=1024)`
+
+## Interaction Patterns
+
+### Dropdown Menus
+
+Always use `Dropdown` + `Popover` for any popup menu or list (toolbar overflow, context menus, sort/filter). Never build custom popup lists.
+
+### File Selection & Edit Mode
+
+Both `TableListItem` and `Card` Interactive stories implement the same selection pattern:
+
+| Action | Behaviour |
+|--------|-----------|
+| Single click | Select / deselect (enters edit mode on first selection) |
+| Double click | Open the item |
+| Rubber band drag | Multi-select via drag rectangle |
+| Select All (table) | Header checkbox toggles all |
+
+**Edit mode header** (when >= 1 item selected):
+- Left: `"N files selected"` — `text-lg font-semibold text-primary`
+- Right: Delete, Download, Move as `Button variant="secondary" size="s"`, plus Done as `Button variant="primary" size="s"`
+
+**Double-click timing:**
+- `Card` has this built-in via `doubleClickThreshold` prop (default 250ms)
+- `TableListItem` does NOT have this yet — implement timeout pattern at story level
+
+**Rubber band selection:**
+- Uses `ref` maps to track element positions
+- Selection rect: `rgba(94, 73, 214, 0.1)` bg + `rgba(94, 73, 214, 0.5)` border
 
 ## Deployment
 
@@ -180,10 +308,14 @@ Uses `@tailwindcss/container-queries`. Breakpoints in `src/constants/breakpoints
 
 Run when asked. Each step has a specific command — no guessing.
 
-1. **Exports** — `ls src/components/*.tsx | wc -l` vs `grep -c "^export {" src/components/index.ts`. Every component file needs both `export { Foo }` and `export type { FooProps }` lines.
-2. **Story categories** — `grep "title:" src/stories/*.stories.tsx`. Every component story needs `Components/<Category>/Name`.
-3. **Story count** — `for f in src/stories/*.stories.tsx; do echo "$(grep -c 'export const' "$f") $f"; done | sort -rn`. Max 3–4 per file.
+1. **Exports** — `ls src/components/*.tsx | wc -l` vs `grep -c "^export {" src/components/index.ts`. Every component file needs both `export { Foo }` and `export type { FooProps }` lines. Update `Introduction.mdx` component count if changed.
+2. **Story categories** — `grep "title:" src/stories/*.stories.tsx`. Every component story needs `Components/<Category>/Name`. Update story links in `Introduction.mdx` if titles changed (links are kebab-case: `Components/Data Display/Card` → `?path=/docs/components-data-display-card--docs`).
+3. **Story count** — `for f in src/stories/*.stories.tsx; do echo "$(grep -c 'export const' "$f") $f"; done | sort -rn`. Max 3-4 per file.
 4. **Hex colors** — `grep -rn '"#[0-9A-Fa-f]' src/components/ src/templates/`. Should be zero (except `Icon.tsx` colorFilters).
 5. **Repeated patterns** — `grep -roh 'transition-[a-z]* duration-fast ease-gitlaw' src/components/ | sort | uniq -c`. Extract to `globals.css` if 3+ occurrences.
 6. **Build** — `npm run build-storybook`. Zero errors (chunk warnings OK).
-7. **Commit** — stage specific files, descriptive message, push.
+7. **Commit** — stage specific files (not `git add -A`), descriptive message, push.
+
+## MCP Tools & Error Handling
+
+When encountering errors accessing MCP tools (Figma MCP, or any other MCP server tools), ask the user to restart Claude rather than trying workarounds.
