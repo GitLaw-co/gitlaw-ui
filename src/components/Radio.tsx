@@ -1,6 +1,12 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
-export interface RadioProps {
+/** Native button attributes minus props we control */
+type NativeButtonProps = Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "onChange" | "disabled" | "className" | "onClick" | "type"
+>;
+
+export interface RadioProps extends NativeButtonProps {
   /** Radio state */
   status?: boolean;
   /** Disabled state */
@@ -11,12 +17,13 @@ export interface RadioProps {
   className?: string;
 }
 
-export const Radio: React.FC<RadioProps> = ({
+export const Radio = forwardRef<HTMLButtonElement, RadioProps>(({
   status = false,
   disabled = false,
   onChange,
   className = "",
-}) => {
+  ...nativeProps
+}, ref) => {
   const handleClick = () => {
     if (disabled) return;
     onChange?.(!status);
@@ -24,6 +31,7 @@ export const Radio: React.FC<RadioProps> = ({
 
   return (
     <button
+      ref={ref}
       type="button"
       onClick={handleClick}
       disabled={disabled}
@@ -36,6 +44,7 @@ export const Radio: React.FC<RadioProps> = ({
       `}
       aria-checked={status}
       role="radio"
+      {...nativeProps}
     >
       {/* On: solid purple circle, inset 3px */}
       {status && (
@@ -43,6 +52,8 @@ export const Radio: React.FC<RadioProps> = ({
       )}
     </button>
   );
-};
+});
+
+Radio.displayName = "Radio";
 
 export default Radio;

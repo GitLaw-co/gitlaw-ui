@@ -1,8 +1,14 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
 export type SwitchSize = "s" | "m";
 
-export interface SwitchProps {
+/** Native button attributes minus props we control */
+type NativeButtonProps = Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "onChange" | "disabled" | "className" | "onClick" | "type"
+>;
+
+export interface SwitchProps extends NativeButtonProps {
   /** Current checked state */
   checked?: boolean;
   /** The size of the switch */
@@ -26,13 +32,14 @@ const sizeClasses: Record<SwitchSize, { track: string; thumb: string }> = {
   },
 };
 
-export const Switch: React.FC<SwitchProps> = ({
+export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(({
   checked = false,
   size = "m",
   onChange,
   disabled = false,
   className = "",
-}) => {
+  ...nativeProps
+}, ref) => {
   const sizeConfig = sizeClasses[size];
 
   const handleClick = () => {
@@ -43,6 +50,7 @@ export const Switch: React.FC<SwitchProps> = ({
 
   return (
     <button
+      ref={ref}
       type="button"
       role="switch"
       aria-checked={checked}
@@ -57,6 +65,7 @@ export const Switch: React.FC<SwitchProps> = ({
         ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
         ${className}
       `}
+      {...nativeProps}
     >
       <span
         className={`
@@ -67,6 +76,8 @@ export const Switch: React.FC<SwitchProps> = ({
       />
     </button>
   );
-};
+});
+
+Switch.displayName = "Switch";
 
 export default Switch;

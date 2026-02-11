@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useId, useCallback } from "react";
+import React, { useState, useRef, useEffect, useId, useCallback, forwardRef } from "react";
 import { Icon } from "./Icon";
 import { colors } from "../specs";
 
@@ -12,7 +12,13 @@ export interface SelectOption {
   label: string;
 }
 
-export interface SelectProps {
+/** Native button attributes minus props we control */
+type NativeButtonProps = Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "onChange" | "value" | "disabled" | "className" | "onClick" | "type"
+>;
+
+export interface SelectProps extends NativeButtonProps {
   /** The size of the select */
   size?: SelectSize;
   /** The current status */
@@ -81,7 +87,7 @@ const sizeClasses: Record<
   },
 };
 
-export const Select: React.FC<SelectProps> = ({
+export const Select = forwardRef<HTMLButtonElement, SelectProps>(({
   size = "m",
   status: controlledStatus,
   align = "fill",
@@ -97,12 +103,26 @@ export const Select: React.FC<SelectProps> = ({
   rightIcon,
   className = "",
   disabled = false,
-}) => {
+  ...nativeProps
+}, ref) => {
   const [internalValue, setInternalValue] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const selectRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+
+  // Merge forwarded ref with internal triggerRef
+  const setTriggerRef = useCallback(
+    (node: HTMLButtonElement | null) => {
+      (triggerRef as React.MutableRefObject<HTMLButtonElement | null>).current = node;
+      if (typeof ref === "function") {
+        ref(node);
+      } else if (ref) {
+        (ref as React.MutableRefObject<HTMLButtonElement | null>).current = node;
+      }
+    },
+    [ref]
+  );
   const autoId = useId();
   const listboxId = `${autoId}-listbox`;
 
@@ -206,7 +226,7 @@ export const Select: React.FC<SelectProps> = ({
 
   const renderDropdown = () => (
     <button
-      ref={triggerRef}
+      ref={setTriggerRef}
       id={triggerId}
       type="button"
       role="combobox"
@@ -223,6 +243,7 @@ export const Select: React.FC<SelectProps> = ({
       `}
       onClick={() => !disabled && setIsOpen(!isOpen)}
       onKeyDown={handleKeyDown}
+      {...nativeProps}
     >
       <div className={`flex items-center flex-1 min-w-0 ${sizeConfig.gap}`}>
         {showLeftIcon && (
@@ -295,6 +316,8 @@ export const Select: React.FC<SelectProps> = ({
       )}
     </div>
   );
-};
+});
+
+Select.displayName = "Select";
 
 export default Select;
