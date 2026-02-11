@@ -38,10 +38,6 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
-  "dependencies": {
-    "clsx": "^2.1.0",
-    "tailwind-merge": "^2.2.0"
-  },
   "devDependencies": {
     "@storybook/addon-essentials": "^8.0.0",
     "@storybook/addon-interactions": "^8.0.0",

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useId } from "react";
 import { Icon } from "./Icon";
 import { colors } from "../specs";
 
@@ -134,6 +134,8 @@ export const Input: React.FC<InputProps> = ({
   const [isFocused, setIsFocused] = useState(false);
   const [inputWidth, setInputWidth] = useState<number | undefined>(undefined);
   const measureRef = useRef<HTMLSpanElement>(null);
+  const autoId = useId();
+  const inputId = `${autoId}-input`;
 
   const value = controlledValue !== undefined ? controlledValue : internalValue;
 
@@ -187,7 +189,7 @@ export const Input: React.FC<InputProps> = ({
   return (
     <div className={`${displayClass} flex-col gap-2 ${widthClass} ${className}`}>
       {shouldShowLabel && (
-        <label className={`font-semibold text-foreground ${sizeConfig.label}`}>
+        <label htmlFor={inputId} className={`font-semibold text-foreground ${sizeConfig.label}`}>
           {label}
         </label>
       )}
@@ -226,6 +228,7 @@ export const Input: React.FC<InputProps> = ({
           </span>
         )}
         <input
+          id={inputId}
           type="text"
           value={value}
           onChange={handleChange}

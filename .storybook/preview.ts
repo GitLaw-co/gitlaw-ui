@@ -38,7 +38,7 @@ const preview: Preview = {
           "Components",
           [
             "Actions",
-            ["Button", "Dropdown", "MenuItem"],
+            ["Button", "MenuItem"],
             "Form",
             ["Input", "TextField", "Select", "Checkbox", "Radio", "Switch"],
             "Data Display",
@@ -46,7 +46,7 @@ const preview: Preview = {
             "Navigation",
             ["Sidebar", "TopHeader", "PageNav", "ListHeader", "Tab"],
             "Overlays",
-            ["Dialog", "Popover", "Tooltip"],
+            ["Dialog", "Dropdown", "Popover", "Tooltip"],
             "Feedback",
             ["Toast", "StickyFeaturePromoBar"],
           ],

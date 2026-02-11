@@ -148,7 +148,7 @@ Opens at [http://localhost:6006](http://localhost:6006)
 | `npm run storybook` | Start dev server on :6006 |
 | `npm run build-storybook` | Build static Storybook |
 | `npm run build` | Build component library |
-| `npm run lint` | Run ESLint |
+| `npm run deploy` | Deploy to GitHub Pages |
 
 ## Tech Stack
 
@@ -164,13 +164,16 @@ Opens at [http://localhost:6006](http://localhost:6006)
 
 ```
 src/
-├── components/       # React components
-│   ├── Button/
-│   ├── Input/
-│   └── ...
+├── components/       # React components (flat: Button.tsx, Input.tsx, etc.)
+├── constants/        # Shared constants (breakpoints)
+├── hooks/            # Custom hooks (useContainerCols, useToolbarOverflow)
 ├── stories/          # Storybook stories
-├── assets/           # Icons, illustrations
-└── styles/           # Global styles, tokens
+├── specs/            # Design tokens (colors, spacing)
+├── templates/        # Page-level templates
+└── styles/           # Global styles, CSS variables
+public/
+├── icons/            # 1,475 SVG icons
+└── illustrations/    # 100+ Zest illustrations
 ```
 
 ## Resources
