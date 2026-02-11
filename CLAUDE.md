@@ -5,8 +5,9 @@ React + TypeScript + Tailwind CSS component library. Storybook for dev/docs. Fig
 ## Quick Start
 
 ```bash
-npm install        # Node 18+
-npm run storybook  # http://localhost:6006
+npm install          # Node 18+
+npm run storybook    # http://localhost:6006
+npm run build-storybook  # build check — run before every PR
 ```
 
 ## Project Structure
@@ -34,13 +35,13 @@ public/illustrations/ # 100+ Zest illustrations
 
 `colors.tokens.js` is the single source of truth. Both `tailwind.config.js` and `colors.ts` import from it.
 
-- **In component JS/TS** — use `import { colors } from '../specs'`, never hardcoded hex
+- **In component JS/TS** — `import { colors } from '../specs'` (goes through `specs/index.ts`), never hardcoded hex
 - **In Tailwind classes** — use semantic names: `bg-primary`, `text-foreground`, `border-border`
 - **To change a color** — edit only `colors.tokens.js`; everything else inherits
 
 ### Components
 
-All form controls use `React.forwardRef` and accept native element props:
+All components use `React.forwardRef` and accept native element props:
 
 ```tsx
 import React, { forwardRef } from 'react';
@@ -65,7 +66,8 @@ export const MyComponent = forwardRef<HTMLButtonElement, MyComponentProps>(({
 MyComponent.displayName = 'MyComponent';
 ```
 
-- Export component + types from `src/components/index.ts`
+- Export component + types from `src/components/index.ts` (both `export { Foo }` and `export type { FooProps }`)
+- Shared types (e.g. `ButtonSize`) live in `specs/` and are re-exported from the component file
 - Use `transition-interactive` (color changes) or `transition-fade` (opacity) — not raw `transition-colors duration-fast ease-gitlaw`
 - Use `Dropdown` + `Popover` for any popup menu. Never build custom popup lists.
 
@@ -97,6 +99,7 @@ Other title prefixes: `Chat/`, `Editor/`, `Layout/`, `Pages/`.
 - **Always branch** — `feature/`, `fix/`, `chore/`. Never commit to `main` directly.
 - Merge via PR (squash). Merge to `main` triggers Vercel deploy.
 - Include `Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>` in commits.
+- If heredoc commit messages fail (shell quoting), use a double-quoted string instead.
 
 ## Adding / Changing Components
 
@@ -108,6 +111,7 @@ Other title prefixes: `Chat/`, `Editor/`, `Layout/`, `Pages/`.
 **Figma MCP notes:**
 - 403 error → auth timed out → ask user to restart Claude
 - Icon sizes from Figma MCP are often wrong (reports 24px for everything) — deduce from container size or ask user
+- Any MCP tool returning connection errors → ask user to restart Claude
 
 ## Adding Icons / Illustrations
 
@@ -127,8 +131,7 @@ Uses `@tailwindcss/container-queries`. Breakpoints in `src/constants/breakpoints
 
 ## Deployment
 
-- **Vercel** — auto-deploys on push to `main` → https://gitlaw-ui.vercel.app
-- **GitHub Pages** — `npm run deploy`
+- **Vercel** (primary) — auto-deploys on push to `main` → https://gitlaw-ui.vercel.app
 
 ## Figma
 
@@ -140,7 +143,7 @@ Uses `@tailwindcss/container-queries`. Breakpoints in `src/constants/breakpoints
 
 Run when asked. Each step has a specific command — no guessing.
 
-1. **Exports** — `ls src/components/*.tsx | wc -l` vs `grep -c "^export {" src/components/index.ts`. Must match.
+1. **Exports** — `ls src/components/*.tsx | wc -l` vs `grep -c "^export {" src/components/index.ts`. Every component file needs both `export { Foo }` and `export type { FooProps }` lines.
 2. **Story categories** — `grep "title:" src/stories/*.stories.tsx`. Every component story needs `Components/<Category>/Name`.
 3. **Story count** — `for f in src/stories/*.stories.tsx; do echo "$(grep -c 'export const' "$f") $f"; done | sort -rn`. Max 3–4 per file.
 4. **Hex colors** — `grep -rn '"#[0-9A-Fa-f]' src/components/ src/templates/`. Should be zero (except `Icon.tsx` colorFilters).
@@ -148,6 +151,3 @@ Run when asked. Each step has a specific command — no guessing.
 6. **Build** — `npm run build-storybook`. Zero errors (chunk warnings OK).
 7. **Commit** — stage specific files, descriptive message, push.
 
-## MCP Tools
-
-If Figma MCP or any other MCP tool returns connection errors, ask the user to restart Claude.
