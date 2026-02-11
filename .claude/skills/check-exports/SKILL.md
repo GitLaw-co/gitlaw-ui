@@ -1,7 +1,7 @@
 ---
 name: check-exports
 description: Validate that all components in src/components/ are properly exported from index.ts with both value and type exports. Fixes any missing exports automatically.
-disable-model-invocation: true
+disable-model-invocation: false
 allowed-tools: Read, Grep, Glob, Edit
 ---
 

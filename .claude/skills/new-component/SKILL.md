@@ -1,7 +1,7 @@
 ---
 name: new-component
 description: Scaffold a new React component with the correct forwardRef pattern, TypeScript types, exports, and a matching Storybook story. Pass the component name as an argument.
-disable-model-invocation: true
+disable-model-invocation: false
 allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 argument-hint: "<ComponentName>"
 ---

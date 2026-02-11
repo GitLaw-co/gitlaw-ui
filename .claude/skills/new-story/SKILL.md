@@ -1,7 +1,7 @@
 ---
 name: new-story
 description: Create a properly structured Storybook story file for an existing component. Pass the component name as an argument.
-disable-model-invocation: true
+disable-model-invocation: false
 allowed-tools: Read, Grep, Glob, Write, Edit
 argument-hint: "<ComponentName>"
 ---

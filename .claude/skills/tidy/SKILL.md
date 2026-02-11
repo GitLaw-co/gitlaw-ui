@@ -1,7 +1,7 @@
 ---
 name: tidy
 description: Run the full tidy-up checklist — exports, story categories, story count, hex colors, repeated patterns, build, and commit. Use after finishing a task to ensure codebase consistency.
-disable-model-invocation: true
+disable-model-invocation: false
 allowed-tools: Read, Grep, Glob, Bash, Edit
 ---
 

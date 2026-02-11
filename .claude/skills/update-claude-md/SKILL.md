@@ -1,7 +1,7 @@
 ---
 name: update-claude-md
 description: Review recent changes to the codebase and update CLAUDE.md accordingly. Checks for new/removed components, changed paths, new patterns, and keeps the file in sync.
-disable-model-invocation: true
+disable-model-invocation: false
 allowed-tools: Read, Grep, Glob, Edit, Bash
 ---
 

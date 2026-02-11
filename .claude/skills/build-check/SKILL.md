@@ -1,7 +1,7 @@
 ---
 name: build-check
 description: Run the Storybook build and report any errors. Use before creating PRs or after making changes to verify nothing is broken.
-disable-model-invocation: true
+disable-model-invocation: false
 allowed-tools: Bash
 ---
 
