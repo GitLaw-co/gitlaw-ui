@@ -1,5 +1,5 @@
 // Auto-generated changelog from git commits
-// Generated: 2026-02-09T17:20:29.469Z
+// Generated: 2026-02-11T15:55:36.127Z
 // Run: node scripts/generate-changelog.js
 
 export interface ChangelogEntry {
@@ -12,8 +12,106 @@ export interface ChangelogEntry {
 
 export const changelog: ChangelogEntry[] = [
   {
+    "date": "2026-02-11",
+    "commits": [
+      {
+        "hash": "7ffb723",
+        "message": "Fix author name and trim redundant credits"
+      },
+      {
+        "hash": "79d85c5",
+        "message": "Credit Dario Codi Pietro as designer in Introduction and README"
+      },
+      {
+        "hash": "5733cce",
+        "message": "Trim Tidy Up intro in CLAUDE.md"
+      },
+      {
+        "hash": "060c48e",
+        "message": "Refine CLAUDE.md self-maintenance: keep table, stay concise"
+      },
+      {
+        "hash": "1012bdf",
+        "message": "Add Divider component and self-maintenance rule to CLAUDE.md"
+      },
+      {
+        "hash": "1342498",
+        "message": "Rename Assets to assets, connectors to services, add Google icon"
+      },
+      {
+        "hash": "2946e7a",
+        "message": "Rewrite CLAUDE.md: leaner structure, all references preserved (#7)"
+      },
+      {
+        "hash": "fae352d",
+        "message": "Consolidate design tokens into single source of truth (#6)"
+      },
+      {
+        "hash": "2c498a8",
+        "message": "Add forwardRef and native element props to form controls (#5)"
+      },
+      {
+        "hash": "731de37",
+        "message": "Fix code audit findings: a11y, Tailwind purge, side effects, docs (#4)"
+      }
+    ]
+  },
+  {
+    "date": "2026-02-10",
+    "commits": [
+      {
+        "hash": "cbbae37",
+        "message": "Redesign tidy-up routine with concrete commands and checks"
+      },
+      {
+        "hash": "1a5f5ed",
+        "message": "Tidy up: extract transition utilities, consolidate stories, update docs"
+      },
+      {
+        "hash": "ed89c8b",
+        "message": "Responsive EditorToolbar with overflow menu (#3)"
+      }
+    ]
+  },
+  {
     "date": "2026-02-09",
     "commits": [
+      {
+        "hash": "bf5e11b",
+        "message": "Add Billing page prototype with SettingsTableRow component"
+      },
+      {
+        "hash": "6afc6c2",
+        "message": "Compact card partial content + always-visible star + clean up stories"
+      },
+      {
+        "hash": "3adf803",
+        "message": "Add sort dropdown to grid view with delayed close"
+      },
+      {
+        "hash": "c29e5bf",
+        "message": "Remove sort label from table header"
+      },
+      {
+        "hash": "7be8a19",
+        "message": "Revert \"Add Select all / Deselect all label to table header edit mode\""
+      },
+      {
+        "hash": "6f35256",
+        "message": "Add Select all / Deselect all label to table header edit mode"
+      },
+      {
+        "hash": "3c9607e",
+        "message": "Move sort indicator from ListHeader to table header row"
+      },
+      {
+        "hash": "6b46390",
+        "message": "Remove top margin between ListHeader and table header"
+      },
+      {
+        "hash": "572aa8d",
+        "message": "Always show table header in list/grid views, fix header spacing"
+      },
       {
         "hash": "a6fc7e1",
         "message": "Fix icon paths for GitHub Pages using STORYBOOK_BASE env var"
@@ -33,6 +131,14 @@ export const changelog: ChangelogEntry[] = [
       {
         "hash": "1f469a8",
         "message": "Update inline edit mode: replace Done with X button and selection count"
+      },
+      {
+        "hash": "61be7b1",
+        "message": "Fix TS2307 SVG import errors: move assets into src/"
+      },
+      {
+        "hash": "e9d8128",
+        "message": "Storybook cleanup: add autodocs tags and consolidate stories"
       },
       {
         "hash": "d47711f",
@@ -116,123 +222,9 @@ export const changelog: ChangelogEntry[] = [
       {
         "hash": "9e6ca3a",
         "message": "Refine PageNav: dropdown padding, sort logic, text size, demo data"
-      },
-      {
-        "hash": "fe0e44a",
-        "message": "Add PageNav component with context switcher and animated dropdown"
-      },
-      {
-        "hash": "b22af76",
-        "message": "Remove Review stories folder, update changelog"
-      },
-      {
-        "hash": "1edcd31",
-        "message": "Add white tooltip variant story for review with Kirill"
-      },
-      {
-        "hash": "74bed0f",
-        "message": "Fix Storybook build: rename changelog script to .cjs for ESM compat"
-      },
-      {
-        "hash": "d38b7bc",
-        "message": "Standardize animations across all components with Tailwind tokens"
-      }
-    ]
-  },
-  {
-    "date": "2026-02-04",
-    "commits": [
-      {
-        "hash": "3a5bf48",
-        "message": "Set up npm publishing for @gitlaw/ui design system"
-      },
-      {
-        "hash": "8c3ae8f",
-        "message": "Add StickyFeaturePromoBar component"
-      },
-      {
-        "hash": "29f81f5",
-        "message": "Add ChatPageTemplate with jurisdiction dropdown and Input improvements"
-      },
-      {
-        "hash": "17d9dba",
-        "message": "Fix sidebar icon alignment when collapsed"
-      },
-      {
-        "hash": "23c84a1",
-        "message": "Improve sidebar animation with snappier transitions"
-      },
-      {
-        "hash": "1f65337",
-        "message": "Add Popover component and refactor Tooltip to use it"
-      },
-      {
-        "hash": "b823386",
-        "message": "Add settings dropdown to ChatInput with position options"
-      },
-      {
-        "hash": "023f0fd",
-        "message": "Update ChatInput settings tooltip to \"Jurisdiction and settings\""
-      }
-    ]
-  },
-  {
-    "date": "2026-02-03",
-    "commits": [
-      {
-        "hash": "fc2a3a7",
-        "message": "Add Prototypes section with DocumentMenuItem, fix Sidebar icons, add MenuItem width prop"
-      },
-      {
-        "hash": "16c075b",
-        "message": "Fix TypeScript errors across components and stories"
-      },
-      {
-        "hash": "00cf96c",
-        "message": "Update Introduction docs and fix ChatThread story"
-      },
-      {
-        "hash": "c47720b",
-        "message": "Add ChatThread component with message components and reorganize Storybook"
-      },
-      {
-        "hash": "980ddb9",
-        "message": "Fix document context Input to be inline with w-auto, not full-width"
-      },
-      {
-        "hash": "d97932b",
-        "message": "Simplify Input - remove hug customizations, keep only background color for document context"
-      },
-      {
-        "hash": "cb0ea0e",
-        "message": "Fix Input hug - remove w-0 that was hiding text"
-      },
-      {
-        "hash": "ee2b7dc",
-        "message": "Fix Input hug using size attribute with w-0 min-w-0 for tighter fit"
-      },
-      {
-        "hash": "d156705",
-        "message": "Reduce Input hug right padding by removing +1ch buffer"
-      },
-      {
-        "hash": "1ddef3d",
-        "message": "Fix Input hug using ch units for proper character-based width"
-      },
-      {
-        "hash": "b1f57d2",
-        "message": "Make document context inputs use hug behavior by default"
-      },
-      {
-        "hash": "bb17c45",
-        "message": "Fix Input hug alignment using inline-flex for proper content hugging"
-      },
-      {
-        "hash": "20830b8",
-        "message": "Fix Input hug alignment to actually hug contents"
       }
     ]
   }
 ];
 
-export const lastUpdated = "2026-02-09";
+export const lastUpdated = "2026-02-11";
