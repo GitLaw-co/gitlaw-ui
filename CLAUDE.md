@@ -368,11 +368,12 @@ Run when asked. Each step has a specific command — no guessing.
 
 ## After Every Task
 
-Always check whether this file (`CLAUDE.md`) needs updating. Common triggers:
-- New or removed component → update "Existing Components" table and "Project Structure" if directories changed
+Always check whether this file (`CLAUDE.md`) needs updating. Keep edits minimal — one-line table rows, not paragraphs.
+- New or removed component → add/remove one row in "Existing Components" table
 - New directory or renamed path → update "Project Structure" tree
 - New pattern or convention → add to relevant "Rules" section
 - New hook, template, or spec → mention in the appropriate section
+- Don't add lengthy descriptions — the table is a quick-reference index, not documentation
 
 ## MCP Tools & Error Handling
 
