@@ -180,6 +180,9 @@ export type {
   ListHeaderEditAction,
 } from "./ListHeader";
 
+export { Divider } from "./Divider";
+export type { DividerProps } from "./Divider";
+
 // Hooks
 export { useContainerCols } from "../hooks/useContainerCols";
 

@@ -51,6 +51,7 @@ assets/               # Source files (not deployed)
 | ChatUserMessage | User chat bubble |
 | Checkbox | Checkbox with indeterminate state |
 | Dialog | Modal dialogs |
+| Divider | Horizontal separator line |
 | Dropdown | Adaptive width dropdown menu |
 | EditorHeader | Document title bar with actions |
 | EditorPaper | Document editing surface |
@@ -364,6 +365,14 @@ Run when asked. Each step has a specific command — no guessing.
 5. **Repeated patterns** — `grep -roh 'transition-[a-z]* duration-fast ease-gitlaw' src/components/ | sort | uniq -c`. If a Tailwind class combo appears 3+ times, extract to `globals.css` as a `@layer utilities` class. Existing utilities: `transition-interactive`, `transition-fade`, `shadow-card`. After adding a new utility, bulk-replace across all files and verify with grep.
 6. **Build** — `npm run build-storybook`. Zero errors (chunk warnings OK).
 7. **Commit** — stage specific files (not `git add -A`), descriptive message, push.
+
+## After Every Task
+
+Always check whether this file (`CLAUDE.md`) needs updating. Common triggers:
+- New or removed component → update "Existing Components" table and "Project Structure" if directories changed
+- New directory or renamed path → update "Project Structure" tree
+- New pattern or convention → add to relevant "Rules" section
+- New hook, template, or spec → mention in the appropriate section
 
 ## MCP Tools & Error Handling
 
