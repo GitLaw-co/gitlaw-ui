@@ -356,7 +356,7 @@ Both `TableListItem` and `Card` Interactive stories implement the same selection
 
 ## Tidy Up
 
-Run when asked. Each step has a specific command — no guessing.
+Run when asked.
 
 1. **Exports** — `ls src/components/*.tsx | wc -l` vs `grep -c "^export {" src/components/index.ts`. Every component file needs both `export { Foo }` and `export type { FooProps }` lines. Update `Introduction.mdx` component count if changed. Update the "Existing Components" table in this file if components were added/removed.
 2. **Story categories** — `grep "title:" src/stories/*.stories.tsx`. Every component story needs `Components/<Category>/Name`. Update story links in `Introduction.mdx` if titles changed (links are kebab-case: `Components/Data Display/Card` → `?path=/docs/components-data-display-card--docs`).
