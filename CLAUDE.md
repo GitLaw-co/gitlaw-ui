@@ -30,6 +30,10 @@ src/
 
 public/icons/         # 1,475 SVG icons (kebab-case)
 public/illustrations/ # 100+ Zest illustrations
+
+Assets/               # Source files (not deployed)
+├── Icons/            # Icon source files
+└── Zest Illustration Set/  # Illustration source files
 ```
 
 ## Existing Components
@@ -54,7 +58,7 @@ public/illustrations/ # 100+ Zest illustrations
 | FileDropdown | File picker dropdown |
 | Icon | 1,475 icons with color support |
 | Input | Text input with label, icons, validation states |
-| ListHeader | Toolbar above file lists with edit layout variants |
+| ListHeader | Toolbar above file lists with edit layout variants (replace, inline, merged) |
 | MenuItem | List items with icons, avatars, checkboxes |
 | Overlay | Full-screen overlay backdrop |
 | PageNav | Settings navigation with context switcher |
@@ -84,7 +88,10 @@ public/illustrations/ # 100+ Zest illustrations
 `colors.tokens.js` is the single source of truth. Both `tailwind.config.js` and `colors.ts` import from it.
 
 - **In component JS/TS** — `import { colors } from '../specs'` (goes through `specs/index.ts`), never hardcoded hex
-- **In Tailwind classes** — use semantic names: `bg-primary`, `text-foreground`, `border-border`
+- **In Tailwind classes** — use semantic names:
+  - Backgrounds: `bg-primary`, `bg-secondary`, `bg-destructive`, `bg-card`, `bg-page-background`
+  - Text: `text-text-primary`, `text-text-secondary`, `text-text-negative`, `text-text-button`
+  - Borders: `border-primary`, `border-border`, `border-input-border`
 - **To change a color** — edit only `colors.tokens.js`; everything else inherits
 
 Key color tokens:
@@ -204,11 +211,29 @@ Other title prefixes: `Chat/`, `Editor/`, `Layout/`, `Pages/`.
 Page stories live in `src/stories/Pages/` and follow a different pattern:
 
 - Title: `"Pages/Page Name"`
-- Layout: `fullscreen` (no centering)
+- Layout: `fullscreen` (no centering), `backgrounds: { default: "light" }`
 - Use `render:` functions (not `args:`)
-- Extract shared data as top-level constants
+- Extract shared data as top-level constants (`sharedProps` pattern)
 - Use section divider comments between logical blocks
 - Keep to 2-3 stories max: **Default** + key alternate states
+
+```tsx
+const meta: Meta<typeof MyTemplate> = {
+  title: "Pages/My Page",
+  component: MyTemplate,
+  parameters: { layout: "fullscreen", backgrounds: { default: "light" } },
+};
+
+/* ------------------------------------------------------------------ */
+/*  Shared data                                                        */
+/* ------------------------------------------------------------------ */
+const sharedProps = { title: "My Page", files, userName: "Ava Campbell" };
+
+/* ------------------------------------------------------------------ */
+/*  Story: Default                                                     */
+/* ------------------------------------------------------------------ */
+export const Default: Story = { render: () => <MyTemplate {...sharedProps} /> };
+```
 
 ### Git
 
@@ -241,7 +266,7 @@ Page stories live in `src/stories/Pages/` and follow a different pattern:
 <Icon name="check" className="size-5" color={colors.iconPrimary} />
 ```
 
-**Illustrations** — copy SVG to `public/illustrations/`, run `node scripts/update-illustration-colors.js`.
+**Illustrations** — copy SVG to `Assets/Zest Illustration Set/` and `public/illustrations/`, then run `node scripts/update-illustration-colors.js`.
 
 ## Responsive Layouts
 
@@ -261,9 +286,24 @@ Uses `@tailwindcss/container-queries`. Breakpoints in `src/constants/breakpoints
 | `@6xl:` | 1152px | — |
 | `@7xl:` | 1280px | — |
 
-- **CSS-only** (`@container` classes) — for grid columns, gaps, visibility
-- **JS** (`useContainerCols` hook) — when a component needs a width-derived prop (e.g. `TableListItem cols`)
-  - Returns: `cols: 0 (<672px) | 2 (672-896) | 4 (896-1024) | 6 (>=1024)`
+- **CSS-only** (`@container` classes) — for grid columns, gaps, visibility:
+  ```tsx
+  <div className="@container">
+    <div className="grid grid-cols-1 gap-2 @lg:grid-cols-2 @2xl:gap-3 @4xl:grid-cols-3 @5xl:grid-cols-4">
+      {cards.map(card => <Card key={card.id} {...card} />)}
+    </div>
+  </div>
+  ```
+- **JS** (`useContainerCols` hook) — when a component needs a width-derived prop (e.g. `TableListItem cols`):
+  ```tsx
+  import { useContainerCols } from '../hooks/useContainerCols';
+  const { cols, containerRef } = useContainerCols();
+  // cols: 0 (<672px) | 2 (672-896) | 4 (896-1024) | 6 (>=1024)
+  <div className="@container" ref={containerRef}>
+    {cols > 0 && <TableListItem type="header" cols={cols} ... />}
+    {rows.map(row => <TableListItem cols={cols} ... />)}
+  </div>
+  ```
 
 ## Interaction Patterns
 
@@ -282,21 +322,29 @@ Both `TableListItem` and `Card` Interactive stories implement the same selection
 | Rubber band drag | Multi-select via drag rectangle |
 | Select All (table) | Header checkbox toggles all |
 
+**Key props:**
+- `TableListItem`: `selected`, `selectMode`, `selectStatus`, `onSelectAllClick`, `onClick`, `onDoubleClick`
+- `Card`: `selected`, `onClick`, `onDoubleClick`
+
 **Edit mode header** (when >= 1 item selected):
 - Left: `"N files selected"` — `text-lg font-semibold text-primary`
 - Right: Delete, Download, Move as `Button variant="secondary" size="s"`, plus Done as `Button variant="primary" size="s"`
 
 **Double-click timing:**
-- `Card` has this built-in via `doubleClickThreshold` prop (default 250ms)
+- `Card` has this built-in via `doubleClickThreshold` prop (default 250ms) using `setTimeout` + `useRef`
 - `TableListItem` does NOT have this yet — implement timeout pattern at story level
+- Use `event.detail === 2` or `setTimeout` with 250ms to match native feel
 
 **Rubber band selection:**
-- Uses `ref` maps to track element positions
+- Uses `ref` maps (`rowRefs` / `cardRefs`) to track element positions
+- `mousedown` → `mousemove` → `mouseup` on a container div
 - Selection rect: `rgba(94, 73, 214, 0.1)` bg + `rgba(94, 73, 214, 0.5)` border
+- DOM structure: `bg-page-background p-8` → outer relative → selection rect → inner fixed-width → header bar → content → footer
 
 ## Deployment
 
 - **Vercel** (primary) — auto-deploys on push to `main` → https://gitlaw-ui.vercel.app
+- **GitHub Pages** (manual) — `npm run deploy`
 
 ## Figma
 
@@ -308,11 +356,11 @@ Both `TableListItem` and `Card` Interactive stories implement the same selection
 
 Run when asked. Each step has a specific command — no guessing.
 
-1. **Exports** — `ls src/components/*.tsx | wc -l` vs `grep -c "^export {" src/components/index.ts`. Every component file needs both `export { Foo }` and `export type { FooProps }` lines. Update `Introduction.mdx` component count if changed.
+1. **Exports** — `ls src/components/*.tsx | wc -l` vs `grep -c "^export {" src/components/index.ts`. Every component file needs both `export { Foo }` and `export type { FooProps }` lines. Update `Introduction.mdx` component count if changed. Update the "Existing Components" table in this file if components were added/removed.
 2. **Story categories** — `grep "title:" src/stories/*.stories.tsx`. Every component story needs `Components/<Category>/Name`. Update story links in `Introduction.mdx` if titles changed (links are kebab-case: `Components/Data Display/Card` → `?path=/docs/components-data-display-card--docs`).
 3. **Story count** — `for f in src/stories/*.stories.tsx; do echo "$(grep -c 'export const' "$f") $f"; done | sort -rn`. Max 3-4 per file.
 4. **Hex colors** — `grep -rn '"#[0-9A-Fa-f]' src/components/ src/templates/`. Should be zero (except `Icon.tsx` colorFilters).
-5. **Repeated patterns** — `grep -roh 'transition-[a-z]* duration-fast ease-gitlaw' src/components/ | sort | uniq -c`. Extract to `globals.css` if 3+ occurrences.
+5. **Repeated patterns** — `grep -roh 'transition-[a-z]* duration-fast ease-gitlaw' src/components/ | sort | uniq -c`. If a Tailwind class combo appears 3+ times, extract to `globals.css` as a `@layer utilities` class. Existing utilities: `transition-interactive`, `transition-fade`, `shadow-card`. After adding a new utility, bulk-replace across all files and verify with grep.
 6. **Build** — `npm run build-storybook`. Zero errors (chunk warnings OK).
 7. **Commit** — stage specific files (not `git add -A`), descriptive message, push.
 
