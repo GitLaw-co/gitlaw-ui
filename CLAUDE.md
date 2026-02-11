@@ -1,6 +1,6 @@
 # Claude Instructions for GitLaw UI
 
-React + TypeScript + Tailwind CSS component library. Storybook for dev/docs. Figma as design source.
+React 18 + TypeScript + Tailwind 3 component library, published as an npm package. Storybook 8 for dev/docs. Figma as design source.
 
 ## Quick Start
 
@@ -10,20 +10,23 @@ npm run storybook    # http://localhost:6006
 npm run build-storybook  # build check — run before every PR
 ```
 
+Before creating anything, check what exists: `ls src/components/*.tsx`
+
 ## Project Structure
 
 ```
 src/
 ├── components/       # React components (flat: Button.tsx, Input.tsx, …)
-├── specs/            # Design tokens — single source of truth
-│   ├── colors.tokens.js   # All color primitives + semantic tokens
+├── specs/            # Design tokens + component specs (single source of truth)
+│   ├── colors.tokens.js   # All color primitives + semantic tokens (plain JS for Node compat)
 │   ├── colors.ts          # Re-exports with TypeScript types
-│   └── index.ts
-├── constants/        # Breakpoints
+│   ├── button.specs.ts    # Button size/spacing specs from Figma
+│   └── index.ts           # Barrel — import from '../specs', not individual files
+├── constants/        # Breakpoints (container + viewport)
 ├── hooks/            # useContainerCols, useToolbarOverflow
 ├── stories/          # Storybook stories
 ├── templates/        # Page-level templates
-└── styles/globals.css # Utilities, illustration CSS vars
+└── styles/globals.css # Transition utilities, illustration CSS vars
 
 public/icons/         # 1,475 SVG icons (kebab-case)
 public/illustrations/ # 100+ Zest illustrations
@@ -39,9 +42,18 @@ public/illustrations/ # 100+ Zest illustrations
 - **In Tailwind classes** — use semantic names: `bg-primary`, `text-foreground`, `border-border`
 - **To change a color** — edit only `colors.tokens.js`; everything else inherits
 
+### Spacing & Radius
+
+Custom tokens defined in `tailwind.config.js` — use these instead of Tailwind defaults:
+
+- **Spacing:** `p-gitlaw-m` (8px), `gap-gitlaw-l` (12px), `m-gitlaw-xl` (16px), etc.
+  Sizes: `xxs`=1px, `xs`=2px, `s`=4px, `m`=8px, `l`=12px, `xl`=16px, `2xl`=24px, `3xl`=32px, `4xl`=48px
+- **Border radius:** `rounded-gitlaw-s` (4px), `rounded-gitlaw-m` (8px), `rounded-gitlaw-full` (pill)
+- **Shadow:** `shadow-card`
+
 ### Components
 
-All components use `React.forwardRef` and accept native element props:
+All components use `React.forwardRef` and accept native element props. Reference `Button.tsx` as the canonical example.
 
 ```tsx
 import React, { forwardRef } from 'react';
@@ -71,6 +83,14 @@ MyComponent.displayName = 'MyComponent';
 - Use `transition-interactive` (color changes) or `transition-fade` (opacity) — not raw `transition-colors duration-fast ease-gitlaw`
 - Use `Dropdown` + `Popover` for any popup menu. Never build custom popup lists.
 
+### Don't
+
+- Don't import directly from `colors.tokens.js` or `colors.ts` in components — use `'../specs'`
+- Don't add CSS custom properties to `globals.css` for new tokens — add to `colors.tokens.js` or `tailwind.config.js`
+- Don't use Tailwind default spacing (`p-2`, `p-4`) — use `gitlaw-*` tokens (`p-gitlaw-m`, `p-gitlaw-xl`)
+- Don't use inline `style={}` — use Tailwind classes
+- Don't create new directories (`utils/`, `lib/`, `helpers/`) — put hooks in `hooks/`, tokens in `specs/`
+
 ### Stories
 
 Max **3–4 stories** per file:
@@ -80,6 +100,23 @@ Max **3–4 stories** per file:
 | Default | Controllable with args panel | Always |
 | AllVariants | Grid of all visual states | Always |
 | Interactive | Stateful demo (selection, forms) | If needed |
+
+Story meta boilerplate:
+
+```tsx
+import type { Meta, StoryObj } from '@storybook/react';
+import { MyComponent } from '../components/MyComponent';
+
+const meta: Meta<typeof MyComponent> = {
+  title: 'Components/<Category>/MyComponent',
+  component: MyComponent,
+  parameters: { layout: 'centered' },
+  tags: ['autodocs'],
+};
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+```
 
 Category is required — use `title: "Components/<Category>/Name"`:
 
@@ -150,4 +187,3 @@ Run when asked. Each step has a specific command — no guessing.
 5. **Repeated patterns** — `grep -roh 'transition-[a-z]* duration-fast ease-gitlaw' src/components/ | sort | uniq -c`. Extract to `globals.css` if 3+ occurrences.
 6. **Build** — `npm run build-storybook`. Zero errors (chunk warnings OK).
 7. **Commit** — stage specific files, descriptive message, push.
-
