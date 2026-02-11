@@ -535,5 +535,304 @@ React support has been requested (GitHub issues #199, #752) but is not planned.
 
 ---
 
+---
+
+## 11. AI-Readable Component Documentation
+
+Research on making gitlaw-ui components consumable by LLMs for code generation.
+
+### The Problem
+
+When AI assistants generate UI code, they often:
+- Use incorrect prop names or values
+- Mix components from different libraries
+- Apply wrong spacing/color tokens
+- Create layouts that don't match design system patterns
+
+**Solution:** Provide a structured system prompt that teaches AI the design system constraints.
+
+### System Prompt Architecture
+
+Based on the [shadcn/ui llms.txt pattern](https://ui.shadcn.com/llms.txt), create a machine-readable component reference:
+
+```
+AVAILABLE COMPONENTS:
+- Button: variant: primary|secondary|outline|ghost|destructive, size: xs|s|m|l|xl
+- Card: variant: file|template|folder, compact: boolean
+- Input: size: xs|s|m|l|xl, state: default|error|disabled, leftIcon: string, rightIcon: string
+- Select: multi: boolean, searchable: boolean
+- Dialog: open: boolean, onClose: function
+- Dropdown: trigger: ReactNode, items: MenuItem[]
+
+LAYOUT PATTERNS:
+- List Page: PageShell → TopHeader → ListHeader → TableListItem[] | Card[]
+- Settings Page: PageShell → PageNav → Section[] → SettingsTableRow[]
+- Editor Page: PageShell → EditorHeader → EditorToolbar → EditorPaper → EditorSection[]
+- Chat Page: ChatThread → ChatAssistantMessage | ChatUserMessage → ChatInput
+
+DESIGN TOKENS:
+- Colors: primary=#5E49D6, textPrimary=#1B1918, textSecondary=#706D6A, background=#F8F6F4
+- Spacing: xxs=1px, xs=2px, s=4px, m=8px, l=12px, xl=16px, 2xl=24px, 3xl=32px, 4xl=48px
+- Radius: s=4px, m=8px, full=9999px
+- Icons: 1,475 available in public/icons/ (kebab-case names)
+
+RULES:
+- Use ONLY listed components — never create custom UI elements
+- Use gitlaw-* spacing tokens — never raw Tailwind (p-4, m-2)
+- Use semantic color names — never hex values
+- Always include PageShell for full pages
+- Icons: <Icon name="check" className="size-5" color={colors.iconPrimary} />
+- Return valid JSX only, no explanations
+```
+
+### Implementation Options
+
+#### Option A: Generate llms.txt Endpoint
+
+Like shadcn/ui, provide a machine-readable component registry:
+
+```
+# @gitlaw/ui Component Reference
+
+## Button
+Primary action element.
+
+### Props
+- variant: "primary" | "secondary" | "outline" | "ghost" | "destructive" (default: "primary")
+- size: "xs" | "s" | "m" | "l" | "xl" (default: "m")
+- disabled: boolean
+- leftIcon: string (icon name from public/icons/)
+- rightIcon: string
+
+### Usage
+<Button variant="primary" size="m">Submit</Button>
+<Button variant="destructive" leftIcon="trash">Delete</Button>
+
+### When to Use
+- Form submissions
+- Primary page actions
+- Destructive confirmations
+
+### When NOT to Use
+- Navigation (use Link or anchor)
+- Multiple primary buttons per page
+```
+
+**Benefits:**
+- AI tools can fetch context automatically
+- Single source of truth for LLM consumption
+- Versioned alongside components
+
+#### Option B: Figma Code Connect
+
+Link Figma design components directly to production React code:
+
+```javascript
+import figma from '@figma/code-connect/react';
+import { Button } from './components/Button';
+
+figma.connect(Button, 'https://figma.com/file/czek1GvIeHMJnnvc3aqWHK/...', {
+  props: {
+    label: figma.string('Label'),
+    variant: figma.enum('Variant', {
+      'Primary': 'primary',
+      'Secondary': 'secondary',
+      'Outline': 'outline',
+      'Ghost': 'ghost',
+      'Destructive': 'destructive'
+    }),
+    size: figma.enum('Size', {
+      'XS': 'xs',
+      'S': 's',
+      'M': 'm',
+      'L': 'l',
+      'XL': 'xl'
+    }),
+    disabled: figma.boolean('Disabled'),
+    leftIcon: figma.string('Left Icon'),
+    rightIcon: figma.string('Right Icon')
+  },
+  example: ({ label, variant, size, disabled, leftIcon, rightIcon }) => (
+    <Button
+      variant={variant}
+      size={size}
+      disabled={disabled}
+      leftIcon={leftIcon}
+      rightIcon={rightIcon}
+    >
+      {label}
+    </Button>
+  )
+});
+```
+
+**Benefits:**
+- Designers see real code snippets in Figma Dev Mode
+- Maps design variants to code props exactly
+- Enhances AI context with accurate implementation details
+- Keeps design ↔ development in sync
+
+**Setup:**
+```bash
+npm install @figma/code-connect
+npx figma connect create  # Generate config files
+npx figma connect publish # Push to Figma
+```
+
+#### Option C: components.json Registry
+
+Machine-readable JSON for tooling:
+
+```json
+{
+  "components": [
+    {
+      "name": "Button",
+      "path": "src/components/Button.tsx",
+      "description": "Primary action element",
+      "props": {
+        "variant": {
+          "type": "enum",
+          "values": ["primary", "secondary", "outline", "ghost", "destructive"],
+          "default": "primary"
+        },
+        "size": {
+          "type": "enum",
+          "values": ["xs", "s", "m", "l", "xl"],
+          "default": "m"
+        }
+      },
+      "usage": {
+        "when": ["Form submissions", "Primary page actions"],
+        "notWhen": ["Navigation", "Multiple per page"]
+      },
+      "accessibility": {
+        "wcag": "AA",
+        "keyboard": true,
+        "screenReader": true
+      },
+      "tokens": {
+        "colors": ["primary", "destructive", "textButtonNegative"],
+        "spacing": ["gitlaw-m", "gitlaw-l", "gitlaw-xl"]
+      },
+      "figma": "https://figma.com/file/czek1GvIeHMJnnvc3aqWHK/?node-id=123"
+    }
+  ],
+  "tokens": {
+    "colors": {
+      "primary": "#5E49D6",
+      "secondary": "#F3F2F0"
+    },
+    "spacing": {
+      "gitlaw-m": "8px",
+      "gitlaw-l": "12px"
+    }
+  },
+  "patterns": {
+    "ListPage": ["PageShell", "TopHeader", "ListHeader", "TableListItem[]"],
+    "SettingsPage": ["PageShell", "PageNav", "Section[]", "SettingsTableRow[]"]
+  }
+}
+```
+
+**Benefits:**
+- Parseable by any tool (LLM, CLI, CI)
+- Can generate llms.txt, Storybook docs, TypeScript types from single source
+- Validates component usage in CI
+
+### Storybook Integration
+
+Enhance existing Storybook with AI-friendly metadata:
+
+```typescript
+// Button.stories.tsx
+const meta: Meta<typeof Button> = {
+  title: 'Components/Actions/Button',
+  component: Button,
+  parameters: {
+    docs: {
+      description: {
+        component: 'Primary action element for form submissions and page actions.',
+      },
+    },
+    // AI-readable context
+    aiContext: {
+      when: ['Form submissions', 'Primary page actions', 'Destructive confirmations'],
+      notWhen: ['Navigation', 'Multiple primary buttons per page'],
+      tokens: ['colors.primary', 'colors.destructive', 'spacing.gitlaw-m'],
+    },
+  },
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: ['primary', 'secondary', 'outline', 'ghost', 'destructive'],
+      description: 'Visual style variant',
+      table: {
+        category: 'Appearance',
+        type: { summary: 'ButtonVariant' },
+        defaultValue: { summary: 'primary' },
+      },
+    },
+  },
+};
+```
+
+### Layout Patterns Documentation
+
+Document not just components, but how they compose:
+
+```markdown
+## List Page Pattern
+
+PageShell (sidebar collapsed on mobile)
+└── TopHeader (breadcrumbs, user menu)
+    └── ListHeader (title, actions, view toggle)
+        └── Content Area
+            ├── TableListItem[] (table view, cols responsive)
+            └── Card[] (grid view, 1→2→3→4 columns)
+
+### Responsive Behavior
+- <672px: 1 column, compact cards, 0 table columns
+- 672-896px: 2 columns, 2 table columns (Name, Updated)
+- 896-1024px: 3 columns, 4 table columns (+Size, +Owner)
+- ≥1024px: 4 columns, 6 table columns (+Created, +Status)
+
+### Edit Mode
+When items selected:
+- ListHeader shows: "N files selected" + Delete, Download, Move, Done buttons
+- TableListItem/Card show checkboxes
+- Selection via click, Shift+click, or rubber-band drag
+```
+
+### Recommended Implementation Path
+
+**Phase 1: Enhance CLAUDE.md** (immediate)
+- Add system prompt format to CLAUDE.md
+- Include layout patterns
+- Document all component props in LLM-friendly format
+
+**Phase 2: Figma Code Connect** (1-2 weeks)
+- Install @figma/code-connect
+- Create .figma.tsx files for each component
+- Publish to Figma
+
+**Phase 3: components.json Registry** (2-3 weeks)
+- Create schema for component metadata
+- Generate from TypeScript types + JSDoc
+- Auto-generate llms.txt from registry
+
+**Phase 4: MCP Server** (future)
+- Like shadcn/ui, provide MCP server for AI assistants
+- Enable "add Button to my project" via AI tools
+
+### Sources
+
+- [shadcn/ui llms.txt](https://ui.shadcn.com/llms.txt)
+- [Figma Code Connect](https://help.figma.com/hc/en-us/articles/23920389749655-Code-Connect)
+- [Code Connect Developer Docs](https://developers.figma.com/docs/code-connect/)
+- [Storybook Autodocs](https://storybook.js.org/docs/writing-docs/autodocs)
+
+---
+
 *Document created 2026-02-11*
 *Related: [Process Automation IDEAS.md #7](https://www.notion.so/2f82b1889d1d8160a3bae86fe4b14d74) — Design System Single Source of Truth*
