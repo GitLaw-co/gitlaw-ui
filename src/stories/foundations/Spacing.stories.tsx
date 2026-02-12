@@ -1,15 +1,7 @@
 import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Story, StoryDefault } from "@ladle/react";
 
-const meta: Meta = {
-  title: 'Foundations/Spacing',
-  parameters: {
-    layout: 'fullscreen',
-  },
-};
-
-export default meta;
-type Story = StoryObj;
+export default { title: "Foundations/Spacing", meta: { layout: "fullscreen" } } satisfies StoryDefault;
 
 interface SpacingSampleProps {
   name: string;
@@ -201,6 +193,4 @@ const SpacingPage = () => {
   );
 };
 
-export const AllSpacing: Story = {
-  render: () => <SpacingPage />,
-};
+export const AllSpacing: Story = () => <SpacingPage />;

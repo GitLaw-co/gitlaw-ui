@@ -1,16 +1,8 @@
 import React, { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Story, StoryDefault } from "@ladle/react";
 import { illustrations, illustrationsByCategory, categories } from '../../illustrations/manifest';
 
-const meta: Meta = {
-  title: 'Foundations/Illustrations',
-  parameters: {
-    layout: 'fullscreen',
-  },
-};
-
-export default meta;
-type Story = StoryObj;
+export default { title: "Foundations/Illustrations", meta: { layout: "fullscreen" } } satisfies StoryDefault;
 
 // Base URL for illustrations - update this path once SVGs are exported
 const ILLUSTRATIONS_BASE_URL = '/illustrations';
@@ -184,6 +176,4 @@ const IllustrationsPage = () => {
   );
 };
 
-export const Gallery: Story = {
-  render: () => <IllustrationsPage />,
-};
+export const Gallery: Story = () => <IllustrationsPage />;

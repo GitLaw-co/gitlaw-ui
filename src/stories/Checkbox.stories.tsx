@@ -1,36 +1,28 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Story, StoryDefault } from "@ladle/react";
 import { useState } from 'react';
 import { Checkbox } from '../components/Checkbox';
 import type { CheckboxStatus } from '../components/Checkbox';
 
-const meta: Meta<typeof Checkbox> = {
-  title: 'Components/Form/Checkbox',
-  component: Checkbox,
-  parameters: {
-    layout: 'centered',
-  },
-  tags: ['autodocs'],
+export default {
+  title: "Components / Form / Checkbox",
+  meta: { layout: "centered" },
   argTypes: {
     status: {
-      control: 'select',
+      control: { type: "select" },
       options: ['off', 'on', 'semi'],
       description: 'Checkbox state',
     },
     disabled: {
-      control: 'boolean',
+      control: { type: "boolean" },
       description: 'Disabled state',
     },
   },
-};
-
-export default meta;
-type Story = StoryObj<typeof meta>;
+} satisfies StoryDefault;
 
 // Default controllable story
-export const Default: Story = {
-  args: {
-    status: 'off',
-  },
+export const Default: Story<typeof Checkbox> = (args) => <Checkbox {...args} />;
+Default.args = {
+  status: 'off',
 };
 
 // Interactive with state toggling
@@ -45,9 +37,7 @@ function InteractiveCheckbox(): JSX.Element {
   );
 }
 
-export const Interactive: Story = {
-  render: () => <InteractiveCheckbox />,
-};
+export const Interactive: Story = () => <InteractiveCheckbox />;
 
 // All states showcase
 function AllStatesShowcase(): JSX.Element {
@@ -127,6 +117,4 @@ function AllStatesShowcase(): JSX.Element {
   );
 }
 
-export const AllStates: Story = {
-  render: () => <AllStatesShowcase />,
-};
+export const AllStates: Story = () => <AllStatesShowcase />;

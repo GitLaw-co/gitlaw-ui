@@ -1,13 +1,13 @@
 # Claude Instructions for GitLaw UI
 
-React 18 + TypeScript + Tailwind 3 component library, published as an npm package. Storybook 8 for dev/docs. Figma as design source.
+React 18 + TypeScript + Tailwind 3 component library, published as an npm package. Ladle for dev/docs. Figma as design source.
 
 ## Quick Start
 
 ```bash
 npm install          # Node 18+
-npm run storybook    # http://localhost:6006
-npm run build-storybook  # build check — run before every PR
+npm run dev          # http://localhost:6006 (ladle serve)
+npm run build-storybook  # build check — run before every PR (ladle build → build/)
 ```
 
 Before creating anything, check what exists: `ls src/components/*.tsx`
@@ -24,7 +24,7 @@ src/
 │   └── index.ts           # Barrel — import from '../specs', not individual files
 ├── constants/        # Breakpoints (container + viewport)
 ├── hooks/            # useContainerCols, useToolbarOverflow
-├── stories/          # Storybook stories
+├── stories/          # Ladle stories
 ├── templates/        # Page-level templates
 └── styles/globals.css # Transition utilities, illustration CSS vars
 
@@ -178,21 +178,22 @@ Max **3-4 stories** per file:
 
 **Do NOT create** individual stories for each variant or state (e.g. `Primary`, `Secondary`, `DisabledOn`). Those belong in AllVariants.
 
-Story meta boilerplate:
+Story boilerplate (Ladle):
 
 ```tsx
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Story, StoryDefault } from "@ladle/react";
 import { MyComponent } from '../components/MyComponent';
 
-const meta: Meta<typeof MyComponent> = {
-  title: 'Components/<Category>/MyComponent',
-  component: MyComponent,
-  parameters: { layout: 'centered' },
-  tags: ['autodocs'],
-};
+export default {
+  title: "Components / <Category> / MyComponent",
+  meta: { layout: "centered" },
+  argTypes: { ... },
+} satisfies StoryDefault;
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export const Default: Story = (args) => <MyComponent {...args} />;
+Default.args = { variant: 'primary' };
+
+export const AllVariants: Story = () => (<div>...</div>);
 ```
 
 Category is required — use `title: "Components/<Category>/Name"`:
@@ -212,19 +213,18 @@ Other title prefixes: `Chat/`, `Editor/`, `Layout/`, `Pages/`.
 
 Page stories live in `src/stories/Pages/` and follow a different pattern:
 
-- Title: `"Pages/Page Name"`
-- Layout: `fullscreen` (no centering), `backgrounds: { default: "light" }`
-- Use `render:` functions (not `args:`)
+- Title: `"Pages / Page Name"`
+- Layout: `fullscreen` via `meta: { layout: "fullscreen" }`
+- Use arrow functions (not args)
 - Extract shared data as top-level constants (`sharedProps` pattern)
 - Use section divider comments between logical blocks
 - Keep to 2-3 stories max: **Default** + key alternate states
 
 ```tsx
-const meta: Meta<typeof MyTemplate> = {
-  title: "Pages/My Page",
-  component: MyTemplate,
-  parameters: { layout: "fullscreen", backgrounds: { default: "light" } },
-};
+export default {
+  title: "Pages / My Page",
+  meta: { layout: "fullscreen" },
+} satisfies StoryDefault;
 
 /* ------------------------------------------------------------------ */
 /*  Shared data                                                        */
@@ -234,7 +234,7 @@ const sharedProps = { title: "My Page", files, userName: "Ava Campbell" };
 /* ------------------------------------------------------------------ */
 /*  Story: Default                                                     */
 /* ------------------------------------------------------------------ */
-export const Default: Story = { render: () => <MyTemplate {...sharedProps} /> };
+export const Default: Story = () => <MyTemplate {...sharedProps} />;
 ```
 
 ### Git
@@ -345,8 +345,8 @@ Both `TableListItem` and `Card` Interactive stories implement the same selection
 
 ## Deployment
 
-- **Vercel** (primary) — auto-deploys on push to `main` → https://gitlaw-ui.vercel.app
-- **GitHub Pages** (manual) — `npm run deploy`
+- **Vercel** (primary) — auto-deploys on push to `main` → https://gitlaw-ui.vercel.app (build output: `build/`)
+- **GitHub Pages** (manual) — `npm run deploy` (builds to `build/`, deploys via gh-pages)
 
 ## Figma
 
@@ -358,8 +358,8 @@ Both `TableListItem` and `Card` Interactive stories implement the same selection
 
 Run when asked.
 
-1. **Exports** — `ls src/components/*.tsx | wc -l` vs `grep -c "^export {" src/components/index.ts`. Every component file needs both `export { Foo }` and `export type { FooProps }` lines. Update `Introduction.mdx` component count if changed. Update the "Existing Components" table in this file if components were added/removed.
-2. **Story categories** — `grep "title:" src/stories/*.stories.tsx`. Every component story needs `Components/<Category>/Name`. Update story links in `Introduction.mdx` if titles changed (links are kebab-case: `Components/Data Display/Card` → `?path=/docs/components-data-display-card--docs`).
+1. **Exports** — `ls src/components/*.tsx | wc -l` vs `grep -c "^export {" src/components/index.ts`. Every component file needs both `export { Foo }` and `export type { FooProps }` lines. Update `Introduction.stories.tsx` component count if changed. Update the "Existing Components" table in this file if components were added/removed.
+2. **Story categories** — `grep "title:" src/stories/*.stories.tsx`. Every component story needs `Components / <Category> / Name`.
 3. **Story count** — `for f in src/stories/*.stories.tsx; do echo "$(grep -c 'export const' "$f") $f"; done | sort -rn`. Max 3-4 per file.
 4. **Hex colors** — `grep -rn '"#[0-9A-Fa-f]' src/components/ src/templates/`. Should be zero (except `Icon.tsx` colorFilters).
 5. **Repeated patterns** — `grep -roh 'transition-[a-z]* duration-fast ease-gitlaw' src/components/ | sort | uniq -c`. If a Tailwind class combo appears 3+ times, extract to `globals.css` as a `@layer utilities` class. Existing utilities: `transition-interactive`, `transition-fade`, `shadow-card`. After adding a new utility, bulk-replace across all files and verify with grep.

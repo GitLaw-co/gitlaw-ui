@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Story, StoryDefault } from "@ladle/react";
 import { PageShell } from "../../components/PageShell";
 import {
   PageNav,
@@ -10,17 +10,10 @@ import {
 } from "../../components";
 import { colors } from "../../specs";
 
-const meta: Meta<typeof PageShell> = {
-  title: "Pages/Settings",
-  component: PageShell,
-  parameters: {
-    layout: "fullscreen",
-    backgrounds: { default: "light" },
-  },
-};
-
-export default meta;
-type Story = StoryObj<typeof PageShell>;
+export default {
+  title: "Pages / Settings",
+  meta: { layout: "fullscreen" },
+} satisfies StoryDefault;
 
 const settingsNavItems = [
   { id: "profile", label: "Profile" },
@@ -49,8 +42,7 @@ const mobileNavItems = (activeId: string) =>
  * Settings Profile page — card variant wrapping list items.
  * Matches the Figma pattern: white bg, 8px padding, 8px rounded.
  */
-export const Profile: Story = {
-  render: () => (
+export const Profile: Story = () => (
     <PageShell
       title="Settings"
       initialSidebarCollapsed
@@ -150,15 +142,13 @@ export const Profile: Story = {
         </div>
       </div>
     </PageShell>
-  ),
-};
+  );
 
 /**
  * Organizations page — search + multiple card groups.
  * Matches the Figma Organizations section pattern.
  */
-export const Organizations: Story = {
-  render: () => (
+export const Organizations: Story = () => (
     <PageShell
       title="Settings"
       initialSidebarCollapsed
@@ -306,5 +296,4 @@ export const Organizations: Story = {
         </div>
       </div>
     </PageShell>
-  ),
-};
+  );

@@ -1,94 +1,84 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Story, StoryDefault } from "@ladle/react";
 import { useState } from 'react';
 import { ChatInput } from '../components/ChatInput';
 import { MenuItem } from '../components/MenuItem';
 import { Icon } from '../components/Icon';
 import ukFlag from '../../assets/flags/uk-uk.svg';
 
-const meta: Meta<typeof ChatInput> = {
-  title: 'Chat/ChatInput',
-  component: ChatInput,
-  parameters: {
-    layout: 'centered',
-  },
-  tags: ['autodocs'],
+export default {
+  title: "Chat / ChatInput",
+  meta: { layout: "centered" },
   argTypes: {
     status: {
-      control: 'select',
+      control: { type: "select" },
       options: ['active', 'populated', 'working'],
       description: 'Input status',
     },
     size: {
-      control: 'select',
+      control: { type: "select" },
       options: ['l', 'm'],
       description: 'Input size',
     },
     placeholder: {
-      control: 'text',
+      control: { type: "text" },
       description: 'Static placeholder text (overrides animated placeholders)',
     },
     animatedPlaceholders: {
-      control: 'object',
+      control: { type: "text" },
       description: 'Array of placeholders to rotate through with animation',
     },
     placeholderInterval: {
-      control: 'number',
+      control: { type: "number" },
       description: 'Interval in ms between placeholder rotations (default: 3000)',
     },
     value: {
-      control: 'text',
+      control: { type: "text" },
       description: 'Input value',
     },
     showQuickActions: {
-      control: 'boolean',
+      control: { type: "boolean" },
       description: 'Show quick actions',
     },
   },
   decorators: [
-    (Story) => (
+    (Component) => (
       <div className="bg-page-background p-8" style={{ width: '700px' }}>
-        <Story />
+        <Component />
       </div>
     ),
   ],
-};
-
-export default meta;
-type Story = StoryObj<typeof ChatInput>;
+} satisfies StoryDefault;
 
 // Default story with all controllable args
-export const Default: Story = {
-  args: {
-    status: 'active',
-    size: 'l',
-    value: '',
-    showQuickActions: true,
-  },
+export const Default: Story = (args) => <ChatInput {...args} />;
+Default.args = {
+  status: 'active',
+  size: 'l',
+  value: '',
+  showQuickActions: true,
 };
 
 // All states showcase
-export const AllStates: Story = {
-  render: () => (
-    <div className="flex flex-col gap-6">
-      <div>
-        <h3 className="text-sm font-semibold mb-4 text-subtle">Working State</h3>
-        <ChatInput status="working" size="l" />
-      </div>
-      <div>
-        <h3 className="text-sm font-semibold mb-4 text-subtle">Active State (Animated Placeholders)</h3>
-        <ChatInput status="active" size="l" />
-      </div>
-      <div>
-        <h3 className="text-sm font-semibold mb-4 text-subtle">Populated State (With Text)</h3>
-        <ChatInput status="populated" size="l" value="User is typing here" />
-      </div>
-      <div>
-        <h3 className="text-sm font-semibold mb-4 text-subtle">Medium Size</h3>
-        <ChatInput status="active" size="m" />
-      </div>
+export const AllStates: Story = () => (
+  <div className="flex flex-col gap-6">
+    <div>
+      <h3 className="text-sm font-semibold mb-4 text-subtle">Working State</h3>
+      <ChatInput status="working" size="l" />
     </div>
-  ),
-};
+    <div>
+      <h3 className="text-sm font-semibold mb-4 text-subtle">Active State (Animated Placeholders)</h3>
+      <ChatInput status="active" size="l" />
+    </div>
+    <div>
+      <h3 className="text-sm font-semibold mb-4 text-subtle">Populated State (With Text)</h3>
+      <ChatInput status="populated" size="l" value="User is typing here" />
+    </div>
+    <div>
+      <h3 className="text-sm font-semibold mb-4 text-subtle">Medium Size</h3>
+      <ChatInput status="active" size="m" />
+    </div>
+  </div>
+);
 
 // UK Flag component
 const UKFlag = () => (
@@ -140,13 +130,4 @@ function ChatInputWithDropdown(): JSX.Element {
   );
 }
 
-export const WithSettingsDropdown: Story = {
-  render: () => <ChatInputWithDropdown />,
-  parameters: {
-    docs: {
-      description: {
-        story: 'Click the settings icon to toggle the jurisdiction and settings dropdown.',
-      },
-    },
-  },
-};
+export const WithSettingsDropdown: Story = () => <ChatInputWithDropdown />;

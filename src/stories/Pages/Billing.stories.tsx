@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Story, StoryDefault } from "@ladle/react";
 import React from "react";
 import { PageShell } from "../../components/PageShell";
 import {
@@ -12,17 +12,10 @@ import {
 } from "../../components";
 import { colors } from "../../specs";
 
-const meta: Meta<typeof PageShell> = {
-  title: "Pages/Billing",
-  component: PageShell,
-  parameters: {
-    layout: "fullscreen",
-    backgrounds: { default: "light" },
-  },
-};
-
-export default meta;
-type Story = StoryObj<typeof PageShell>;
+export default {
+  title: "Pages / Billing",
+  meta: { layout: "fullscreen" },
+} satisfies StoryDefault;
 
 /* ------------------------------------------------------------------ */
 /*  Shared data                                                        */
@@ -429,6 +422,4 @@ const BillingPage: React.FC = () => {
  * - **Invoices:** Stripe-powered invoice history with download
  * - **Payment methods:** Stripe-stored cards with edit/remove
  */
-export const Default: Story = {
-  render: () => <BillingPage />,
-};
+export const Default: Story = () => <BillingPage />;

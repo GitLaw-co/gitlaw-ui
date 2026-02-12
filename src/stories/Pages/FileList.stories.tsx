@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Story, StoryDefault } from "@ladle/react";
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { PageShell } from "../../components/PageShell";
 import {
@@ -15,17 +15,10 @@ import type { CheckboxStatus } from "../../components/Checkbox";
 import type { SortDirection } from "../../components/TableListItem";
 import { containerBreakpoints } from "../../constants/breakpoints";
 
-const meta: Meta<typeof PageShell> = {
-  title: "Pages/File List",
-  component: PageShell,
-  parameters: {
-    layout: "fullscreen",
-    backgrounds: { default: "light" },
-  },
-};
-
-export default meta;
-type Story = StoryObj<typeof PageShell>;
+export default {
+  title: "Pages / File List",
+  meta: { layout: "fullscreen" },
+} satisfies StoryDefault;
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -835,6 +828,4 @@ const InteractiveFileList = () => {
  * **Edit mode:** When items are selected, ListHeader shows edit action
  * buttons inline on the left. Table header checkbox shows selection count.
  */
-export const Default: Story = {
-  render: () => <InteractiveFileList />,
-};
+export const Default: Story = () => <InteractiveFileList />;

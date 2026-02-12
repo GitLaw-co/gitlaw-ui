@@ -1,15 +1,7 @@
 import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Story, StoryDefault } from "@ladle/react";
 
-const meta: Meta = {
-  title: 'Foundations/Typography',
-  parameters: {
-    layout: 'fullscreen',
-  },
-};
-
-export default meta;
-type Story = StoryObj;
+export default { title: "Foundations/Typography", meta: { layout: "fullscreen" } } satisfies StoryDefault;
 
 interface TypeSampleProps {
   name: string;
@@ -214,6 +206,4 @@ const TypographyPage = () => {
   );
 };
 
-export const AllTypography: Story = {
-  render: () => <TypographyPage />,
-};
+export const AllTypography: Story = () => <TypographyPage />;
