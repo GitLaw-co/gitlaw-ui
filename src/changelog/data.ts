@@ -1,5 +1,5 @@
 // Auto-generated changelog from git commits
-// Generated: 2026-02-11T15:55:36.127Z
+// Generated: 2026-02-13T11:46:26.451Z
 // Run: node scripts/generate-changelog.js
 
 export interface ChangelogEntry {
@@ -12,8 +12,41 @@ export interface ChangelogEntry {
 
 export const changelog: ChangelogEntry[] = [
   {
+    "date": "2026-02-12",
+    "commits": [
+      {
+        "hash": "f51fabc",
+        "message": "Revert to serving at root for subdomain-based routing"
+      },
+      {
+        "hash": "0c5d287",
+        "message": "Fix Docker path: serve files at /storybook and /ladle subpaths"
+      }
+    ]
+  },
+  {
     "date": "2026-02-11",
     "commits": [
+      {
+        "hash": "5104b96",
+        "message": "Add 6 Claude Code skills derived from CLAUDE.md conventions (#10)"
+      },
+      {
+        "hash": "880827a",
+        "message": "Fix Docker builds: add CI=true, skip changelog, keep assets/"
+      },
+      {
+        "hash": "9a32c5c",
+        "message": "Add Docker build workflow and fix .dockerignore"
+      },
+      {
+        "hash": "75e7479",
+        "message": "Add Docker infrastructure for Storybook and Ladle deployments"
+      },
+      {
+        "hash": "f6f0eeb",
+        "message": "Update changelog data"
+      },
       {
         "hash": "7ffb723",
         "message": "Fix author name and trim redundant credits"
@@ -184,47 +217,9 @@ export const changelog: ChangelogEntry[] = [
       {
         "hash": "03b61b4",
         "message": "Restructure Storybook tree: group components, promote Chat/Editor, add Pages"
-      },
-      {
-        "hash": "6fef7be",
-        "message": "Add layout primitives: PageShell, Stack, Section"
-      },
-      {
-        "hash": "e9b373e",
-        "message": "Add COMPONENTS.md API cheat sheet for prompt-based prototyping"
-      }
-    ]
-  },
-  {
-    "date": "2026-02-06",
-    "commits": [
-      {
-        "hash": "bc8dfce",
-        "message": "Add StarIcon story for discoverability in Storybook"
-      },
-      {
-        "hash": "1254b4c",
-        "message": "Tidy up: update docs to 34 components, fix hardcoded hex colors"
-      },
-      {
-        "hash": "0d3c614",
-        "message": "Add Checkbox, Radio, TableListItem, StarIcon components; clean up all stories"
-      }
-    ]
-  },
-  {
-    "date": "2026-02-05",
-    "commits": [
-      {
-        "hash": "7d578ca",
-        "message": "Fix Storybook sidebar sort: add missing components to storySort"
-      },
-      {
-        "hash": "9e6ca3a",
-        "message": "Refine PageNav: dropdown padding, sort logic, text size, demo data"
       }
     ]
   }
 ];
 
-export const lastUpdated = "2026-02-11";
+export const lastUpdated = "2026-02-13";
