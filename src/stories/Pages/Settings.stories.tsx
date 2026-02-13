@@ -29,6 +29,7 @@ const settingsNavItems = [
   { id: "contacts", label: "Contacts" },
   { id: "api-keys", label: "API keys" },
   { id: "memories", label: "Memories" },
+  { id: "integrations", label: "Integrations" },
   { id: "billing", label: "Billing" },
 ];
 
