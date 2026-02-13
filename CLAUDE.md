@@ -68,6 +68,7 @@ assets/               # Source files (not deployed)
 | Popover | Click/hover triggered popover overlay |
 | Radio | Radio button with label |
 | Section | Content section with optional header |
+| SectionHeader | Settings section header with title, secondary text, optional action slot |
 | Select | Searchable dropdown with multi-select |
 | SettingsTableRow | Settings key-value row |
 | Sidebar | Collapsible navigation |
@@ -236,6 +237,34 @@ const sharedProps = { title: "My Page", files, userName: "Ava Campbell" };
 /* ------------------------------------------------------------------ */
 export const Default: Story = { render: () => <MyTemplate {...sharedProps} /> };
 ```
+
+### Settings Page Group Spacing
+
+Settings pages use a **group** pattern: `SectionHeader` + content (e.g. `Section variant="card"`) form one group.
+
+- **0px** vertical gap inside a group (header touching its card) — wrap in `<div className="flex flex-col">`
+- **16px** vertical gap between groups — use `<div className="flex flex-col gap-gitlaw-xl">` as the outer container
+
+```tsx
+<div className="flex flex-col gap-gitlaw-xl">       {/* 16px between groups */}
+  <div className="flex flex-col">                    {/* 0px inside group */}
+    <SectionHeader title="Section A" secondaryText="Description" />
+    <Section variant="card">
+      <Stack gap="none">{/* MenuItems */}</Stack>
+    </Section>
+  </div>
+  <div className="flex flex-col">                    {/* 0px inside group */}
+    <SectionHeader title="Section B" action={<Button>...</Button>} />
+    <Section variant="card">
+      <Stack gap="none">{/* MenuItems */}</Stack>
+    </Section>
+  </div>
+</div>
+```
+
+Settings rows use `<MenuItem primaryTextWeight="semibold">` for the primary label (Figma `Text-base/Semibold`). Always set this prop on MenuItems inside settings pages.
+
+Always follow this pattern when building settings pages with section headers.
 
 ### Git
 

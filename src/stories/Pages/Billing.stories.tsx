@@ -172,6 +172,7 @@ const BillingPage: React.FC = () => {
           className="hidden md:flex"
         />
         <div className="flex-1 max-w-[1040px]">
+          {/* 16px between groups */}
           <Stack gap="l">
             {/* ── Plan ── */}
             <Section variant="card">

@@ -15,9 +15,13 @@ export type MenuItemLeftElement =
 
 export type MenuItemWidth = "fill" | "hug";
 
+export type MenuItemPrimaryWeight = "normal" | "semibold";
+
 export interface MenuItemProps {
   /** Primary text content */
   primaryText?: string;
+  /** Primary text font weight — use "semibold" for settings rows (Figma Text-base/Semibold) */
+  primaryTextWeight?: MenuItemPrimaryWeight;
   /** Secondary text content */
   secondaryText?: string;
   /** Type of left element to display */
@@ -100,6 +104,7 @@ export interface MenuItemProps {
 
 export const MenuItem: React.FC<MenuItemProps> = ({
   primaryText = "Primary",
+  primaryTextWeight = "normal",
   secondaryText = "2 minutes ago",
   leftElement = "icon",
   showLeftElement = true,
@@ -235,7 +240,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
         {renderLeftElement()}
 
         <div className="flex flex-col flex-1 min-w-0">
-          <p className="text-base font-normal text-foreground truncate leading-[1.4]">
+          <p className={`text-base text-foreground truncate leading-[1.4] ${primaryTextWeight === "semibold" ? "font-semibold" : "font-normal"}`}>
             {primaryText}
           </p>
           {showSecondaryText && (
